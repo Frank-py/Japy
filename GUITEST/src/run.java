@@ -9,6 +9,7 @@ public class run {
       // int x = 1;
      //  while (x>=0 ){
     frame0 test = new frame0();
+    System.out.println("hi");
  // x++;
  //  }
    }
