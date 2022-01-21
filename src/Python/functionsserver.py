@@ -24,24 +24,21 @@ def create_database(connection, query):
         print("Database created successfully")
     except Error as e:
         print(f"The error '{e}' occurred")
-        
-def query(connection, Table):
+def query(connection, query):
     cursor = connection.cursor()
     try:
-        sql = 'INSERT INTO %s (Username, Password, IP) VALUES (%s, %s, %s);'
-        val = (Table[0], Table[1], Table[2], Table[3])
-        cursor.execute(sql, val)
-        connection.commit()# Wenn verändert werden muss
+        # sql = 'INSERT INTO Persons (Username, Password, IP) VALUES (%s, %s, %s);'
+        # val = (query[0], query[1], query[2])
+        # cursor.execute(sql, val)
+        cursor.execute('SELECT IP from Persons where Username = "Quint";')
+        myresult = cursor.fetchone()# wenn anzeigen
+        #connection.commit()# Wenn verändert werden muss
+        return myresult[0]
     except Error as e:
-        print(e)
-def show(connection, spalte):
-    cursor = connection.cursor()
-    try:
-        sql = 'SELECT %s (Username, Password, IP) VALUES (%s, %s, %s);'
-        #'SELECT IP from Persons where Username = "Quint";'
-        val = (spalte[0], spalte[1], spalte[2], spalte[3])
-        cursor.execute(sql, val)
-        #myresult = cursor.fetchone()/cursor.fetchall()# wenn anzeigen
-    except Error as e:
-        print(e)
+        print(e) #Nur wenn angezeigt werden muss
+connection = create_connection("ip", "username", "passwort", "database")
+a = query(connection, ["daniel", "asdasd", "0.0.0.0"])
+print(a)
+#create_database_query = "CREATE DATABASE Messenger"
+#create_database(connection, create_database_query, "Messenger")
 
