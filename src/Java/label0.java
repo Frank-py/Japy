@@ -3,14 +3,9 @@
  */
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import javax.swing.border.Border;
 public class label0 extends JLabel {
-    
-    // You might want to add frame.setVisible(true) to be the very last line. Sometimes with Mac, the components won't appear until you resize the window
 
 
 	label0() {
@@ -25,7 +20,7 @@ public class label0 extends JLabel {
 		this.setHorizontalTextPosition(JLabel.CENTER); //set text LEFT,CENTER, RIGHT of imageicon
 		this.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
 		this.setForeground(new Color(0x00FF00)); //set font color of text
-		this.setFont(new Font("MV Boli",Font.PLAIN,50)); //set font of text
+		this.setFont(new Font("MV Boli",Font.PLAIN,10)); //set font of text
 		this.setIconTextGap(100); //set gap of text to image
 		this.setBackground(Color.black); //set background color
 		this.setOpaque(true); //display background color
