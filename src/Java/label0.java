@@ -13,7 +13,7 @@ public class label0 extends JLabel {
     // You might want to add frame.setVisible(true) to be the very last line. Sometimes with Mac, the components won't appear until you resize the window
 
 
-	label0(frame0 frame) {
+	label0() {
 
 		// JLabel = a GUI display area for a string of text, an image, or both
 		
@@ -34,8 +34,7 @@ public class label0 extends JLabel {
 		this.setHorizontalAlignment(JLabel.CENTER); //set horizontal position of icon+text within label
 		//this.setBounds(100, 100, 1000, 1000); //set x,y position within frame as well as dimensions
 		//frame.setLayout(null);
-		frame.add(this);
-		//frame.pack();
+		
 	}
 
     
