@@ -12,6 +12,7 @@ public class javaclient {
     public static void main(String args[]) {
         while (v) { 
                String b = send("hi");
+               System.out.println(b);
         }     
     }
     public static String send(String a){
