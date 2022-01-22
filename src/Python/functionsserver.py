@@ -1,3 +1,4 @@
+from sqlite3 import Cursor
 import mysql.connector
 
 from mysql.connector import Error
@@ -16,7 +17,6 @@ def create_connection(host_name, user_name, user_password, db_name):
     except Error as e:
         print(f"The error '{e}' occurred")
     return connection
-
 def create_database(connection, query):
     cursor = connection.cursor()
     try:
@@ -24,21 +24,29 @@ def create_database(connection, query):
         print("Database created successfully")
     except Error as e:
         print(f"The error '{e}' occurred")
-def query(connection, query):
+def login(connection, user, password, ip):
     cursor = connection.cursor()
     try:
-        # sql = 'INSERT INTO Persons (Username, Password, IP) VALUES (%s, %s, %s);'
-        # val = (query[0], query[1], query[2])
-        # cursor.execute(sql, val)
-        cursor.execute('SELECT IP from Persons where Username = "Quint";')
-        myresult = cursor.fetchone()# wenn anzeigen
-        #connection.commit()# Wenn verändert werden muss
-        return myresult[0]
+        cursor.execute('SELECT * from Persons where Username = "Quint";')
+        myresult = cursor.fetchall()
+        return myresult
+    except:
+        print("Error")
+def register(connection, user, password, ip):
+    cursor = connection.cursor()
+    try:
+        sql = 'INSERT INTO Persons (Username, Password, IP) VALUES (%s, %s, %s);'
+        val = (user, password, ip)
+        cursor.execute(sql, val)
     except Error as e:
-        print(e) #Nur wenn angezeigt werden muss
+        print(e)
+def updateip(connection, user, ip):
+    cursor = connection.cursor()
+    try:
+        sql = "UPDATE Persons SET IP = '%s' WHERE user = '%s'"
+        cursor.execute(sql, (user, ip))
+        connection.commit()
+    except:
+        print("error")
 connection = create_connection("ip", "username", "passwort", "database")
-a = query(connection, ["daniel", "asdasd", "0.0.0.0"])
-print(a)
-#create_database_query = "CREATE DATABASE Messenger"
-#create_database(connection, create_database_query, "Messenger")
 
