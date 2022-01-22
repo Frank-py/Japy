@@ -1,4 +1,5 @@
 from sqlite3 import Cursor
+from turtle import up
 import mysql.connector
 
 from mysql.connector import Error
@@ -24,29 +25,49 @@ def create_database(connection, query):
         print("Database created successfully")
     except Error as e:
         print(f"The error '{e}' occurred")
-def login(connection, user, password, ip):
+def login(connection, user):
     cursor = connection.cursor()
     try:
-        cursor.execute('SELECT * from Persons where Username = "Quint";')
-        myresult = cursor.fetchall()
+        cursor.execute('SELECT Password from Persons where Username = "%s";' % (user))
+        myresult = cursor.fetchone()[0]
         return myresult
-    except:
-        print("Error")
+    except Error as e:
+        print(e)
 def register(connection, user, password, ip):
     cursor = connection.cursor()
     try:
         sql = 'INSERT INTO Persons (Username, Password, IP) VALUES (%s, %s, %s);'
         val = (user, password, ip)
         cursor.execute(sql, val)
+        connection.commit()
     except Error as e:
         print(e)
 def updateip(connection, user, ip):
     cursor = connection.cursor()
     try:
-        sql = "UPDATE Persons SET IP = '%s' WHERE user = '%s'"
-        cursor.execute(sql, (user, ip))
+        cursor.execute("UPDATE Persons SET IP = '%s' WHERE Username = '%s';" % (ip, user))
+        connection.commit()
+    except Error as e:
+        print(e)
+def insertmessage(connection, sender, receiver, message):
+    cursor = connection.cursor()
+    try:
+        sql = "INSERT INTO Messages (send, recv, message) VALUES (%s, %s, %s);"
+        val = (sender, receiver, message)
+        cursor.execute(sql, val)
         connection.commit()
     except:
         print("error")
-connection = create_connection("ip", "username", "passwort", "database")
-
+def checkformessages(connection, receiver):
+    cursor = connection.cursor()
+    try:
+        cursor.execute('SELECT message FROM Messages WHERE recv = "%s"' % receiver)
+        nachrichten = cursor.fetchall()
+        listen = []
+        for i in nachrichten:
+            listen.append(i[0])
+        return listen
+    except:
+        print("error")        
+        
+connection = create_connection("localhost", "daniel", "4sdf38§$/WE3/FW§459fd2w3", "Messenger")
