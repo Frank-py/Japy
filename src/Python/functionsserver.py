@@ -37,7 +37,7 @@ def register(connection, liste):
     cursor = connection.cursor()
     try:
         sql = 'INSERT INTO Persons (Username, Password, IP) VALUES (%s, %s, %s);'
-        val = (liste[0], liste[1], liste[2])
+        val = (liste[0], liste[1], liste[2].strip())
         cursor.execute(sql, val)
         connection.commit()
     except Error as e:
@@ -53,7 +53,7 @@ def insertmessage(connection, liste):
     cursor = connection.cursor()
     try:
         sql = "INSERT INTO Messages (send, recv, message) VALUES (%s, %s, %s);"
-        val = (liste[0], liste[1], liste[2])
+        val = (liste[0], liste[1], liste[2].strip())
         cursor.execute(sql, val)
         connection.commit()
     except:
@@ -61,13 +61,12 @@ def insertmessage(connection, liste):
 def checkformessages(connection, receiver):
     cursor = connection.cursor()
     try:
-        cursor.execute('SELECT message FROM Messages WHERE recv = "%s"' % receiver)
+        cursor.execute('SELECT message FROM Messages WHERE recv = "%s";' % (receiver))
         nachrichten = cursor.fetchall()
         listen = []
         for i in nachrichten:
             listen.append(i[0])
         return listen
     except:
-        print("error")        
-        
-connection = create_connection("localhost", "daniel", "4sdf38§$/WE3/FW§459fd2w3", "Messenger")
+        return "error"        
+#print(checkformessages(create_connection("localhost", "daniel", "4sdf38§$/WE3/FW§459fd2w3", "Messenger"), "Valentin"))
