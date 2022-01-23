@@ -33,27 +33,27 @@ def login(connection, user):
         return myresult
     except Error as e:
         print(e)
-def register(connection, user, password, ip):
+def register(connection, liste):
     cursor = connection.cursor()
     try:
         sql = 'INSERT INTO Persons (Username, Password, IP) VALUES (%s, %s, %s);'
-        val = (user, password, ip)
+        val = (liste[0], liste[1], liste[2])
         cursor.execute(sql, val)
         connection.commit()
     except Error as e:
         print(e)
-def updateip(connection, user, ip):
+def updateip(connection, liste):
     cursor = connection.cursor()
     try:
-        cursor.execute("UPDATE Persons SET IP = '%s' WHERE Username = '%s';" % (ip, user))
+        cursor.execute("UPDATE Persons SET IP = '%s' WHERE Username = '%s';" % (liste[0], liste[1]))
         connection.commit()
     except Error as e:
         print(e)
-def insertmessage(connection, sender, receiver, message):
+def insertmessage(connection, liste):
     cursor = connection.cursor()
     try:
         sql = "INSERT INTO Messages (send, recv, message) VALUES (%s, %s, %s);"
-        val = (sender, receiver, message)
+        val = (liste[0], liste[1], liste[2])
         cursor.execute(sql, val)
         connection.commit()
     except:
