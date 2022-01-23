@@ -7,8 +7,8 @@ public class panel0 extends JPanel {
     
             // JPanel = a GUI component that functions as a container to hold other components
             
-            this.setBackground(Color.red);
-            this.setBounds(100, 100, 100, 100);
+            this.setBackground(Color.black);
+            this.setBounds(100, 100, 200, 200);
             this.setLayout(new BorderLayout());
             
         }
