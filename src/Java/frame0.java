@@ -1,12 +1,14 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class frame0 extends JFrame {
+public class frame0 extends JFrame{
 
 
   // JFrame = a GUI window to add components to
   
-  frame0(){
+  frame0() throws InterruptedException {
+    ImageIcon image = new ImageIcon("prof.png");
+    this.setIconImage(image.getImage());
   this.setTitle("Close me!!!");
   this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   //this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -17,9 +19,7 @@ public class frame0 extends JFrame {
   //this.toFront();
   this.setAlwaysOnTop(false);
  // this.setUndecorated(true);
-  ImageIcon image = new ImageIcon("prof.png"); 
-  this.setIconImage(image.getImage()); 
-  this.getContentPane().setBackground(new Color(0x123456)); 
+  this.getContentPane().setBackground(new Color(0x123456));
     
  }
 }
