@@ -22,7 +22,8 @@ def getsock():
         elif data[0] == "fetchmessages":
             connection = create_connection("localhost", "daniel", "4sdf38§$/WE3/FW§459fd2w3", "Messenger")
             checkformessages(connection, data[1:])
-        
+        else:
+            pass
 while True:
     print(getsock())
 #connection = create_connection("ip", "username", "passwort", "database")
