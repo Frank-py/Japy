@@ -33,7 +33,6 @@ public class run2 {
        panel.setBackground(Color.red);
        panel.setBounds(100, 100, 100, 100);
        panel.setLayout(new BorderLayout());
-       
 
        // JLabel = a GUI display area for a string of text, an image, or both
        JLabel label = new JLabel();
@@ -53,8 +52,7 @@ public class run2 {
        //label.setBounds(100, 100, 1000, 1000); //set x,y position within frame as well as dimensions
        //frame.setLayout(null);
 
-
-       panel.add(label);
+       //panel.add(label);
        mainWin.add(panel);
        //mainWin.add(label);
 
