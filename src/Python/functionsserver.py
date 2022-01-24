@@ -53,7 +53,7 @@ def insertmessage(connection, liste):
     cursor = connection.cursor()
     try:
         sql = "INSERT INTO Messages (send, recv, message) VALUES (%s, %s, %s);"
-        val = (liste[0], liste[1], liste[2].strip())
+        val = (liste[0], liste[1], " ".join(liste[2:]).strip())
         cursor.execute(sql, val)
         connection.commit()
     except:
