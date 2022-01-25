@@ -2,9 +2,10 @@ package Japy.src.Java;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener.*;
+import java.awt.event.*;
 
-public class run extends JFrame {
+public class run implements KeyListener {
   public static void main(String[] args) {
     ImageIcon pic = new ImageIcon(
         "C:\\Users\\valie\\OneDrive\\Desktop\\SwitchClips\\Programmieren\\Japy\\src\\Java\\prof.png");
@@ -63,16 +64,6 @@ public class run extends JFrame {
     frame.add(test, BorderLayout.NORTH);
     frame.add(test2, BorderLayout.CENTER);
     frame.setVisible(true);
-    KeyListener keyl = new KeyList(){
-      
-    }
-    /*addKeyListener(pass);
-    //char ch = KEY_PRESSE
-    keypressed(huh.VK_ENTER);
-    if (ev.getKeyCode() == KeyEvent.VK_ENTER) {
-      
-    }*/
-    
 
   }
 }
