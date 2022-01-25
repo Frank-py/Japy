@@ -20,15 +20,15 @@ public class javaclient {
          */
     }
 
-    public static String send(String a) {
-        try {
+    public static String send(String a, Socket socket) {
+        /* try {
 
             socket =   new Socket("localhost", 6000);
         } catch (UnknownHostException e1) {
             e1.printStackTrace();
         } catch (IOException e1) {
             e1.printStackTrace();
-        }
+        } */
         sent = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -36,7 +36,7 @@ public class javaclient {
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                     out.print(a + "\r\n");
                     out.flush();
-                    socket.close();
+                    //socket.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
