@@ -65,7 +65,9 @@ public class run {
     test2.add(pass);
     
     login[0] = "login ";
-      KeyListener g = new KeyListener() {
+      
+    
+    KeyListener g = new KeyListener() {
         public void keyPressed(KeyEvent e) {
           if (e.getKeyChar() == KeyEvent.VK_ENTER) {
             //login.add(user.getText());
@@ -73,7 +75,7 @@ public class run {
             
             login [1] = user.getText();
             login [2] = pass.getText();
-            //System.out.println(login.toString());
+            System.out.println(Arrays.toString(login));
           }
         }
 
@@ -90,7 +92,8 @@ public class run {
     frame.add(test, BorderLayout.NORTH);
     frame.add(test2, BorderLayout.CENTER);
     frame.setVisible(true);
-    javaclient.send(login);
+
+   // javaclient.send(login);
 
   }
 
