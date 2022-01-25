@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 public class run {
   //ArrayList<String> login = new ArrayList<>();
-  public static String[] login = new String [2];
+  public static String[] login = new String [3];
 
   public static void main(String[] args) {
     ImageIcon pic = new ImageIcon(
@@ -64,14 +64,15 @@ public class run {
     test2.add(pw);
     test2.add(pass);
     
-
+    login[0] = "login ";
       KeyListener g = new KeyListener() {
         public void keyPressed(KeyEvent e) {
           if (e.getKeyChar() == KeyEvent.VK_ENTER) {
             //login.add(user.getText());
             //login.add(pass.getText());
-            login [0] = user.getText();
-            login [1] = pass.getText();
+            
+            login [1] = user.getText();
+            login [2] = pass.getText();
             //System.out.println(login.toString());
           }
         }
