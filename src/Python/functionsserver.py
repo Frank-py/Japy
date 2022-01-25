@@ -68,5 +68,14 @@ def checkformessages(connection, receiver):
             listen.append(i[0])
         return listen
     except:
-        return "error"        
-#print(checkformessages(create_connection("localhost", "daniel", "4sdf38§$/WE3/FW§459fd2w3", "Messenger"), "Valentin"))
+        return "error"
+def checkaccount(connection, name):
+    cursor = connection.cursor()
+    try:
+        cursor.execute('SELECT 1 FROM Persons WHERE Username = "%s";' % (name))
+        nachrichten = cursor.fetchone()[0]
+        return name == name
+    except:
+        return False
+           
+print(checkaccount(create_connection("localhost", "daniel", "4sdf38§$/WE3/FW§459fd2w3", "Messenger"), "Valentina"))

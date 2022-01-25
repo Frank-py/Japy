@@ -32,9 +32,16 @@ public class test extends JFrame implements ActionListener {
         add(jTextField);
 
         setSize(400, 400);
+    
 
+        jButton = new JButton("Submit");
+        jButton.setBounds(50, 100, 100, 30);
+
+        jButton.addActionListener(this);
+
+        add(jButton);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!jTextField.getText().equals("")) {

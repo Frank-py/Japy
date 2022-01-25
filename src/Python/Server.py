@@ -19,8 +19,12 @@ def getsock():
         elif data[0] == "checkformessages":
             a = re.sub(r'[^A-Za-z0-9_]', '', data[1])
             return checkformessages(connection, data[1].strip())
+        elif data[0] == "checkaccount":
+            if checkaccount(connection, data[1]):
+                login(connection, data[1:])
+            else:
+                register(connection, data[1:])
         else:
             return checkformessages(connection, data[1])
 while True:
     print(getsock())
-#connection = create_connection("ip", "username", "passwort", "database")
