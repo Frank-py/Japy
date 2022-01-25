@@ -4,11 +4,25 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener.*;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.awt.event.*;
+import java.io.*;
 
 public class run {
-  //ArrayList<String> login = new ArrayList<>();
-  public static String[] login = new String [3];
+  // ArrayList<String> login = new ArrayList<>();
+  public static String[] login = new String[3];
+  public static Socket socket;{
+  try{
+  socket = new Socket("localhost", 5000);}
+  catch(UnknownHostException e1)
+  {
+    e1.printStackTrace();
+  }catch(
+  IOException e2)
+  {
+    e2.printStackTrace();}
+  }
 
   public static void main(String[] args) {
     ImageIcon pic = new ImageIcon(
@@ -64,18 +78,27 @@ public class run {
     test2.add(pw);
     test2.add(pass);
     
+<<<<<<< HEAD
     login[0] = "login ";
       
     
     KeyListener g = new KeyListener() {
+=======
+    login[0] = "login";
+      KeyListener g = new KeyListener() {
+>>>>>>> refs/remotes/origin/main
         public void keyPressed(KeyEvent e) {
           if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-            //login.add(user.getText());
-            //login.add(pass.getText());
+            javaclient.send("login",socket);
+            javaclient.send(user.getText(),socket);
+            javaclient.send(pass.getText(),socket);
             
+<<<<<<< HEAD
             login [1] = user.getText();
             login [2] = pass.getText();
             System.out.println(Arrays.toString(login));
+=======
+>>>>>>> refs/remotes/origin/main
           }
         }
 
@@ -92,8 +115,11 @@ public class run {
     frame.add(test, BorderLayout.NORTH);
     frame.add(test2, BorderLayout.CENTER);
     frame.setVisible(true);
+<<<<<<< HEAD
 
    // javaclient.send(login);
+=======
+>>>>>>> refs/remotes/origin/main
 
   }
 
