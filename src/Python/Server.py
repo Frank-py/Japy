@@ -1,16 +1,21 @@
-import socket, re, threading
+import socket, re, threading, hashlib
 from functionsserver import *
 PORT = 5000
 
 def Client(conn, addr):
-    data = conn.recv(1024).decode(encoding="UTF-8")
-    if data == "login":
-            
-    data = data.strip("]").strip("[").split(", ")
-    print(data)
-    if data[0] == "login":
-        Benutzer = User().checkaccount(data[1], data[2], addr)
-        print(Benutzer.ip)
+    while True:
+        data = conn.recv(1024).decode(encoding="UTF-8")
+        if data == "login":
+            data = []
+            for i in range(2):
+                data.append(conn.recv(1024).decode(encoding="UTF-8"))
+            benutzer = User().checkaccount(data[0], hashlib.md5(bytes(data[1], encoding='utf-8')).hexdigest(), addr[0])
+            if isinstance(benutzer, str):
+                print(benutzer)
+            else:
+                print("richtiges Passwort")
+        else:
+            print("test")
     conn.close()
     
 def main():
@@ -23,4 +28,5 @@ def main():
         thread.start()
         thread.join()
         print(f"Verbindungen: {threading.active_count() - 1}") #wegen main()
+        break
 main()

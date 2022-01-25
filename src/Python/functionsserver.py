@@ -37,7 +37,7 @@ class User():
             if myresult == password:
                 return cls(user, password, ip, True)
             else:
-                return "wrong password"
+                return "falschesa passwort"
         except Error as e:
             print(e)
     @classmethod
@@ -45,10 +45,10 @@ class User():
         cursor = connection.cursor()
         try:
             sql = 'INSERT INTO Persons (Username, Password, IP) VALUES (%s, %s, %s);'
-            val = (username, password, ip.strip())
+            val = (username, password, ip)
             cursor.execute(sql, val)
             connection.commit()
-            return cls(username, password, ip.strip(), True)
+            return cls(username, password, ip, True)
         except Error as e:
             return "error"
     def updateip(self, connection, username, ip):
@@ -86,7 +86,7 @@ class User():
             nachrichten = cursor.fetchone()[0]
             if name == name:
                 return self.login(self.connection, name, password, ip)
-        except:
+        except Exception as e:
             return self.register(self.connection, name, password, ip)
 
 
