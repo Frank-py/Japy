@@ -6,6 +6,7 @@ import java.awt.event.KeyListener.*;
 import java.awt.event.*;
 
 public class run implements KeyListener {
+
   public static void main(String[] args) {
     ImageIcon pic = new ImageIcon(
         "C:\\Users\\valie\\OneDrive\\Desktop\\SwitchClips\\Programmieren\\Japy\\src\\Java\\prof.png");
@@ -43,6 +44,13 @@ public class run implements KeyListener {
     title.add(test2, BorderLayout.SOUTH);
 
     JTextField user = new JTextField("");
+    user.addActionListener(new ActionListener(){
+
+      public void actionPerformed(ActionEvent e){
+
+        System.out.println(user.getText());
+
+}});
     JLabel tftitle = new JLabel("Username: ");
     tftitle.setFont(new Font("MV Boli", Font.BOLD, 20));
     tftitle.setForeground(new Color(0x00FF00));
@@ -52,6 +60,13 @@ public class run implements KeyListener {
     test2.add(user);
 
     JTextField pass = new JTextField("");
+    pass.addActionListener(new ActionListener(){
+
+      public void actionPerformed(ActionEvent e){
+
+              System.out.println(pass.getText());
+
+      }});
     JLabel pw = new JLabel("Password: ");
     pw.setFont(new Font("MV Boli", Font.BOLD, 20));
     pw.setForeground(new Color(0x00FF00));
