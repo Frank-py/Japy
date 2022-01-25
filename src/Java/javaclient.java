@@ -12,13 +12,15 @@ public class javaclient {
     static boolean v = true;
 
     public static void main(String args[]) {
-        while (v) {
-            String b = send("hi");
-            System.out.println(b);
-        }
+        /*
+         * while (v) {
+         * String b = send("hi");
+         * System.out.println(b);
+         * }
+         */
     }
 
-    public static String send(String a) {
+    public static String[] send(String[] a) {
         try {
 
             socket =   new Socket("localhost", 6000);
@@ -36,7 +38,6 @@ public class javaclient {
                     out.flush();
                     socket.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -45,7 +46,7 @@ public class javaclient {
         try {
             sent.join();
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         return a;
