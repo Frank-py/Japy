@@ -1,11 +1,15 @@
 package Japy.src.Java;
 
+import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener.*;
 import java.awt.event.*;
 
-public class run implements KeyListener {
+public class run {
+  //ArrayList<String> login = new ArrayList<>();
+  public static String[] login = new String [2];
+
   public static void main(String[] args) {
     ImageIcon pic = new ImageIcon(
         "C:\\Users\\valie\\OneDrive\\Desktop\\SwitchClips\\Programmieren\\Japy\\src\\Java\\prof.png");
@@ -59,11 +63,34 @@ public class run implements KeyListener {
     pass.setPreferredSize(new Dimension(200, 50));
     test2.add(pw);
     test2.add(pass);
+    
 
+      KeyListener g = new KeyListener() {
+        public void keyPressed(KeyEvent e) {
+          if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+            //login.add(user.getText());
+            //login.add(pass.getText());
+            login [0] = user.getText();
+            login [1] = pass.getText();
+            //System.out.println(login.toString());
+          }
+        }
+
+        public void keyReleased(KeyEvent e) {
+        }
+
+        public void keyTyped(KeyEvent e) {
+        }
+      };
+
+    pass.addKeyListener(g);
+    user.addKeyListener(g);
     test.add(laby);
     frame.add(test, BorderLayout.NORTH);
     frame.add(test2, BorderLayout.CENTER);
     frame.setVisible(true);
+    javaclient.send(login);
 
   }
+
 }
