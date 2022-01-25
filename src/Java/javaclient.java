@@ -20,7 +20,7 @@ public class javaclient {
          */
     }
 
-    public static String[] send(String[] a) {
+    public static String send(String a) {
         try {
 
             socket =   new Socket("localhost", 6000);

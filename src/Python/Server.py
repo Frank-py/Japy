@@ -4,6 +4,8 @@ PORT = 5000
 
 def Client(conn, addr):
     data = conn.recv(1024).decode(encoding="UTF-8")
+    if data == "login":
+            
     data = data.strip("]").strip("[").split(", ")
     print(data)
     if data[0] == "login":
