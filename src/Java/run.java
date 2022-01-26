@@ -1,27 +1,28 @@
 package Java;
-
+import Java.javaclient2;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
-
-import java.awt.*;
+import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
 public class run{
   public static Socket socket;
   static JButton loginbu;
-
+  public static String a;
   public static void main(String[] args) {
-
-    try {
-      socket =   new Socket("localhost", 6000);
-    } catch (UnknownHostException e1) {
-      e1.printStackTrace();
-    } catch (IOException e2) {
-      e2.printStackTrace();
-    }
+    try{
+      socket =   new Socket("localhost", 6000);}
+      catch(UnknownHostException e1)
+      {
+        e1.printStackTrace();
+      }catch(
+      IOException e2)
+      {
+        e2.printStackTrace();}
     ImageIcon pic = new ImageIcon(
         "C:\\Users\\valie\\OneDrive\\Desktop\\SwitchClips\\Programmieren\\Japy\\src\\Java\\prof.png");
 
@@ -78,9 +79,12 @@ public class run{
     KeyListener g = new KeyListener() {
       public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-          javaclient.send("login", socket);
-          javaclient.send(user.getText(), socket);
-          javaclient.send(pass.getText(), socket);
+          try {
+            a = javaclient2.send("login daniel asdf", socket);
+          } catch (Exception i) {
+            System.out.println(i);
+          }
+          System.out.println(a);
 
         }
       }
