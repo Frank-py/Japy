@@ -94,7 +94,7 @@ public class run{
 
     loginbu = new button0();
 
-    frame.add(loginbu);
+    test2.add(loginbu,10,2);
     pass.addKeyListener(g);
     user.addKeyListener(g);
     test.add(laby);
