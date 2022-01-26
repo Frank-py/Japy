@@ -1,35 +1,28 @@
-package Java;
-import Java.javaclient2;
+package Japy.src.Java;
+
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
-import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
+
 import java.awt.*;
+import java.net.*;
 import java.awt.event.*;
 import java.io.*;
 
 public class run{
   public static Socket socket;
-  static JButton loginbu;
-  public static String a;
+  
+
   public static void main(String[] args) {
-    try{
-      socket =   new Socket("localhost", 6000);}
-      catch(UnknownHostException e1)
-      {
-        e1.printStackTrace();
-      }catch(
-      IOException e2)
-      {
-        e2.printStackTrace();}
+
+    try {
+      socket =   new Socket("localhost", 6000);
+    } catch (UnknownHostException e1) {
+      e1.printStackTrace();
+    } catch (IOException e2) {
+      e2.printStackTrace();
+    }
     ImageIcon pic = new ImageIcon(
         "C:\\Users\\valie\\OneDrive\\Desktop\\SwitchClips\\Programmieren\\Japy\\src\\Java\\prof.png");
-
-    JLabel laby = new JLabel("Hier Anmelden:");
-    laby.setFont(new Font("MV Boli", Font.BOLD, 30));
-    laby.setForeground(new Color(0xFFFFFF));
-    laby.setSize(100, 100);
 
     JFrame frame = new JFrame();
     frame.setSize(300, 500);
@@ -39,6 +32,11 @@ public class run{
     frame.setResizable(false);
     frame.setIconImage(pic.getImage());
     frame.getContentPane().setBackground(new Color(0x123456));
+
+    JLabel laby = new JLabel("Hier Anmelden:");
+    laby.setFont(new Font("MV Boli", Font.BOLD, 30));
+    laby.setForeground(new Color(0xFFFFFF));
+    laby.setSize(100, 100);
 
     JPanel title = new JPanel();
     title.setSize(600, 600);
@@ -79,12 +77,9 @@ public class run{
     KeyListener g = new KeyListener() {
       public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-          try {
-            a = javaclient2.send("login daniel asdf", socket);
-          } catch (Exception i) {
-            System.out.println(i);
-          }
-          System.out.println(a);
+          javaclient.send("login", socket);
+          javaclient.send(user.getText(), socket);
+          javaclient.send(pass.getText(), socket);
 
         }
       }
@@ -96,7 +91,7 @@ public class run{
       }
     };
 
-    loginbu = new button0();
+     JButton loginbu = new button0();
 
     test2.add(loginbu,10,2);
     pass.addKeyListener(g);
