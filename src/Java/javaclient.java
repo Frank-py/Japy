@@ -1,5 +1,4 @@
-package Japy.src.Java;
-
+package Java;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -20,7 +19,7 @@ public class javaclient {
          */
     }
 
-    public static String send(String a, Socket socket) {
+    public static void send(String a, Socket socket) {
         /* try {
 
             socket =   new Socket("localhost", 6000);
@@ -29,16 +28,13 @@ public class javaclient {
         } catch (IOException e1) {
             e1.printStackTrace();
         } */
-        sent = new Thread(new Callable() {
+        sent = new Thread(new Runnable() {
             @Override
-            public String call() {
+            public void run() {
                 try {
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     out.print(a);
                     out.flush();
-                    String resp = in.readLine();
-                    return resp;
                     //socket.close();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -52,7 +48,6 @@ public class javaclient {
 
             e.printStackTrace();
         }
-        return a;
     }
 
 }
