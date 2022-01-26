@@ -34,7 +34,7 @@ public class javaclient {
             public void run() {
                 try {
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                    out.print(a + "\r\n");
+                    out.print(a);
                     out.flush();
                     //socket.close();
                 } catch (IOException e) {
