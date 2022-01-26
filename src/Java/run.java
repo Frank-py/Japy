@@ -43,11 +43,13 @@ public class run {
     title.setBackground(new Color(0x123456));
 
     
-    JPanel UserInput = new JPanel(new GridLayout(5, 2));
+    JPanel UserInput = new JPanel(new GridLayout(7, 1));
     // UserInput.setSize(200,200);
     UserInput.setBackground(new Color(0x123456));
 
-    
+    JPanel button = new JPanel();
+    button.setBackground(new Color(0x123456));
+
     
     JTextField user = new JTextField("");
     user.setPreferredSize(new Dimension(200, 50));
@@ -99,12 +101,14 @@ public class run {
     pass.addKeyListener(g);
     user.addKeyListener(g);
     title.add(laby);
+    button.add(loginbu, BorderLayout.CENTER);
     UserInput.add(UserTitle);
     UserInput.add(user);
     UserInput.add(PassTitle);
     UserInput.add(pass);
-    //UserInput.add(space);
-    frame.add(loginbu, BorderLayout.SOUTH);
+    UserInput.add(space);
+    UserInput.add(button);
+
     frame.add(title, BorderLayout.NORTH);
     frame.add(UserInput, BorderLayout.CENTER);
     frame.setVisible(true);
