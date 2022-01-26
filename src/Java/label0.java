@@ -1,5 +1,4 @@
-package Japy.src.Java;
-
+package Java;
 /**
  * label0
  */
