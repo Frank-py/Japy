@@ -1,14 +1,16 @@
+from atexit import register
 import mysql.connector
 
 from mysql.connector import Error
 
 class User():
-    def __init__(self, user=None, password=None, ip=None, loggedin=None):
+    def __init__(self, user=None, password=None, ip=None, loggedin=None, registriert=False):
         self.user = user
         self.password = password
         self.ip = ip
         self.connection = self.create_connection()
         self.loggedin = loggedin
+        self.registriert = registriert
     def create_connection(self):
         connection = None
         try:
@@ -37,7 +39,7 @@ class User():
             if myresult == password:
                 return cls(user, password, ip, True)
             else:
-                return "falschesa passwort"
+                return cls(None, None, None, False)
         except Error as e:
             print(e)
     @classmethod
@@ -48,7 +50,7 @@ class User():
             val = (username, password, ip)
             cursor.execute(sql, val)
             connection.commit()
-            return cls(username, password, ip, True)
+            return cls(username, password, ip, True, True)
         except Error as e:
             return "error"
     def updateip(self, connection, username, ip):
