@@ -8,7 +8,7 @@ import java.net.*;
 import java.awt.event.*;
 import java.io.*;
 
-public class run{
+public class run {
   public static Socket socket;
   
 
@@ -25,7 +25,7 @@ public class run{
         "C:\\Users\\valie\\OneDrive\\Desktop\\SwitchClips\\Programmieren\\Japy\\src\\Java\\prof.png");
 
     JFrame frame = new JFrame();
-    frame.setSize(300, 500);
+    frame.setSize(300, 400);
     frame.setLocationRelativeTo(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setTitle("Messenger");
@@ -43,7 +43,7 @@ public class run{
     title.setBackground(new Color(0x123456));
 
     
-    JPanel UserInput = new JPanel(new GridLayout(10, 2));
+    JPanel UserInput = new JPanel(new GridLayout(5, 2));
     // UserInput.setSize(200,200);
     UserInput.setBackground(new Color(0x123456));
 
@@ -82,10 +82,20 @@ public class run{
       }
     };
     
-    JButton loginbu = new button0();
+        
+    
+    //JButton loginbu = new button0();
+        JButton loginbu = new JButton("Login!");
+        loginbu.setFont(new Font("MV Boli", Font.BOLD, 20));
+        
+        loginbu.setForeground(new Color(0x0000FF));
+        loginbu.setFocusable(false);
+        loginbu.setSize(200, 50);
     JPanel space = new JPanel();
     space.setBackground(new Color(0x123456));
+    space.setSize(50,50);
     
+    //loginbu.addActionListener(pressed);
     pass.addKeyListener(g);
     user.addKeyListener(g);
     title.add(laby);
@@ -93,8 +103,8 @@ public class run{
     UserInput.add(user);
     UserInput.add(PassTitle);
     UserInput.add(pass);
-    UserInput.add(space);
-    UserInput.add(loginbu);
+    //UserInput.add(space);
+    frame.add(loginbu, BorderLayout.SOUTH);
     frame.add(title, BorderLayout.NORTH);
     frame.add(UserInput, BorderLayout.CENTER);
     frame.setVisible(true);
