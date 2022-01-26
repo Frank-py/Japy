@@ -1,4 +1,4 @@
-package Japy.src.Java;
+package Java;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
