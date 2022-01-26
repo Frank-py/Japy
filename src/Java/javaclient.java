@@ -29,13 +29,16 @@ public class javaclient {
         } catch (IOException e1) {
             e1.printStackTrace();
         } */
-        sent = new Thread(new Runnable() {
+        sent = new Thread(new Callable() {
             @Override
-            public void run() {
+            public String call() {
                 try {
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     out.print(a);
                     out.flush();
+                    String resp = in.readLine();
+                    return resp;
                     //socket.close();
                 } catch (IOException e) {
                     e.printStackTrace();
