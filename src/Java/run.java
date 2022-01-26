@@ -1,31 +1,27 @@
 package Java;
 
-import java.util.*;
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
+
 import java.awt.*;
-import java.awt.event.KeyListener.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.awt.event.*;
 import java.io.*;
 
-public class run {
-  // ArrayList<String> login = new ArrayList<>();
-  public static String[] login = new String[3];
+public class run{
   public static Socket socket;
-
+  static JButton loginbu;
 
   public static void main(String[] args) {
-    
-    try{
-      socket =   new Socket("localhost", 6000);}
-      catch(UnknownHostException e1)
-      {
-        e1.printStackTrace();
-      }catch(
-      IOException e2)
-      {
-        e2.printStackTrace();}
+
+    try {
+      socket =   new Socket("localhost", 6000);
+    } catch (UnknownHostException e1) {
+      e1.printStackTrace();
+    } catch (IOException e2) {
+      e2.printStackTrace();
+    }
     ImageIcon pic = new ImageIcon(
         "C:\\Users\\valie\\OneDrive\\Desktop\\SwitchClips\\Programmieren\\Japy\\src\\Java\\prof.png");
 
@@ -78,32 +74,33 @@ public class run {
     pass.setPreferredSize(new Dimension(200, 50));
     test2.add(pw);
     test2.add(pass);
-    
-    login[0] = "login";
-      KeyListener g = new KeyListener() {
-        public void keyPressed(KeyEvent e) {
-          if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-            javaclient.send("login",socket);
-            javaclient.send(user.getText(),socket);
-            javaclient.send(pass.getText(),socket);
-            
-          }
-        }
 
-        public void keyReleased(KeyEvent e) {
-        }
+    KeyListener g = new KeyListener() {
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+          javaclient.send("login", socket);
+          javaclient.send(user.getText(), socket);
+          javaclient.send(pass.getText(), socket);
 
-        public void keyTyped(KeyEvent e) {
         }
-      };
+      }
 
+      public void keyReleased(KeyEvent e) {
+      }
+
+      public void keyTyped(KeyEvent e) {
+      }
+    };
+
+    loginbu = new button0();
+
+    frame.add(loginbu);
     pass.addKeyListener(g);
     user.addKeyListener(g);
     test.add(laby);
     frame.add(test, BorderLayout.NORTH);
     frame.add(test2, BorderLayout.CENTER);
     frame.setVisible(true);
-
   }
 
 }

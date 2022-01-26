@@ -36,7 +36,7 @@ public class encryption {
       BigInteger BB = BigInteger.valueOf(B);
       BigInteger key2 = BB.modPow(rando,pp);
       key = key2.toString(10);
-      System.out.println("Your private key is: " );
+      System.out.println("Your private key is: " + key );
       
     } 
     else {
@@ -48,7 +48,7 @@ public class encryption {
     boolean crypt  = scanny.nextBoolean();
     int keyInt = Integer.parseInt(key);
     key = Integer.toBinaryString(keyInt);
-    System.out.println("Enter Message:" + key );
+    System.out.println("Enter Message:" );
     Scanner scanny2 = new Scanner(System.in);
     String mess = scanny2.nextLine();
     String res = "";
