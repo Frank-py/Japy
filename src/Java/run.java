@@ -1,19 +1,10 @@
 package Java;
-
-//import javax.swing.*;
-//import javax.swing.event.ChangeListener;
-
-//import java.awt.*;
 import java.net.*;
-//import java.awt.event.*;
 import java.io.*;
 
 public class run {
   public static Socket socket;
-  
-
   public static void main(String[] args) {
-
     try {
       socket = new Socket("localhost", 5000);
     } catch (UnknownHostException e1) {
@@ -21,6 +12,7 @@ public class run {
     } catch (IOException e2) {
       e2.printStackTrace();
     }
+    
     
     int resp = login.createGUI(socket);
   }
