@@ -18,6 +18,7 @@ public class button0 extends JButton implements ActionListener {
         loginbu.addActionListener(this);
         loginbu.setForeground(new Color(0x0000FF));
         loginbu.setFocusable(false);
+        loginbu.setSize(200, 50);
 
     }
 
