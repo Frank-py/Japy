@@ -14,7 +14,10 @@ public class run {
     }
     
     int resp = login.createGUI(socket);
-    System.out.println(resp);
+    if (resp!=0) {
+      System.out.println(resp);
+    }
+    
   }
   
 }

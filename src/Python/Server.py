@@ -1,5 +1,5 @@
 import socket, re, threading, hashlib
-from functionsserver import *
+#from functionsserver import *
 PORT = 5000
 
 def Client(conn, addr):
@@ -7,7 +7,7 @@ def Client(conn, addr):
         data = conn.recv(1024).decode(encoding="UTF-8")
         print(data)
         data = conn.recv(1024).decode(encoding="UTF-8")
-        print(data)
+        println(data)
         data = conn.recv(1024).decode(encoding="UTF-8")
         print(data)
         conn.send("richtiges Passwort$".encode('utf-8'))
