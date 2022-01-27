@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 //import java.net.UnknownHostException;
 public class sendrecv {
-    public static Stream<String> resp = null;
+    //public static Stream<String> resp = null;
     public static String send(Socket socket, String Funktion, String args[]) { 
         try {
             if (Funktion == "login") {
@@ -23,13 +23,13 @@ public class sendrecv {
 
         
                 String resp;
-                while ((resp = in.readLine()) != null) {
+                /* while ((resp = in.readLine()) != null) {
                 if ("$".equals(resp)) {
                     break;
-                }
+                } */
         }
 
-            }
+           // }
 
         } catch (IOException e) {
             e.printStackTrace();
