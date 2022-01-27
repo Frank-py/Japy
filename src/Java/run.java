@@ -1,4 +1,4 @@
-package Japy.src.Java;
+package Java;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -70,9 +70,10 @@ public class run {
     KeyListener g = new KeyListener() {
       public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-          javaclient.send("login", socket);
-          javaclient.send(user.getText(), socket);
-          javaclient.send(pass.getText(), socket);
+          // javaclient2.send("login", socket);
+          // javaclient2.send(user.getText(), socket);
+          // javaclient2.send(pass.getText(), socket);
+          return;
           
         }
       }
