@@ -8,9 +8,6 @@ import java.awt.event.*;
 import java.io.*;
 
 public class login {
-  public static void main(String[] args) {
-
-  }
 
   public static String recv = "5";
 
@@ -62,6 +59,7 @@ public class login {
           sendrecv.send("login", socket);
           sendrecv.send(user.getText(), socket);
           recv = sendrecv.send(pass.getText(), socket);
+          System.out.println(user.getText() + pass.getText());
 
         }
       }
@@ -76,14 +74,25 @@ public class login {
     // JButton loginbu = new button0();
     JButton loginbu = new JButton("Login!");
     loginbu.setFont(new Font("MV Boli", Font.BOLD, 20));
-
+    
     loginbu.setForeground(new Color(0x0000FF));
+    
     loginbu.setFocusable(false);
     loginbu.setSize(200, 50);
     JPanel space = new JPanel();
     space.setBackground(new Color(0x123456));
     space.setSize(50, 50);
 
+    ActionListener act = new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == loginbu) {
+          System.out.println("Button pressed!");
+          loginbu.setEnabled(false);
+        }
+
+      }
+    };
+    loginbu.addActionListener(act);
     // loginbu.addActionListener(pressed);
     pass.addKeyListener(g);
     user.addKeyListener(g);
@@ -103,4 +112,7 @@ public class login {
     return 0;
 
   }
+
+  // @Override
+
 }
