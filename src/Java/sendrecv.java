@@ -1,21 +1,41 @@
 package Java;
+
 import java.io.*;
 import java.net.Socket;
+import java.util.stream.Stream;
+
 //import java.net.UnknownHostException;
 public class sendrecv {
-    public static String send(String a, Socket socket) /*throws UnknownHostException, ClassNotFoundException, InterruptedException*/{
+    public static Stream<String> resp = null;
+    public static String send(Socket socket, String Funktion, String args[]) { 
         try {
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out.print(a);
-            out.flush();
-            String resp = in.readLine();
-            socket.close();
-            return resp;          
+            if (Funktion == "login") {
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out.print("login");
+                out.flush();
+                out.print(args[0].replaceAll("\r", "").replaceAll("\n", ""));
+                out.flush();
+                out.print(args[1].replaceAll("\r", "").replaceAll("\n", ""));
+                out.flush();
+                //System.out.println(in.ready());
+                //resp = in.lines();
+
+        
+                String resp;
+                while ((resp = in.readLine()) != null) {
+                if ("$".equals(resp)) {
+                    break;
+                }
+        }
+
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
             return "error";
         }
-        
+        return "1";
+
     }
 }

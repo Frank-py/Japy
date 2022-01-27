@@ -56,10 +56,10 @@ public class login {
     KeyListener g = new KeyListener() {
       public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-          sendrecv.send("login", socket);
-          sendrecv.send(user.getText(), socket);
-          recv = sendrecv.send(pass.getText(), socket);
-          System.out.println(user.getText() + pass.getText());
+          String[] lol = {user.getText(), pass.getText()};
+          recv = sendrecv.send(socket, "login", lol);
+          System.out.println("hi");
+          //System.out.println(recv);
 
         }
       }
@@ -74,9 +74,9 @@ public class login {
     // JButton loginbu = new button0();
     JButton loginbu = new JButton("Login!");
     loginbu.setFont(new Font("MV Boli", Font.BOLD, 20));
-    
+
     loginbu.setForeground(new Color(0x0000FF));
-    
+
     loginbu.setFocusable(false);
     loginbu.setSize(200, 50);
     JPanel space = new JPanel();
@@ -88,8 +88,11 @@ public class login {
         if (e.getSource() == loginbu) {
           System.out.println("Button pressed!");
           loginbu.setEnabled(false);
+          //sendrecv.send("login", socket);
+          //sendrecv.send(user.getText(), socket);
+          //recv = sendrecv.send(pass.getText(), socket);
+          System.out.println(recv);
         }
-
       }
     };
     loginbu.addActionListener(act);
