@@ -1,4 +1,4 @@
-package Japy.src.Java;
+package Java;
 import java.io.*;
 import java.net.Socket;
 //import java.net.UnknownHostException;

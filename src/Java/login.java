@@ -1,4 +1,4 @@
-package Japy.src.Java;
+package Java;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
