@@ -13,8 +13,8 @@ public class run {
       e2.printStackTrace();
     }
     
-    
     int resp = login.createGUI(socket);
+    System.out.println(resp);
   }
   
 }
