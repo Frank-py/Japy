@@ -1,4 +1,4 @@
-package Japy.src.Java;
+package Java;
 import java.net.*;
 import java.io.*;
 
@@ -14,10 +14,7 @@ public class run {
     }
     
     int resp = login.createGUI(socket);
-    if (resp!=0) {
-      System.out.println(resp);
     }
     
-  }
-  
 }
+  

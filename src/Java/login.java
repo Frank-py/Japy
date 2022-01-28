@@ -1,4 +1,4 @@
-package Japy.src.Java;
+package Java;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -72,8 +72,6 @@ public class login {
           String[] lol = {user.getText(), pass.getText()};
           recv = sendrecv.send(socket, "login", lol);
           loginbu.setEnabled(false);
-          System.out.println("hi");
-          //System.out.println(recv);
 
         }
       }
@@ -90,10 +88,9 @@ public class login {
         if (e.getSource() == loginbu) {
           System.out.println("Button pressed!");
           loginbu.setEnabled(false);
-          //sendrecv.send("login", socket);
-          //sendrecv.send(user.getText(), socket);
-          //recv = sendrecv.send(pass.getText(), socket);
-          System.out.println(recv);
+          String[] lol = {user.getText(), pass.getText()};
+          recv = sendrecv.send(socket, "login", lol);
+          loginbu.setEnabled(false);
         }
       }
     };
