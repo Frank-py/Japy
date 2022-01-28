@@ -6,12 +6,10 @@ import java.net.*;
 import java.awt.event.*;
 
 public class login {
-
-  public static String recv = "5";
-
+  public static String recv;
   public static void createGUI(Socket socket) {
-    ImageIcon pic = new ImageIcon(
-        "C:\\Users\\valie\\OneDrive\\Desktop\\SwitchClips\\Programmieren\\Japy\\src\\Java\\prof.png");
+    Color color = new Color(0x123456);
+    ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
 
     JFrame frame = new JFrame();
     frame.setSize(300, 400);
@@ -20,26 +18,26 @@ public class login {
     frame.setTitle("Messenger");
     frame.setResizable(false);
     frame.setIconImage(pic.getImage());
-    frame.getContentPane().setBackground(new Color(0x123456));
+    frame.getContentPane().setBackground(color);
 
     JLabel laby = new JLabel("Hier Anmelden:");
     laby.setFont(new Font("MV Boli", Font.BOLD, 30));
     laby.setForeground(new Color(0xFFFFFF));
-    laby.setSize(100, 100);
 
     JPanel title = new JPanel();
-    // title.setSize(1000,1000);
-    title.setBackground(new Color(0x123456));
+    title.setBackground(color);
 
     JPanel UserInput = new JPanel(new GridLayout(7, 1));
-    // UserInput.setSize(200,200);
-    UserInput.setBackground(new Color(0x123456));
+    UserInput.setBackground(color);
 
     JPanel button = new JPanel();
-    button.setBackground(new Color(0x123456));
+    button.setBackground(color);
+
+    JPanel space = new JPanel();
+    space.setSize(50, 50);
+    space.setVisible(false);
 
     JTextField user = new JTextField("");
-    user.setPreferredSize(new Dimension(200, 50));
     JLabel UserTitle = new JLabel("Username: ");
     UserTitle.setFont(new Font("MV Boli", Font.BOLD, 20));
     UserTitle.setForeground(new Color(0x00FF00));
@@ -49,20 +47,12 @@ public class login {
     PassTitle.setFont(new Font("MV Boli", Font.BOLD, 20));
     PassTitle.setForeground(new Color(0x00FF00));
 
-    pass.setPreferredSize(new Dimension(200, 50));
-
-
-    // JButton loginbu = new button0();
     JButton loginbu = new JButton("Login!");
     loginbu.setFont(new Font("MV Boli", Font.BOLD, 20));
-
     loginbu.setForeground(new Color(0x0000FF));
-
     loginbu.setFocusable(false);
     loginbu.setSize(200, 50);
-    JPanel space = new JPanel();
-    space.setBackground(new Color(0x123456));
-    space.setSize(50, 50);
+
 
     KeyListener g = new KeyListener() {
       public void keyPressed(KeyEvent e) {
@@ -99,16 +89,15 @@ public class login {
     pass.addKeyListener(g);
     user.addKeyListener(g);
     title.add(laby);
-    button.add(loginbu, BorderLayout.CENTER);
+    button.add(loginbu);
     UserInput.add(UserTitle);
     UserInput.add(user);
     UserInput.add(PassTitle);
     UserInput.add(pass);
     UserInput.add(space);
     UserInput.add(button);
-    
     frame.add(title, BorderLayout.NORTH);
-    frame.add(UserInput, BorderLayout.CENTER);
+    frame.add(UserInput);
     frame.setVisible(true);
     while (true) {
       System.out.println(recv);
