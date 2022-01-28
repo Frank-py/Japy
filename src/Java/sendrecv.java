@@ -20,8 +20,6 @@ public class sendrecv {
                 InputStreamReader in = new InputStreamReader(socket.getInputStream());
                 BufferedReader bf = new BufferedReader(in);
                 s = bf.readLine();
-                System.out.println(s);
-
                 }
 
            // }
