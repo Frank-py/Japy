@@ -1,4 +1,4 @@
-package Java;
+package Japy.src.Java;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -53,23 +53,6 @@ public class login {
 
     pass.setPreferredSize(new Dimension(200, 50));
 
-    KeyListener g = new KeyListener() {
-      public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-          String[] lol = {user.getText(), pass.getText()};
-          recv = sendrecv.send(socket, "login", lol);
-          System.out.println("hi");
-          //System.out.println(recv);
-
-        }
-      }
-
-      public void keyReleased(KeyEvent e) {
-      }
-
-      public void keyTyped(KeyEvent e) {
-      }
-    };
 
     // JButton loginbu = new button0();
     JButton loginbu = new JButton("Login!");
@@ -82,6 +65,25 @@ public class login {
     JPanel space = new JPanel();
     space.setBackground(new Color(0x123456));
     space.setSize(50, 50);
+
+    KeyListener g = new KeyListener() {
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+          String[] lol = {user.getText(), pass.getText()};
+          recv = sendrecv.send(socket, "login", lol);
+          loginbu.setEnabled(false);
+          System.out.println("hi");
+          //System.out.println(recv);
+
+        }
+      }
+
+      public void keyReleased(KeyEvent e) {
+      }
+
+      public void keyTyped(KeyEvent e) {
+      }
+    };
 
     ActionListener act = new ActionListener() {
       public void actionPerformed(ActionEvent e) {

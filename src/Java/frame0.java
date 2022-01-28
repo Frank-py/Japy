@@ -1,4 +1,4 @@
-package Java;
+package Japy.src.Java;
 
 import java.awt.*;
 import javax.swing.*;
