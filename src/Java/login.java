@@ -1,17 +1,15 @@
 package Java;
 
 import javax.swing.*;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.net.*;
 import java.awt.event.*;
-import java.io.*;
 
 public class login {
 
   public static String recv = "5";
 
-  public static int createGUI(Socket socket) {
+  public static void createGUI(Socket socket) {
     ImageIcon pic = new ImageIcon(
         "C:\\Users\\valie\\OneDrive\\Desktop\\SwitchClips\\Programmieren\\Japy\\src\\Java\\prof.png");
 
@@ -71,7 +69,7 @@ public class login {
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
           String[] lol = {user.getText(), pass.getText()};
           recv = sendrecv.send(socket, "login", lol);
-          loginbu.setEnabled(false);
+          //loginbu.setEnabled(false);
 
         }
       }
@@ -87,11 +85,12 @@ public class login {
       public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginbu) {
           System.out.println("Button pressed!");
-          loginbu.setEnabled(false);
+          //loginbu.setEnabled(false);
           String[] lol = {user.getText(), pass.getText()};
           recv = sendrecv.send(socket, "login", lol);
-          loginbu.setEnabled(false);
-        }
+          //0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
+          //loginbu.setEnabled(false);
+        } 
       }
     };
     loginbu.addActionListener(act);
@@ -106,15 +105,21 @@ public class login {
     UserInput.add(pass);
     UserInput.add(space);
     UserInput.add(button);
-
+    
     frame.add(title, BorderLayout.NORTH);
     frame.add(UserInput, BorderLayout.CENTER);
     frame.setVisible(true);
-
-    return 0;
-
+    while (true) {
+      //System.out.println(recv);
+      if (Integer.parseInt(recv) == 0){
+        return;
+      }
+      else if (Integer.parseInt(recv) == 1){ 
+        return;
+      }
+    }
   }
-
+  
   // @Override
 
 }

@@ -12,9 +12,9 @@ public class run {
     } catch (IOException e2) {
       e2.printStackTrace();
     }
-    
-    int resp = login.createGUI(socket);
+    login.createGUI(socket);
+    System.out.println("new window");
     }
-    
 }
+    
   
