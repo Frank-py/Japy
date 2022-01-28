@@ -111,7 +111,7 @@ public class login {
     frame.add(UserInput, BorderLayout.CENTER);
     frame.setVisible(true);
     while (true) {
-      //System.out.println(recv);
+      System.out.println(recv);
       if (Integer.parseInt(recv) == 0){
         return;
       }

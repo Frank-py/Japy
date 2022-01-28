@@ -19,7 +19,7 @@ def Client(conn, addr):
                 data.append(conn.recv(1024).decode(encoding="UTF-8"))
                 data.append(conn.recv(1024).decode(encoding="UTF-8"))
                 print(data)
-                conn.send("5\n".encode('utf-8'))
+                conn.send("1\n".encode('utf-8'))
                 #benutzer = User().checkaccount(data[0], hashlib.md5(bytes(data[1], encoding='UTF-8')).hexdigest(), addr[0])
                # if benutzer.loggedin and benutzer.registriert:
                 #    conn.send("0\n".encode('utf-8'))
