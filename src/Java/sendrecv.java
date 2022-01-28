@@ -5,11 +5,11 @@ import java.net.Socket;
 
 //import java.net.UnknownHostException;
 public class sendrecv {
-    //public static Stream<String> resp = null;
-    public static String s = null;
+    public static String s;
     public static String send(Socket socket, String Funktion, String args[]) { 
         try {
             if (Funktion == "login") {
+                s = null;
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 out.print("login");
                 out.flush();
@@ -29,6 +29,5 @@ public class sendrecv {
             return "error";
         }
         return s;
-
     }
 }

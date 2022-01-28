@@ -69,6 +69,7 @@ public class login {
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
           String[] lol = {user.getText(), pass.getText()};
           recv = sendrecv.send(socket, "login", lol);
+          System.out.println(recv);
           //loginbu.setEnabled(false);
 
         }
