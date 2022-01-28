@@ -85,10 +85,10 @@ public class login {
     ActionListener act = new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginbu) {
-          System.out.println("Button pressed!");
           //loginbu.setEnabled(false);
           String[] lol = {user.getText(), pass.getText()};
           recv = sendrecv.send(socket, "login", lol);
+          System.out.println(recv);
           //0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
           //loginbu.setEnabled(false);
         } 
