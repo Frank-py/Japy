@@ -4,6 +4,7 @@ import java.net.Socket;
 
 public class sendrecv {
     public static String s;
+    
     public static String send(Socket socket, String Funktion, String args[]) { 
         try {
             if (Funktion == "login") {
@@ -22,7 +23,7 @@ public class sendrecv {
         } 
         catch (IOException e) {
             e.printStackTrace();
-            return "error";
+            return "2";
         }
         return s;
     }
