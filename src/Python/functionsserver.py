@@ -1,6 +1,5 @@
 from atexit import register
 import mysql.connector
-
 from mysql.connector import Error
 
 class User():
@@ -90,6 +89,3 @@ class User():
                 return self.login(self.connection, name, password, ip)
         except Exception as e:
             return self.register(self.connection, name, password, ip)
-
-
-
