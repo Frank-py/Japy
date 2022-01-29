@@ -1,9 +1,7 @@
 package Java;
-
 import java.io.*;
 import java.net.Socket;
 
-//import java.net.UnknownHostException;
 public class sendrecv {
     public static String s;
     public static String send(Socket socket, String Funktion, String args[]) { 
@@ -21,10 +19,8 @@ public class sendrecv {
                 BufferedReader bf = new BufferedReader(in);
                 s = bf.readLine();
                 }
-
-           // }
-
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
             return "error";
         }

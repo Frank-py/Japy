@@ -43,10 +43,10 @@ public class encryption {
       key = scanny.next();
     }
     
-    Scanner scanny2 = new Scanner(System.in);
     System.out.println("type true to decrypt (entschlüsseln), type false to encrypt (verschlüsseln)");
     boolean crypt  = scanny.nextBoolean();
     scanny.close();
+    Scanner scanny2 = new Scanner(System.in);
     int keyInt = Integer.parseInt(key);
     key = Integer.toBinaryString(keyInt);
     System.out.println("Enter Message:" );
@@ -60,10 +60,9 @@ public class encryption {
     else {
       mess = Stringtobinary(mess);
       res = crypt(mess,key);
-    } // end of if-else
-
+    }
     System.out.println(res);  
-  } // end of main
+  }
     
   public static String Binarytostring (String in) {
     String out = "";
@@ -86,10 +85,10 @@ public class encryption {
         y = bin.length()%8;
       } 
       out = out + bin;
-    } // end of for  
+    } 
     return out;
   }
-  
+
   public static String crypt (String mess, String key){
     int messLen = mess.length();
     int keyLen = key.length();
@@ -98,7 +97,7 @@ public class encryption {
     while (messLen>keyLen) { 
       key = key+temp;
       keyLen = key.length(); 
-    } // end of while
+    }
     char[] messC = mess.toCharArray();
     char[] keyC = key.toCharArray();
     for (int x = 0;x < mess.length() ;x++ ) {
@@ -106,19 +105,18 @@ public class encryption {
         out = out + 0; 
       } else {
         out = out + 1;
-      } // end of if-else
-    } // end of for
+      }
+    }
     return out;
   }
+
   static boolean isPrime(double n)
   {
-    // Corner case
     if (n <= 1)
       return false;
-    // Check from 2 to n-1
     for (int i = 2; i < n; i++)
       if (n % i == 0)
         return false;
     return true;
   }
-} // end of class encryption
+}

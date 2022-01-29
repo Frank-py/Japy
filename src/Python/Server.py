@@ -1,8 +1,6 @@
 import socket, re, threading, hashlib
 from functionsserver import *
 PORT = 5000
-
-
     
 def Client(conn, addr):
     while True:
@@ -32,7 +30,6 @@ def Client(conn, addr):
         # except OSError:
         #     conn.close()
         #     return
-    
     
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
