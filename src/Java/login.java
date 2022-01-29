@@ -53,7 +53,6 @@ public class login {
     loginbu.setFocusable(false);
     loginbu.setSize(200, 50);
 
-
     KeyListener g = new KeyListener() {
       public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
@@ -75,7 +74,6 @@ public class login {
     ActionListener act = new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginbu) {
-          //loginbu.setEnabled(false);
           String[] lol = {user.getText(), pass.getText()};
           recv = sendrecv.send(socket, "login", lol);
           System.out.println(recv);
@@ -85,7 +83,6 @@ public class login {
       }
     };
     loginbu.addActionListener(act);
-    // loginbu.addActionListener(pressed);
     pass.addKeyListener(g);
     user.addKeyListener(g);
     title.add(laby);
@@ -99,6 +96,7 @@ public class login {
     frame.add(title, BorderLayout.NORTH);
     frame.add(UserInput);
     frame.setVisible(true);
+
     while (true) {
       System.out.println(recv);
       if (Integer.parseInt(recv) == 0){
@@ -109,7 +107,4 @@ public class login {
       }
     }
   }
-  
-  // @Override
-
 }

@@ -4,7 +4,6 @@
 #include<sys/socket.h>
 #include<arpa/inet.h>	//inet_addr
 #include<unistd.h>	//write
-
 #include<pthread.h> //for threading , link with lpthread
 
 void *connection_handler(void *);
@@ -72,7 +71,6 @@ int main(int argc , char *argv[])
 	
 	return 0;
 }
-
 
 /*
  * This will handle connection for each client
