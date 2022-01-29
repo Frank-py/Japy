@@ -5,7 +5,7 @@ import java.net.*;
 import java.awt.event.*;
 
 public class login {
-  public static String recv;
+  public static String recv = "5";
 
   public static void createGUI(Socket socket) {
     Color color = new Color(0x123456);
@@ -100,9 +100,11 @@ public class login {
     while (true) {
       System.out.println(recv);
       if (Integer.parseInt(recv) == 0){
+        frame.dispose();
         return;
       }
       else if (Integer.parseInt(recv) == 1){ 
+        frame.dispose();
         return;
       }
     }
