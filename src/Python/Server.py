@@ -20,7 +20,7 @@ def Client(conn, addr):
                     print(data)
                     conn.send("0\n".encode('utf-8'))
                 except Exception:
-                        conn.send("3\n".encode('utf-8'))
+                        conn.send("4\n".encode('utf-8'))
                 #benutzer = User().checkaccount(data[0], hashlib.md5(bytes(data[1], encoding='UTF-8')).hexdigest(), addr[0])
                # if benutzer.loggedin and benutzer.registriert:
                 #    conn.send("0\n".encode('utf-8'))
