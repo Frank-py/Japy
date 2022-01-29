@@ -16,14 +16,13 @@ public class sendrecv {
                 out.flush();
                 out.print(args[1].replaceAll("\r", "").replaceAll("\n", ""));
                 out.flush();
-                InputStreamReader in = new InputStreamReader(socket.getInputStream());
-                BufferedReader bf = new BufferedReader(in);
+                BufferedReader bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 s = bf.readLine();
                 }
         } 
         catch (IOException e) {
             e.printStackTrace();
-            return "2";
+            return "4";
         }
         return s;
     }

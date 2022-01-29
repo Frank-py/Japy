@@ -16,7 +16,7 @@ public class login {
     frame.setSize(300, 420);
     frame.setLocationRelativeTo(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setTitle("Messenger");
+    frame.setTitle("Login");
     frame.setResizable(false);
     frame.setIconImage(pic.getImage());
     frame.getContentPane().setBackground(color);
@@ -43,7 +43,7 @@ public class login {
     UserTitle.setFont(new Font("MV Boli", Font.BOLD, 20));
     UserTitle.setForeground(new Color(0x00FF00));
 
-    JTextField pass = new JTextField("");
+    JTextField pass = new JTextField();
     JLabel PassTitle = new JLabel("Password: ");
     PassTitle.setFont(new Font("MV Boli", Font.BOLD, 20));
     PassTitle.setForeground(new Color(0x00FF00));
@@ -76,10 +76,17 @@ public class login {
           if (pass.getText().equals("") | user.getText().equals("")) {
             recv = "2";
           }
+          else if (EULA.isSelected() == false | robo.isSelected()==false) {
+            recv = "3";
+          }
           else{
-          String[] lol = {user.getText(), pass.getText()};
-          recv = sendrecv.send(socket, "login", lol);
-          //loginbu.setEnabled(false);
+            try {
+              String[] lol = {user.getText(), pass.getText()};
+              recv = sendrecv.send(socket, "login", lol);
+              //0 = registriert, 1 = eingeloggt, 2 = falsches Passwort  
+            } catch (Exception f) {
+              recv = "4";
+            }
           }
         }
       }
@@ -101,10 +108,13 @@ public class login {
             recv = "3";
           }
           else{
-          String[] lol = {user.getText(), pass.getText()};
-          recv = sendrecv.send(socket, "login", lol);
-          //0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
-          //loginbu.setEnabled(false);
+            try {
+              String[] lol = {user.getText(), pass.getText()};
+              recv = sendrecv.send(socket, "login", lol);
+              //0 = registriert, 1 = eingeloggt, 2 = falsches Passwort  
+            } catch (Exception f) {
+              recv = "4";
+            }
           }
         } 
       }
@@ -149,6 +159,7 @@ public class login {
       }
       else if (Integer.parseInt(recv) == 4){
         JOptionPane.showMessageDialog(null, "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR", JOptionPane.ERROR_MESSAGE);
+        frame.dispose();
         return 4;
       }
     }

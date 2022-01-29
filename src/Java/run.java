@@ -13,7 +13,10 @@ public class run {
       e2.printStackTrace();
     }
     int log = login.createGUI(socket);
-    System.out.println("new window");
+    if (log == 4) {
+      return;
+    }
+    //System.out.println("new window");
     messInterface.createGUI(log);
     }
 }
