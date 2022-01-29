@@ -14,6 +14,7 @@ public class run {
     }
     login.createGUI(socket);
     System.out.println("new window");
+    messInterface.createGUI();
     }
 }
     

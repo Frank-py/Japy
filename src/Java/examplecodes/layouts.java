@@ -7,9 +7,6 @@ public class layouts {
         gridlayout();
         flowlayout();
         borderlayout();
-
-
-
 	}
    
     public static void gridlayout() {
