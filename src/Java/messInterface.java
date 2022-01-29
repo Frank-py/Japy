@@ -39,16 +39,18 @@ public static void main(String[] args) {
     frame.setIconImage(pic.getImage());
     frame.getContentPane().setBackground(color);
 
-    Users = new JPanel(new FlowLayout());
+    Users = new JPanel();
+    Users.setLayout(new BoxLayout(Users, BoxLayout.Y_AXIS));
     Users.setBackground(color);
 
+    JPanel space = new JPanel();
+    
 
     addUsers = new JButton("    Add User    ");
     addUsers.setIcon(plus);
     addUsers.setFont(new Font("MV Boli", Font.BOLD, 15));
     addUsers.setForeground(new Color(0x0000FF));
     addUsers.setFocusable(false);
-    addUsers.setSize(new Dimension(1000,1000));
 
 
 
@@ -56,6 +58,7 @@ public static void main(String[] args) {
     addUsers.addActionListener(act);
     Users.add(addUsers);
     frame.add(Users,BorderLayout.WEST);
+    frame.add(space,BorderLayout.CENTER);
     frame.setVisible(true);
     //return;
 
@@ -70,6 +73,8 @@ public static void run() {
            newUser.setFont(new Font("Consolas",Font.PLAIN,35));
            newUser.setForeground(new Color(0x00FF00));
            newUser.setBackground(color);
+           newUser.setCaretColor(Color.white);
+           newUser.setSize(new Dimension(10,10));
            Users.add(newUser);
            frame.add(Users);
            frame.setVisible(true);
