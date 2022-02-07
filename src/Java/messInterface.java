@@ -1,5 +1,5 @@
 //package Japy.src.Java;
-package Java;
+package Japy.src.Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,12 +9,13 @@ public class messInterface {
     public static Color color = new Color(0x123456);
     //public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
-    public static ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
-    public static ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
+    public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
+    public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
     public static JButton addUsers;
     public static JFrame frame;
     public static JPanel Users;
     public static boolean createUser = false;
+
     public static ActionListener act = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == addUsers) {
@@ -26,7 +27,6 @@ public class messInterface {
     // main for testing not necessary
     public static void main(String[] args) {
         createGUI(0);
-        // run();
     }
 
     public static void createGUI(int log) {
@@ -40,7 +40,8 @@ public class messInterface {
         frame.getContentPane().setBackground(color);
 
         Users = new JPanel();
-        Users.setLayout(new BoxLayout(Users, BoxLayout.Y_AXIS));
+        //Users.setLayout(new BoxLayout(Users, BoxLayout.Y_AXIS));
+        Users.setLayout(new GridLayout(10,6));
         Users.setSize(1, 1);
         Users.setBackground(color);
 
@@ -67,36 +68,15 @@ public class messInterface {
                 newUser.setForeground(new Color(0x00FF00));
                 newUser.setBackground(color);
                 newUser.setCaretColor(Color.white);
-                newUser.setSize(new Dimension(10, 10));
-                Users.add(newUser);
+                newUser.setSize(new Dimension(1, 1));
+                Users.add(newUser, 2, 1);
                 frame.add(Users);
+                addUsers.setEnabled(false);
                 frame.setVisible(false);
                 frame.setVisible(true);
                 createUser = false;
 
             }
-        }
-
-    }
-
-    public static void run() {
-        while (true) {
-            System.out.println("hu");
-            if (createUser) {
-                System.out.println("ho");
-                JTextField newUser = new JTextField();
-                newUser.setFont(new Font("Consolas", Font.PLAIN, 35));
-                newUser.setForeground(new Color(0x00FF00));
-                newUser.setBackground(color);
-                newUser.setCaretColor(Color.white);
-                newUser.setSize(new Dimension(10, 10));
-                Users.add(newUser);
-                frame.add(Users);
-                frame.setVisible(true);
-                createUser = false;
-
-            }
-
         }
 
     }
