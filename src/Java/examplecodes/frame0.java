@@ -1,10 +1,8 @@
-package Japy.src.Java;
-
+package Japy.src.Java.examplecodes;
 import java.awt.*;
 import javax.swing.*;
 
 public class frame0 extends JFrame {
-
   // JFrame = a GUI window to add components to
   public static void main(String[] args) {
     int x = 1;
@@ -25,8 +23,6 @@ public class frame0 extends JFrame {
     // this.toFront();
     this.setAlwaysOnTop(true);
     // this.setUndecorated(true);
-    
     this.getContentPane().setBackground(new Color(0x123456));
-
   }
 }
