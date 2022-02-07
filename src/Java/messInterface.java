@@ -1,5 +1,5 @@
-package Japy.src.Java;
-
+//package Japy.src.Java;
+package Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,8 +7,10 @@ import java.awt.event.*;
 public class messInterface {
 
     public static Color color = new Color(0x123456);
-    public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-    public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
+    //public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
+    //public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
+    public static ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
+    public static ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
     public static JButton addUsers;
     public static JFrame frame;
     public static JPanel Users;
