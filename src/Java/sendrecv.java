@@ -1,11 +1,10 @@
 package Java;
-
 import java.io.*;
 import java.net.Socket;
 
-//import java.net.UnknownHostException;
 public class sendrecv {
     public static String s;
+    
     public static String send(Socket socket, String Funktion, String args[]) { 
         try {
             if (Funktion == "login") {
@@ -17,16 +16,13 @@ public class sendrecv {
                 out.flush();
                 out.print(args[1].replaceAll("\r", "").replaceAll("\n", ""));
                 out.flush();
-                InputStreamReader in = new InputStreamReader(socket.getInputStream());
-                BufferedReader bf = new BufferedReader(in);
+                BufferedReader bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 s = bf.readLine();
                 }
-
-           // }
-
-        } catch (IOException e) {
+        } 
+        catch (IOException e) {
             e.printStackTrace();
-            return "error";
+            return "4";
         }
         return s;
     }

@@ -3,31 +3,31 @@ import java.math.*;
 import java.util.*;
  
 public class encryption {
-  public static void main(String[] args) {
+    public static void main(String[] args) {
     Scanner scanny = new Scanner(System.in);
     Random randy = new Random();
     String key = "";
-    int ran = 0;
+    int ran;
     System.out.println("Do you want to create key for \"Diffie-Hellman-Schlüsselaustauschverfahren\"?");
     boolean create = scanny.nextBoolean();
     if (create) {
       System.out.println("Enter g or enter 0 to generate g");
       int g = scanny.nextInt();
       System.out.println("Enter the primenumber p or 0 to generate p");
-     int p = scanny.nextInt();
+      int p = scanny.nextInt();
       if (p==0) {
         do {
           p = randy.nextInt(1000000000);
-        } while (!isPrime(p) | p<1000000 ); // end of do-while
-      } // end of if
+        } while (!isPrime(p) | p<1000000 );
+      }
       if (g==0) {
         g =  randy.nextInt(p-1);
-      } // end of if
+      }
       BigInteger gg = BigInteger.valueOf(g);
       BigInteger pp = BigInteger.valueOf(p);
       do {
        ran = randy.nextInt(1000000000);
-      } while (ran <= 1); // end of do-while
+      } while (ran <= 1);
       BigInteger rando = BigInteger.valueOf(ran);
       BigInteger A = gg.modPow(rando,pp);
       System.out.println("\n g = " + g + "\n p = " + p + "\n A = " + A + "\n a = " + ran);
@@ -36,20 +36,20 @@ public class encryption {
       BigInteger BB = BigInteger.valueOf(B);
       BigInteger key2 = BB.modPow(rando,pp);
       key = key2.toString(10);
-      System.out.println("Your private key is: " + key );
-      
+      System.out.println("Your private key is: " + key ); 
     } 
     else {
       System.out.println("Enter crypt key:");
       key = scanny.next();
-    } // end of if-else
+    }
     
-    System.out.println("type true to entschlüsseln, type false to verschlüsseln");
+    System.out.println("type true to decrypt (entschlüsseln), type false to encrypt (verschlüsseln)");
     boolean crypt  = scanny.nextBoolean();
+    scanny.close();
+    Scanner scanny2 = new Scanner(System.in);
     int keyInt = Integer.parseInt(key);
     key = Integer.toBinaryString(keyInt);
     System.out.println("Enter Message:" );
-    Scanner scanny2 = new Scanner(System.in);
     String mess = scanny2.nextLine();
     String res = "";
     
@@ -60,10 +60,9 @@ public class encryption {
     else {
       mess = Stringtobinary(mess);
       res = crypt(mess,key);
-    } // end of if-else
-
+    }
     System.out.println(res);  
-  } // end of main
+  }
     
   public static String Binarytostring (String in) {
     String out = "";
@@ -86,10 +85,10 @@ public class encryption {
         y = bin.length()%8;
       } 
       out = out + bin;
-    } // end of for  
+    } 
     return out;
   }
-  
+
   public static String crypt (String mess, String key){
     int messLen = mess.length();
     int keyLen = key.length();
@@ -98,7 +97,7 @@ public class encryption {
     while (messLen>keyLen) { 
       key = key+temp;
       keyLen = key.length(); 
-    } // end of while
+    }
     char[] messC = mess.toCharArray();
     char[] keyC = key.toCharArray();
     for (int x = 0;x < mess.length() ;x++ ) {
@@ -106,19 +105,18 @@ public class encryption {
         out = out + 0; 
       } else {
         out = out + 1;
-      } // end of if-else
-    } // end of for
+      }
+    }
     return out;
   }
+
   static boolean isPrime(double n)
   {
-    // Corner case
     if (n <= 1)
       return false;
-    // Check from 2 to n-1
     for (int i = 2; i < n; i++)
       if (n % i == 0)
         return false;
     return true;
   }
-} // end of class encryption
+}
