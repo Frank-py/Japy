@@ -39,9 +39,8 @@ public class messInterface {
 
         Users = new JPanel();
         Users.setLayout(new BoxLayout(Users, BoxLayout.Y_AXIS));
-        Users.setSize(1,1 );
+        Users.setSize(1, 1);
         Users.setBackground(color);
-       
 
         JPanel space = new JPanel();
         space.setForeground(new Color(0x0000FF));
@@ -60,7 +59,7 @@ public class messInterface {
         while (true) {
             System.out.print("");
             if (createUser) {
-                //System.out.print("ho");
+                // System.out.print("ho");
                 JTextField newUser = new JTextField();
                 newUser.setFont(new Font("Consolas", Font.PLAIN, 35));
                 newUser.setForeground(new Color(0x00FF00));
