@@ -1,4 +1,4 @@
-package Java.examplecodes;
+package Japy.src.Java.examplecodes;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.*;

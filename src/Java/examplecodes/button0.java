@@ -1,4 +1,4 @@
-package Java.examplecodes;
+package Japy.src.Java.examplecodes;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
