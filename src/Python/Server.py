@@ -35,10 +35,10 @@ def Client(conn, addr):
     
     
 def main():
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(("", PORT))
-    s.listen()
     while True:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind(("", PORT))
+        s.listen()
         conn, addr = s.accept()
         thread = threading.Thread(target = Client, args=(conn, addr))
         thread.start()
