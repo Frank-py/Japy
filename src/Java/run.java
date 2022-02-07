@@ -14,9 +14,11 @@ public class run {
     } catch (IOException e2) {
       e2.printStackTrace();
     }
-    int resp = login.createGUI(socket);
-    if (resp != 0) {
-      System.out.println(resp);
+    int log = login.createGUI(socket);
+    if (log == 4) {
+      return;
     }
+    // System.out.println("new window");
+    messInterface.createGUI(log);
   }
 }
