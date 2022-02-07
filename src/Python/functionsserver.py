@@ -2,6 +2,8 @@ from atexit import register
 import mysql.connector
 from mysql.connector import Error
 
+import socket, threading, hashlib
+
 class User():
     def __init__(self, user=None, password=None, ip=None, loggedin=None, registriert=False):
         self.user = user
@@ -36,9 +38,9 @@ class User():
             cursor.execute('SELECT Password from Persons where Username = "%s";' % (user))
             myresult = cursor.fetchone()[0]
             if myresult == password:
-                return cls(user, password, ip, True)
+                return cls(user, password, ip, True, False)
             else:
-                return cls(None, None, None, False)
+                return cls(None, None, None, False, False)
         except Error as e:
             print(e)
     @classmethod
@@ -83,9 +85,13 @@ class User():
     def checkaccount(self, name, password, ip):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT 1 FROM Persons WHERE Username = "%s";' % (name))
-            nachrichten = cursor.fetchone()[0]
-            if name == name:
-                return self.login(self.connection, name, password, ip)
+            cursor.execute('SELECT * FROM Persons WHERE Username = "%s";' % (name))
+            nachrichten = cursor.fetchall()
+            try:
+                print(nachrichten[0][0])
+                if name == nachrichten[0][0]:
+                    return self.login(self.connection, name, password, ip)
+            except:    
+                return self.register(self.connection, name, password, ip)
         except Exception as e:
-            return self.register(self.connection, name, password, ip)
+            return e

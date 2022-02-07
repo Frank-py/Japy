@@ -9,7 +9,7 @@ public class run {
 
   public static void main(String[] args) {
     try {
-      socket = new Socket("localhost", 5000);
+      socket = new Socket("localhost", 6000);
     } catch (UnknownHostException e1) {
       e1.printStackTrace();
     } catch (IOException e2) {
