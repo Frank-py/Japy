@@ -1,54 +1,41 @@
 import socket, threading, hashlib
 from functionsserver import *
-PORT = 5000
+PORT = 6000
     
 def Client(conn, addr):
     while True:
         data = []
         try:
-            data = conn.recv(1024).decode(encoding="UTF-8")
-            print(data = conn.recv(1024).decode(encoding="UTF-8"))
-            data = conn.recv(1024).decode(encoding="UTF-8")
-            print(data = conn.recv(1024).decode(encoding="UTF-8"))
-            data = conn.recv(1024).decode(encoding="UTF-8")
-            print(data = conn.recv(1024).decode(encoding="UTF-8"))
-            if data == "login":
-<<<<<<< HEAD
-                benutzer = User().checkaccount(data[0], hashlib.md5(bytes(data[1], encoding='UTF-8')).hexdigest(), addr[0])
+            data.append(conn.recv(512).decode(encoding="UTF-8"))
+            conn.send(b"200\n")
+            print(data)
+            data.append(conn.recv(512).decode(encoding="UTF-8"))
+            conn.send(b"200\n")
+            print(data)
+            data.append(conn.recv(512).decode(encoding="UTF-8"))
+            conn.send(b"200\n")
+            print(data)
+            if data[0] == "login":
+                benutzer = User().checkaccount(data[1], hashlib.md5(bytes(data[2], encoding='UTF-8')).hexdigest(), addr[0])
                 if benutzer.loggedin and benutzer.registriert:
                     conn.send("0\n".encode('utf-8'))
                 elif benutzer.loggedin:
                     conn.send("1\n".encode('utf-8'))
                 else:
-                    conn.send("2\n".encode('utf-8'))
-=======
-                try:
-                    data = []
-                    data.append(conn.recv(1024).decode(encoding="UTF-8"))
-                    data.append(conn.recv(1024).decode(encoding="UTF-8"))
-                    print(data)
-                    conn.send("1\n".encode('utf-8'))
-                except Exception:
-                        conn.send("4\n".encode('utf-8'))
-                #benutzer = User().checkaccount(data[0], hashlib.md5(bytes(data[1], encoding='UTF-8')).hexdigest(), addr[0])
-               # if benutzer.loggedin and benutzer.registriert:
-                #    conn.send("0\n".encode('utf-8'))
-               # elif benutzer.loggedin:
-               #     conn.send("1\n".encode('utf-8'))
-               # else:
-               #     conn.send("2\n".encode('utf-8'))
->>>>>>> 12c1ee418626a2e347285e3bb396939856864dca
+                    conn.send("2\n".encode('utf-8')) 
             else:
                 conn.close()
+                return
         except OSError:
             conn.send("4\n".encode('utf-8'))
             conn.close()
+            print("error 1212")
             return
     
 def main():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(("", PORT))
     while True:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind(("", PORT))
         s.listen()
         conn, addr = s.accept()
         thread = threading.Thread(target = Client, args=(conn, addr))
