@@ -1,4 +1,5 @@
-package Java;
+package Japy.src.Java;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.*;
@@ -55,7 +56,7 @@ public class login {
     loginbu.setSize(200, 42);
 
     JCheckBox robo = new JCheckBox("I'm not a robot");
-		robo.setFocusable(false);
+    robo.setFocusable(false);
     robo.setBackground(color);
     robo.setForeground(new Color(0x00FF00));
 
@@ -64,7 +65,7 @@ public class login {
     EULA.setBackground(color);
     EULA.setForeground(new Color(0x00FF00));
 
-    JCheckBox news = new JCheckBox("Subscribe to the Newsletter",true);
+    JCheckBox news = new JCheckBox("Subscribe to the Newsletter", true);
     news.setFocusable(false);
     news.setBackground(color);
     news.setForeground(new Color(0x00FF00));
@@ -75,15 +76,13 @@ public class login {
 
           if (pass.getText().equals("") | user.getText().equals("")) {
             recv = "2";
-          }
-          else if (EULA.isSelected() == false | robo.isSelected()==false) {
+          } else if (EULA.isSelected() == false | robo.isSelected() == false) {
             recv = "3";
-          }
-          else{
+          } else {
             try {
-              String[] lol = {user.getText(), pass.getText()};
+              String[] lol = { user.getText(), pass.getText() };
               recv = sendrecv.send(socket, "login", lol);
-              //0 = registriert, 1 = eingeloggt, 2 = falsches Passwort  
+              // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
             } catch (Exception f) {
               recv = "4";
             }
@@ -103,20 +102,18 @@ public class login {
         if (e.getSource() == loginbu) {
           if (pass.getText().equals("") | user.getText().equals("")) {
             recv = "2";
-          }
-          else if (EULA.isSelected() == false | robo.isSelected()==false) {
+          } else if (EULA.isSelected() == false | robo.isSelected() == false) {
             recv = "3";
-          }
-          else{
+          } else {
             try {
-              String[] lol = {user.getText(), pass.getText()};
+              String[] lol = { user.getText(), pass.getText() };
               recv = sendrecv.send(socket, "login", lol);
-              //0 = registriert, 1 = eingeloggt, 2 = falsches Passwort  
+              // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
             } catch (Exception f) {
               recv = "4";
             }
           }
-        } 
+        }
       }
     };
 
@@ -135,30 +132,30 @@ public class login {
     UserInput.add(button);
     // UserInput.add(space);
     frame.add(title, BorderLayout.NORTH);
-    frame.add(UserInput,BorderLayout.CENTER);
+    frame.add(UserInput, BorderLayout.CENTER);
     frame.setVisible(true);
-    
+
     while (true) {
-     System.out.println(recv);
-      if (Integer.parseInt(recv) == 0){
+      System.out.println(recv);
+      if (Integer.parseInt(recv) == 0) {
         frame.dispose();
         JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
         return 0;
-      }
-      else if (Integer.parseInt(recv) == 1){ 
+      } else if (Integer.parseInt(recv) == 1) {
         frame.dispose();
         return 1;
-      }
-      else if (Integer.parseInt(recv) == 2){
-        JOptionPane.showMessageDialog(null, "No or Wrong Password or Username, try again!", "Invalid UserInput", JOptionPane.ERROR_MESSAGE);
+      } else if (Integer.parseInt(recv) == 2) {
+        JOptionPane.showMessageDialog(null, "No or Wrong Password or Username, try again!", "Invalid UserInput",
+            JOptionPane.ERROR_MESSAGE);
         recv = "500";
-      }
-      else if (Integer.parseInt(recv) == 3) {
-        JOptionPane.showMessageDialog(null, "Proof Humanity and Accept EULA", "Accept required Terms", JOptionPane.ERROR_MESSAGE);
+      } else if (Integer.parseInt(recv) == 3) {
+        JOptionPane.showMessageDialog(null, "Proof Humanity and Accept EULA", "Accept required Terms",
+            JOptionPane.ERROR_MESSAGE);
         recv = "500";
-      }
-      else if (Integer.parseInt(recv) == 4){
-        JOptionPane.showMessageDialog(null, "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR", JOptionPane.ERROR_MESSAGE);
+      } else if (Integer.parseInt(recv) == 4) {
+        JOptionPane.showMessageDialog(null,
+            "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
+            JOptionPane.ERROR_MESSAGE);
         frame.dispose();
         return 4;
       }

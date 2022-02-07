@@ -1,5 +1,5 @@
 import socket, re, threading, hashlib
-from functionsserver import *
+#from functionsserver import *
 PORT = 5000
     
 def Client(conn, addr):
