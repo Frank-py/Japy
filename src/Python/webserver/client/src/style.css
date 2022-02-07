@@ -1,0 +1,33 @@
+body {
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    
+}
+.eingabe{
+  align-items: center; 
+  justify-items: center;
+  justify-content: center;
+  width: 200%;
+  height: 200%;
+  padding: 20px 25px;
+  margin: 20px 0;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
