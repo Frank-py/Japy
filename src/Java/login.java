@@ -1,5 +1,5 @@
-//package Japy.src.Java;
-package Java;
+package Japy.src.Java;
+//package Java;
 import javax.swing.*;
 import java.awt.*;
 import java.net.*;
@@ -8,6 +8,7 @@ import java.awt.event.*;
 public class login {
   public static String recv = "500";
   public static boolean accept = false;
+  public static boolean h = true;
 
   public static int createGUI(Socket socket) {
     Color color = new Color(0x123456);
