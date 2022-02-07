@@ -1,5 +1,5 @@
-package Japy.src.Java;
-//package Java;
+//package Japy.src.Java;
+package Java;
 
 import java.net.*;
 import java.io.*;
