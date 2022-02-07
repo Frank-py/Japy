@@ -74,8 +74,8 @@ public class messInterface {
                 frame.add(Users);
                 frame.add(space, BorderLayout.CENTER);
                 //frame.setVisible(false);
-                //frame.setVisible(true);
-                frame.repaint();
+                frame.setVisible(true);
+                //frame.repaint();
                 createUser = false;
             }
         }
