@@ -1,5 +1,5 @@
+package Java;
 //package Japy.src.Java;
-package Japy.src.Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -40,8 +40,8 @@ public class messInterface {
         frame.getContentPane().setBackground(color);
 
         Users = new JPanel();
-        //Users.setLayout(new BoxLayout(Users, BoxLayout.Y_AXIS));
-        Users.setLayout(new GridLayout(10,6));
+        Users.setLayout(new BoxLayout(Users, BoxLayout.Y_AXIS));
+        //Users.setLayout(new GridLayout(10,6));
         Users.setSize(1, 1);
         Users.setBackground(color);
 
@@ -63,19 +63,20 @@ public class messInterface {
             System.out.print("");
             if (createUser) {
                 // System.out.print("ho");
+               // addUsers.setEnabled(false);
                 JTextField newUser = new JTextField();
                 newUser.setFont(new Font("Consolas", Font.PLAIN, 35));
                 newUser.setForeground(new Color(0x00FF00));
                 newUser.setBackground(color);
                 newUser.setCaretColor(Color.white);
-                newUser.setSize(new Dimension(1, 1));
+                newUser.setSize(10,10);
                 Users.add(newUser, 2, 1);
                 frame.add(Users);
-                addUsers.setEnabled(false);
-                frame.setVisible(false);
-                frame.setVisible(true);
+                frame.add(space, BorderLayout.CENTER);
+                //frame.setVisible(false);
+                //frame.setVisible(true);
+                frame.repaint();
                 createUser = false;
-
             }
         }
 
