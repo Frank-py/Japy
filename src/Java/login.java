@@ -1,5 +1,5 @@
-package Japy.src.Java;
-
+//package Japy.src.Java;
+package Java;
 import javax.swing.*;
 import java.awt.*;
 import java.net.*;
@@ -11,7 +11,8 @@ public class login {
 
   public static int createGUI(Socket socket) {
     Color color = new Color(0x123456);
-    ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
+   // ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
+    ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
 
     JFrame frame = new JFrame();
     frame.setSize(300, 420);
@@ -136,7 +137,7 @@ public class login {
     frame.setVisible(true);
 
     while (true) {
-      //System.out.println(recv);
+      System.out.print("");
       if (Integer.parseInt(recv) == 0) {
         frame.dispose();
         JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
