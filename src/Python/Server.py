@@ -1,6 +1,6 @@
 import socket, threading, hashlib
 from functionsserver import *
-PORT = 5000
+PORT = 6000
     
 def Client(conn, addr):
     while True:
