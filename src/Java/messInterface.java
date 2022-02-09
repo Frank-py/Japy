@@ -40,10 +40,11 @@ public class messInterface {
         try {
             so =   new Socket("localhost", 6000);
         } catch (UnknownHostException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
+            recv = "4";
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         createGUI(0, so);
@@ -61,7 +62,6 @@ public class messInterface {
 
                     Users.remove(newUser);
                     frame.add(Users, BorderLayout.WEST);
-                    addUsers.setEnabled(true);
                     frame.setVisible(true);
                 }
             }
@@ -107,13 +107,21 @@ public class messInterface {
             System.out.print("");
             if (recv == "0") {
                 JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
+                recv = "500";
             } else if (recv == "1") {
                 userliste[n] = new JButton(user[0]);
                 Users.add(userliste[n]);
+                frame.add(Users, BorderLayout.WEST);
+                frame.setVisible(true);
+                addUsers.setEnabled(true);
                 n = n + 1;
                 System.out.print("hat funktioniert!");
+                recv = "500";
+            } else if (Integer.parseInt(recv) == 4) {
+                JOptionPane.showMessageDialog(null,
+                        "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
             }
-
             if (createUser) {
                 addUsers.setEnabled(false);
 

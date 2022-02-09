@@ -19,6 +19,6 @@ public class run {
       return;
     }
     // System.out.println("new window");
-    messInterface.createGUI(log,socket);
+    messInterface.createGUI(log, socket);
   }
 }
