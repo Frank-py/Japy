@@ -1,5 +1,5 @@
-package Java;
-//package Japy.src.Java;
+//package Java;
+package Japy.src.Java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,14 +55,10 @@ public class messInterface {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     System.out.println(newUser.getText());
                     // Users.remove(newUser);
-
-                    try {
                         String[] userf = { newUser.getText() };
                         user = userf;
                         recv = sendrecv.send(socket, "proofuser", user);
-                    } catch (Exception y) {
-
-                    }
+                    
                     Users.remove(newUser);
                     frame.add(Users, BorderLayout.WEST);
                     addUsers.setEnabled(true);
@@ -113,7 +109,10 @@ public class messInterface {
             } else if (recv == "1") {
                 userliste[n] = new JButton(user[0]);
                 Users.add(userliste[n]);
-                n = n + 1;
+                frame.add(Users);
+                frame.setVisible(true);
+                n += 1;
+            
             }
 
             if (createUser) {
