@@ -17,8 +17,8 @@ public class messInterface {
     public static Color color = new Color(150, 0, 255);
     // public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     // public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
-    public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-    public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
+    public static ImageIcon pic = new ImageIcon("Java/prof.png");
+    public static ImageIcon plus = new ImageIcon("Java/plus.png");
     public static JButton addUsers;
     public static JFrame frame;
     public static JTextField newUser;
@@ -73,7 +73,7 @@ public class messInterface {
             if (e.getSource() == addUsers) {
                 newUser = new JTextField();
                 addUsers.setEnabled(false);
-                newUser.setFont(new Font("Consolas", Font.PLAIN, 35));
+                newUser.setFont(new Font("Consolas", Font.PLAIN, 25));
                 newUser.setForeground(new Color(0x00FF00));
                 newUser.setBackground(color);
                 newUser.setCaretColor(Color.white);
@@ -125,7 +125,7 @@ public class messInterface {
                 //userliste[n] = new JButton(user[0]);
                 //Users.add(userliste[n]);
                 JButton a = new JButton(user[0]);
-                a.setFont(new Font("MV Boli", Font.PLAIN, 55));
+                a.setFont(new Font("MV Boli", Font.PLAIN, 35));
                 Users.add(a);
                 addUsers.setEnabled(true);
                 n = n + 1;
