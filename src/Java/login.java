@@ -8,9 +8,11 @@ import java.awt.event.*;
 public class login {
   public static String recv = "500";
   public static boolean accept = false;
+  public static boolean h = true;
 
   public static int createGUI(Socket socket) {
     Color color = new Color(0x123456);
+   // ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
 
     JFrame frame = new JFrame();
@@ -136,10 +138,11 @@ public class login {
     frame.setVisible(true);
 
     while (true) {
-      System.out.println(recv);
+      System.out.print("");
       if (Integer.parseInt(recv) == 0) {
         frame.dispose();
         JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
+
         return 0;
       } else if (Integer.parseInt(recv) == 1) {
         frame.dispose();
