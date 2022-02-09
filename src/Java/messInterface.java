@@ -61,7 +61,7 @@ public class messInterface {
                         user = userf;
                         recv = sendrecv.send(socket, "proofuser", user);
                     } catch (Exception y) {
-
+                        System.out.println(y);
                     }
                     Users.remove(newUser);
                     frame.add(Users, BorderLayout.WEST);
@@ -114,6 +114,7 @@ public class messInterface {
                 userliste[n] = new JButton(user[0]);
                 Users.add(userliste[n]);
                 n = n + 1;
+                System.out.print("hat funktioniert!");
             }
 
             if (createUser) {
