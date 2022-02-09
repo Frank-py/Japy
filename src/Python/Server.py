@@ -3,34 +3,36 @@ from functionsserver import *
 PORT = 6000
     
 def Client(conn, addr):
-    while True:
-        data = []
-        try:
+    try:
+        while True:
+            data = []
             data.append(conn.recv(512).decode(encoding="UTF-8"))
             conn.send(b"200\n")
-            print(data)
-            data.append(conn.recv(512).decode(encoding="UTF-8"))
-            conn.send(b"200\n")
-            print(data)
-            data.append(conn.recv(512).decode(encoding="UTF-8"))
-            conn.send(b"200\n")
-            print(data)
             if data[0] == "login":
+                for i in range(2):
+                    data.append(conn.recv(512).decode(encoding="UTF-8"))
+                    conn.send(b"200\n")
                 benutzer = User().checkaccount(data[1], hashlib.md5(bytes(data[2], encoding='UTF-8')).hexdigest(), addr[0])
                 if benutzer.loggedin and benutzer.registriert:
                     conn.send("0\n".encode('utf-8'))
+                    break
                 elif benutzer.loggedin:
                     conn.send("1\n".encode('utf-8'))
+                    break
                 else:
                     conn.send("2\n".encode('utf-8')) 
+        while True:
+            data = []
+            if data[0] == "proofuser":
+                pass
             else:
                 conn.close()
                 return
-        except OSError:
-            conn.send("4\n".encode('utf-8'))
-            conn.close()
-            print("error 1212")
-            return
+    except OSError:
+        conn.send("4\n".encode('utf-8'))
+        conn.close()
+        print("error")
+        return
     
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
