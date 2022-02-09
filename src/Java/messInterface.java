@@ -1,5 +1,5 @@
-//package Java;
-package Japy.src.Java;
+package Java;
+//package Japy.src.Java;
 
 import javax.swing.*;
 import java.awt.*;
