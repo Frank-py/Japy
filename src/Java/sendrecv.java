@@ -11,7 +11,8 @@ public class sendrecv {
             s = null;
             BufferedReader bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            
+            System.out.println(args[0]);
+            System.out.println(Funktion);
             if (Funktion == "login") {
                 out.print("login");
                 out.flush();
@@ -23,8 +24,9 @@ public class sendrecv {
                 out.flush();
                 bf.readLine();
                 s = bf.readLine();
-
-            if (Funktion == "proofuser"){
+            }
+            else if (Funktion == "proofuser"){
+                System.out.println("test");
                 out.print("proofuser");
                 out.flush();
                 bf.readLine();
@@ -32,7 +34,6 @@ public class sendrecv {
                 out.flush();
                 bf.readLine();
                 s = bf.readLine();
-            }
             }
         } catch (IOException e) {
             e.printStackTrace();
