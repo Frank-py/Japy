@@ -1,4 +1,5 @@
-package Ctest.examplecodes;
+package Japy.src.Ctest.examplecodes;
+//package Ctest.examplecodes;
 //package Java.examplecodes;
 import java.awt.Color;
 import java.awt.Font;
