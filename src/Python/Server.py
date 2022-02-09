@@ -28,7 +28,7 @@ def Client(conn, addr):
             if data[0] == "proofuser":
                 data.append(conn.recv(512).decode(encoding="UTF-8"))
                 conn.send(b"200\n")
-                conn.send(benutzer.searchaccount(data[1]).encode('utf-8')+b"\n")
+                conn.send(benutzer.searchaccount(data[1]).encode('utf-8')+"\n".encode('utf-8'))
             else:
                 conn.close()
                 return
