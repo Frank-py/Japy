@@ -20,6 +20,6 @@ public class run {
       return;
     }
     // System.out.println("new window");
-    messInterface.createGUI(log);
+    messInterface.createGUI(log,socket);
   }
 }

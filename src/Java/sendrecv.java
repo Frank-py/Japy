@@ -8,10 +8,11 @@ public class sendrecv {
 
     public static String send(Socket socket, String Funktion, String args[]) {
         try {
+            s = null;
+            BufferedReader bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            
             if (Funktion == "login") {
-                BufferedReader bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                s = null;
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 out.print("login");
                 out.flush();
                 bf.readLine();
@@ -22,6 +23,16 @@ public class sendrecv {
                 out.flush();
                 bf.readLine();
                 s = bf.readLine();
+
+            if (Funktion == "proofuser"){
+                out.print("proofuser");
+                out.flush();
+                bf.readLine();
+                out.print(args[0].replaceAll("\r", "").replaceAll("\n", ""));
+                out.flush();
+                bf.readLine();
+                s = bf.readLine();
+            }
             }
         } catch (IOException e) {
             e.printStackTrace();
