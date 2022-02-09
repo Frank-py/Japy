@@ -55,10 +55,10 @@ public class messInterface {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     System.out.println(newUser.getText());
                     // Users.remove(newUser);
-                        String[] userf = { newUser.getText() };
-                        user = userf;
-                        recv = sendrecv.send(socket, "proofuser", user);
-                    
+                    String[] userf = { newUser.getText() };
+                    user = userf;
+                    recv = sendrecv.send(socket, "proofuser", user);
+
                     Users.remove(newUser);
                     frame.add(Users, BorderLayout.WEST);
                     addUsers.setEnabled(true);
@@ -71,6 +71,7 @@ public class messInterface {
 
             public void keyTyped(KeyEvent e) {
             }
+
         };
 
         frame = new JFrame();
@@ -109,10 +110,8 @@ public class messInterface {
             } else if (recv == "1") {
                 userliste[n] = new JButton(user[0]);
                 Users.add(userliste[n]);
-                frame.add(Users);
-                frame.setVisible(true);
-                n += 1;
-            
+                n = n + 1;
+                System.out.print("hat funktioniert!");
             }
 
             if (createUser) {

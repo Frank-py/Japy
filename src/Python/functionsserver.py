@@ -88,23 +88,17 @@ class User():
             cursor.execute('SELECT * FROM Persons WHERE Username = "%s";' % (name))
             nachrichten = cursor.fetchall()
             try:
-                print(nachrichten[0][0])
                 if name == nachrichten[0][0]:
                     return self.login(self.connection, name, password, ip)
             except:    
                 return self.register(self.connection, name, password, ip)
         except Exception as e:
             return e
-    def searchaccount(self, name):
+    def searchaccount(self, user):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT IP FROM Persons WHERE Username = "%s";' % (name))
+            cursor.execute('SELECT 1 FROM Persons WHERE Username = "%s";' % (user))
             nachrichten = cursor.fetchall()
-            try:
-                print(nachrichten[0][0])
-                if name == nachrichten[0][0]:
-                    return self.login(self.connection, name, password, ip)
-            except:    
-                return self.register(self.connection, name, password, ip)
+            return str(len(nachrichten)) 
         except Exception as e:
             return e
