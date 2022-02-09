@@ -3,34 +3,41 @@ from functionsserver import *
 PORT = 6000
     
 def Client(conn, addr):
-    while True:
-        data = []
-        try:
-            data = conn.recv(1024).decode(encoding="UTF-8")
-            print(data = conn.recv(1024).decode(encoding="UTF-8"))
-            data = conn.recv(1024).decode(encoding="UTF-8")
-            print(data = conn.recv(1024).decode(encoding="UTF-8"))
-            data = conn.recv(1024).decode(encoding="UTF-8")
-            print(data = conn.recv(1024).decode(encoding="UTF-8"))
-            if data == "login":
-                benutzer = User().checkaccount(data[0], hashlib.md5(bytes(data[1], encoding='UTF-8')).hexdigest(), addr[0])
+    try:
+        while True:
+            data = []
+            data.append(conn.recv(512).decode(encoding="UTF-8"))
+            conn.send(b"200\n")
+            if data[0] == "login":
+                for i in range(2):
+                    data.append(conn.recv(512).decode(encoding="UTF-8"))
+                    conn.send(b"200\n")
+                benutzer = User().checkaccount(data[1], hashlib.md5(bytes(data[2], encoding='UTF-8')).hexdigest(), addr[0])
                 if benutzer.loggedin and benutzer.registriert:
                     conn.send("0\n".encode('utf-8'))
+                    break
                 elif benutzer.loggedin:
                     conn.send("1\n".encode('utf-8'))
+                    break
                 else:
-                    conn.send("2\n".encode('utf-8'))
+                    conn.send("2\n".encode('utf-8')) 
+        while True:
+            data = []
+            if data[0] == "proofuser":
+                pass
             else:
                 conn.close()
-        except OSError:
-            conn.send("4\n".encode('utf-8'))
-            conn.close()
-            return
+                return
+    except OSError:
+        conn.send("4\n".encode('utf-8'))
+        conn.close()
+        print("error")
+        return
     
 def main():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(("", PORT))
     while True:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind(("", PORT))
         s.listen()
         conn, addr = s.accept()
         thread = threading.Thread(target = Client, args=(conn, addr))
