@@ -12,7 +12,7 @@ public class login {
 
   public static int createGUI(Socket socket) {
     Color color = new Color(0x123456);
-   // ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
+    // ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
 
     JFrame frame = new JFrame();
@@ -148,6 +148,8 @@ public class login {
         frame.dispose();
         return 1;
       } else if (Integer.parseInt(recv) == 2) {
+        EULA.setEnabled(false);
+        
         JOptionPane.showMessageDialog(null, "No or Wrong Password or Username, try again!", "Invalid UserInput",
             JOptionPane.ERROR_MESSAGE);
         recv = "500";
