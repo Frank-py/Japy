@@ -1,4 +1,4 @@
-package Japy.src.Java;
+package Java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -142,7 +142,6 @@ public class login {
       if (Integer.parseInt(recv) == 0) {
         frame.dispose();
         JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
-
         return 0;
       } else if (Integer.parseInt(recv) == 1) {
         frame.dispose();
