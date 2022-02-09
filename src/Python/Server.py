@@ -21,10 +21,14 @@ def Client(conn, addr):
                     break
                 else:
                     conn.send("2\n".encode('utf-8')) 
-        while True:
+        while True: 
             data = []
+            data.append(conn.recv(512).decode(encoding="UTF-8"))
+            conn.send(b"200\n")
             if data[0] == "proofuser":
-                pass
+                data.append(conn.recv(512).decode(encoding="UTF-8"))
+                conn.send(b"200\n")
+                conn.send(benutzer.searchaccount(data[1]).encode('utf-8')+b"\n")
             else:
                 conn.close()
                 return
