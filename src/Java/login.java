@@ -9,6 +9,7 @@ public class login {
   public static String recv = "500";
   public static boolean accept = false;
   public static boolean h = true;
+  public static int counter = 0;
 
   public static int createGUI(Socket socket) {
     Color color = new Color(0x123456);
@@ -46,14 +47,15 @@ public class login {
     UserTitle.setFont(new Font("MV Boli", Font.BOLD, 20));
     UserTitle.setForeground(new Color(0x00FF00));
 
-    JTextField pass = new JTextField();
+    JPasswordField pass = new JPasswordField();
     JLabel PassTitle = new JLabel("Password: ");
     PassTitle.setFont(new Font("MV Boli", Font.BOLD, 20));
     PassTitle.setForeground(new Color(0x00FF00));
 
     JButton loginbu = new JButton("Login!");
     loginbu.setFont(new Font("MV Boli", Font.BOLD, 15));
-    loginbu.setForeground(new Color(0x0000FF));
+    loginbu.setForeground(new Color(0xFFFFFF));
+    loginbu.setBackground(new Color(47,49,54));
     loginbu.setFocusable(false);
     loginbu.setSize(200, 42);
 
@@ -74,15 +76,32 @@ public class login {
 
     KeyListener g = new KeyListener() {
       public void keyPressed(KeyEvent e) {
+        
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-
-          if (pass.getText().equals("") | user.getText().equals("")) {
+            System.out.println(String.valueOf(pass.getPassword()));
+          if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
             recv = "2";
           } else if (EULA.isSelected() == false | robo.isSelected() == false) {
             recv = "3";
+            /*JProgressBar lullol = new JProgressBar(0);
+            lullol.setBounds(0, 0, 300, 420);
+            lullol.setStringPainted(true);
+            UserInput.add(lullol);
+            loginbu.setEnabled(false);
+            while (counter <= 100) {
+              lullol.setValue(counter);
+              try {
+                Thread.sleep(100);
+              } catch (Exception i) {
+                System.out.println("sldöjkhkvhsjkhheshjdfsjljflsajfjsaf" + i);
+              }
+              counter++;
+              System.out.println(counter);
+            }
+            loginbu.setEnabled(true);*/
           } else {
             try {
-              String[] lol = { user.getText(), pass.getText() };
+              String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
               recv = sendrecv.send(socket, "login", lol);
               // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
             } catch (Exception f) {
@@ -102,13 +121,13 @@ public class login {
     ActionListener act = new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginbu) {
-          if (pass.getText().equals("") | user.getText().equals("")) {
+          if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
             recv = "2";
           } else if (EULA.isSelected() == false | robo.isSelected() == false) {
             recv = "3";
           } else {
             try {
-              String[] lol = { user.getText(), pass.getText() };
+              String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
               recv = sendrecv.send(socket, "login", lol);
               // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
             } catch (Exception f) {
@@ -147,15 +166,17 @@ public class login {
         frame.dispose();
         return 1;
       } else if (Integer.parseInt(recv) == 2) {
-        EULA.setEnabled(false);
-        
+        EULA.setSelected(false);
+        news.setSelected(true);
+        robo.setSelected(false);
+
         JOptionPane.showMessageDialog(null, "No or Wrong Password or Username, try again!", "Invalid UserInput",
             JOptionPane.ERROR_MESSAGE);
         recv = "500";
       } else if (Integer.parseInt(recv) == 3) {
         JOptionPane.showMessageDialog(null, "Proof Humanity and Accept EULA", "Accept required Terms",
             JOptionPane.ERROR_MESSAGE);
-        recv = "500";
+         recv = "500";
       } else if (Integer.parseInt(recv) == 4) {
         JOptionPane.showMessageDialog(null,
             "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",

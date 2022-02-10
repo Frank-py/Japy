@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { render } from 'react-dom';
-import "./style.css"
+let loggedin = null;
 function Login() {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
@@ -28,6 +28,7 @@ function Login() {
     .then(message => {
       console.log(message);
       if (message.response === "201" || message.response === "202"){
+        loggedin = true;
         window.location.href = "/messenger"
       }
       else{
