@@ -1,5 +1,5 @@
 import React from 'react';
-import "./style.css"
+import "./NotFound.css"
 function NotFound() {
     return(
         <a>404 Website not found!</a>
