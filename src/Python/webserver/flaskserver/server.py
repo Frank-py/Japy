@@ -19,5 +19,6 @@ def login():
             return {"response": "201"}
         else:
             return {"response": "401"}
+@app.route("/login", methods=["POST", "GET"])
 if __name__ == "__main__":
     app.run(debug=True)
