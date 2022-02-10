@@ -62,7 +62,6 @@ public static void scale(JPanel panel) {
     public static void createGUI(int log, Socket socket) {
         
         JPanel space = new JPanel();
-        space.setSize(100,100);
         // space.paint(ba);
         //space.drawImage();
     
