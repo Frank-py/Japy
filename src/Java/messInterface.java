@@ -5,11 +5,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.awt.image.BufferedImage;
 
 public class messInterface {
     public static String[] user;
@@ -26,7 +24,7 @@ public class messInterface {
     public static ImageIcon ba = new ImageIcon("Java/Background.png");
     public static Image img = ba.getImage();
     public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad =  new JLabel();
-
+    public static JPanel space = new JPanel();
     public static JButton addUsers;
     public static JFrame frame;
     public static JTextField newUser;
@@ -50,18 +48,20 @@ public class messInterface {
         }
         createGUI(0, so);
     }
-public static void scale(JPanel panel) {
+public static void scale() {
     
-     Image imgscale = img.getScaledInstance(panel.getWidth(), panel.getHeight(), Image.SCALE_SMOOTH);
+     Image imgscale = img.getScaledInstance(space.getWidth(), space.getHeight(), Image.SCALE_SMOOTH);
      //   Image imgscale = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
     ImageIcon bascale = new ImageIcon(imgscale);
-        backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad.setIcon(bascale);
-}
+    backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad.setIcon(bascale);
+    space.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad);
+
+    }
 
     public static void createGUI(int log, Socket socket) {
         
-        JPanel space = new JPanel();
+       
         // space.paint(ba);
         //space.drawImage();
     
@@ -103,8 +103,7 @@ public static void scale(JPanel panel) {
                     // frame.setVisible(false);
                     frame.setVisible(true);
                     newUser.addKeyListener(enter);
-                     scale(space);
-        space.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad);
+                     scale();
                 }
             }
         };
