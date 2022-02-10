@@ -18,10 +18,10 @@ public class messInterface {
     public static String recv = "500";
     public static Color color = new Color(0x123456);
     // public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-    // public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
+     public static ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
     public static ImageIcon pic = new ImageIcon("Java/prof.png");
-    public static ImageIcon plus = new ImageIcon("Java/plus.png");
-    public static ImageIcon ba = new ImageIcon("Java/Background.png");
+    //public static ImageIcon plus = new ImageIcon("Java/plus.png");
+    public static ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
     public static Image img = ba.getImage();
     public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad =  new JLabel();
     public static JPanel space = new JPanel();
@@ -55,8 +55,8 @@ public static void scale() {
 
     ImageIcon bascale = new ImageIcon(imgscale);
     backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad.setIcon(bascale);
+    backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad.setOpaque(true);
     space.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad);
-
     }
 
     public static void createGUI(int log, Socket socket) {
@@ -103,7 +103,7 @@ public static void scale() {
                     // frame.setVisible(false);
                     frame.setVisible(true);
                     newUser.addKeyListener(enter);
-                     scale();
+                     
                 }
             }
         };
@@ -136,7 +136,9 @@ public static void scale() {
         frame.setVisible(true);
 
         while (true) {
-            System.out.print("");
+            scale();
+            frame.add(space, BorderLayout.CENTER);
+            System.out.print("g");
             if (Integer.parseInt(recv) == 0) {
                 JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
                 recv = "500";
