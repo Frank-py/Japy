@@ -10,8 +10,14 @@ export const Sidebar = [
         cName: "nav-text"
     },
     {
-        title: "adduser",
-        path: "/messenger/adduser",
+        title: "Adduser",
+        path: "/messenger/Adduser",
+        icon: <IoIcons.IoMdPeople />,
+        cName: "nav-text"
+    },
+    {
+        title: "Logout",
+        path: "/messenger/logout",
         icon: <IoIcons.IoMdPeople />,
         cName: "nav-text"
     }

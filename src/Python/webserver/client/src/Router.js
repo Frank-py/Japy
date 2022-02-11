@@ -6,7 +6,6 @@ const Router = () => {
     return (
         <BrowserRouter>
         <Routes>
-
             <Route exact path="/login" element={<Login/>}/>
             <Route exact path="/messenger/*" element={<Messenger/>}/>
             <Route path="*" element={<NotFound/>}/>
