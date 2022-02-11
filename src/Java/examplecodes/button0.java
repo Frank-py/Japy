@@ -1,6 +1,12 @@
+<<<<<<< HEAD:src/Ctest/examplecodes/button0.java
 package Japy.src.Ctest.examplecodes;
 //package Ctest.examplecodes;
 //package Java.examplecodes;
+=======
+//package Japy.src.Ctest.examplecodes;
+//package Ctest.examplecodes;
+package Java.examplecodes;
+>>>>>>> a5ff5dfd1252393fa562db9979153de0752f3dcd:src/Java/examplecodes/button0.java
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
