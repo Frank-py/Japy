@@ -1,6 +1,8 @@
+package Japy.src.Java.examplecodes;
+
 //package Japy.src.Ctest.examplecodes;
 //package Ctest.examplecodes;
-package Java.examplecodes;
+//package Java.examplecodes;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
