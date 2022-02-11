@@ -7,7 +7,7 @@ const Router = () => {
         <BrowserRouter>
         <Routes>
             <Route exact path="/login" element={<Login/>}/>
-            <Route exact path="/messenger/*" element={<Messenger/>} />
+            <Route exact path="/messenger/*" element={<Messenger/>}/>
             <Route path="*" element={<NotFound/>}/>
             <Route path="/" element={<Navigate to="/login"/>}/>
         </Routes>
