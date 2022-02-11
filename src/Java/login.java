@@ -1,4 +1,5 @@
-package Java;
+//package Java;
+package Japy.src.Java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +28,7 @@ public class login {
 
     JLabel laby = new JLabel("Hier Anmelden:");
     laby.setFont(new Font("MV Boli", Font.BOLD, 30));
-    laby.setForeground(new Color(0xFFFFFF));
+    laby.setForeground(Color.white);
 
     JPanel title = new JPanel();
     title.setBackground(color);
@@ -45,34 +46,34 @@ public class login {
     JTextField user = new JTextField("");
     JLabel UserTitle = new JLabel("Username: ");
     UserTitle.setFont(new Font("MV Boli", Font.BOLD, 20));
-    UserTitle.setForeground(new Color(0x00FF00));
+    UserTitle.setForeground(Color.white);
 
     JPasswordField pass = new JPasswordField();
     JLabel PassTitle = new JLabel("Password: ");
     PassTitle.setFont(new Font("MV Boli", Font.BOLD, 20));
-    PassTitle.setForeground(new Color(0x00FF00));
+    PassTitle.setForeground(Color.white);
 
     JButton loginbu = new JButton("Login!");
     loginbu.setFont(new Font("MV Boli", Font.BOLD, 15));
-    loginbu.setForeground(new Color(0xFFFFFF));
+    loginbu.setForeground(Color.white);
     loginbu.setBackground(new Color(47,49,54));
     loginbu.setFocusable(false);
-    loginbu.setSize(200, 42);
+    loginbu.setSize(200, 35);
 
     JCheckBox robo = new JCheckBox("I'm not a robot");
     robo.setFocusable(false);
     robo.setBackground(color);
-    robo.setForeground(new Color(0x00FF00));
+    robo.setForeground(Color.white);
 
     JCheckBox EULA = new JCheckBox("Accept the EULA and our AGB and the collection of necessary data");
     EULA.setFocusable(false);
     EULA.setBackground(color);
-    EULA.setForeground(new Color(0x00FF00));
+    EULA.setForeground(Color.white);
 
     JCheckBox news = new JCheckBox("Subscribe to the Newsletter", true);
     news.setFocusable(false);
     news.setBackground(color);
-    news.setForeground(new Color(0x00FF00));
+    news.setForeground(Color.white);
 
     KeyListener g = new KeyListener() {
       public void keyPressed(KeyEvent e) {
