@@ -1,11 +1,8 @@
-//package Ctest.examplecodes;
-<<<<<<< HEAD:src/Ctest/examplecodes/panel0.java
-package Japy.src.Ctest.examplecodes;
+package Japy.src.Java.examplecodes;
 
-=======
+//package Ctest.examplecodes;
 //package Japy.src.Ctest.examplecodes;
-package Java.examplecodes;
->>>>>>> a5ff5dfd1252393fa562db9979153de0752f3dcd:src/Java/examplecodes/panel0.java
+//package Java.examplecodes;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.*;

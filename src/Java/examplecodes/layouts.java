@@ -1,9 +1,6 @@
-<<<<<<< HEAD:src/Ctest/examplecodes/layouts.java
-package Japy.src.Ctest.examplecodes;
-=======
+package Japy.src.Java.examplecodes;
+
 //package Japy.src.Ctest.examplecodes;
-package Java.examplecodes;
->>>>>>> a5ff5dfd1252393fa562db9979153de0752f3dcd:src/Java/examplecodes/layouts.java
 //package Ctest.examplecodes;
 //package Java.examplecodes;
 import java.awt.*;

@@ -1,11 +1,7 @@
-<<<<<<< HEAD:src/Ctest/examplecodes/frame0.java
-package Japy.src.Ctest.examplecodes;
-=======
-//package Japy.src.Ctest.examplecodes;
->>>>>>> a5ff5dfd1252393fa562db9979153de0752f3dcd:src/Java/examplecodes/frame0.java
+package Japy.src.Java.examplecodes;
 //package Ctest.examplecodes;
 //package Java.examplecodes;
-package Java.examplecodes;
+//package Java.examplecodes;
 import java.awt.*;
 import javax.swing.*;
 
