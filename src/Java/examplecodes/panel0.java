@@ -1,6 +1,8 @@
+package Japy.src.Java.examplecodes;
+
 //package Ctest.examplecodes;
 //package Japy.src.Ctest.examplecodes;
-package Java.examplecodes;
+//package Java.examplecodes;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.*;
