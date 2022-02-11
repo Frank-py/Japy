@@ -1,5 +1,5 @@
-package Ctest.examplecodes;
-//package Japy.src.Ctest.examplecodes;
+//package Ctest.examplecodes;
+package Japy.src.Ctest.examplecodes;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
