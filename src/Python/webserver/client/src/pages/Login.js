@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { render } from 'react-dom';
-import "./Login.css"
+import styles from "./login.scss"
 let loggedin = null;
 function Login() {
   const [user, setUser] = useState('');
@@ -37,14 +36,14 @@ function Login() {
       }
     })
   }
-  return (<div className="eingabe">
+  return (<div className={styles.eingabe}>
               <form method="post" onSubmit={handleFormSubmit}>
-                <p className="password">{WrongPassword}</p>
+                <p className={styles.password}>{WrongPassword}</p>
                 <input name="username" placeholder='Username' onChange={handleUserChange}></input>
                 <p></p>
                 <input type="password" placeholder='Password' name="password" onChange={handlePasswordChange}></input>
                 <p></p>
-                <input type="submit" value="submit" className="button"></input>
+                <input type="submit" value="submit" className={styles.input}></input>
               </form>
     </div>)
 }

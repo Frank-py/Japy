@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Navbar from "./Navbar"
-import "./Navbar.css"
+
+import styles from "./messenger.module.scss"
 import {Routes, Route, Navigate} from "react-router-dom";
 function Messenger() {
     const [loggedin, setlog] = useState(false)
@@ -9,7 +10,7 @@ function Messenger() {
     message.response === "201" ? setlog(true) : (<Navigate to="/login"/>) 
 })
   return (
-    <div className="mess">
+    <div className={styles.container}>
       <div>
         <Navbar />
         <Routes>
