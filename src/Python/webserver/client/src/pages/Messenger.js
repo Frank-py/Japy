@@ -10,7 +10,7 @@ function Messenger() {
 })
   return (
     <div className="mess">
-      <div>
+      <div className='ano'>
         <Navbar />
         <Routes>
             <Route path="/"/>
