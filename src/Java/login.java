@@ -13,9 +13,9 @@ public class login {
   public static int counter = 0;
 
   public static int createGUI(Socket socket) {
-    Color color = new Color(0x123456);
-    // ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-    ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
+    Color color = new Color(27,37,43);
+    ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
+    //ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
 
     JFrame frame = new JFrame();
     frame.setSize(300, 420);
