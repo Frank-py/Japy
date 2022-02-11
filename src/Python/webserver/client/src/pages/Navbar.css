@@ -1,11 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-
-.mess {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Lato", sans-serif;
-}
+    
 .Adduser, .Chat, .Logout{
     display: flex;
     height: 90vh;
@@ -14,11 +8,14 @@
     font-size: 3rem;
 }
 .navbar {
+    margin-top: 0px;
     background-color: #060b26;
     height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    
 }
 .menu-bars{
     margin-left: 2rem;
