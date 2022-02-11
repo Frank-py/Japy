@@ -1,0 +1,10 @@
+.eingabe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40vh;
+    margin-left: 3vh;
+    margin-right: 3vh;
+    margin-bottom: 3vh;
+
+}
