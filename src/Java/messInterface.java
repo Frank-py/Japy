@@ -1,9 +1,6 @@
-//package Java;
-package Japy.src.Java;
-
+package Java;
+//package Japy.src.Java;
 import javax.swing.*;
-import javax.swing.text.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
