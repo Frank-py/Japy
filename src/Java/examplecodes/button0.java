@@ -8,7 +8,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class button0 extends JFrame implements ActionListener {
-    //**************************************************
+
 
         JButton button;
         JLabel label;

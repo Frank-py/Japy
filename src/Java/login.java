@@ -1,5 +1,5 @@
-//package Java;
-package Japy.src.Java;
+package Java;
+//package Japy.src.Java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,9 +14,9 @@ public class login {
 
   public static int createGUI(Socket socket) {
     Color color = new Color(27,37,43);
-    ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-    //ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
-
+    //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
+    //ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
+    ImageIcon pic = new ImageIcon("src/Java/prof.png");
     JFrame frame = new JFrame();
     frame.setSize(300, 420);
     frame.setLocationRelativeTo(null);
@@ -79,7 +79,7 @@ public class login {
       public void keyPressed(KeyEvent e) {
         
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-            System.out.println(String.valueOf(pass.getPassword()));
+         
           if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
             recv = "2";
           } else if (EULA.isSelected() == false | robo.isSelected() == false) {
@@ -100,39 +100,40 @@ public class login {
               System.out.println(counter);
             }
             loginbu.setEnabled(true);*/
-          } else {
+          }
+          else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
+              recv = "4";}
+          else {
             try {
               String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
               recv = sendrecv.send(socket, "login", lol);
               // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
             } catch (Exception f) {
-              recv = "4";
+              recv = "5";
             }
           }
         }
       }
-
-      public void keyReleased(KeyEvent e) {
-      }
-
-      public void keyTyped(KeyEvent e) {
-      }
+      public void keyReleased(KeyEvent e) {}
+      public void keyTyped(KeyEvent e) {}
     };
 
     ActionListener act = new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginbu) {
-          if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
+          if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("") ){
             recv = "2";
           } else if (EULA.isSelected() == false | robo.isSelected() == false) {
             recv = "3";
+          } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
+              recv = "4";
           } else {
             try {
               String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
               recv = sendrecv.send(socket, "login", lol);
               // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
             } catch (Exception f) {
-              recv = "4";
+              recv = "5";
             }
           }
         }
@@ -175,10 +176,20 @@ public class login {
             JOptionPane.ERROR_MESSAGE);
         recv = "500";
       } else if (Integer.parseInt(recv) == 3) {
-        JOptionPane.showMessageDialog(null, "Proof Humanity and Accept EULA", "Accept required Terms",
+            JOptionPane.showMessageDialog(null, "Proof Humanity and Accept EULA", "Accept required Terms",
             JOptionPane.ERROR_MESSAGE);
-         recv = "500";
-      } else if (Integer.parseInt(recv) == 4) {
+            recv = "500";
+      } else if (Integer.parseInt(recv) == 4){
+          EULA.setSelected(false);
+          news.setSelected(true);
+          robo.setSelected(false);
+
+        JOptionPane.showMessageDialog(null, "Username or Password is too long, try again!", "Invalid UserInput",
+            JOptionPane.ERROR_MESSAGE);
+        recv = "500";
+        }
+    
+        else if (Integer.parseInt(recv) == 5) {
         JOptionPane.showMessageDialog(null,
             "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
             JOptionPane.ERROR_MESSAGE);
