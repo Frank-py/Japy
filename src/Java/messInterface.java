@@ -128,9 +128,9 @@ public class messInterface {
        // frame.add(chat, BorderLayout.CENTER);
         frame.add(back,BorderLayout.CENTER);
         frame.setVisible(true);
-        scale();
+       // scale();
         while (true) {
-           // scale();
+           scale();
             System.out.print("");
 
             if (recv.equals("0")) {
@@ -183,15 +183,13 @@ public class messInterface {
     }
 
     public static void newchat() {
-        in.setText("");
-
-        //if(lol){
+        
+        if(lol){
+            in.setSize(50, 50);
             chat.add(in);
             lol = false;
-      //  }
-        //JPanel x = new JPanel();
-       // x.setSize( back.getWidth(), back.getHeight());
-       // x.setBackground(Color.RED);
+        }
+        in.setText("");
         chat.setSize( back.getWidth(), back.getHeight());
         back.add(chat,1);
         frame.add(back,BorderLayout.CENTER);
