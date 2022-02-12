@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 //package Japy.src.Java.examplecodes;//
+=======
+//package Japy.src.Java.examplecodes;
+>>>>>>> f64eded519e428f294062d55a424e6b66cef2602
 
 //package Japy.src.Ctest.examplecodes;
 //package Ctest.examplecodes;
