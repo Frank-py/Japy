@@ -1,7 +1,9 @@
-package Java;
-//package Japy.src.Java;
+//package Java;
+package Japy.src.Java;
 
 import javax.swing.*;
+import javax.swing.text.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -77,6 +79,7 @@ public class messInterface {
             public void keyReleased(KeyEvent e) {}
             public void keyTyped(KeyEvent e) {} 
         };
+
         ActionListener act = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == addUsers) {
@@ -92,12 +95,14 @@ public class messInterface {
                     // frame.setVisible(false);
                     frame.setVisible(true);
                     newUser.addKeyListener(enter);
-                }
 
+                }
                 for (JButton o : userliste) {
                     if (e.getSource() == o) {
                         newchat();
+                        System.out.println("ww");
                     }
+
                 }
             }
         };
@@ -110,6 +115,7 @@ public class messInterface {
         frame.setTitle("Messenger");
         frame.setIconImage(pic.getImage());
         frame.getContentPane().setBackground(color);
+
         Users = new JPanel();
         // Users.setLayout(new BoxLayout(Users, BoxLayout.Y_AXIS));
         Users.setLayout(new GridLayout(10, 1, 0, 0));
@@ -132,7 +138,6 @@ public class messInterface {
         while (true) {
            scale();
             System.out.print("");
-
             if (recv.equals("0")) {
                 JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
                 recv = "500";
