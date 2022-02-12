@@ -1,5 +1,5 @@
-//package Java;
-package Japy.src.Java;
+package Java;
+//package Japy.src.Java;
 
 import java.math.*;
 import java.util.*;
@@ -25,13 +25,8 @@ public class encry {
         a = randy.nextInt(1000000000);
         BigInteger rando = BigInteger.valueOf(a);
         BigInteger A = gg.modPow(rando, pp);
-<<<<<<< HEAD
         
-        String[] numbers = {A.toString(10)};
-=======
-
         String[] numbers = {};
->>>>>>> 6a61e793abce40f8f257825446e516aea8579adf
 
         return numbers;
     }
