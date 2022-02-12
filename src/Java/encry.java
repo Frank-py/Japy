@@ -12,7 +12,7 @@ public class encry {
 
     public String[] newkey() {
         Random randy = new Random();
-        String[] numbers = {};
+        
 
         do {
             p = randy.nextInt(1000000000);
@@ -25,8 +25,8 @@ public class encry {
         a = randy.nextInt(1000000000);
         BigInteger rando = BigInteger.valueOf(a);
         BigInteger A = gg.modPow(rando, pp);
-
-        numbers.add(A.toString(10));
+        
+        String[] numbers = {A.toString(10)};
 
         return numbers;
     }
