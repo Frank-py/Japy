@@ -6,36 +6,36 @@ def Client(conn, addr):
     try:
         while True:
             data = []
-            data.append(conn.recv(512).decode(encoding="UTF-8"))
-            conn.send(b"200\n")
+            data.append(conn.recv(512).decode(encoding="latin-1"))
+            conn.send("200\n".encode("latin-1"))
             if data[0] == "login":
                 for i in range(2):
-                    data.append(conn.recv(512).decode(encoding="UTF-8"))
-                    conn.send(b"200\n")
-                benutzer = User().checkaccount(data[1], hashlib.md5(bytes(data[2], encoding='UTF-8')).hexdigest(), addr[0])
+                    data.append(conn.recv(512).decode(encoding="latin-1"))
+                    conn.send("200\n".encode("latin-1"))
+                benutzer = User().checkaccount(data[1], hashlib.md5(bytes(data[2], encoding='latin-1')).hexdigest(), addr[0])
                 if benutzer.loggedin and benutzer.registriert:
-                    conn.send("0\n".encode('utf-8'))
+                    conn.send("0\n".encode('latin-1'))
                     break
                 elif benutzer.loggedin:
-                    conn.send("1\n".encode('utf-8'))
+                    conn.send("1\n".encode('latin-1'))
                     break
                 else:
-                    conn.send("2\n".encode('utf-8')) 
+                    conn.send("2\n".encode('latin-1')) 
         while True: 
             data = []
-            data.append(conn.recv(512).decode(encoding="UTF-8"))
-            conn.send(b"200\n")
+            data.append(conn.recv(512).decode(encoding="latin-1"))
+            conn.send("200\n".encode("latin-1"))
             if data[0] == "proofuser":
-                data.append(conn.recv(512).decode(encoding="UTF-8"))
-                conn.send(b"200\n")
-                conn.send(benutzer.searchaccount(data[1]).encode('utf-8')+"\n".encode('utf-8'))
+                data.append(conn.recv(512).decode(encoding="latin-1"))
+                conn.send("200\n".encode("latin-1"))
+                conn.send(benutzer.searchaccount(data[1]).encode('latin-1')+"\n".encode('latin-1'))
             else:
                 conn.close()
                 return
-    except OSError:
-        conn.send("4\n".encode('utf-8'))
+    except Exception as E:
+        conn.send("4\n".encode('latin-1'))
         conn.close()
-        print("error")
+        print(E)
         return
     
 def main():

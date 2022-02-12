@@ -6,20 +6,24 @@ def Client(conn, addr):
     try:
         while True:
             data = []
-            data.append(conn.recv(512).decode(encoding="UTF-8"))
+            data.append(conn.recv(512).decode(encoding="latin-1"))
             conn.send(b"200\n")
+            print(data)
             if data[0] == "login":
-                data.append(conn.recv(512).decode(encoding="UTF-8"))
+                data.append(conn.recv(512).decode(encoding="latin-1"))
+                print(data)
                 conn.send(b"200\n")
-                data.append(conn.recv(512).decode(encoding="UTF-8"))
+                data.append(conn.recv(512).decode(encoding="latin-1"))
+                print(data)
                 conn.send(b"200\n")
-                conn.send("1\n".encode('utf-8'))
+                conn.send("1\n".encode('latin-1'))
             if data[0] == "proofuser":
-                data.append(conn.recv(512).decode(encoding="UTF-8"))
+                data.append(conn.recv(512).decode(encoding="latin-1"))
+                print(data)
                 conn.send(b"200\n")
-                conn.send("1\n".encode('utf-8'))
+                conn.send("1\n".encode('latin-1'))
     except OSError:
-        conn.send("4\n".encode('utf-8'))
+        conn.send("4\n".encode('latin-1'))
         conn.close()
         print("error")
         return
