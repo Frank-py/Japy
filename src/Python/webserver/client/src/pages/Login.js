@@ -1,10 +1,8 @@
-import React, {useState, useEffect, createContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./Login.css"
-import Messenger from "./Messenger"
 let credentials = null
-let loggedin = false
-const Context = createContext(false);
-export function Login() {
+
+function Login() {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [WrongPassword, setWrongPassword] = useState('');
@@ -30,14 +28,10 @@ export function Login() {
       }
     }).then(response => response.json())
     .then(message => {
-      console.log(message)
+      console.log(message);
       if (message.response === "201" || message.response === "202"){
-        loggedin = true
-          return (
-          <Context.Provider value={true}>
-          <Messenger />
-          </Context.Provider>
-  );
+        sessionStorage.setItem('token', JSON.stringify(credentials));
+        window.location.href = "/messenger"
       }
       else{
         setWrongPassword("Wrong Password")
@@ -57,4 +51,3 @@ export function Login() {
 }
 
 export default Login;
-export {credentials, loggedin, Context};
