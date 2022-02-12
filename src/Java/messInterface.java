@@ -14,7 +14,7 @@ public class messInterface {
     public static int n = 0;
     public static boolean lol =true;
     public static JButton[] userliste = new JButton[100];
-    // public static JPanel[] chat = new JPanel[100];
+    public static JLayeredPane back = new JLayeredPane();
     public static String recv = "500";
     public static Color color = new Color(27, 37, 43);
     // public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
@@ -27,15 +27,13 @@ public class messInterface {
     public static Image img = ba.getImage();
     public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad = new JLabel();
     public static JPanel chat = new JPanel();
+   // public static JPanel back = new JPanel();
     public static JTextField in = new JTextField();
     public static JButton addUsers;
     public static JFrame frame;
     public static JTextField newUser;
     public static JPanel Users;
     public static boolean createUser = false;
-
-    // public static
-    // public static
 
     // main for testing not necessary
     public static void main(String[] args) {
@@ -54,11 +52,12 @@ public class messInterface {
 
     public static void createGUI(int log, Socket socket) {
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
-        in.setForeground(new Color(0x000000));
+        in.setForeground(Color.white);
         in.setCaretColor(Color.white);
         in.setBackground(color);
 
         chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
+        chat.setOpaque(false);
         KeyListener enter = new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
@@ -75,12 +74,8 @@ public class messInterface {
                     }
                 }
             }
-
-            public void keyReleased(KeyEvent e) {
-            }
-
-            public void keyTyped(KeyEvent e) {
-            }
+            public void keyReleased(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {} 
         };
         ActionListener act = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -92,9 +87,8 @@ public class messInterface {
                     newUser.setBackground(color);
                     newUser.setCaretColor(Color.white);
                     Users.add(newUser, 5, 1);
-                    frame.add(chat, BorderLayout.CENTER);
+                    //back.add(chat, BorderLayout.CENTER);
                     frame.add(Users, BorderLayout.WEST);
-                    frame.add(chat, BorderLayout.CENTER);
                     // frame.setVisible(false);
                     frame.setVisible(true);
                     newUser.addKeyListener(enter);
@@ -131,11 +125,12 @@ public class messInterface {
 
         Users.add(addUsers);
         frame.add(Users, BorderLayout.WEST);
-        frame.add(chat, BorderLayout.CENTER);
+       // frame.add(chat, BorderLayout.CENTER);
+        frame.add(back,BorderLayout.CENTER);
         frame.setVisible(true);
         scale();
         while (true) {
-            //scale();
+           // scale();
             System.out.print("");
 
             if (recv.equals("0")) {
@@ -171,28 +166,35 @@ public class messInterface {
 
     public static void scale() {
 
-        Image imgscale = img.getScaledInstance(chat.getWidth(), chat.getHeight(), Image.SCALE_SMOOTH);
+        Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
         // Image imgscale = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
         ImageIcon bascale = new ImageIcon(imgscale);
         backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
                 .setIcon(bascale);
-        chat.add(
-                backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad);
-        //frame.add(chat, BorderLayout.CENTER);
+            //    JPanel s = new JPanel(); 
+            backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
+            .setSize( back.getWidth(), back.getHeight());    
+        back.add(
+                backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,0);
+      // back.add(s);
+                //frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
     public static void newchat() {
         in.setText("");
 
-       if(lol){
+        //if(lol){
             chat.add(in);
             lol = false;
-        }
-        
-        frame.add(chat, BorderLayout.CENTER);
+      //  }
+        //JPanel x = new JPanel();
+       // x.setSize( back.getWidth(), back.getHeight());
+       // x.setBackground(Color.RED);
+        chat.setSize( back.getWidth(), back.getHeight());
+        back.add(chat,1);
+        frame.add(back,BorderLayout.CENTER);
         frame.setVisible(true);
-
     }
 }
