@@ -1,6 +1,6 @@
-package Japy.src.Java.examplecodes;
+//package Japy.src.Java.examplecodes;
 //package Ctest.examplecodes;
-//package Java.examplecodes;
+package Java.examplecodes;
 //package Java.examplecodes;
 import java.awt.*;
 import javax.swing.*;
@@ -8,11 +8,7 @@ import javax.swing.*;
 public class frame0 extends JFrame {
   // JFrame = a GUI window to add components to
   public static void main(String[] args) {
-    int x = 1;
-    while (x==1)
-    {
       new frame0();
-    }
   }
 
   frame0() {
