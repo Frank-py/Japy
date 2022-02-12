@@ -16,7 +16,7 @@ public class login {
     Color color = new Color(27,37,43);
     //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
-    ImageIcon pic = new ImageIcon("src/Java/prof.png");
+    ImageIcon pic = new ImageIcon("prof5.png");
     JFrame frame = new JFrame();
     frame.setSize(300, 420);
     frame.setLocationRelativeTo(null);

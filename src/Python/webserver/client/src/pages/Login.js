@@ -1,11 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import { render } from 'react-dom';
+import React, {useState, useEffect, createContext} from 'react';
 import "./Login.css"
-let loggedin = null;
-function Login() {
+import Messenger from "./Messenger"
+let credentials = null
+let loggedin = false
+const Context = createContext(false);
+export function Login() {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [WrongPassword, setWrongPassword] = useState('');
+  credentials = [user, password]
   useEffect(() => {
     return <p>WrongPassword</p>,
     [WrongPassword]});
@@ -20,17 +23,21 @@ function Login() {
     fetch("/login", {
       method: "POST",
       body: JSON.stringify({
-        content: [user, password]
+        content: credentials
       }),
       headers: {
         "Content-Type": "application/json; charset=UTF-8"
       }
     }).then(response => response.json())
     .then(message => {
-      console.log(message);
+      console.log(message)
       if (message.response === "201" || message.response === "202"){
-        loggedin = true;
-        window.location.href = "/messenger"
+        loggedin = true
+          return (
+          <Context.Provider value={true}>
+          <Messenger />
+          </Context.Provider>
+  );
       }
       else{
         setWrongPassword("Wrong Password")
@@ -50,3 +57,4 @@ function Login() {
 }
 
 export default Login;
+export {credentials, loggedin, Context};
