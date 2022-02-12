@@ -16,7 +16,7 @@ public class login {
     Color color = new Color(27,37,43);
     //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
-    ImageIcon pic = new ImageIcon("src/Java/prof.png");
+    ImageIcon pic = new ImageIcon("src/Java/prof5.png");
     JFrame frame = new JFrame();
     frame.setSize(300, 420);
     frame.setLocationRelativeTo(null);
@@ -102,8 +102,8 @@ public class login {
             loginbu.setEnabled(true);*/
           }
           else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
-              recv = "4";}
-          else {
+              recv = "4";
+            } else {
             try {
               String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
               recv = sendrecv.send(socket, "login", lol);
@@ -183,7 +183,8 @@ public class login {
           EULA.setSelected(false);
           news.setSelected(true);
           robo.setSelected(false);
-
+          pass.setText("");
+          user.setText("");
         JOptionPane.showMessageDialog(null, "Username or Password is too long, try again!", "Invalid UserInput",
             JOptionPane.ERROR_MESSAGE);
         recv = "500";

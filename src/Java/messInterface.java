@@ -12,19 +12,22 @@ public class messInterface {
     public static String[] user;
     public static Socket so;
     public static int n = 0;
+    public static boolean lol =true;
     public static JButton[] userliste = new JButton[100];
     // public static JPanel[] chat = new JPanel[100];
     public static String recv = "500";
     public static Color color = new Color(27, 37, 43);
-    //public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-    //public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
+    // public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
+    // public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
     public static ImageIcon pic = new ImageIcon("src/Java/prof.png");
     public static ImageIcon plus = new ImageIcon("src/Java/plus.png");
     public static ImageIcon ba = new ImageIcon("src/Java/Background.png");
-   // public static ImageIcon ba = new ImageIcon("Japy\\src\\Java\\Background.png");
+    // public static ImageIcon ba = new
+    // ImageIcon("Japy\\src\\Java\\Background.png");
     public static Image img = ba.getImage();
-    public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad = new JLabel();
-    public static JPanel chat = new JPanel(new BorderLayout());
+    public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad = new JLabel();
+    public static JPanel chat = new JPanel();
+    public static JTextField in = new JTextField();
     public static JButton addUsers;
     public static JFrame frame;
     public static JTextField newUser;
@@ -50,24 +53,34 @@ public class messInterface {
     }
 
     public static void createGUI(int log, Socket socket) {
+        in.setFont(new Font("Consolas", Font.PLAIN, 25));
+        in.setForeground(new Color(0x000000));
+        in.setCaretColor(Color.white);
+        in.setBackground(color);
+
+        chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
         KeyListener enter = new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                    if (newUser.getText().length()>20) {
+                    if (newUser.getText().length() > 20) {
                         recv = "5";
                         newUser.setText("");
                     } else {
-                    String[] userf = { newUser.getText() };
-                    user = userf;
-                    recv = sendrecv.send(socket, "proofuser", user);
-                    Users.remove(newUser);
-                    frame.add(Users, BorderLayout.WEST);
-                    frame.setVisible(true);   
+                        String[] userf = { newUser.getText() };
+                        user = userf;
+                        recv = sendrecv.send(socket, "proofuser", user);
+                        Users.remove(newUser);
+                        frame.add(Users, BorderLayout.WEST);
+                        frame.setVisible(true);
                     }
                 }
             }
-            public void keyReleased(KeyEvent e) {}
-            public void keyTyped(KeyEvent e) {}
+
+            public void keyReleased(KeyEvent e) {
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
         };
         ActionListener act = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -97,6 +110,7 @@ public class messInterface {
 
         frame = new JFrame();
         frame.setSize(1366, 768);
+        frame.setMinimumSize(new Dimension(370,370));
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Messenger");
@@ -119,11 +133,11 @@ public class messInterface {
         frame.add(Users, BorderLayout.WEST);
         frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
-
+        scale();
         while (true) {
-            scale();
+            //scale();
             System.out.print("");
-            
+
             if (recv.equals("0")) {
                 JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
                 recv = "500";
@@ -146,11 +160,11 @@ public class messInterface {
                         "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
                         JOptionPane.ERROR_MESSAGE);
                 recv = "500";
-            } else if(recv.equals("5")){
+            } else if (recv.equals("5")) {
                 JOptionPane.showMessageDialog(null,
                         "Username too long please try again!", "OutOfBounds",
                         JOptionPane.ERROR_MESSAGE);
-                        recv = "500";
+                recv = "500";
             }
         }
     }
@@ -161,45 +175,24 @@ public class messInterface {
         // Image imgscale = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
         ImageIcon bascale = new ImageIcon(imgscale);
-        backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad
+        backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
                 .setIcon(bascale);
         chat.add(
-                backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad);
-        frame.add(chat, BorderLayout.CENTER);
+                backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad);
+        //frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
     public static void newchat() {
-       chat.removeAll();
-        scale();
-        JTextField in = new JTextField();
-        //in.setDocument(new JTextFieldLimit(15));
-        //in.setOpaque(false);
-         in.setFont(new Font("Consolas", Font.PLAIN, 25));
-                    in.setForeground(new Color(0x00FF00));
-                    in.setBackground(color);
-                    in.setCaretColor(Color.white);
-        chat.add(in,BorderLayout.CENTER);
+        in.setText("");
+
+       if(lol){
+            chat.add(in);
+            lol = false;
+        }
+        
         frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
 
     }
-
-    // public class JTextFieldLimit extends PlainDocument {
-    //     private int limit;
-
-    //     JTextFieldLimit(int limit) {
-    //         super();
-    //         this.limit = limit;
-    //     }
-
-    //     public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-    //         if (str == null)
-    //             return;
-
-    //         if ((getLength() + str.length()) <= limit) {
-    //             super.insertString(offset, str, attr);
-    //         }
-    //     }
-   // }
 }
