@@ -1,18 +1,21 @@
-import React, {useState, useContext} from 'react'
+import React, {useEffect} from 'react'
 import Navbar from "./Navbar"
 import "./Navbar.css"
-import {credentials, loggedin, Context} from "./Login"
-import {Routes, Route, Navigate} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
+import Logout from "./Logout"
 function Messenger() {
-  console.log(credentials)
-  const value = useContext(Context);
-  console.log(credentials, loggedin, value)
+  const tokenString = sessionStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  if (userToken === null){
+    window.location.href = "/login"
+  }
+
   return (
     <div className="mess">
       <div className='ano'>
         <Navbar />
         <Routes>
-            <Route path="/"/>
+            <Route path="/" />
         </Routes>
     </div>
     </div>
