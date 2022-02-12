@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-    
+
+
+
+
 .Adduser, .Chat, .Logout{
     display: flex;
     height: 90vh;
@@ -8,7 +11,9 @@
     font-size: 3rem;
 }
 .navbar {
-    margin-top: 0px;
+    margin-top: -10px;
+    margin-right: -10px;
+    margin-left: -10px;
     background-color: #060b26;
     height: 80px;
     display: flex;
@@ -64,6 +69,7 @@
 
 .nav-menu-items {
     width: 100%;
+    margin-left: -60px;
 
 }
 

@@ -18,9 +18,9 @@ public class messInterface {
     public static Color color = new Color(27, 37, 43);
     //public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
-    public static ImageIcon pic = new ImageIcon("src/Java/prof.png");
-    public static ImageIcon plus = new ImageIcon("src/Java/plus.png");
-    public static ImageIcon ba = new ImageIcon("src/Java/Background.png");
+    public static ImageIcon pic = new ImageIcon("prof5.png");
+    public static ImageIcon plus = new ImageIcon("plus.png");
+    public static ImageIcon ba = new ImageIcon("Background.png");
    // public static ImageIcon ba = new ImageIcon("Japy\\src\\Java\\Background.png");
     public static Image img = ba.getImage();
     public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplstopilikecookiesandimagesarebad = new JLabel();

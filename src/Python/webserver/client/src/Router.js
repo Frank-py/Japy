@@ -3,6 +3,7 @@ import Login from "./pages/Login"
 import NotFound from "./pages/NotFound"
 import Messenger from "./pages/Messenger"
 const Router = () => {
+    document.title = "Messenger";
     return (
         <BrowserRouter>
         <Routes>
