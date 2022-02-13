@@ -40,12 +40,19 @@ function Login() {
   }
   return (<div className="eingabe">
               <form method="post" onSubmit={handleFormSubmit}>
-                <p className="password">{WrongPassword}</p>
+                <p>{WrongPassword}</p>
+                <label>
+                
                 <input name="username" placeholder='Username' onChange={handleUserChange}></input>
-                <p></p>
+                </label>
+                <label>
+                
                 <input type="password" placeholder='Password' name="password" onChange={handlePasswordChange}></input>
-                <p></p>
+                </label>
+                <label>
+                
                 <input type="submit" value="submit" className="button"></input>
+                </label>
               </form>
     </div>)
 }

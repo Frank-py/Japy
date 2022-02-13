@@ -16,6 +16,7 @@ function Messenger() {
         <Navbar />
         <Routes>
             <Route path="/" />
+            <Route path="/Adduser" element={<div>hallo</div>}/>
         </Routes>
     </div>
     </div>
