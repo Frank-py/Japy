@@ -53,6 +53,7 @@ public class encryption {
     System.out.println("Enter Message:");
     String mess = scanny2.nextLine();
     String res = "";
+    scanny2.close();
 
     if (crypt) {
       mess = crypt(mess, key);

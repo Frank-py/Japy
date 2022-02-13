@@ -1,5 +1,4 @@
 button auf login
-MaxInput String Length
 
 Colors final
 Fix panel size main window(messinterface)
