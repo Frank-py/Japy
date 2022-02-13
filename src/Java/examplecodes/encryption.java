@@ -1,5 +1,5 @@
-//package Java;
-package Java.examplecodes;
+//package Java.examplecodes;
+package Japy.src.Java.examplecodes;
 
 import java.math.*;
 import java.util.*;

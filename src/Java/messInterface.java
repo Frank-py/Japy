@@ -1,5 +1,5 @@
-package Java;
-//package Japy.src.Java;
+//package Java;
+package Japy.src.Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -16,14 +16,6 @@ public class messInterface {
     public static JLayeredPane back = new JLayeredPane();
     public static String recv = "500";
     public static Color color = new Color(27, 37, 43);
-<<<<<<< HEAD
-    //public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-    //public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
-    public static ImageIcon pic = new ImageIcon("prof5.png");
-    public static ImageIcon plus = new ImageIcon("plus.png");
-    public static ImageIcon ba = new ImageIcon("Background.png");
-   // public static ImageIcon ba = new ImageIcon("Japy\\src\\Java\\Background.png");
-=======
     // public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     // public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
     public static ImageIcon pic = new ImageIcon("src/Java/prof.png");
@@ -31,7 +23,6 @@ public class messInterface {
     public static ImageIcon ba = new ImageIcon("src/Java/Background.png");
     // public static ImageIcon ba = new
     // ImageIcon("Japy\\src\\Java\\Background.png");
->>>>>>> f64eded519e428f294062d55a424e6b66cef2602
     public static Image img = ba.getImage();
     public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad = new JLabel();
     public static JPanel chat = new JPanel();
