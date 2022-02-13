@@ -17,19 +17,18 @@
 }
 .navbar {
   background-color: #060b26;
+  width: 5rem;
   height: 100vh;
-  width: 16vh;
-  display: inline-block;
+
 }
 
 .menu-bars {
-    display: inline-block;
-    margin-left: 4.5vh;
-    margin-top: 3.2vh;
-    background: none;
-    font-size: 3.5rem;
-}
-.menu-bars2 {
+  display: inline-block;
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+  }
+  .menu-bars2 {
     display: inline-block;
     margin-top: 2vh;
     font-size: 2rem;
