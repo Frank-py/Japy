@@ -1,8 +1,7 @@
-//package Java;
-package Japy.src.Java;
+package Java;
+//package Japy.src.Java;
 import javax.swing.*;
 import java.awt.*;
-import java.net.*;
 import java.awt.event.*;
 public class login {
   public static String recv = "500";
@@ -10,11 +9,11 @@ public class login {
   public static boolean h = true;
   public static int counter = 0;
 
-  public static int createGUI(Socket socket) {
+  public static int createGUI() {
     Color color = new Color(27,37,43);
     //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
-    ImageIcon pic = new ImageIcon("src/Java/prof5.png");
+    ImageIcon pic = new ImageIcon("Java/prof5.png");
     JFrame frame = new JFrame();
     frame.setSize(320, 440);
     frame.setLocationRelativeTo(null);
@@ -104,7 +103,7 @@ public class login {
             } else {
             try {
               String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
-              recv = sendrecv.send(socket, "login", lol);
+              recv = sendrecv.send( "login", lol);
               // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
             } catch (Exception f) {
               recv = "5";
@@ -128,7 +127,7 @@ public class login {
           } else {
             try {
               String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
-              recv = sendrecv.send(socket, "login", lol);
+              recv = sendrecv.send("login", lol);
               // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
             } catch (Exception f) {
               recv = "5";

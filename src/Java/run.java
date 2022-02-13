@@ -1,26 +1,17 @@
-//package Java;
-package Japy.src.Java;
+package Java;
+//package Japy.src.Java;
 
 import java.net.*;
 import java.io.*;
 
 public class run {
-  public static Socket socket;
-
   public static void main(String[] args) {
-    try {
-      socket =   new Socket("localhost", 6000);
-    } catch (UnknownHostException e1) {
-      e1.printStackTrace();
-    } catch (IOException e2) {
-      e2.printStackTrace();
-    }
-
-    int log = login.createGUI(socket);
+    sendrecv.socket();  
+    int log = login.createGUI();
     if (log == 4) {
       return;
     }
     // System.out.println("new window");
-    messInterface.createGUI(log, socket);
+    messInterface.createGUI(log);
   }
 }

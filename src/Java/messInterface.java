@@ -1,25 +1,22 @@
-//package Java;
-package Japy.src.Java;
+package Java;
+//package Japy.src.Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.net.*;
 public class messInterface {
     public static String[] user;
-    public static Socket so;
     public static int n = 0;
     public static boolean lol =true;
     public static JButton[] userliste = new JButton[100];
     public static JLayeredPane back = new JLayeredPane();
     public static String recv = "500";
     public static Color color = new Color(27, 37, 43);
-    public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-    public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
-    public static ImageIcon ba = new ImageIcon("Japy\\src\\Java\\Background.png");
-    //public static ImageIcon pic = new ImageIcon("src/Java/prof.png");
-    //public static ImageIcon plus = new ImageIcon("src/Java/plus.png");
-    //public static ImageIcon ba = new ImageIcon("src/Java/Background.png");
+    // public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
+    // public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
+    // public static ImageIcon ba = new ImageIcon("Japy\\src\\Java\\Background.png");
+    public static ImageIcon pic = new ImageIcon("Java/prof5.png");
+    public static ImageIcon plus = new ImageIcon("Java/plus.png");
+    public static ImageIcon ba = new ImageIcon("Java/Background.png");
     public static Image img = ba.getImage();
     public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad = new JLabel();
     public static JPanel chat = new JPanel();
@@ -32,7 +29,7 @@ public class messInterface {
 
     // main for testing not necessary
     public static void main(String[] args) {
-        try {
+       /*  try {
             so =   new Socket("localhost", 6000);
         } catch (UnknownHostException e) {
 
@@ -41,11 +38,11 @@ public class messInterface {
         } catch (IOException e) {
 
             e.printStackTrace();
-        }
-        createGUI(0, so);
-    }
+        }*/
+        createGUI(0);
+    } 
 
-    public static void createGUI(int log, Socket socket) {
+    public static void createGUI(int log) {
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
         in.setForeground(Color.white);
         in.setCaretColor(Color.white);
@@ -62,7 +59,7 @@ public class messInterface {
                     } else {
                         String[] userf = { newUser.getText() };
                         user = userf;
-                        recv = sendrecv.send(socket, "proofuser", user);
+                        recv = sendrecv.send("proofuser", user);
                         Users.remove(newUser);
                         frame.add(Users, BorderLayout.WEST);
                         frame.setVisible(true);
@@ -130,7 +127,7 @@ public class messInterface {
        // scale();
         while (true) {
            scale();
-           String recv = sendrecv.recv();
+          // String[] recieve = sendrecv.recv();
             System.out.print("");
             if (recv.equals("0")) {
                 JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);

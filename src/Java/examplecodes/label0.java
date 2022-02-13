@@ -1,4 +1,4 @@
-package Japy.src.Java.examplecodes;
+package Java.examplecodes;
 //package Java.examplecodes;
 import java.awt.Color;
 import java.awt.Font;
