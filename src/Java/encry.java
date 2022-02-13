@@ -1,5 +1,5 @@
-//package Java;
-package Japy.src.Java;
+package Java;
+//package Japy.src.Java;
 
 import java.math.*;
 import java.util.*;
@@ -13,7 +13,6 @@ public class encry {
     public String[] newkey() {
         Random randy = new Random();
         
-
         do {
             p = randy.nextInt(1000000000);
         } while (!isPrime(p) | p < 1000000);
@@ -25,10 +24,22 @@ public class encry {
         a = randy.nextInt(1000000000);
         BigInteger rando = BigInteger.valueOf(a);
         BigInteger A = gg.modPow(rando, pp);
-
-        String[] numbers = {};
+        
+        String[] numbers = {pp.toString(10), gg.toString(10), A.toString(10)};
 
         return numbers;
+    }
+
+    public String endnewkey(String[] in){
+        String key = "";
+
+        if(in.length == 1){
+
+        } else{
+
+        }
+
+        return key;
     }
 
     static boolean isPrime(double n) {

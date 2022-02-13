@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { render } from 'react-dom';
 import "./Login.css"
-let loggedin = null;
+let credentials = null
+
 function Login() {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [WrongPassword, setWrongPassword] = useState('');
+  credentials = [user, password]
   useEffect(() => {
     return <p>WrongPassword</p>,
     [WrongPassword]});
@@ -20,7 +21,7 @@ function Login() {
     fetch("/login", {
       method: "POST",
       body: JSON.stringify({
-        content: [user, password]
+        content: credentials
       }),
       headers: {
         "Content-Type": "application/json; charset=UTF-8"
@@ -29,7 +30,7 @@ function Login() {
     .then(message => {
       console.log(message);
       if (message.response === "201" || message.response === "202"){
-        loggedin = true;
+        sessionStorage.setItem('token', JSON.stringify(credentials));
         window.location.href = "/messenger"
       }
       else{

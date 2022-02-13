@@ -1,11 +1,9 @@
-//package Java;
-package Japy.src.Java;
-
+package Java;
+//package Japy.src.Java;
 import javax.swing.*;
 import java.awt.*;
 import java.net.*;
 import java.awt.event.*;
-
 public class login {
   public static String recv = "500";
   public static boolean accept = false;
@@ -16,9 +14,13 @@ public class login {
     Color color = new Color(27,37,43);
     //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
+<<<<<<< HEAD
+    ImageIcon pic = new ImageIcon("prof5.png");
+=======
     ImageIcon pic = new ImageIcon("src/Java/prof5.png");
+>>>>>>> f64eded519e428f294062d55a424e6b66cef2602
     JFrame frame = new JFrame();
-    frame.setSize(300, 420);
+    frame.setSize(320, 440);
     frame.setLocationRelativeTo(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setTitle("Login");
@@ -33,7 +35,7 @@ public class login {
     JPanel title = new JPanel();
     title.setBackground(color);
 
-    JPanel UserInput = new JPanel(new GridLayout(9, 1));
+    JPanel UserInput = new JPanel(new GridLayout(8, 1));
     UserInput.setBackground(color);
 
     JPanel button = new JPanel();
@@ -54,18 +56,18 @@ public class login {
     PassTitle.setForeground(Color.white);
 
     JButton loginbu = new JButton("Login!");
-    loginbu.setFont(new Font("MV Boli", Font.BOLD, 15));
+    loginbu.setFont(new Font("MV Boli", Font.BOLD, 14));
     loginbu.setForeground(Color.white);
     loginbu.setBackground(new Color(47,49,54));
     loginbu.setFocusable(false);
-    loginbu.setSize(200, 35);
+    loginbu.setSize(200, 40);
 
     JCheckBox robo = new JCheckBox("I'm not a robot");
     robo.setFocusable(false);
     robo.setBackground(color);
     robo.setForeground(Color.white);
 
-    JCheckBox EULA = new JCheckBox("Accept the EULA and our AGB and the collection of necessary data");
+    JCheckBox EULA = new JCheckBox("Accept the EULA and our AGB");
     EULA.setFocusable(false);
     EULA.setBackground(color);
     EULA.setForeground(Color.white);
@@ -189,7 +191,6 @@ public class login {
             JOptionPane.ERROR_MESSAGE);
         recv = "500";
         }
-    
         else if (Integer.parseInt(recv) == 5) {
         JOptionPane.showMessageDialog(null,
             "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
