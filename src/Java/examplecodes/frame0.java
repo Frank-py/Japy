@@ -1,12 +1,6 @@
-//package Japy.src.Java.examplecodes;
-//package Ctest.examplecodes;
-<<<<<<< HEAD
+package Japy.src.Java.examplecodes;
 //package Java.examplecodes;
-package Java.examplecodes;
-=======
-package Java.examplecodes;
-//package Java.examplecodes;
->>>>>>> f64eded519e428f294062d55a424e6b66cef2602
+
 import java.awt.*;
 import javax.swing.*;
 

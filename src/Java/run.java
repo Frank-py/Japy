@@ -1,5 +1,5 @@
-package Java;
-//package Japy.src.Java;
+//package Java;
+package Japy.src.Java;
 
 import java.net.*;
 import java.io.*;
@@ -15,6 +15,7 @@ public class run {
     } catch (IOException e2) {
       e2.printStackTrace();
     }
+
     int log = login.createGUI(socket);
     if (log == 4) {
       return;

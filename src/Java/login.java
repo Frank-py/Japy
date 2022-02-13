@@ -1,5 +1,5 @@
-package Java;
-//package Japy.src.Java;
+//package Java;
+package Japy.src.Java;
 import javax.swing.*;
 import java.awt.*;
 import java.net.*;
@@ -14,11 +14,7 @@ public class login {
     Color color = new Color(27,37,43);
     //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
-<<<<<<< HEAD
-    ImageIcon pic = new ImageIcon("prof5.png");
-=======
     ImageIcon pic = new ImageIcon("src/Java/prof5.png");
->>>>>>> f64eded519e428f294062d55a424e6b66cef2602
     JFrame frame = new JFrame();
     frame.setSize(320, 440);
     frame.setLocationRelativeTo(null);
