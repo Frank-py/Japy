@@ -43,13 +43,16 @@ public class messInterface {
     } 
 
     public static void createGUI(int log) {
+         back.add(
+               backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,Integer.valueOf(0));
+      
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
         in.setForeground(Color.white);
         in.setCaretColor(Color.white);
         in.setBackground(color);
-
-        chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
-        chat.setOpaque(false);
+        chat.setLayout(new BorderLayout());
+       // chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
+      //  chat.setOpaque(false);
         KeyListener enter = new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
@@ -90,7 +93,6 @@ public class messInterface {
                 for (JButton o : userliste) {
                     if (e.getSource() == o) {
                         newchat();
-                        System.out.println("ww");
                     }
 
                 }
@@ -168,12 +170,11 @@ public class messInterface {
         ImageIcon bascale = new ImageIcon(imgscale);
         backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
                 .setIcon(bascale);
-            //    JPanel s = new JPanel(); 
+                JPanel s = new JPanel(); 
             backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
             .setSize( back.getWidth(), back.getHeight());    
-        back.add(
-                backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,0);
-      // back.add(s);
+         back.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,0);
+      // back.add(s,Integer.valueOf(0));
                 //frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
     }
@@ -182,12 +183,16 @@ public class messInterface {
         
         if(lol){
             in.setSize(50, 50);
-            chat.add(in);
+            JPanel ka = new JPanel();
+            ka.setSize(100, 100);
+            ka.setBackground(Color.RED);
+            chat.add(ka);
+            //chat.add(in);
             lol = false;
         }
         in.setText("");
-        chat.setSize( back.getWidth(), back.getHeight());
-        back.add(chat,1);
+        chat.setSize(back.getWidth(), back.getHeight());
+        back.add(chat,4);
         frame.add(back,BorderLayout.CENTER);
         frame.setVisible(true);
     }

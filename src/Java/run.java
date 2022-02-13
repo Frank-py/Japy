@@ -1,9 +1,6 @@
 package Java;
 //package Japy.src.Java;
 
-import java.net.*;
-import java.io.*;
-
 public class run {
   public static void main(String[] args) {
     sendrecv.socket();  
