@@ -1,5 +1,5 @@
-//package Java;
-package Japy.src.Java;
+package Java;
+//package Japy.src.Java;
 
 import java.io.*;
 import java.net.*;
@@ -8,12 +8,18 @@ public class sendrecv {
     public static BufferedReader bf;
     public static  PrintWriter out;
     public static String s;
-    public static Socket socket() throws UnknownHostException, IOException{
+    public static Socket socket;
     
-     Socket socket = new Socket("localhost", 6000);
+    public static Socket socket() {
+    
+    try {
+    socket = new Socket("localhost", 6000);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
      return socket;
     }
-    public static String send(Socket socket, String Funktion, String in[]) {
+    public static String send(String Funktion, String in[]) {
         try {
             s = null;
             bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -59,12 +65,12 @@ public class sendrecv {
         return s;
     }
 
-    public static String[] recv() {
-        String[] lol = {};
-        bf.readLine();
-        return lol;
-        if ( == "recvkey") {
+    // public static String[] recv() {
+    //     String[] lol = {};
+    //     bf.readLine();
+    //     if (bf.readline == "recvkey") {
+    //     return lol;
 
-        }
-    }
+    //     }
 }
+
