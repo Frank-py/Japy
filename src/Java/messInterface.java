@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
+import java.net.*;
 public class messInterface {
     public static String[] user;
     public static Socket so;
@@ -16,17 +14,15 @@ public class messInterface {
     public static JLayeredPane back = new JLayeredPane();
     public static String recv = "500";
     public static Color color = new Color(27, 37, 43);
-    // public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-    // public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
-    public static ImageIcon pic = new ImageIcon("src/Java/prof.png");
-    public static ImageIcon plus = new ImageIcon("src/Java/plus.png");
-    public static ImageIcon ba = new ImageIcon("src/Java/Background.png");
-    // public static ImageIcon ba = new
-    // ImageIcon("Japy\\src\\Java\\Background.png");
+    public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
+    public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
+    public static ImageIcon ba = new ImageIcon("Japy\\src\\Java\\Background.png");
+    //public static ImageIcon pic = new ImageIcon("src/Java/prof.png");
+    //public static ImageIcon plus = new ImageIcon("src/Java/plus.png");
+    //public static ImageIcon ba = new ImageIcon("src/Java/Background.png");
     public static Image img = ba.getImage();
     public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad = new JLabel();
     public static JPanel chat = new JPanel();
-   // public static JPanel back = new JPanel();
     public static JTextField in = new JTextField();
     public static JButton addUsers;
     public static JFrame frame;
@@ -134,6 +130,7 @@ public class messInterface {
        // scale();
         while (true) {
            scale();
+           String recv = sendrecv.recv();
             System.out.print("");
             if (recv.equals("0")) {
                 JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
