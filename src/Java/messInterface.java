@@ -39,13 +39,12 @@ public class messInterface {
 
             e.printStackTrace();
         }*/
+        sendrecv.socket();
         createGUI(0);
     } 
 
     public static void createGUI(int log) {
-         back.add(
-               backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,Integer.valueOf(0));
-      
+        back.setSize(1000,1000); 
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
         in.setForeground(Color.white);
         in.setCaretColor(Color.white);
@@ -124,9 +123,9 @@ public class messInterface {
         Users.add(addUsers);
         frame.add(Users, BorderLayout.WEST);
        // frame.add(chat, BorderLayout.CENTER);
+       
         frame.add(back,BorderLayout.CENTER);
         frame.setVisible(true);
-       // scale();
         while (true) {
            scale();
           // String[] recieve = sendrecv.recv();
@@ -170,10 +169,15 @@ public class messInterface {
         ImageIcon bascale = new ImageIcon(imgscale);
         backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
                 .setIcon(bascale);
-                JPanel s = new JPanel(); 
+                JPanel s = new JPanel();
+                s.setOpaque(false);
+               // s.setBackground(Color.BLACK);
+                s.setSize(back.getWidth(), back.getHeight());
+                s.setLayout(null);
             backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
-            .setSize( back.getWidth(), back.getHeight());    
-         back.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,0);
+            .setSize( s.getWidth(), s.getHeight());
+            s.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad);    
+         back.add(s,Integer.valueOf(0));
       // back.add(s,Integer.valueOf(0));
                 //frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
@@ -192,7 +196,7 @@ public class messInterface {
         }
         in.setText("");
         chat.setSize(back.getWidth(), back.getHeight());
-        back.add(chat,4);
+        back.add(chat,Integer.valueOf(4));
         frame.add(back,BorderLayout.CENTER);
         frame.setVisible(true);
     }
