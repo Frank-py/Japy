@@ -1,6 +1,8 @@
 package Java;
 //package Japy.src.Java;
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.event.*;
 public class messInterface {
@@ -163,20 +165,21 @@ public class messInterface {
 
     public static void scale() {
 
-        Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
+        JPanel s = new JPanel();
+       // s.setBackground(Color.BLACK);
+        s.setSize(500,500);
+        s.setLayout(new BorderLayout());
+        Image imgscale = img.getScaledInstance(s.getWidth(), s.getHeight(), Image.SCALE_SMOOTH);
         // Image imgscale = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
         ImageIcon bascale = new ImageIcon(imgscale);
-        backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
-                .setIcon(bascale);
-                JPanel s = new JPanel();
-                s.setOpaque(false);
-               // s.setBackground(Color.BLACK);
-                s.setSize(back.getWidth(), back.getHeight());
-                s.setLayout(null);
+      //  backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
+           //     .setIcon(bascale);
             backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
-            .setSize( s.getWidth(), s.getHeight());
-            s.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad);    
+            .setSize( 400,400);
+            backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad.setBackground(Color.BLACK);
+            backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad.setOpaque(true);
+            s.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,BorderLayout.CENTER);    
          back.add(s,Integer.valueOf(0));
       // back.add(s,Integer.valueOf(0));
                 //frame.add(chat, BorderLayout.CENTER);
@@ -197,7 +200,6 @@ public class messInterface {
         in.setText("");
         chat.setSize(back.getWidth(), back.getHeight());
         back.add(chat,Integer.valueOf(4));
-        frame.add(back,BorderLayout.CENTER);
         frame.setVisible(true);
     }
 }
