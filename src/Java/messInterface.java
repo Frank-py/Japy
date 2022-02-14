@@ -13,14 +13,14 @@ public class messInterface {
     public static JLayeredPane back = new JLayeredPane();
     public static String recv = "500";
     public static Color color = new Color(27, 37, 43);
-    // public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-    // public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
-    // public static ImageIcon ba = new ImageIcon("Japy\\src\\Java\\Background.png");
-    public static ImageIcon pic = new ImageIcon("Java/prof5.png");
-    public static ImageIcon plus = new ImageIcon("Java/plus.png");
-    public static ImageIcon ba = new ImageIcon("Java/Background.png");
+     public static ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
+     public static ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
+    public static ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
+    //public static ImageIcon pic = new ImageIcon("Java/prof5.png");
+   // public static ImageIcon plus = new ImageIcon("Java/plus.png");
+    //public static ImageIcon ba = new ImageIcon("Java/Background.png");
     public static Image img = ba.getImage();
-    public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad = new JLabel();
+   // public static JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad = new JLabel();
     public static JPanel chat = new JPanel();
     public static JTextField in = new JTextField();
     public static JButton addUsers;
@@ -165,22 +165,19 @@ public class messInterface {
 
     public static void scale() {
 
-        JPanel s = new JPanel();
-       // s.setBackground(Color.BLACK);
-        s.setSize(500,500);
-        s.setLayout(new BorderLayout());
-        Image imgscale = img.getScaledInstance(s.getWidth(), s.getHeight(), Image.SCALE_SMOOTH);
+        JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad = new JLabel();
+        Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
         // Image imgscale = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
         ImageIcon bascale = new ImageIcon(imgscale);
-      //  backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
-           //     .setIcon(bascale);
+        backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
+                .setIcon(bascale);
             backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
-            .setSize( 400,400);
-            backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad.setBackground(Color.BLACK);
-            backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad.setOpaque(true);
-            s.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,BorderLayout.CENTER);    
-         back.add(s,Integer.valueOf(0));
+            .setSize( back.getWidth(), back.getHeight());
+            //backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad.setBackground(Color.BLACK);
+           // backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad.setOpaque(true);
+            back.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,Integer.valueOf(0));    
+            //back.add(s,Integer.valueOf(0));
       // back.add(s,Integer.valueOf(0));
                 //frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
