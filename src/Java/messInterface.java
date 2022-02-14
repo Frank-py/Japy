@@ -8,7 +8,7 @@ import java.awt.event.*;
 public class messInterface {
     public static String[] user;
     public static int n = 0;
-    public static boolean lol =true;
+    public static boolean lol = true;
     public static JButton[] userliste = new JButton[100];
     public static JLayeredPane back = new JLayeredPane();
     public static String recv = "500";
@@ -52,6 +52,8 @@ public class messInterface {
         in.setCaretColor(Color.white);
         in.setBackground(color);
         chat.setLayout(new BorderLayout());
+        
+        back.add(chat,Integer.valueOf(4));
        // chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
       //  chat.setOpaque(false);
         KeyListener enter = new KeyListener() {
@@ -129,8 +131,8 @@ public class messInterface {
         frame.add(back,BorderLayout.CENTER);
         frame.setVisible(true);
         while (true) {
-           scale();
-          // String[] recieve = sendrecv.recv();
+            scale();
+            // String[] recieve = sendrecv.recv();
             System.out.print("");
             if (recv.equals("0")) {
                 JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
@@ -174,12 +176,9 @@ public class messInterface {
                 .setIcon(bascale);
             backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
             .setSize( back.getWidth(), back.getHeight());
-            //backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad.setBackground(Color.BLACK);
-           // backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad.setOpaque(true);
             back.add(backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,Integer.valueOf(0));    
-            //back.add(s,Integer.valueOf(0));
-      // back.add(s,Integer.valueOf(0));
                 //frame.add(chat, BorderLayout.CENTER);
+               
         frame.setVisible(true);
     }
 
@@ -187,16 +186,11 @@ public class messInterface {
         
         if(lol){
             in.setSize(50, 50);
-            JPanel ka = new JPanel();
-            ka.setSize(100, 100);
-            ka.setBackground(Color.RED);
-            chat.add(ka);
-            //chat.add(in);
+           chat.setSize(back.getWidth(), back.getHeight()); 
+           chat.add(in);
             lol = false;
         }
         in.setText("");
-        chat.setSize(back.getWidth(), back.getHeight());
-        back.add(chat,Integer.valueOf(4));
         frame.setVisible(true);
     }
 }
