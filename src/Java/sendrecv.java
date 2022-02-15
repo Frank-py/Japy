@@ -57,8 +57,13 @@ public class sendrecv {
             } else if (Funktion == "sendkey") {
 
             }
+<<<<<<< HEAD
             //bf.close();
            // out.close();
+=======
+        //     bf.close();
+        //    out.close();
+>>>>>>> 6a5737ab5e703727f1359d39615b8a172a951a7c
         } catch (IOException e) {
             e.printStackTrace();
             return "4";

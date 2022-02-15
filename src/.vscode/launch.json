@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch encryption",
+            "request": "launch",
+            "mainClass": "Java.examplecodes.encryption",
+            "projectName": "src_4bfd1c3a"
+        },
+        {
+            "type": "java",
+            "name": "Launch frame0",
+            "request": "launch",
+            "mainClass": "Java.examplecodes.frame0",
+            "projectName": "src_4bfd1c3a"
+        },
+        {
+            "type": "java",
+            "name": "Launch layouts",
+            "request": "launch",
+            "mainClass": "Java.examplecodes.layouts",
+            "projectName": "src_4bfd1c3a"
+        },
+        {
+            "type": "java",
+            "name": "Launch messInterface",
+            "request": "launch",
+            "mainClass": "Java.messInterface",
+            "projectName": "src_4bfd1c3a"
+        },
+        {
+            "type": "java",
+            "name": "Launch run",
+            "request": "launch",
+            "mainClass": "Java.run",
+            "projectName": "src_4bfd1c3a"
+        }
+    ]
+}
