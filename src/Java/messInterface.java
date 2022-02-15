@@ -10,6 +10,7 @@ public class messInterface {
     public static String[] user;
     public static int n = 0;
     public static boolean lol = true;
+    public static boolean lol2 = true;
     public static JButton[] userliste = new JButton[100];
     public static JLayeredPane back = new JLayeredPane();
     public static String recv = "500";
@@ -22,7 +23,7 @@ public class messInterface {
     // public static ImageIcon ba = new ImageIcon("Java/Background.png");
     public static Image img = ba.getImage();
     // public static JLabel
-    // backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
+    // background
     // = new JLabel();
     public static JPanel chat = new JPanel();
     public static JTextField in = new JTextField();
@@ -34,18 +35,6 @@ public class messInterface {
 
     // main for testing not necessary
     public static void main(String[] args) {
-        /*
-         * try {
-         * so = new Socket("localhost", 6000);
-         * } catch (UnknownHostException e) {
-         * 
-         * e.printStackTrace();
-         * recv = "4";
-         * } catch (IOException e) {
-         * 
-         * e.printStackTrace();
-         * }
-         */
         sendrecv.socket();
         createGUI(0);
     }
@@ -101,6 +90,8 @@ public class messInterface {
                     frame.setVisible(true);
                     newUser.addKeyListener(enter);
 
+                } else if (newUser.getText().length() > 20) {
+                    recv = "4";
                 }
                 for (JButton o : userliste) {
                     if (e.getSource() == o) {
@@ -155,7 +146,6 @@ public class messInterface {
                 userliste[n].setForeground(new Color(0xFFFFFF));
                 userliste[n].setFocusable(false);
                 userliste[n].addActionListener(act);
-
                 Users.add(userliste[n]);
                 n++;
                 addUsers.setEnabled(true);
@@ -175,21 +165,20 @@ public class messInterface {
     }
 
     public static void scale() {
-
-        JLabel backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad = new JLabel();
+        JLabel background = new JLabel();
         Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
-        // Image imgscale = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-
         ImageIcon bascale = new ImageIcon(imgscale);
-        backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
-                .setIcon(bascale);
-        backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad
-                .setSize(back.getWidth(), back.getHeight());
-        back.add(
-                backgroundthingthatveryconvincingandeasytoremambernameiguesswhatdoyouthinkisveryconfusingandannoyingwhyyoudodosseriouslyplsstopilikecookiesandimagesarebad,
-                Integer.valueOf(0));
-        // frame.add(chat, BorderLayout.CENTER);
+        background.setIcon(bascale);
+        background.setSize(back.getWidth(), back.getHeight());
+        if (lol2) {
+            back.add(background, Integer.valueOf(0));
+         lol2 = false;   
+        }
+        back.repaint();
 
+ 
+      //  back.remove(background);
+        // frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
