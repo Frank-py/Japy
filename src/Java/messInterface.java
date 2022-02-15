@@ -5,11 +5,6 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.AffineTransform;
-
-import java.awt.image.*;
-import java.io.File;
-import javax.imageio.ImageIO;
 
 public class messInterface {
     public static String[] user;
@@ -171,19 +166,26 @@ public class messInterface {
 
     public static void scale() {
         JLabel background = new JLabel();
+        JLabel background1 = new JLabel();
         Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon bascale = new ImageIcon(imgscale);
-        background.setIcon(bascale);
-        background.setSize(back.getWidth(), back.getHeight());
         if (lol2) {
+            background1.setIcon(bascale);
+            background1.setSize(back.getWidth(), back.getHeight());
+            back.add(background1, Integer.valueOf(0));
+            back.remove(background1);
+            lol2 = false;
+        } else {
+            background.setIcon(bascale);
+            background.setSize(back.getWidth(), back.getHeight());
             back.add(background, Integer.valueOf(0));
-         lol2 = false;   
+            back.remove(background);
+            lol2 = true;
         }
-        back.repaint();
+       /*  background.setIcon(bascale);
+        background.setSize(back.getWidth(), back.getHeight());
+        back.add(background, Integer.valueOf(0));*/
 
- 
-      //  back.remove(background);
-        // frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
@@ -197,19 +199,5 @@ public class messInterface {
         }
         in.setText("");
         frame.setVisible(true);
-    }
-
-    public void resize() {
-        double widthScaleFactor = back.getWidth() / (double) back.getWidth();
-        double heightScaleFactor = back.getHeight() / (double) back.getHeight();
-        double scaleFactor = (widthScaleFactor > heightScaleFactor) ? heightScaleFactor : widthScaleFactor;
-
-        AffineTransform at = new AffineTransform();
-        at.scale(scaleFactor, scaleFactor);
-
-        AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-        scaledImage = scaleOp.filter(originalImage, null);
-
-        repaint();
     }
 }
