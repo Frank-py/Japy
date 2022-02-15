@@ -5,21 +5,27 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+
+import java.awt.image.*;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 public class messInterface {
     public static String[] user;
     public static int n = 0;
     public static boolean lol = true;
+    public static boolean lol2 = true;
     public static JButton[] userliste = new JButton[100];
     public static JLayeredPane back = new JLayeredPane();
     public static String recv = "500";
     public static Color color = new Color(27, 37, 43);
-    // public static ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
-    // public static ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
-    // public static ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
-    public static ImageIcon pic = new ImageIcon("Java/prof5.png");
-    public static ImageIcon plus = new ImageIcon("Java/plus.png");
-    public static ImageIcon ba = new ImageIcon("Java/Background.png");
+    public static ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
+    public static ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
+    public static ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
+    // public static ImageIcon pic = new ImageIcon("Java/prof5.png");
+    // public static ImageIcon plus = new ImageIcon("Java/plus.png");
+    // public static ImageIcon ba = new ImageIcon("Java/Background.png");
     public static Image img = ba.getImage();
     // public static JLabel
     // background
@@ -34,18 +40,6 @@ public class messInterface {
 
     // main for testing not necessary
     public static void main(String[] args) {
-        /*
-         * try {
-         * so = new Socket("localhost", 6000);
-         * } catch (UnknownHostException e) {
-         * 
-         * e.printStackTrace();
-         * recv = "4";
-         * } catch (IOException e) {
-         * 
-         * e.printStackTrace();
-         * }
-         */
         sendrecv.socket();
         createGUI(0);
     }
@@ -101,7 +95,7 @@ public class messInterface {
                     frame.setVisible(true);
                     newUser.addKeyListener(enter);
 
-                } else if (newUser.getText().length() > 20 ) {
+                } else if (newUser.getText().length() > 20) {
                     recv = "4";
                 }
                 for (JButton o : userliste) {
@@ -176,19 +170,19 @@ public class messInterface {
     }
 
     public static void scale() {
-
         JLabel background = new JLabel();
         Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
-        // Image imgscale = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-
         ImageIcon bascale = new ImageIcon(imgscale);
-        background
-                .setIcon(bascale);
-        background
-                .setSize(back.getWidth(), back.getHeight());
-        back.add(
-                background,
-                Integer.valueOf(0));
+        background.setIcon(bascale);
+        background.setSize(back.getWidth(), back.getHeight());
+        if (lol2) {
+            back.add(background, Integer.valueOf(0));
+         lol2 = false;   
+        }
+        back.repaint();
+
+ 
+      //  back.remove(background);
         // frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
     }
@@ -203,5 +197,19 @@ public class messInterface {
         }
         in.setText("");
         frame.setVisible(true);
+    }
+
+    public void resize() {
+        double widthScaleFactor = back.getWidth() / (double) back.getWidth();
+        double heightScaleFactor = back.getHeight() / (double) back.getHeight();
+        double scaleFactor = (widthScaleFactor > heightScaleFactor) ? heightScaleFactor : widthScaleFactor;
+
+        AffineTransform at = new AffineTransform();
+        at.scale(scaleFactor, scaleFactor);
+
+        AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+        scaledImage = scaleOp.filter(originalImage, null);
+
+        repaint();
     }
 }
