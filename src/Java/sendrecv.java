@@ -1,5 +1,5 @@
-package Java;
-//package Japy.src.Java;
+//package Java;
+package Japy.src.Java;
 
 import java.io.*;
 import java.net.*;
@@ -57,7 +57,7 @@ public class sendrecv {
             } else if (Funktion == "sendkey") {
 
             }
-            bf.close();
+            //bf.close();
            // out.close();
         } catch (IOException e) {
             e.printStackTrace();
