@@ -3,13 +3,10 @@ package Japy.src.Java;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.*;
 import java.io.File;
-import java.io.IOException;
-import javax.swing.JComponent;
+import java.awt.event.*;
 
 public class messInterface {
     public static String[] user;
@@ -23,10 +20,11 @@ public class messInterface {
     public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof5.png");
     public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
     public static ImageIcon ba = new ImageIcon("Japy\\src\\Java\\Background.png");
-    JImageComponent ic = new JImageComponent("Japy\\src\\Java\\Background.png");
+    //JImageComponent ic = new JImageComponent("Japy\\src\\Java\\Background.png");
     // public static ImageIcon pic = new ImageIcon("Java/prof5.png");
     // public static ImageIcon plus = new ImageIcon("Java/plus.png");
     // public static ImageIcon ba = new ImageIcon("Java/Background.png");
+    public static BufferedImage backgroundi;
     public static Image img = ba.getImage();
     // public static JLabel
     // background
@@ -53,6 +51,11 @@ public class messInterface {
         in.setCaretColor(Color.white);
         in.setBackground(color);
         chat.setLayout(new BorderLayout());
+        try {
+            backgroundi = ImageIO.read(new File("Japy\\src\\Java\\Background.png"));
+        } catch (Exception e) {
+            
+        }
 
         back.add(chat, Integer.valueOf(4));
         // chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
@@ -138,7 +141,7 @@ public class messInterface {
         frame.add(back, BorderLayout.CENTER);
         frame.setVisible(true);
         while (true) {
-            scale();
+            resize(backgroundi,back.getWidth(), back.getHeight());
             // String[] recieve = sendrecv.recv();
             System.out.print("");
             if (recv.equals("0")) {
@@ -172,20 +175,27 @@ public class messInterface {
     }
 
     public static void scale() {
-        img = img.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT);
-        frame.setImage(img);
-        // back.add(picLabel, Integer.valueOf(0));
-        // JLabel background = new JLabel();
-        //img = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
-        // ImageIcon bascale = new ImageIcon(imgscale);
-        // background.setIcon(bascale);
-        // background.setSize(back.getWidth(), back.getHeight());
-        // back.add(background, Integer.valueOf(0));
+        JLabel background = new JLabel();
+        JLabel background1 = new JLabel();
+        Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon bascale = new ImageIcon(imgscale);
+        if (lol2) {
+            background1.setIcon(bascale);
+            background1.setSize(back.getWidth(), back.getHeight());
+            back.add(background1, Integer.valueOf(0));
+            back.remove(background1);
+            lol2 = false;
+        } else {
+            background.setIcon(bascale);
+            background.setSize(back.getWidth(), back.getHeight());
+            back.add(background, Integer.valueOf(0));
+            back.remove(background);
+            lol2 = true;
+        }
+       /*  background.setIcon(bascale);
+        background.setSize(back.getWidth(), back.getHeight());
+        back.add(background, Integer.valueOf(0));*/
 
-        frame.repaint();
-
-        // back.remove(background);
-        // frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
@@ -199,5 +209,14 @@ public class messInterface {
         }
         in.setText("");
         frame.setVisible(true);
+    }
+
+    public static BufferedImage resize(BufferedImage image, int width, int height) {
+        BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
+        Graphics2D g2d = (Graphics2D) bi.createGraphics();
+        g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
+        g2d.drawImage(image, 0, 0, width, height, null);
+        g2d.dispose();
+        return bi;
     }
 }
