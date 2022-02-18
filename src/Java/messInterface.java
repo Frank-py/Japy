@@ -1,10 +1,15 @@
 //package Java;
 package Japy.src.Java;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JComponent;
 
 public class messInterface {
     public static String[] user;
@@ -18,6 +23,7 @@ public class messInterface {
     public static ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof5.png");
     public static ImageIcon plus = new ImageIcon("Japy\\src\\Java\\plus.png");
     public static ImageIcon ba = new ImageIcon("Japy\\src\\Java\\Background.png");
+    JImageComponent ic = new JImageComponent("Japy\\src\\Java\\Background.png");
     // public static ImageIcon pic = new ImageIcon("Java/prof5.png");
     // public static ImageIcon plus = new ImageIcon("Java/plus.png");
     // public static ImageIcon ba = new ImageIcon("Java/Background.png");
@@ -40,6 +46,7 @@ public class messInterface {
     }
 
     public static void createGUI(int log) {
+
         back.setSize(1000, 1000);
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
         in.setForeground(Color.white);
@@ -165,19 +172,19 @@ public class messInterface {
     }
 
     public static void scale() {
-        JLabel background = new JLabel();
-        Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon bascale = new ImageIcon(imgscale);
-        background.setIcon(bascale);
-        background.setSize(back.getWidth(), back.getHeight());
-        if (lol2) {
-            back.add(background, Integer.valueOf(0));
-         lol2 = false;   
-        }
-        back.repaint();
+        img = img.getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT);
+        frame.setImage(img);
+        // back.add(picLabel, Integer.valueOf(0));
+        // JLabel background = new JLabel();
+        //img = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
+        // ImageIcon bascale = new ImageIcon(imgscale);
+        // background.setIcon(bascale);
+        // background.setSize(back.getWidth(), back.getHeight());
+        // back.add(background, Integer.valueOf(0));
 
- 
-      //  back.remove(background);
+        frame.repaint();
+
+        // back.remove(background);
         // frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
     }
