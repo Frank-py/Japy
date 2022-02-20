@@ -1,15 +1,13 @@
-//package Java;
-package Japy.src.Java;
+package Java;
+//package  Japy.src.Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class login {
-  public static String recv = "500";
-  public static boolean accept = false;
-  public static boolean h = true;
-  public static int counter = 0;
-
-  public static int createGUI() {
+  String recv = "500";
+ 
+  int counter = 0;
+  login(){
     Color color = new Color(27,37,43);
     //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
@@ -160,10 +158,10 @@ public class login {
       if (Integer.parseInt(recv) == 0) {
         frame.dispose();
         JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
-        return 0;
+        messInterface.createGUI(0);
       } else if (Integer.parseInt(recv) == 1) {
         frame.dispose();
-        return 1;
+        messInterface.createGUI(1);
       } else if (Integer.parseInt(recv) == 2) {
         EULA.setSelected(false);
         news.setSelected(true);
@@ -191,8 +189,9 @@ public class login {
             "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
             JOptionPane.ERROR_MESSAGE);
         frame.dispose();
-        return 4;
       }
     }
   }
+  
+
 }
