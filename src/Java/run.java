@@ -9,7 +9,7 @@ public class run {
     if (log == 4) {
       return;
     }
-    // System.out.println("new window");
-    messInterface.createGUI(log); */
+     messInterface.createGUI(0); 
+    */
   }
 }
