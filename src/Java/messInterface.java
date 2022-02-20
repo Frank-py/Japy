@@ -60,14 +60,9 @@ public class messInterface {
                     }
                 }
             }
-
-            public void keyReleased(KeyEvent e) {
-            }
-
-            public void keyTyped(KeyEvent e) {
-            }
+            public void keyReleased(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {}
         };
-
         ActionListener act = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == addUsers) {
@@ -104,6 +99,7 @@ public class messInterface {
         frame.setTitle("Messenger");
         frame.setIconImage(pic.getImage());
         frame.getContentPane().setBackground(color);
+        System.out.println("wwwwww");
 
         Users = new JPanel();
         // Users.setLayout(new BoxLayout(Users, BoxLayout.Y_AXIS));
@@ -125,7 +121,7 @@ public class messInterface {
         frame.add(back, BorderLayout.CENTER);
         frame.setVisible(true);
         while (true) {
-            scale();
+           // scale();
             // String[] recieve = sendrecv.recv();
             System.out.print("");
             if (recv.equals("0")) {
