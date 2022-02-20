@@ -123,18 +123,19 @@ public class login{
     frame.setVisible(true);
 
   }
-  static void enter(String we){
-    messInterface.createGUI(0);
-  }
-   void enter2(String recv){
+  
+   void enter(String recv){
     if (Integer.parseInt(recv) == 0) {
       frame.dispose();
       JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
-      messInterface.createGUI(0);
+      new messInterface(0);
+      System.out.println("w");
+      return;
      
     } else if (Integer.parseInt(recv) == 1) {
       frame.dispose();
-      messInterface.createGUI(1);
+      new messInterface(1);
+      return ;
     
     } else if (Integer.parseInt(recv) == 2) {
       EULA.setSelected(false);
