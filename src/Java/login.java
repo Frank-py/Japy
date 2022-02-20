@@ -124,18 +124,19 @@ public class login{
 
   }
   
-   void enter(String recv){
+  void enter(String recv){
     if (Integer.parseInt(recv) == 0) {
       frame.dispose();
       JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
-      new messInterface(0);
-      System.out.println("w");
+    //  new messInterface(0);
+      System.out.println("hallo");
       return;
      
     } else if (Integer.parseInt(recv) == 1) {
       frame.dispose();
-      new messInterface(1);
-      return ;
+     // new messInterface(1);
+      System.out.println("hallo");
+      return;
     
     } else if (Integer.parseInt(recv) == 2) {
       EULA.setSelected(false);
@@ -145,6 +146,7 @@ public class login{
       JOptionPane.showMessageDialog(null, "No or Wrong Password or Username, try again!", "Invalid UserInput",
           JOptionPane.ERROR_MESSAGE);
       recv = "500";
+      return ;
     } else if (Integer.parseInt(recv) == 3) {
           JOptionPane.showMessageDialog(null, "Proof Humanity and Accept EULA", "Accept required Terms",
           JOptionPane.ERROR_MESSAGE);
@@ -165,6 +167,7 @@ public class login{
           }
           loginbu.setEnabled(true);*/
           recv = "500";
+          return ;
     } else if (Integer.parseInt(recv) == 4){
         EULA.setSelected(false);
         news.setSelected(true);
@@ -174,12 +177,14 @@ public class login{
       JOptionPane.showMessageDialog(null, "Username or Password is too long, try again!", "Invalid UserInput",
           JOptionPane.ERROR_MESSAGE);
       recv = "500";
+      return ;
       }
       else if (Integer.parseInt(recv) == 5) {
       JOptionPane.showMessageDialog(null,
           "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
           JOptionPane.ERROR_MESSAGE);
       frame.dispose();
+      return ;
     }
   }
 }
