@@ -7,39 +7,33 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class messInterface {
-    public static String[] user;
-    public static int n = 0;
-    public static boolean lol = true;
-    public static boolean lol2 = true;
-    public static JButton[] userliste = new JButton[100];
-    public static JLayeredPane back = new JLayeredPane();
-    public static String recv = "500";
-    public static Color color = new Color(27, 37, 43);
-    public static ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
-    public static ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
-    public static ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
-    // public static ImageIcon pic = new ImageIcon("Java/prof5.png");
-    // public static ImageIcon plus = new ImageIcon("Java/plus.png");
-    // public static ImageIcon ba = new ImageIcon("Java/Background.png");
-    public static Image img = ba.getImage();
-    // public static JLabel
+     String[] user;
+     int n = 0;
+     boolean lol = true;
+     boolean lol2 = true;
+     JButton[] userliste = new JButton[100];
+     JLayeredPane back = new JLayeredPane();
+     String recv = "500";
+     Color color = new Color(27, 37, 43);
+     ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
+     ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
+     ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
+    //  ImageIcon pic = new ImageIcon("Java/prof5.png");
+    //  ImageIcon plus = new ImageIcon("Java/plus.png");
+    //  ImageIcon ba = new ImageIcon("Java/Background.png");
+     Image img = ba.getImage();
+    //  JLabel
     // background
     // = new JLabel();
-    public static JPanel chat = new JPanel();
-    public static JTextField in = new JTextField();
-    public static JButton addUsers;
-    public static JFrame frame;
-    public static JTextField newUser;
-    public static JPanel Users;
-    public static boolean createUser = false;
+    JPanel chat = new JPanel();
+     JTextField in = new JTextField();
+     JButton addUsers;
+     JFrame frame;
+     JTextField newUser;
+     JPanel Users;
+     boolean createUser = false;
 
-    // main for testing not necessary
-    public static void main(String[] args) {
-        sendrecv.socket();
-        createGUI(0);
-    }
-
-    public static void createGUI(int log) {
+    messInterface(int log){
         back.setSize(1000, 1000);
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
         in.setForeground(Color.white);
@@ -163,8 +157,13 @@ public class messInterface {
             }
         }
     }
+    // main for testing not necessary
+    public static void main(String[] args) {
+        sendrecv.socket();
+        new messInterface(0);
+    }
 
-    public static void scale() {
+     void scale() {
         JLabel background = new JLabel();
         Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon bascale = new ImageIcon(imgscale);
@@ -175,7 +174,7 @@ public class messInterface {
         frame.setVisible(true);
     }
 
-    public static void newchat() {
+     void newchat() {
 
         if (lol) {
             in.setSize(50, 50);
