@@ -13,10 +13,9 @@ if platform.system() == "Linux":
         os.system("rm Java/*.class")
 else:
     threading.Thread(target=subprocess.Popen, args=(["python", "src\\Java\\servertest.py"],)).start()
-    out = os.system("cd \\src\\")
     while True:
         time.sleep(1)
-        out = os.system("javac Java\\run.java")
+        out = os.system("javac src\\Java\\run.java")
         out = subprocess.Popen(["java", "Java.run"])
         out.wait()
         os.system("del Java\\*.class")
