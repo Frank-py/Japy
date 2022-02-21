@@ -12,7 +12,7 @@ if platform.system() == "Linux":
         out.wait()
         os.system("rm Java/*.class")
 else:
-    threading.Thread(target=subprocess.Popen, args=(["python3", "Python/Server.py"],)).start()
+    threading.Thread(target=subprocess.Popen, args=(["python3", "Python\\Server.py"],)).start()
     while True:
         time.sleep(1)
         out = subprocess.call(["javac", "Java\\run.java"])
