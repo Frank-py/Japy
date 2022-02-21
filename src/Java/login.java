@@ -128,13 +128,13 @@ public class login{
     if (Integer.parseInt(recv) == 0) {
       frame.dispose();
       JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
-    //  new messInterface(0);
+      new messInterface(0);
       System.out.println("hallo");
       return;
      
     } else if (Integer.parseInt(recv) == 1) {
       frame.dispose();
-     // new messInterface(1);
+      new messInterface(1);
       System.out.println("hallo");
       return;
     
