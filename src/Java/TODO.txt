@@ -2,3 +2,22 @@
 Colors final
 Fix panel size main window(messinterface)
 logout
+
+
+seid ihr noch drin
+
+LINUX HALT
+Ja bei uns gehts
+es gibt ne todo.txt am besten da rein schreiben
+https://downdetector.com/status/discord/
+
+public static void scale() {
+        JLabel background = new JLabel();
+        Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon backgroundImage = new ImageIcon(imgscale);
+        background.setIcon(backgroundImage);
+        background.setSize(back.getWidth(), back.getHeight());
+        jlayeredpane1.add(background, Integer.valueOf(0));
+        jlayeredpane1.remove(background);
+        frame.setVisible(true);
+    }
