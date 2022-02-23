@@ -37,7 +37,6 @@ public class login{
           try {
             String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
             enter(sendrecv.send( "login", lol));
-            return;
             // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
           } catch (Exception f) {
             enter("5");
@@ -61,9 +60,7 @@ public class login{
           } else {
           try {
             String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
-            enter(sendrecv.send( "login", lol));
-            System.out.println("2");
-            return;
+            enter(sendrecv.send( "login", lol));    
             // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
           } catch (Exception f) {
             enter("5");
@@ -122,7 +119,7 @@ public class login{
     frame.add(title, BorderLayout.NORTH);
     frame.add(UserInput, BorderLayout.CENTER);
     frame.setVisible(true);
-    //new messInterface(0);
+    
 
   }
   
@@ -130,12 +127,13 @@ void enter(String recv){
     if (Integer.parseInt(recv) == 0) {
       frame.dispose();
       JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
-    //new messInterface(0);
+      new messInterface(0);
       System.out.println("hallo");
       return;
      
     } else if (Integer.parseInt(recv) == 1) {
       frame.dispose();
+
       new messInterface(1);
       System.out.println("hallo");
       return;
