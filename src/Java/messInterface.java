@@ -73,6 +73,7 @@ public class messInterface {
     };
 
     messInterface(int log){
+        frame.revalidate();
         back.setSize(1000, 1000);
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
         in.setForeground(Color.white);
@@ -90,7 +91,7 @@ public class messInterface {
         frame.setTitle("Messenger");
         frame.setIconImage(pic.getImage());
         frame.getContentPane().setBackground(color);
-        System.out.println("wwwwww");
+        //System.out.println("wwwwww");
 
         Users = new JPanel();
         Users.setLayout(new GridLayout(10, 1, 0, 0));
@@ -125,6 +126,7 @@ public class messInterface {
         sendrecv.socket();
         new messInterface(0);
     }
+    
     void enter(String recv){
         if (recv.equals("0")) {
             JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
