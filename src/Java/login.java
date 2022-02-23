@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class login{
-  String recv = "500";
   int counter = 0;
   ImageIcon pic = new ImageIcon("Java/prof5.png");
   //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
@@ -145,7 +144,6 @@ public class login{
 
       JOptionPane.showMessageDialog(null, "No or Wrong Password or Username, try again!", "Invalid UserInput",
           JOptionPane.ERROR_MESSAGE);
-      recv = "500";
       return ;
     } else if (Integer.parseInt(recv) == 3) {
           JOptionPane.showMessageDialog(null, "Proof Humanity and Accept EULA", "Accept required Terms",
@@ -166,25 +164,21 @@ public class login{
             System.out.println(counter);
           }
           loginbu.setEnabled(true);*/
-          recv = "500";
           return ;
     } else if (Integer.parseInt(recv) == 4){
-        EULA.setSelected(false);
-        news.setSelected(true);
-        robo.setSelected(false);
-        pass.setText("");
-        user.setText("");
-      JOptionPane.showMessageDialog(null, "Username or Password is too long, try again!", "Invalid UserInput",
-          JOptionPane.ERROR_MESSAGE);
-      recv = "500";
-      return ;
+          EULA.setSelected(false);
+          news.setSelected(true);
+          robo.setSelected(false);
+          pass.setText("");
+          user.setText("");
+          JOptionPane.showMessageDialog(null, "Username or Password is too long, try again!", "Invalid UserInput", JOptionPane.ERROR_MESSAGE);
+          return ;
       }
       else if (Integer.parseInt(recv) == 5) {
-      JOptionPane.showMessageDialog(null,
-          "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
+          JOptionPane.showMessageDialog(null, "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
           JOptionPane.ERROR_MESSAGE);
-      frame.dispose();
-      return ;
+          frame.dispose();
+          return ;
     }
   }
 }
