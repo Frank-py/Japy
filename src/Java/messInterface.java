@@ -4,31 +4,32 @@ package Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 public class messInterface {
-     String[] user;
-     int n = 0;
-     boolean lol = true;
-     boolean lol2 = true;
-     JButton[] userliste = new JButton[100];
-     JLayeredPane back = new JLayeredPane();
-     Color color = new Color(27, 37, 43);
-     ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
-     ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
-     ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
-     ImageIcon bal = new ImageIcon("src\\Java\\Backgroundy.png");
-     JLabel background = new JLabel();
-    //  ImageIcon pic = new ImageIcon("Java/prof5.png");
-    //  ImageIcon plus = new ImageIcon("Java/plus.png");
-    //  ImageIcon ba = new ImageIcon("Java/Background.png");
-     Image img = ba.getImage();
-     JPanel chat = new JPanel();
-     JTextField in = new JTextField();
-     JButton addUsers;
-     JFrame frame = new JFrame();
-     JTextField newUser = new JTextField();
-     JPanel Users;
-     boolean createUser = false;
-     KeyListener enter = new KeyListener() {
+    String[] user;
+    int n = 0;
+    boolean lol = true;
+    boolean lol2 = true;
+    JButton[] userliste = new JButton[100];
+    JLayeredPane back = new JLayeredPane();
+    Color color = new Color(27, 37, 43);
+    ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
+    ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
+    ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
+    ImageIcon bal = new ImageIcon("src\\Java\\Backgroundy.png");
+    JLabel background = new JLabel();
+    // ImageIcon pic = new ImageIcon("Java/prof5.png");
+    // ImageIcon plus = new ImageIcon("Java/plus.png");
+    // ImageIcon ba = new ImageIcon("Java/Background.png");
+    Image img = ba.getImage();
+    JPanel chat = new JPanel();
+    JTextField in = new JTextField();
+    JButton addUsers;
+    JFrame frame = new JFrame();
+    JTextField newUser = new JTextField();
+    JPanel Users;
+    boolean createUser = false;
+    KeyListener enter = new KeyListener() {
         public void keyPressed(KeyEvent e) {
             if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                 if (newUser.getText().length() > 20) {
@@ -72,8 +73,8 @@ public class messInterface {
         }
     };
 
-    messInterface(int log){
-        frame.revalidate();
+    messInterface(int log) {
+        
         back.setSize(1000, 1000);
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
         in.setForeground(Color.white);
@@ -91,7 +92,7 @@ public class messInterface {
         frame.setTitle("Messenger");
         frame.setIconImage(pic.getImage());
         frame.getContentPane().setBackground(color);
-        //System.out.println("wwwwww");
+        // System.out.println("wwwwww");dfsfdsf
 
         Users = new JPanel();
         Users.setLayout(new GridLayout(10, 1, 0, 0));
@@ -109,25 +110,27 @@ public class messInterface {
         frame.add(Users, BorderLayout.WEST);
         // frame.add(chat, BorderLayout.CENTER);
         frame.add(back, BorderLayout.CENTER);
-        
+
         background.setIcon(bal);
         background.setSize(back.getWidth(), back.getHeight());
         back.add(background, Integer.valueOf(0));
         frame.setVisible(true);
+        new messInterface(0);
         while (true) {
-            background.setSize(back.getWidth(), back.getHeight()); 
+            background.setSize(back.getWidth(), back.getHeight());
             // scale();
             // String[] recieve = sendrecv.recv();
-            
+
         }
     }
+
     // main for testing not necessary
     public static void main(String[] args) {
         sendrecv.socket();
         new messInterface(0);
     }
-    
-    void enter(String recv){
+
+    void enter(String recv) {
         if (recv.equals("0")) {
             JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
             addUsers.setEnabled(true);
@@ -154,7 +157,7 @@ public class messInterface {
 
     }
 
-     void scale() {
+    void scale() {
         JLabel background = new JLabel();
         Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon bascale = new ImageIcon(imgscale);
@@ -165,7 +168,7 @@ public class messInterface {
         frame.setVisible(true);
     }
 
-     void newchat() {
+    void newchat() {
 
         if (lol) {
             in.setSize(50, 50);
