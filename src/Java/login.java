@@ -120,10 +120,10 @@ public class login{
     frame.add(UserInput, BorderLayout.CENTER);
     frame.setVisible(true);
     
-
+    
   }
   
-void enter(String recv){
+  void enter(String recv){
     if (Integer.parseInt(recv) == 0) {
       frame.dispose();
       JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
@@ -133,7 +133,6 @@ void enter(String recv){
      
     } else if (Integer.parseInt(recv) == 1) {
       frame.dispose();
-
       new messInterface(1);
       System.out.println("hallo");
       return;
