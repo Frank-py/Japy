@@ -11,3 +11,6 @@ test: VulkanTest
 
 clean:
 	rm -f VulkanTest
+
+VulkanTest1: main.cpp
+	x86_64-w64-mingw32-g++ $(CFLAGS) -o VulkanTest1 main.cpp $(LDFLAGS)
