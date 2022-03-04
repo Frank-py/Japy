@@ -43,7 +43,6 @@ public class messInterface {
                     user = userf;
                     enter(sendrecv.send("proofuser", user));
                     Users.remove(newUser);
-                    frame.add(Users, BorderLayout.WEST);
                     frame.setVisible(true);
                 }
             }
@@ -56,7 +55,7 @@ public class messInterface {
             if (newUser.getText().length() > 20) {
                 enter("4");
             } else if (e.getSource() == addUsers) {
-                
+                newUser.setText("");
                 addUsers.setEnabled(false);
                 newUser.setFont(new Font("Consolas", Font.PLAIN, 25));
                 newUser.setForeground(new Color(0x00FF00));
@@ -76,7 +75,7 @@ public class messInterface {
         }
     };
 
-    messInterface(int log) throws IOException {
+    messInterface(int log) {
         
         
         back.setSize(1000, 1000);
@@ -85,6 +84,7 @@ public class messInterface {
         in.setCaretColor(Color.white);
         in.setBackground(color);
         chat.setLayout(new BorderLayout());
+        chat.setOpaque(false);
 
         back.add(chat, Integer.valueOf(4));
         // chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
@@ -123,8 +123,10 @@ public class messInterface {
          frame.setVisible(true);
        // new messInterface(0);
         while (true) {
-            background.setSize(frame.getWidth(), frame.getHeight());
             
+            background.setSize(frame.getWidth(), frame.getHeight());
+           // back.setSize(frame.getWidth(), frame.getHeight());
+           // chat.setSize(frame.getWidth(), frame.getHeight());
     //         System.out.println("w");
     //         imglabel background = new imglabel();
     //         background.setSize(frame.getWidth(), frame.getHeight());
@@ -158,7 +160,6 @@ public class messInterface {
             Users.add(userliste[n]);
             n++;
             addUsers.setEnabled(true);
-            frame.setVisible(true);
         } else if (recv.equals("4")) {
             JOptionPane.showMessageDialog(null,
                     "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
@@ -194,10 +195,10 @@ public class messInterface {
 
     void newchat() {
 
+        chat.setSize(back.getWidth(), back.getHeight());
         if (lol) {
-            in.setSize(50, 50);
-            chat.setSize(back.getWidth(), back.getHeight());
-            chat.add(in);
+            chat.add(in,BorderLayout.SOUTH);
+           // chat.add(new JTextField("Moin"));
             lol = false;
         }
         in.setText("");
