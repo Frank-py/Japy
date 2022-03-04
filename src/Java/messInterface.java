@@ -16,14 +16,14 @@ public class messInterface {
     JButton[] userliste = new JButton[100];
     JLayeredPane back = new JLayeredPane();
     Color color = new Color(27, 37, 43);
-    ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
-    ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
-    ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
-    ImageIcon bal = new ImageIcon("src\\Java\\Backgroundy.png");
+    // ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
+    // ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
+    // ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
+    ImageIcon bal = new ImageIcon("Java/Backgroundy.png");
     JLabel background = new JLabel();
-    // ImageIcon pic = new ImageIcon("Java/prof5.png");
-    // ImageIcon plus = new ImageIcon("Java/plus.png");
-    // ImageIcon ba = new ImageIcon("Java/Background.png");
+    ImageIcon pic = new ImageIcon("Java/prof5.png");
+    ImageIcon plus = new ImageIcon("Java/plus.png");
+    ImageIcon ba = new ImageIcon("Java/Background.png");
     Image img = ba.getImage();
     JPanel chat = new JPanel();
     JTextField in = new JTextField();
@@ -115,6 +115,7 @@ public class messInterface {
         Users.add(addUsers);
         frame.add(Users, BorderLayout.WEST);
         // frame.add(chat, BorderLayout.CENTER);
+<<<<<<< HEAD
         
          background.setIcon(bal);
          background.setSize(frame.getWidth(), frame.getHeight());
@@ -122,6 +123,15 @@ public class messInterface {
          frame.add(back);
          frame.setVisible(true);
        // new messInterface(0);
+=======
+        frame.add(back, BorderLayout.CENTER);
+
+        background.setIcon(bal);
+        background.setSize(back.getWidth(), back.getHeight());
+        back.add(background, Integer.valueOf(0));
+        frame.setVisible(true);
+        
+>>>>>>> c915251706b14f34e8aac0774cb3b490560dabd7
         while (true) {
             
             background.setSize(frame.getWidth(), frame.getHeight());
