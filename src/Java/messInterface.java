@@ -1,9 +1,12 @@
 package Java;
 
+import javax.imageio.ImageIO;
 //package Japy.src.Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
+import java.io.IOException;
 
 public class messInterface {
     String[] user;
@@ -73,7 +76,8 @@ public class messInterface {
         }
     };
 
-    messInterface(int log) {
+    messInterface(int log) throws IOException {
+        
         
         back.setSize(1000, 1000);
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
@@ -92,6 +96,8 @@ public class messInterface {
         frame.setTitle("Messenger");
         frame.setIconImage(pic.getImage());
         frame.getContentPane().setBackground(color);
+        
+        frame.setVisible(true);
         // System.out.println("wwwwww");dfsfdsf
 
         Users = new JPanel();
@@ -109,23 +115,31 @@ public class messInterface {
         Users.add(addUsers);
         frame.add(Users, BorderLayout.WEST);
         // frame.add(chat, BorderLayout.CENTER);
-        frame.add(back, BorderLayout.CENTER);
-
-        background.setIcon(bal);
-        background.setSize(back.getWidth(), back.getHeight());
-        back.add(background, Integer.valueOf(0));
-        frame.setVisible(true);
-        new messInterface(0);
+        
+         background.setIcon(bal);
+         background.setSize(frame.getWidth(), frame.getHeight());
+         back.add(background, Integer.valueOf(0));
+         frame.add(back);
+         frame.setVisible(true);
+       // new messInterface(0);
         while (true) {
-            background.setSize(back.getWidth(), back.getHeight());
-            // scale();
-            // String[] recieve = sendrecv.recv();
+            background.setSize(frame.getWidth(), frame.getHeight());
+            
+    //         System.out.println("w");
+    //         imglabel background = new imglabel();
+    //         background.setSize(frame.getWidth(), frame.getHeight());
+    //         back.setSize(frame.getWidth(), frame.getHeight());
+    //         back.add(background, Integer.valueOf(0));
+    //         frame.add(back, BorderLayout.CENTER);
+    //         frame.setVisible(true);
+    //         // scale();
+    //         // String[] recieve = sendrecv.recv();
 
         }
     }
 
     // main for testing not necessary
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         sendrecv.socket();
         new messInterface(0);
     }
@@ -158,14 +172,24 @@ public class messInterface {
     }
 
     void scale() {
-        JLabel background = new JLabel();
+        
         Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon bascale = new ImageIcon(imgscale);
-        background.setIcon(bascale);
+        JLabel background = new JLabel(bascale);
         background.setSize(back.getWidth(), back.getHeight());
         back.add(background, Integer.valueOf(0));
-        back.remove(background);
+        //back.remove(background);
         frame.setVisible(true);
+    }
+
+    void scale2(){
+        frame.setContentPane(new JPanel() {
+			Image myImage = ba.getImage();
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				g.drawImage(myImage, 0, 0,this);
+			}
+		});
     }
 
     void newchat() {
