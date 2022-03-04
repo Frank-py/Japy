@@ -46,13 +46,14 @@ public class encryption {
 
     System.out.println("type true to decrypt (entschlüsseln), type false to encrypt (verschlüsseln)");
     boolean crypt = scanny.nextBoolean();
-    scanny.close();
+    
     Scanner scanny2 = new Scanner(System.in);
     int keyInt = Integer.parseInt(key);
     key = Integer.toBinaryString(keyInt);
     System.out.println("Enter Message:");
     String mess = scanny2.nextLine();
     String res = "";
+    scanny.close();
     scanny2.close();
 
     if (crypt) {
