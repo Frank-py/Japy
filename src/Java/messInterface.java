@@ -1,6 +1,5 @@
 package Java;
-
-import javax.imageio.ImageIO;
+//bitte funktionieren
 //package Japy.src.Java;
 import javax.swing.*;
 import java.awt.*;
@@ -115,15 +114,6 @@ public class messInterface {
         Users.add(addUsers);
         frame.add(Users, BorderLayout.WEST);
         // frame.add(chat, BorderLayout.CENTER);
-<<<<<<< HEAD
-        
-         background.setIcon(bal);
-         background.setSize(frame.getWidth(), frame.getHeight());
-         back.add(background, Integer.valueOf(0));
-         frame.add(back);
-         frame.setVisible(true);
-       // new messInterface(0);
-=======
         frame.add(back, BorderLayout.CENTER);
 
         background.setIcon(bal);
@@ -131,7 +121,6 @@ public class messInterface {
         back.add(background, Integer.valueOf(0));
         frame.setVisible(true);
         
->>>>>>> c915251706b14f34e8aac0774cb3b490560dabd7
         while (true) {
             
             background.setSize(frame.getWidth(), frame.getHeight());
