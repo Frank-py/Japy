@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class login{
-  int counter = 0;
-  ImageIcon pic = new ImageIcon("Java/prof5.png");
+  //int counter = 0;
+  ImageIcon logo = new ImageIcon("Java/prof5.png");
   //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
   JFrame frame = new JFrame();
@@ -75,7 +75,7 @@ public class login{
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setTitle("Login");
     frame.setResizable(false);
-    frame.setIconImage(pic.getImage());
+    frame.setIconImage(logo.getImage());
     frame.getContentPane().setBackground(color);
     laby.setFont(new Font("MV Boli", Font.BOLD, 30));
     laby.setForeground(Color.white);
