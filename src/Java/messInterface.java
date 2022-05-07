@@ -9,22 +9,18 @@ import java.awt.event.*;
 public class messInterface {
      String[] user;
      int n = 0;
-     boolean lol = true;
-     boolean lol2 = true;
+     //boolean lol = true;  
      JButton[] userliste = new JButton[100];
      JLayeredPane back = new JLayeredPane();
      String recv = "500";
      Color color = new Color(27, 37, 43);
-     ImageIcon pic = new ImageIcon("src\\Java\\prof.png");
+     ImageIcon logo = new ImageIcon("src\\Java\\prof5.png");
      ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
      ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
     //  ImageIcon pic = new ImageIcon("Java/prof5.png");
     //  ImageIcon plus = new ImageIcon("Java/plus.png");
     //  ImageIcon ba = new ImageIcon("Java/Background.png");
-     Image img = ba.getImage();
-    //  JLabel
-    // background
-    // = new JLabel();
+    // Image img = ba.getImage();
     JPanel chat = new JPanel();
      JTextField in = new JTextField();
      JButton addUsers;
@@ -32,16 +28,38 @@ public class messInterface {
      JTextField newUser;
      JPanel Users;
      boolean createUser = false;
+     public int heighttemp;
+    public int widthtemp;
 
     messInterface(int log){
-        back.setSize(1000, 1000);
+        frame = new JFrame();
+        frame.setSize(1366, 768);
+        frame.setMinimumSize(new Dimension(370, 370));
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Messenger");
+        frame.setIconImage(logo.getImage());
+        frame.getContentPane().setBackground(color);
+        System.out.println("wwwwww");
+
+        //frame.setContentPane(back);????????????
+        heighttemp = frame.getHeight();
+        widthtemp = frame.getWidth();
+
+        //back.setSize(frame.getHeight(), frame.getWidth());
+        //back.setBackground(Color.red);
+       // back.setOpaque(true);
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
         in.setForeground(Color.white);
         in.setCaretColor(Color.white);
         in.setBackground(color);
         chat.setLayout(new BorderLayout());
+        chat.setSize(frame.getHeight(), frame.getWidth());
+        chat.setBackground(Color.green);
+        chat.setOpaque(true);
 
-        back.add(chat, Integer.valueOf(4));
+        back.add(chat, Integer.valueOf(0));
+        frame.add(back, BorderLayout.CENTER);
         // chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
         // chat.setOpaque(false);
         KeyListener enter = new KeyListener() {
@@ -91,15 +109,7 @@ public class messInterface {
             }
         };
 
-        frame = new JFrame();
-        frame.setSize(1366, 768);
-        frame.setMinimumSize(new Dimension(370, 370));
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Messenger");
-        frame.setIconImage(pic.getImage());
-        frame.getContentPane().setBackground(color);
-        System.out.println("wwwwww");
+        
 
         Users = new JPanel();
         // Users.setLayout(new BoxLayout(Users, BoxLayout.Y_AXIS));
@@ -121,7 +131,7 @@ public class messInterface {
         frame.add(back, BorderLayout.CENTER);
         frame.setVisible(true);
         while (true) {
-           // scale();
+            scale();
             // String[] recieve = sendrecv.recv();
             System.out.print("");
             if (recv.equals("0")) {
@@ -159,25 +169,30 @@ public class messInterface {
         new messInterface(0);
     }
 
-     void scale() {
-        JLabel background = new JLabel();
+      void scale() {
+        if (frame.getHeight() != heighttemp || frame.getWidth() != widthtemp) {
+            heighttemp = frame.getHeight();
+            widthtemp = frame.getWidth();
+            chat.setSize(frame.getHeight(), frame.getWidth());}
+
+        /*JLabel background = new JLabel();
         Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon bascale = new ImageIcon(imgscale);
         background.setIcon(bascale);
         background.setSize(back.getWidth(), back.getHeight());
         back.add(background, Integer.valueOf(0));
         back.remove(background);
-        frame.setVisible(true);
-    }
+        frame.setVisible(true);*/
+    } 
 
      void newchat() {
-
+/* 
         if (lol) {
             in.setSize(50, 50);
             chat.setSize(back.getWidth(), back.getHeight());
             chat.add(in);
             lol = false;
-        }
+        } */
         in.setText("");
         frame.setVisible(true);
     }
