@@ -15,11 +15,11 @@ public class messInterface {
      Color color = new Color(27, 37, 43);
      ImageIcon logo = new ImageIcon("src\\Java\\prof5.png");
      ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
-     ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
+     ImageIcon ba = new ImageIcon("src\\Java\\Backgroundy.png");
     //  ImageIcon pic = new ImageIcon("Java/prof5.png");
     //  ImageIcon plus = new ImageIcon("Java/plus.png");
     //  ImageIcon ba = new ImageIcon("Java/Background.png");
-     Image img = ba.getImage();
+   //  Image img = ba.getImage();
     JPanel chat = new JPanel();
     JTextField in = new JTextField();
     JButton addUsers;
@@ -87,8 +87,10 @@ public class messInterface {
                     newUser.setBackground(color);
                     newUser.setCaretColor(Color.white);
                     Users.add(newUser, 5, 1);
-                    frame.setVisible(true);
                     newUser.addKeyListener(enter);
+                 
+                   frame.setVisible(true);
+
 
                 } else if (newUser.getText().length() > 20) {
                     recv = "4";
@@ -116,9 +118,12 @@ public class messInterface {
         addUsers.setFocusable(false);
         addUsers.addActionListener(act);
 
+
         Users.add(addUsers);
+       // Users.setSize(width, height);
         frame.add(Users, BorderLayout.WEST);
         chat.setSize( frame.getWidth(),frame.getHeight());
+        back.setSize( frame.getWidth(),frame.getHeight());
         back.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()));
 
         chat.setLayout(new BorderLayout());
@@ -128,19 +133,13 @@ public class messInterface {
 
         chat.setOpaque(false);
         background = new JLabel(ba);
-        background.setSize( frame.getWidth(),frame.getHeight());
+ 
         
-
-       
-       // back.setSize(1000,1000);
-     //   c.gridx = 1;
-     
-        back.add(chat, Integer.valueOf(0));
-        back.add(background, Integer.valueOf(1));
+        back.add(chat, Integer.valueOf(1));
+        background.setSize( back.getWidth(),back.getHeight());
+        back.add(background, Integer.valueOf(0));
        frame.add(back,BorderLayout.EAST); //??????
         // frame.add(chat, BorderLayout.CENTER);
-
-       // frame.add(back, c);
         frame.setVisible(true);
         while (true) {
             if (frame.getHeight() != heighttemp || frame.getWidth() != widthtemp) {
@@ -180,9 +179,13 @@ public class messInterface {
     public  void reloadframe() {
         heighttemp = frame.getHeight();
         widthtemp = frame.getWidth();
-        chat.setSize( frame.getWidth(),frame.getHeight());
+       
         back.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()));
+        chat.setSize( back.getWidth(),back.getHeight());
         background.setSize( frame.getWidth(),frame.getHeight());
+        Users.setOpaque(true);
+        frame.add(Users, BorderLayout.WEST);
+        frame.setVisible(true);
     }
     // main for testing not necessary
     public static void main(String[] args) {
