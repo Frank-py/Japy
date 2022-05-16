@@ -9,7 +9,6 @@ import java.awt.event.*;
 public class messInterface {
      String[] user;
      int n = 0;
-     //boolean lol = true;  
      JButton[] userliste = new JButton[100];
      JLayeredPane back = new JLayeredPane();
      String recv = "500";
@@ -20,19 +19,22 @@ public class messInterface {
     //  ImageIcon pic = new ImageIcon("Java/prof5.png");
     //  ImageIcon plus = new ImageIcon("Java/plus.png");
     //  ImageIcon ba = new ImageIcon("Java/Background.png");
-    // Image img = ba.getImage();
+     Image img = ba.getImage();
     JPanel chat = new JPanel();
-     JTextField in = new JTextField();
-     JButton addUsers;
-     JFrame frame;
-     JTextField newUser;
-     JPanel Users;
-     boolean createUser = false;
-     public int heighttemp;
+    JTextField in = new JTextField();
+    JButton addUsers;
+    JFrame frame;
+    JTextField newUser;
+    JPanel Users;
+    public JLabel background;
+    boolean createUser = false;
+    public int heighttemp;
     public int widthtemp;
 
     messInterface(int log){
+        
         frame = new JFrame();
+        frame.setLayout(new BorderLayout());
         frame.setSize(1366, 768);
         frame.setMinimumSize(new Dimension(370, 370));
         frame.setLocationRelativeTo(null);
@@ -40,7 +42,7 @@ public class messInterface {
         frame.setTitle("Messenger");
         frame.setIconImage(logo.getImage());
         frame.getContentPane().setBackground(color);
-        System.out.println("wwwwww");
+
 
         //frame.setContentPane(back);????????????
         heighttemp = frame.getHeight();
@@ -53,13 +55,7 @@ public class messInterface {
         in.setForeground(Color.white);
         in.setCaretColor(Color.white);
         in.setBackground(color);
-        chat.setLayout(new BorderLayout());
-        chat.setSize(frame.getHeight(), frame.getWidth());
-        chat.setBackground(Color.green);
-        chat.setOpaque(true);
-
-        back.add(chat, Integer.valueOf(0));
-        frame.add(back, BorderLayout.CENTER);
+        
         // chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
         // chat.setOpaque(false);
         KeyListener enter = new KeyListener() {
@@ -91,9 +87,6 @@ public class messInterface {
                     newUser.setBackground(color);
                     newUser.setCaretColor(Color.white);
                     Users.add(newUser, 5, 1);
-                    // back.add(chat, BorderLayout.CENTER);
-                    frame.add(Users, BorderLayout.WEST);
-                    // frame.setVisible(false);
                     frame.setVisible(true);
                     newUser.addKeyListener(enter);
 
@@ -112,7 +105,6 @@ public class messInterface {
         
 
         Users = new JPanel();
-        // Users.setLayout(new BoxLayout(Users, BoxLayout.Y_AXIS));
         Users.setLayout(new GridLayout(10, 1, 0, 0));
         Users.setBackground(color);
 
@@ -126,12 +118,34 @@ public class messInterface {
 
         Users.add(addUsers);
         frame.add(Users, BorderLayout.WEST);
+        chat.setSize( frame.getWidth(),frame.getHeight());
+        back.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()));
+
+        chat.setLayout(new BorderLayout());
+        chat.setBackground(Color.green);
+        back.setBackground(Color.red);
+        back.setOpaque(false);
+
+        chat.setOpaque(false);
+        background = new JLabel(ba);
+        background.setSize( frame.getWidth(),frame.getHeight());
+        
+
+       
+       // back.setSize(1000,1000);
+     //   c.gridx = 1;
+     
+        back.add(chat, Integer.valueOf(0));
+        back.add(background, Integer.valueOf(1));
+       frame.add(back,BorderLayout.EAST); //??????
         // frame.add(chat, BorderLayout.CENTER);
 
-        frame.add(back, BorderLayout.CENTER);
+       // frame.add(back, c);
         frame.setVisible(true);
         while (true) {
-            scale();
+            if (frame.getHeight() != heighttemp || frame.getWidth() != widthtemp) {
+               reloadframe();
+                }
             // String[] recieve = sendrecv.recv();
             System.out.print("");
             if (recv.equals("0")) {
@@ -163,17 +177,21 @@ public class messInterface {
             }
         }
     }
+    public  void reloadframe() {
+        heighttemp = frame.getHeight();
+        widthtemp = frame.getWidth();
+        chat.setSize( frame.getWidth(),frame.getHeight());
+        back.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()));
+        background.setSize( frame.getWidth(),frame.getHeight());
+    }
     // main for testing not necessary
     public static void main(String[] args) {
         sendrecv.socket();
         new messInterface(0);
     }
 
-      void scale() {
-        if (frame.getHeight() != heighttemp || frame.getWidth() != widthtemp) {
-            heighttemp = frame.getHeight();
-            widthtemp = frame.getWidth();
-            chat.setSize(frame.getHeight(), frame.getWidth());}
+     
+        
 
         /*JLabel background = new JLabel();
         Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
@@ -183,7 +201,7 @@ public class messInterface {
         back.add(background, Integer.valueOf(0));
         back.remove(background);
         frame.setVisible(true);*/
-    } 
+    
 
      void newchat() {
 /* 
