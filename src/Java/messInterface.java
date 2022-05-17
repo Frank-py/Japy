@@ -61,7 +61,7 @@ public class messInterface {
         KeyListener enter = new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                    if (newUser.getText().length() > 20) {
+                    if (newUser.getText().length() > 10) {
                         recv = "5";
                         newUser.setText("");
                     } else {
@@ -69,7 +69,8 @@ public class messInterface {
                         user = userf;
                         recv = sendrecv.send("proofuser", user);
                         Users.remove(newUser);
-                        frame.add(Users, BorderLayout.WEST);
+                        Users.setSize(addUsers.getWidth()+ 17, frame.getHeight());
+            
                         frame.setVisible(true);
                     }
                 }
@@ -107,9 +108,9 @@ public class messInterface {
         
 
         Users = new JPanel();
-        Users.setLayout(new GridLayout(10, 1, 0, 0));
+        Users.setLayout(new GridLayout(10, 1));
         Users.setBackground(color);
-
+       
         addUsers = new JButton("Add User");
         addUsers.setIcon(plus);
         addUsers.setFont(new Font("MV Boli", Font.BOLD, 20));
@@ -120,7 +121,8 @@ public class messInterface {
 
 
         Users.add(addUsers);
-       // Users.setSize(width, height);
+        Users.setSize(addUsers.getWidth()+ 17, frame.getHeight());
+        // tUsers.setSize(frame.getWidth()/10*2, frame.getHeight());
         frame.add(Users, BorderLayout.WEST);
         chat.setSize( frame.getWidth(),frame.getHeight());
         back.setSize( frame.getWidth(),frame.getHeight());
@@ -179,13 +181,12 @@ public class messInterface {
     public  void reloadframe() {
         heighttemp = frame.getHeight();
         widthtemp = frame.getWidth();
+        //Users.add(addUsers);
+        Users.setSize(addUsers.getWidth()+ 17, frame.getHeight());
        
-        back.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()));
+        back.setPreferredSize(new Dimension(frame.getWidth()-Users.getWidth(),frame.getHeight()));
         chat.setSize( back.getWidth(),back.getHeight());
-        background.setSize( frame.getWidth(),frame.getHeight());
-        Users.setOpaque(true);
-        frame.add(Users, BorderLayout.WEST);
-        frame.setVisible(true);
+        background.setSize( frame.getWidth()-Users.getWidth(),frame.getHeight());
     }
     // main for testing not necessary
     public static void main(String[] args) {
