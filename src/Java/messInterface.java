@@ -13,12 +13,12 @@ public class messInterface {
      JLayeredPane back = new JLayeredPane();
      String recv = "500";
      Color color = new Color(27, 37, 43);
-     ImageIcon logo = new ImageIcon("src\\Java\\prof5.png");
-     ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
-     ImageIcon ba = new ImageIcon("src\\Java\\Backgroundy.png");
-    //  ImageIcon pic = new ImageIcon("Java/prof5.png");
-    //  ImageIcon plus = new ImageIcon("Java/plus.png");
-    //  ImageIcon ba = new ImageIcon("Java/Background.png");
+    //  ImageIcon logo = new ImageIcon("src\\Java\\prof5.png");
+    //  ImageIcon plus = new ImageIcon("src\\Java\\plus.png");
+    //  ImageIcon ba = new ImageIcon("src\\Java\\Backgroundy.png");
+     ImageIcon logo = new ImageIcon("Java/prof5.png");
+     ImageIcon plus = new ImageIcon("Java/plus.png");
+     ImageIcon ba = new ImageIcon("Java/Backgroundy.png");
    //  Image img = ba.getImage();
     JPanel chat = new JPanel();
     JTextField in = new JTextField();
@@ -69,7 +69,7 @@ public class messInterface {
                         user = userf;
                         recv = sendrecv.send("proofuser", user);
                         Users.remove(newUser);
-                        Users.setSize(addUsers.getWidth()+ 17, frame.getHeight());
+                        Users.setSize(addUsers.getWidth(), frame.getHeight());
             
                         frame.setVisible(true);
                     }
@@ -121,7 +121,7 @@ public class messInterface {
 
 
         Users.add(addUsers);
-        Users.setSize(addUsers.getWidth()+ 17, frame.getHeight());
+        Users.setSize(addUsers.getWidth(), frame.getHeight());
         // tUsers.setSize(frame.getWidth()/10*2, frame.getHeight());
         frame.add(Users, BorderLayout.WEST);
         chat.setSize( frame.getWidth(),frame.getHeight());
@@ -182,7 +182,7 @@ public class messInterface {
         heighttemp = frame.getHeight();
         widthtemp = frame.getWidth();
         //Users.add(addUsers);
-        Users.setSize(addUsers.getWidth()+ 17, frame.getHeight());
+        Users.setSize(addUsers.getWidth(), frame.getHeight());
        
         back.setPreferredSize(new Dimension(frame.getWidth()-Users.getWidth(),frame.getHeight()));
         chat.setSize( back.getWidth(),back.getHeight());
