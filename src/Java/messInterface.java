@@ -61,7 +61,19 @@ public class messInterface {
         KeyListener enter = new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                    if (newUser.getText().length() > 10) {
+                    if (in.getText().length() > 0) {
+                        sendrecv.send("sendMes", new String[]{user[0], in.getText()});
+                        in.setText("");
+                    }
+                }
+              
+
+                if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
+                    frame.dispose();
+                }
+                
+                if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+                    if (newUser.getText().length() > 1069 || newUser.getText().length() < 1) {
                         recv = "5";
                         newUser.setText("");
                     } else {
@@ -78,6 +90,7 @@ public class messInterface {
             public void keyReleased(KeyEvent e) {}
             public void keyTyped(KeyEvent e) {}
         };
+        
         ActionListener act = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == addUsers) {
@@ -87,15 +100,15 @@ public class messInterface {
                     newUser.setForeground(new Color(0x00FF00));
                     newUser.setBackground(color);
                     newUser.setCaretColor(Color.white);
+                    
                     Users.add(newUser,1);
+                    newUser.requestFocusInWindow();
                     newUser.addKeyListener(enter);
                  
                    frame.setVisible(true);
 
 
-                } else if (newUser.getText().length() > 20) {
-                    recv = "4";
-                }
+                } 
                 for (JButton o : userliste) {
                     if (e.getSource() == o) {
                         newchat();
@@ -119,7 +132,6 @@ public class messInterface {
         addUsers.setFocusable(false);
         addUsers.addActionListener(act);
         
-        
         Users.add(addUsers);
         Users.setPreferredSize(new Dimension(frame.getWidth()/10*2, frame.getHeight()));
         frame.add(Users, BorderLayout.WEST);
@@ -128,8 +140,7 @@ public class messInterface {
         chat.setSize( frame.getWidth(),frame.getHeight());
         back.setSize( frame.getWidth(),frame.getHeight());
         back.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()));
-
-        chat.setLayout(new BorderLayout());
+        chat.setLayout(new GridLayout(10,1));
         chat.setBackground(Color.green);
         back.setBackground(Color.red);
         back.setOpaque(false);
@@ -162,7 +173,7 @@ public class messInterface {
                 userliste[n].setForeground(new Color(0xFFFFFF));
                 userliste[n].setFocusable(false);
                 userliste[n].addActionListener(act);
-                Users.add(userliste[n]);
+                Users.add(userliste[n],1);
                 n++;
                 addUsers.setEnabled(true);
                 frame.setVisible(true);
@@ -173,7 +184,7 @@ public class messInterface {
                 recv = "500";
             } else if (recv.equals("5")) {
                 JOptionPane.showMessageDialog(null,
-                        "Username too long please try again!", "OutOfBounds",
+                        "Invalid! Enter a valid Ussername", "OutOfBounds",
                         JOptionPane.ERROR_MESSAGE);
                 recv = "500";
             }
@@ -219,7 +230,7 @@ public class messInterface {
         } */
         in.setText("");
         
-        //chat.add(in);
+        chat.add(in);
         frame.setVisible(true);
     }
 }
