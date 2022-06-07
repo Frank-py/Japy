@@ -17,6 +17,13 @@ def Client(conn, addr):
                 print(data)
                 conn.send(b"200\n")
                 conn.send("1\n".encode('latin-1'))
+            
+            if data[0] == "getMes":
+                data.append(conn.recv(512).decode(encoding="latin-1"))
+                print(data)
+                conn.send(b"200\n")
+                conn.send("Halllo\n".encode('latin-1'))    
+                
             if data[0] == "proofuser":
                 data.append(conn.recv(512).decode(encoding="latin-1"))
                 print(data)

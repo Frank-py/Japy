@@ -54,7 +54,17 @@ public class sendrecv {
                 out.flush();
                 bf.readLine();
                 s = "Success";
-            } else if (Funktion == "sendkey") {
+            } 
+            else if (Funktion == "getMes") {
+                out.print("getMes");
+                out.flush();
+                bf.readLine();
+                out.print(in[0]);
+                out.flush();
+                bf.readLine();
+                s = bf.readLine();
+            }
+            else if (Funktion == "sendkey") {
 
             }
         //     bf.close();
