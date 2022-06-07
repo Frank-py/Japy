@@ -137,8 +137,8 @@ public class messInterface {
         frame.add(Users, BorderLayout.WEST);
        // Users.setSize(frame.getWidth()-100, frame.getHeight());
         // tUsers.setSize(frame.getWidth()/10*2, frame.getHeight());
-        chat.setSize( frame.getWidth(),frame.getHeight());
-        back.setSize( frame.getWidth(),frame.getHeight());
+        chat.setSize( frame.getWidth()/10*8,frame.getHeight());
+        back.setSize( frame.getWidth()/10*8,frame.getHeight());
         back.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()));
         chat.setLayout(new GridLayout(10,1));
         chat.setBackground(Color.green);
@@ -229,7 +229,8 @@ public class messInterface {
             lol = false;
         } */
         in.setText("");
-        
+        in.setPreferredSize(new Dimension(frame.getWidth()/10, back.getHeight()));
+     
         chat.add(in);
         frame.setVisible(true);
     }
