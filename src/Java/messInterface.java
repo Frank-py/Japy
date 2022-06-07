@@ -123,8 +123,15 @@ public class messInterface {
         in.addKeyListener(new KeyListener(){ public void keyPressed(KeyEvent e) {
             if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
             sendrecv.send("sendMes",new String[]{in.getText(),currentUser} );
-            in.setText("");}   
-        }
+            in.setText("");
+            JLabel label = new JLabel(sendrecv.send("getMes",new String[]{currentUser}));
+            label.setSize(100, 100);
+        
+            chat.add(label);
+            };
+            }
+                 
+        
         public void keyReleased(KeyEvent e) {}
         public void keyTyped(KeyEvent e) {}
         });
@@ -150,7 +157,7 @@ public class messInterface {
         chat.setBackground(Color.green);
         back.setBackground(Color.red);
         back.setOpaque(false);
-        chat.setOpaque(false);
+        chat.setOpaque(true);
         background = new JLabel(ba);
  
         back.add(chat, Integer.valueOf(1));
