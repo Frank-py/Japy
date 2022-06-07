@@ -8,6 +8,7 @@ import java.awt.event.*;
 
 public class messInterface {
      String[] user;
+     String currentUser;
      int n = 0;
      JButton[] userliste = new JButton[100];
      JLayeredPane back = new JLayeredPane();
@@ -56,16 +57,12 @@ public class messInterface {
         in.setCaretColor(Color.white);
         in.setBackground(color);
         
+        
         // chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
         // chat.setOpaque(false);
         KeyListener enter = new KeyListener() {
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                    if (in.getText().length() > 0) {
-                        sendrecv.send("sendMes", new String[]{user[0], in.getText()});
-                        in.setText("");
-                    }
-                }
+                
               
 
                 if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
@@ -86,6 +83,9 @@ public class messInterface {
                         frame.setVisible(true);
                     }
                 }
+                
+                
+
             }
             public void keyReleased(KeyEvent e) {}
             public void keyTyped(KeyEvent e) {}
@@ -111,6 +111,7 @@ public class messInterface {
                 } 
                 for (JButton o : userliste) {
                     if (e.getSource() == o) {
+                        currentUser = o.getText();
                         newchat();
                     }
 
@@ -119,7 +120,14 @@ public class messInterface {
         };
 
         
-
+        in.addKeyListener(new KeyListener(){ public void keyPressed(KeyEvent e) {
+            if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
+            sendrecv.send("sendMes",new String[]{in.getText(),currentUser} );
+            in.setText("");}   
+        }
+        public void keyReleased(KeyEvent e) {}
+        public void keyTyped(KeyEvent e) {}
+        });
         Users = new JPanel();
         Users.setLayout(new GridLayout(11, 1));
         Users.setBackground(color);
@@ -189,12 +197,19 @@ public class messInterface {
         heighttemp = frame.getHeight();
         widthtemp = frame.getWidth();
         //Users.add(addUsers);
+
        // Users.setSize(addUsers.getWidth(), frame.getHeight());
-       
+
+
+
+
+       back.setSize(new Dimension(frame.getWidth()-Users.getWidth(),frame.getHeight()));
+      
         back.setPreferredSize(new Dimension(frame.getWidth()-Users.getWidth(),frame.getHeight()));
         chat.setSize( back.getWidth(),back.getHeight());
         background.setSize( frame.getWidth()-Users.getWidth(),frame.getHeight());
         Users.setPreferredSize(new Dimension(frame.getWidth()/10*2, frame.getHeight()));
+        
     }
     // main for testing not necessary
     public static void main(String[] args) {
@@ -224,7 +239,9 @@ public class messInterface {
             lol = false;
         } */
         in.setText("");
-        in.setPreferredSize(new Dimension(frame.getWidth()/10, back.getHeight()));
+        
+       // in.setSize(new Dimension(back.getWidth()-100, back.getHeight()-100));
+        //in.setSize(new Dimension(back.getWidth(), back.getHeight()));
      
         chat.add(in);
         frame.setVisible(true);
