@@ -137,24 +137,19 @@ public class messInterface {
         frame.add(Users, BorderLayout.WEST);
        // Users.setSize(frame.getWidth()-100, frame.getHeight());
         // tUsers.setSize(frame.getWidth()/10*2, frame.getHeight());
-        chat.setSize( frame.getWidth()/10*8,frame.getHeight());
-        back.setSize( frame.getWidth()/10*8,frame.getHeight());
-        back.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()));
+        back.setPreferredSize(new Dimension(frame.getWidth()-Users.getWidth(),frame.getHeight()));
         chat.setLayout(new GridLayout(10,1));
         chat.setBackground(Color.green);
         back.setBackground(Color.red);
         back.setOpaque(false);
-
         chat.setOpaque(false);
         background = new JLabel(ba);
  
-        
         back.add(chat, Integer.valueOf(1));
-        background.setSize( back.getWidth(),back.getHeight());
         back.add(background, Integer.valueOf(0));
        frame.add(back,BorderLayout.EAST); //??????
-        // frame.add(chat, BorderLayout.CENTER);
         frame.setVisible(true);
+        reloadframe();
         while (true) {
             if (frame.getHeight() != heighttemp || frame.getWidth() != widthtemp) {
                reloadframe();
