@@ -128,7 +128,7 @@ public class messInterface {
         
         in.addKeyListener(new KeyListener(){ public void keyPressed(KeyEvent e) {
             if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
-            sendrecv.send("sendMes",new String[]{in.getText(),currentUser} );
+            sendrecv.send("sendMes",new String[]{currentUser, in.getText()} );
             in.setText("");
             JLabel label = new JLabel(sendrecv.send("getMes",new String[]{currentUser}));
             label.setSize(100, 100);
