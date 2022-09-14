@@ -27,10 +27,11 @@ def Client(conn, addr):
             data.append(conn.recv(512).decode(encoding="utf-8"))
             conn.send("200\n".encode("utf-8"))
             if data[0] == "getMes":
+                print("getmes")
                 data.append(conn.recv(512).decode(encoding="utf-8"))
                 conn.send("200\n".encode("utf-8"))
                 nachrichte = benutzer.checkformessages()
-                conn.send(nachrichte.encode("utf-8"))
+                conn.send(nachrichte.encode("utf-8")+"\n".encode("utf-8"))
 
 
             if data[0] == "proofuser":

@@ -57,12 +57,19 @@ public class sendrecv {
             } 
             else if (Funktion == "getMes") {
                 out.print("getMes");
+                System.out.println("asdf");
                 out.flush();
+                System.out.println("asdf");
                 bf.readLine();
+                System.out.println("asdf");
                 out.print(in[0]);
+                System.out.println("asdf");
                 out.flush();
+                System.out.println("asdf");
                 bf.readLine();
+                System.out.println("asdf");
                 s = bf.readLine();
+                System.out.println("asdf");
             }
             else if (Funktion == "sendkey") {
 
