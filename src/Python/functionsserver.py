@@ -66,10 +66,10 @@ class User():
             self.connection.commit()
         except:
             print("error")
-    def checkformessages(self):
+    def checkformessages(self, recv):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT message FROM Messages WHERE recv = "%s";' % self.user)
+            cursor.execute('SELECT message FROM Messages WHERE recv = "%s" AND send = "%s";' % (self.user, recv))
             nachrichten = cursor.fetchall()
             listen = []
             for i in nachrichten:
