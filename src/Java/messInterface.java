@@ -122,18 +122,6 @@ public class messInterface {
             }
         };
 
-<<<<<<< HEAD
-        
-        in.addKeyListener(new KeyListener(){ public void keyPressed(KeyEvent e) {
-            if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
-            sendrecv.send("sendMes",new String[]{currentUser,in.getText()} );
-            in.setText("");
-           // JLabel label = new JLabel(sendrecv.send("getMes",new String[]{currentUser}));
-          //  label.setSize(100, 100);
-        
-          //  chat.add(label);
-            };
-=======
         in.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
@@ -151,7 +139,6 @@ public class messInterface {
             }
 
             public void keyTyped(KeyEvent e) {
->>>>>>> 1320124a3d3ef6608eb71585e0a504098d382b83
             }
         });
         Users = new JPanel();
@@ -258,20 +245,6 @@ public class messInterface {
         JLabel label = new JLabel(sendrecv.send("getMes", new String[] { currentUser }));
         label.setSize(100, 100);
 
-<<<<<<< HEAD
-     void newchat() {
-        JLabel label = new JLabel(sendrecv.send("getMes",new String[]{currentUser}));
-         label.setSize(100, 100);
-      
-          chat.add(label);
-/* 
-        if (lol) {
-            
-            chat.setSize(back.getWidth(), back.getHeight());
-            chat.add(in);
-            lol = false;
-        } */
-=======
         chat.add(label);
         /*
          * 
@@ -282,7 +255,6 @@ public class messInterface {
          * lol = false;
          * }
          */
->>>>>>> 1320124a3d3ef6608eb71585e0a504098d382b83
         in.setText("");
 
         // in.setSize(new Dimension(back.getWidth()-100, back.getHeight()-100));
