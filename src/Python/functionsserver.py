@@ -59,8 +59,9 @@ class User():
     def insertmessage(self, recv, text):
         cursor = self.connection.cursor()
         try:
-            sql = "INSERT INTO Messages (send, recv, Message) VALUES (%s, %s, %s);"
-            val = (self.user, recv, text)
+            sql = "INSERT INTO Messages (send, recv, Message, Time) VALUES (%s, %s, %s, %s);"
+            now = str(strftime("%Y-%m-%d %H:%M:%S", gmtime())).strip("'")
+            val = (self.user, recv, text, now)
             cursor.execute(sql, val)
             self.connection.commit()
         except:
