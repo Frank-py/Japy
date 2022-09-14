@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 public class login{
   //int counter = 0;
+  public static boolean loggedin = false;
   ImageIcon logo = new ImageIcon("Java/prof5.png");
   //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
@@ -71,6 +72,7 @@ public class login{
   };
   login(){
     frame.setSize(320, 440);
+    frame.setAlwaysOnTop(true);
     frame.setLocationRelativeTo(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setTitle("Login");
@@ -127,14 +129,16 @@ public class login{
     if (Integer.parseInt(recv) == 0) {
       frame.dispose();
       JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
-      new messInterface(0);
+      loggedin = true;
+      //new messInterface(0);
       System.out.println("hallo");
       return;
      
     } else if (Integer.parseInt(recv) == 1) {
       frame.dispose();
-      new messInterface(1);
-      System.out.println("hallo");
+      loggedin = true;
+      //new messInterface(1);
+      System.out.println("hall o");
       return;
     
     } else if (Integer.parseInt(recv) == 2) {

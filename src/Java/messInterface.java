@@ -10,6 +10,7 @@ public class messInterface {
      String[] user;
      String currentUser;
      int n = 0;
+     public static boolean logins = false;
      JButton[] userliste = new JButton[100];
      JLayeredPane back = new JLayeredPane();
      String recv = "500";
@@ -33,6 +34,11 @@ public class messInterface {
     public int widthtemp;
 
     messInterface(int log){
+        
+        while (!logins) {
+        logins=login.loggedin;
+        System.out.print("");
+        }
         
         frame = new JFrame();
         frame.setLayout(new BorderLayout());
