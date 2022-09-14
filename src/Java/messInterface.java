@@ -130,10 +130,10 @@ public class messInterface {
             if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
             sendrecv.send("sendMes",new String[]{in.getText(),currentUser} );
             in.setText("");
-            JLabel label = new JLabel(sendrecv.send("getMes",new String[]{currentUser}));
-            label.setSize(100, 100);
+           // JLabel label = new JLabel(sendrecv.send("getMes",new String[]{currentUser}));
+          //  label.setSize(100, 100);
         
-            chat.add(label);
+          //  chat.add(label);
             };
             }
                  
@@ -244,6 +244,10 @@ public class messInterface {
     
 
      void newchat() {
+        JLabel label = new JLabel(sendrecv.send("getMes",new String[]{currentUser}));
+         label.setSize(100, 100);
+      
+          chat.add(label);
 /* 
         if (lol) {
             
@@ -258,5 +262,7 @@ public class messInterface {
      
         chat.add(in);
         frame.setVisible(true);
+
+        
     }
 }
