@@ -1,14 +1,15 @@
 from atexit import register
+import datetime
 import mysql.connector
 from mysql.connector import Error
-
+from time import gmtime, strftime
 import socket, threading, hashlib
 
 class User():
-    def __init__(self, user=None, password=None, ip=None, loggedin=None, registriert=False):
+    def __init__(self, user=None, password=None, date=None, loggedin=None, registriert=False):
         self.user = user
         self.password = password
-        self.ip = ip
+        self.date = date
         self.connection = self.create_connection()
         self.loggedin = loggedin
         self.registriert = registriert
@@ -32,73 +33,68 @@ class User():
         except Error as e:
             print(f"The error '{e}' occurred")
     @classmethod
-    def login(cls, connection, user, password, ip):
+    def login(cls, connection, user, password):
         cursor = connection.cursor()
         try:
-            cursor.execute('SELECT Password from Persons where Username = "%s";' % (user))
+            cursor.execute('SELECT Password from People where Username = "%s";' % (user))
             myresult = cursor.fetchone()[0]
             if myresult == password:
-                return cls(user, password, ip, True, False)
+                return cls(user, password, None, True, False)
             else:
                 return cls(None, None, None, False, False)
         except Error as e:
             print(e)
     @classmethod
-    def register(cls, connection, username, password, ip):
+    def register(cls, connection, username, password):
         cursor = connection.cursor()
         try:
-            sql = 'INSERT INTO Persons (Username, Password, IP) VALUES (%s, %s, %s);'
-            val = (username, password, ip)
+            now = str(strftime("%Y-%m-%d %H:%M:%S", gmtime())).strip("'")
+            sql = "INSERT INTO People (Username, Password, CD) VALUES (%s, %s, %s);"
+            val = (username, password, now)
             cursor.execute(sql, val)
             connection.commit()
-            return cls(username, password, ip, True, True)
+            return cls(username, password, now, True, True)
         except Error as e:
-            return "error"
-    def updateip(self, connection, username, ip):
+            return e
+    def insertmessage(self, recv, text):
         cursor = self.connection.cursor()
         try:
-            cursor.execute("UPDATE Persons SET IP = '%s' WHERE Username = '%s';" % (ip, username))
-            connection.commit()
-            self.ip = ip
-        except Error as e:
-            print(e)
-    def insertmessage(self, liste):
-        cursor = self.connection.cursor()
-        try:
-            sql = "INSERT INTO Messages (send, recv, message) VALUES (%s, %s, %s);"
-            val = (self.user, self.recv, " ".join(liste[2:]).strip())
+            sql = "INSERT INTO Messages (send, recv, Message, Time) VALUES (%s, %s, %s, %s);"
+            now = str(strftime("%Y-%m-%d %H:%M:%S", gmtime())).strip("'")
+            val = (self.user, recv, text, now)
             cursor.execute(sql, val)
             self.connection.commit()
         except:
             print("error")
-    def checkformessages(self, receiver):
+    def checkformessages(self, recv):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT message FROM Messages WHERE recv = "%s" AND send = "%s";' % (receiver, self.user))
+            cursor.execute('SELECT message FROM Messages WHERE recv = "%s" AND send = "%s";' % (self.user, recv))
             nachrichten = cursor.fetchall()
             listen = []
             for i in nachrichten:
                 listen.append(i[0])
-            return listen
+            return str(";".join(listen))
         except:
             return "error"
-    def checkaccount(self, name, password, ip):
+    def checkaccount(self, name, password):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT * FROM Persons WHERE Username = "%s";' % (name))
+            cursor.execute('SELECT * FROM People WHERE Username = "%s";' % (name))
             nachrichten = cursor.fetchall()
             try:
                 if name == nachrichten[0][0]:
-                    return self.login(self.connection, name, password, ip)
+                    return self.login(self.connection, name, password)
             except:    
-                return self.register(self.connection, name, password, ip)
+                return self.register(self.connection, name, password)
         except Exception as e:
             return e
     def searchaccount(self, user):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT 1 FROM Persons WHERE Username = "%s";' % (user))
+            cursor.execute('SELECT 1 FROM People WHERE Username = "%s";' % (user))
             nachrichten = cursor.fetchall()
-            return str(len(nachrichten)) 
+            return len(nachrichten) != 0 
         except Exception as e:
             return e
+
