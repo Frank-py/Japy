@@ -44,7 +44,7 @@ public class sendrecv {
                 bf.readLine();
                 s = bf.readLine();
             } else if (Funktion == "sendMes") {
-                out.print("message");
+                out.print("sendMes");
                 out.flush();
                 bf.readLine();
                 out.print(in[0]);
