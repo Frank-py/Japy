@@ -72,7 +72,7 @@ public class login{
   };
   login(){
     frame.setSize(320, 440);
-    frame.setAlwaysOnTop(true);
+   // frame.setAlwaysOnTop(true);
     frame.setLocationRelativeTo(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setTitle("Login");
