@@ -48,6 +48,7 @@ def Client(conn, addr):
                 conn.send("200\n".encode("utf-8"))
                 print(data[2])
                 benutzer.insertmessage(data[1], data[2]) 
+                conn.send("200\n".encode("utf-8"))
     except Exception as E:
         conn.send("4\n".encode('utf-8'))
         conn.close()
