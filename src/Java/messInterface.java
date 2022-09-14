@@ -244,7 +244,12 @@ public class messInterface {
     
 
      void newchat() {
+            JLabel label = new JLabel(sendrecv.send("getMes",new String[]{currentUser}));
+         label.setSize(100, 100);
+
+          chat.add(label);
 /* 
+        
         if (lol) {
             
             chat.setSize(back.getWidth(), back.getHeight());
