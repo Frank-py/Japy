@@ -1,14 +1,13 @@
 from atexit import register
-import datetime
 import mysql.connector
 from mysql.connector import Error
 from time import gmtime, strftime
-import socket, threading, hashlib
-
+import versch
 class User():
     def __init__(self, user=None, password=None, date=None, loggedin=None, registriert=False):
         self.user = user
         self.password = password
+        self.status = 0 
         self.date = date
         self.connection = self.create_connection()
         self.loggedin = loggedin
@@ -97,5 +96,49 @@ class User():
             return len(nachrichten) != 0 
         except Exception as e:
             return e
+    def createKey(self, user2):
+        cursor = self.connection.cursor()        
+        try:
+            user1binich = True
+            cursor.execute('SELECT 1 FROM KeyCache WHERE user1 = "%s" AND user2 = "%s";' % (self.user, user2))
+            nachrichten = cursor.fetchall()
+            if len(nachrichten) == 0:
+                user1binich = False
+                cursor.execute('SELECT 1 FROM KeyCache WHERE user1 = "%s" AND user2 = "%s";' % (user2, self.user))
+                nachrichten = cursor.fetchall()
+                if len(nachrichten) == 0:
+                    self.status = 0
+                    return "0"
+                
+                 
+            cursor.execute('SELECT 1 FROM KeyCache WHERE user1 = "%s" AND user2 = "%s" AND A IS NOT NULL;' % (self.user, user2))
+            aexistiert = cursor.fetchall()
+            if len(aexistiert) != 0:
+                if user1binich:
+                    self.status = 1
+                    return "1"
+                else:
+                    self.status = 2
+                    return "2"
+            else:
+                if not user1binich:
+                    self.status = 1
+                    return "1"
+                else:
+                    self.status = 2
+                    return "2"
+            
 
-gvfggg
+        except Exception as e:
+            return e
+    def insertkeys(self, user2, P, G, a):
+        # cursor = self.connection.cursor()        
+        # try:
+        #     sql = "INSERT INTO People (Username, Password, CD) VALUES (%s, %s, %s);"
+        #     val = (username, password, now)
+        #     cursor.execute(sql, val)
+        #     connection.commit()
+        #     return cls(username, password, now, True, True)
+        pass
+
+

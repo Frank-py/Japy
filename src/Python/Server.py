@@ -50,6 +50,29 @@ def Client(conn, addr):
                 print(data[2])
                 benutzer.insertmessage(data[1], data[2]) 
                 conn.send("200\n".encode("utf-8"))
+            if data[0] == "createKey":
+                data.append(conn.recv(512).decode(encoding="utf-8"))
+                conn.send("200\n".encode("utf-8"))
+                conn.send(benutzer.createKey(data[1]).encode("utf-8")+"\n".encode("utf-8"))
+                if benutzer.status == 1:
+                    continue
+                if benutzer.status == 0:
+                    P = conn.recv(512).decode(encoding="utf-8")
+                    conn.send("200\n".encode("utf-8"))
+                    G = conn.recv(512).decode(encoding="utf-8")
+                    conn.send("200\n".encode("utf-8"))
+                    A = conn.recv(512).decode(encoding="utf-8")
+                    conn.send("200\n".encode("utf-8"))
+                    benutzer.insertKeys(P, G, A)
+                if benutzer.status == 2:
+                    (P, G, A) = benutzer.getKeys(data[1])
+                    conn.send(P.encode("utf-8"))
+                    conn.send(G.encode("utf-8"))
+                    conn.send(A.encode("utf-8"))
+                    B = conn.recv(512).decode(encoding="utf-8")
+                    conn.send("200\n".encode("utf-8"))
+                    benutzer.insertKeys(B)
+
     except Exception as E:
         conn.send("4\n".encode('utf-8'))
         conn.close()

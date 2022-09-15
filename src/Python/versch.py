@@ -1,5 +1,3 @@
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, 
-QLineEdit, QInputDialog)
 def Binär(text):
     l, m = [], []
     for i in text:
