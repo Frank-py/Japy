@@ -6,19 +6,20 @@ import java.net.*;
 
 public class sendrecv {
     public static BufferedReader bf;
-    public static  PrintWriter out;
+    public static PrintWriter out;
     public static String s;
     public static Socket socket;
-    
+
     public static Socket socket() {
-    
-    try {
-    socket = new Socket("localhost", 6000);
-    } catch (IOException e) {
-        e.printStackTrace();
+
+        try {
+            socket = new Socket("localhost", 6000);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return socket;
     }
-     return socket;
-    }
+
     public static String send(String Funktion, String in[]) {
         try {
             s = null;
@@ -54,28 +55,44 @@ public class sendrecv {
                 out.flush();
                 bf.readLine();
                 s = "Success";
-            } 
-            else if (Funktion == "getMes") {
+            } else if (Funktion == "getMes") {
                 out.print("getMes");
-                System.out.println("asdf");
                 out.flush();
-                System.out.println("asdf");
                 bf.readLine();
-                System.out.println("asdf");
                 out.print(in[0]);
-                System.out.println("asdf");
                 out.flush();
-                System.out.println("asdf");
                 bf.readLine();
-                System.out.println("asdf");
                 s = bf.readLine();
-                System.out.println("asdf");
-            }
-            else if (Funktion == "sendkey") {
+            } else if (Funktion == "createKey") {
+                out.print("createKey");
+                out.flush();
+                bf.readLine();
+                s = bf.readLine();
+                if (s.equals("new")) {
+                    out.print(in[0]);
+                    out.flush();
+                    bf.readLine();
+                    out.print(in[1]);
+                    out.flush();
+                    bf.readLine();
+                    out.print(in[2]);
+                    out.flush();
+                    bf.readLine();
+
+                }
+
+            } else if (Funktion == "isKey") {
+                out.print("isKey");
+                out.flush();
+                bf.readLine();
+                out.print(in[0]);
+                out.flush();
+                bf.readLine();
+                s = bf.readLine();
 
             }
-        //     bf.close();
-        //    out.close();
+            // bf.close();
+            // out.close();
         } catch (IOException e) {
             e.printStackTrace();
             return "4";
@@ -84,11 +101,10 @@ public class sendrecv {
     }
 
     // public static String[] recv() {
-    //     String[] lol = {};
-    //     bf.readLine();
-    //     if (bf.readline == "recvkey") {
-    //     return lol;
+    // String[] lol = {};
+    // bf.readLine();
+    // if (bf.readline == "recvkey") {
+    // return lol;
 
-    //     }
+    // }
 }
-
