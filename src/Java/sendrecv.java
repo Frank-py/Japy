@@ -69,15 +69,14 @@ public class sendrecv {
                 bf.readLine();
                 s = bf.readLine();
                 if (s.equals("new")) {
+                    s = "";
+                    //s.append(in[0]);
                     out.print(in[0]);
                     out.flush();
                     bf.readLine();
-                    out.print(in[1]);
-                    out.flush();
-                    bf.readLine();
-                    out.print(in[2]);
-                    out.flush();
-                    bf.readLine();
+                    
+                } else{
+                    s = bf.readLine();
 
                 }
 

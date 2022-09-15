@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 public class login{
   //int counter = 0;
+  public static String name;
   public static boolean loggedin = false;
   ImageIcon logo = new ImageIcon("Java/prof5.png");
   //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
@@ -37,7 +38,9 @@ public class login{
           } else {
           try {
             String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
+            name=user.getText();
             enter(sendrecv.send( "login", lol));
+
             // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
           } catch (Exception f) {
             enter("5");
@@ -61,6 +64,7 @@ public class login{
           } else {
           try {
             String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
+            name = user.getText();
             enter(sendrecv.send( "login", lol));    
             // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
           } catch (Exception f) {

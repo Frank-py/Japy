@@ -4,8 +4,7 @@ package Java;
 public class run {
   public static void main(String[] args) {
     sendrecv.socket();
-    String[] h = {};
-    sendrecv.send("key", h);
+   
     new login();
     new messInterface(0);
     /*
