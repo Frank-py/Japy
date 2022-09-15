@@ -3,8 +3,8 @@ package Java;
 import java.math.*;
 import java.util.*;
 import java.io.*;
-import org.json.simple.JsonObject;
-import org.json.simple.parser.*;
+import com.google.gson.*;
+
 
 
 public class encry {
@@ -12,28 +12,50 @@ public class encry {
     public static int g;
     public static int a;
     public static BigInteger A;
+    public static void main(String[] args) {
+        getKey("w");
+    }
 
     public static String getKey(String User){
-        File keys = new File("..\\keys"+login.name+".json");
-        JsonParser pars = new JsonParser();
-        FileReader read = new FileReader("..\\keys"+login.name+".json");
-        JsonObject keylist = (JsonObject) parser.parse(read);
-       
-       
-        keylist.put(User,key);
-        FileWriter keyWriter = new FileWriter("..\\keys"+login.name+".json");
-        keyWriter.write(""
+      
+        File keys = new File("keys"+"login.name"+".json");
+       //File keys = new File("test.txt");
+       try {
+        keys.createNewFile();
+    } catch (IOException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+    }
+        FileReader read;
+        String key = "";
+        try {
+            read = new FileReader(".\\keys"+login.name+".json");
+           // read = new FileReader(keys);
+            JsonElement parser = JsonParser.parseReader(read);
+            JsonObject keylist = parser.getAsJsonObject();
+            key = keylist.get(User).getAsString();
+
+        } catch (FileNotFoundException e) {
             
-        );
-        keyWriter.close();
+            e.printStackTrace();
+        }
+       
+       
+      //  keylist.put(User,key);
+       // FileWriter keyWriter = new FileWriter("..\\keys"+login.name+".json");
+       // keyWriter.write(""
+            
+       // );
+       // keyWriter.close();
         ;
 
-        if (key.equals("0")) {
-            key = sendrecv.send("createKey", new String[] { currentUser });
+       // if (key.equals("0")) {
+           // key = sendrecv.send("createKey", new String[] { currentUser });
 
         
         
-        }
+        //}
+        return key;
 
         
 
