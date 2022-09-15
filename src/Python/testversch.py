@@ -1,11 +1,10 @@
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, 
+from PyQt5.QtWidgets import (QApplication, QWidget, 
 QLineEdit, QInputDialog)
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
+
 from versch import *
 from random import randint
-import sympy, sys, webbrowser, os, numpy as np
+import sympy, sys 
 
 class Example(QWidget):
     def __init__(self):
