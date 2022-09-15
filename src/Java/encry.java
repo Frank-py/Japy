@@ -2,12 +2,44 @@ package Java;
 
 import java.math.*;
 import java.util.*;
+import java.io.*;
+import org.json.simple.JsonObject;
+import org.json.simple.parser.*;
+
 
 public class encry {
     public static int p;
     public static int g;
     public static int a;
     public static BigInteger A;
+
+    public static String getKey(String User){
+        File keys = new File("..\\keys"+login.name+".json");
+        JsonParser pars = new JsonParser();
+        FileReader read = new FileReader("..\\keys"+login.name+".json");
+        JsonObject keylist = (JsonObject) parser.parse(read);
+       
+       
+        keylist.put(User,key);
+        FileWriter keyWriter = new FileWriter("..\\keys"+login.name+".json");
+        keyWriter.write(""
+            
+        );
+        keyWriter.close();
+        ;
+
+        if (key.equals("0")) {
+            key = sendrecv.send("createKey", new String[] { currentUser });
+
+        
+        
+        }
+
+        
+
+
+        
+    }
 
     public String[] newkey(String[] in) {
         Random randy = new Random();
@@ -47,6 +79,23 @@ public class encry {
         }
 
         return key;
+    }
+
+    public static String[] decMes(String in,String key) {
+        String[] ary = in.split(";");
+        System.out.println(Arrays.toString(ary));
+       int n = 0;
+       String[] out = new String[10000];
+        for (String i : ary) {
+        
+           
+           out[n]=decryption(i,key);
+           n++;
+            
+        }
+        System.out.println(Arrays.toString(out));
+        return out;
+        
     }
 
     public static String encryption(String in, String key) {

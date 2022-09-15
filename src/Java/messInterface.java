@@ -242,13 +242,10 @@ public class messInterface {
      */
 
     void newchat() {
-        String key = sendrecv.send("isKey", new String[] { currentUser });
-        if (key == "0") {
-            key = sendrecv.send("createKey", new String[] { currentUser });
-
-        }
-
-        JLabel label = new JLabel(encry.decryption(sendrecv.send("getMes", new String[] { currentUser }), key));
+        String key = encry.getKey(currentUser);
+        
+        encry.decMes(sendrecv.send("getMes", new String[] { currentUser }),key);
+        JLabel label = new JLabel();
         label.setSize(10, 10);
 
         chat.add(label);
