@@ -242,8 +242,14 @@ public class messInterface {
      */
 
     void newchat() {
-        JLabel label = new JLabel(sendrecv.send("getMes", new String[] { currentUser }));
-        label.setSize(100, 100);
+        String key = sendrecv.send("isKey", new String[] { currentUser });
+        if (key == "0") {
+            key = sendrecv.send("createKey", new String[] { currentUser });
+
+        }
+
+        JLabel label = new JLabel(encry.decryption(sendrecv.send("getMes", new String[] { currentUser }), key));
+        label.setSize(10, 10);
 
         chat.add(label);
         /*
@@ -263,6 +269,5 @@ public class messInterface {
         chat.add(in);
         frame.setVisible(true);
 
-        
     }
 }
