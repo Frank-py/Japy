@@ -159,12 +159,9 @@ class User():
                 self.connection.commit()
                 return
             else:
-                return
+                
 
                      
-                    
-                
-                
                 
         except Exception as E:
             print("An erro occured!")
