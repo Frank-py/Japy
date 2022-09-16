@@ -149,15 +149,17 @@ class User():
                 if self.user1binich:
                     cursor.execute('SELECT p,g,B FROM KeyCache WHERE (user1 = "%s" and user2 = "%s") or (user1 = "%s" and user2 = "%s");' % (self.user, user2, user2, self.user))
                 else:
-                    
-                    nachrichten = cursor.fetchall()
-                    print(nachrichten)
-                    sql = 'UPDATE KeyCache set B=NULL WHERE (user1 = "%s" AND user2 = "%s") OR (user1 = "%s" AND user2 = "%s");'
-                    val = (self.user, user2, user2, self.user)
-                    cursor.execute(sql, val)
-                    self.connection.commit()
-                    return
-                else:
+                    cursor.execute('SELECT p,g,A FROM KeyCache WHERE (user1 = "%s" and user2 = "%s") or (user1 = "%s" and user2 = "%s");' % (self.user, user2, user2, self.user))
+                nachrichten = cursor.fetchall()
+                print(nachrichten)
+                
+                #sql = 'UPDATE KeyCache set B=NULL WHERE (user1 = "%s" AND user2 = "%s") OR (user1 = "%s" AND user2 = "%s");'
+                val = (self.user, user2, user2, self.user)
+                cursor.execute(sql, val)
+                self.connection.commit()
+                return
+            else:
+                return
 
                      
                     
