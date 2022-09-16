@@ -71,12 +71,28 @@ public class sendrecv {
                 s = bf.readLine();
                 if (s.equals("0")) {
                     s = "";
+                    String [] pgA = encry.newkey(new String[]{});
                     //s.append(in[0]);
-                    out.print(in[0]);
+                    out.print(pgA[0]);
+                    out.flush();
+                    bf.readLine();
+                    out.print(pgA[1]);
+                    out.flush();
+                    bf.readLine();
+                    out.print(pgA[2]);
                     out.flush();
                     bf.readLine();
                     
-                } else{
+                } 
+                if (s.equals("2")) {
+                    String[] Bap = new String[3];
+                    Bap[0] = bf.readLine();
+                    Bap[2] = bf.readLine();
+                    encry.endnewkey(Bap);
+
+
+                }
+                else{
                     s = bf.readLine();
 
                 }
