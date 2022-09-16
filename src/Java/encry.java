@@ -9,8 +9,16 @@ public class encry {
     public static int g;
     public static int a;
     public static BigInteger A;
+    encry(){
+        
+    }
     public static void main(String[] args) {
         getKey("wgg");
+    }
+    public static int a(){
+        
+        
+        return a;
     }
 
     public static String getKey(String User){
