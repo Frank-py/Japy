@@ -88,7 +88,8 @@ public class sendrecv {
                     String[] Bap = new String[3];
                     Bap[0] = bf.readLine();
                     Bap[2] = bf.readLine();
-                    encry.endnewkey(Bap);
+                    Bap[1] = encry.a();
+                    s = encry.endnewkey(Bap);
 
 
                 }

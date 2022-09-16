@@ -144,12 +144,14 @@ class User():
                 self.connection.commit()
                 return
             
-            if self.status == 2: #
-
+            if self.status == 2 and a == None: #
+                Flag = True
                 if self.user1binich:
                     cursor.execute('SELECT p,g,B FROM KeyCache WHERE (user1 = "%s" and user2 = "%s") or (user1 = "%s" and user2 = "%s");' % (self.user, user2, user2, self.user))
+                    sql = 'UPDATE KeyCache set B=NULL WHERE (user1 = "%s" AND user2 = "%s") OR (user1 = "%s" AND user2 = "%s");'
                 else:
                     cursor.execute('SELECT p,g,A FROM KeyCache WHERE (user1 = "%s" and user2 = "%s") or (user1 = "%s" and user2 = "%s");' % (self.user, user2, user2, self.user))
+                    sql = 'UPDATE KeyCache set A=NULL WHERE (user1 = "%s" AND user2 = "%s") OR (user1 = "%s" AND user2 = "%s");'
                 nachrichten = cursor.fetchall()
                 print(nachrichten)
                 
@@ -157,29 +159,15 @@ class User():
                 val = (self.user, user2, user2, self.user)
                 cursor.execute(sql, val)
                 self.connection.commit()
-                return
             else:
+                if not self.user1binich:
+                    sql = 'UPDATE KeyCache set B="%s" WHERE (user1 = "%s" AND user2 = "%s") OR (user1 = "%s" AND user2 = "%s");'
+                    val = (self.user, user2, user2, self.user)
+                    cursor.execute(sql, val)
+                    self.connection.commit()
+
                 
 
-                     
-                
-        except Exception as E:
-            print("An erro occured!")
-    def getKeys(self, user2):
-        cursor = self.connection.cursor()
-        try:
-            if self.status == 2:
-                cursor.execute('SELECT P, G, A FROM KeyCache WHERE (user1 = "%s" and user2 = "%s") or (user1 = "%s" and user2 = "%s");' % (self.user, user2, user2, self.user))
-                nachrichten = cursor.fetchall()
-                print(nachrichten)
-            elif self.status == 3:
-                cursor.execute('SELECT B FROM KeyCache WHERE (user1 = "%s" and user2 = "%s") or (user1 = "%s" and user2 = "%s");' % (self.user, user2, user2, self.user))
-                nachrichten = cursor.fetchall()
-                print(nachrichten)
-                sql = 'UPDATE KeyCache set B=NULL WHERE (user1 = "%s" AND user2 = "%s") OR (user1 = "%s" AND user2 = "%s");'
-                val = (self.user, user2, user2, self.user)
-                cursor.execute(sql, val)
-                self.connection.commit()
         except Exception as E:
             print("An erro occured!")
         

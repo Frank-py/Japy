@@ -9,66 +9,57 @@ public class encry {
     public static int g;
     public static int a;
     public static BigInteger A;
+    public static File keys;
+    public static JsonObject keylist;
+    public static String key = "";
     encry(){
-        
+        JsonElement parser;
+        keys = new File("keys"+"login.name"+".json");
+        try {
+         keys.createNewFile();
+     }  catch (IOException e1) {
+         e1.printStackTrace();
+     }
+        try {
+            parser = JsonParser.parseReader(new FileReader("keys"+"login.name"+".json"));
+            keylist = parser.getAsJsonObject();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+         
+      
+             
     }
     public static void main(String[] args) {
         getKey("wgg");
     }
-    public static int a(){
+    public static String a(){
         
         
-        return a;
+        return Integer.toString(a);
     }
 
     public static String getKey(String User){
-      
-        File keys = new File("keys"+"login.name"+".json");
-       try {
-        keys.createNewFile();
-    } catch (IOException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
-    }
-        String key = "";
-        try {
-            JsonElement parser = JsonParser.parseReader(new FileReader("keys"+"login.name"+".json"));
-            JsonObject keylist = parser.getAsJsonObject();
-           if (keylist.has("User")) {
-            
+        
+           if (keylist.has(User)) {
             key = keylist.get(User).getAsString();
            }
            else{
             key = sendrecv.send("createKey", new String[] { User });
            }
 
-        } catch (FileNotFoundException e) {
-
-           // bbbbb;
-            e.printStackTrace();
-        }
-       
-       
-    
-        
+           return key;
        // FileWriter keyWriter = new FileWriter("..\\keys"+login.name+".json");
        // keyWriter.write(""
             
        // );
-       // keyWriter.close();
-        ;
+       // keyWriter.close(); 
 
        // if (key.equals("0")) {
            // 
-
-        
         
         //}
-        return key;
-
-        
-
-
         
     }
 
@@ -94,8 +85,7 @@ public class encry {
         BigInteger rando = BigInteger.valueOf(a);
         BigInteger A = gg.modPow(rando, pp);
 
-        String[] numbers = { pp.toString(10), gg.toString(10), A.toString(10) };
-
+        String[] numbers = { pp.toString(10), gg.toString(10), A.toString(10) }; //,a
         return numbers;
     }
 
