@@ -26,22 +26,22 @@ public class encry {
         // TODO Auto-generated catch block
         e1.printStackTrace();
     }
-        FileReader read;
         String key = "";
         try {
-            read = new FileReader(".\\keys"+login.name+".json");
+         
            // read = new FileReader(keys);
-            JsonElement parser = JsonParser.parseReader(read);
+            JsonElement parser = JsonParser.parseReader(new FileReader(".\\keys"+"login.name"+".json"));
             JsonObject keylist = parser.getAsJsonObject();
             key = keylist.get(User).getAsString();
 
         } catch (FileNotFoundException e) {
-            
-            e.printStackTrace();
+            key = sendrecv.send("createKey", new String[] { User });
+
         }
        
        
-      //  keylist.put(User,key);
+    
+        
        // FileWriter keyWriter = new FileWriter("..\\keys"+login.name+".json");
        // keyWriter.write(""
             
@@ -49,9 +49,8 @@ public class encry {
        // keyWriter.close();
         ;
 
-       // if (key.equals("0")) {
-           // key = sendrecv.send("createKey", new String[] { currentUser });
-
+      
+         
         
         
         //}

@@ -67,8 +67,9 @@ public class sendrecv {
                 out.print("createKey");
                 out.flush();
                 bf.readLine();
+                out.print(in[0]);
                 s = bf.readLine();
-                if (s.equals("new")) {
+                if (s.equals("0")) {
                     s = "";
                     //s.append(in[0]);
                     out.print(in[0]);
