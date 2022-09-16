@@ -26,10 +26,13 @@ public class encry {
         try {
             JsonElement parser = JsonParser.parseReader(new FileReader("keys"+"login.name"+".json"));
             JsonObject keylist = parser.getAsJsonObject();
-           if (condition:var(boolean)) {
+           if (keylist.has("User")) {
             
-           }
             key = keylist.get(User).getAsString();
+           }
+           else{
+            key = sendrecv.send("createKey", new String[] { User });
+           }
 
         } catch (FileNotFoundException e) {
 
@@ -47,7 +50,7 @@ public class encry {
         ;
 
        // if (key.equals("0")) {
-           // key = sendrecv.send("createKey", new String[] { currentUser });
+           // 
 
         
         
