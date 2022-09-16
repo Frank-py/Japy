@@ -4,22 +4,18 @@ import java.math.*;
 import java.util.*;
 import java.io.*;
 import com.google.gson.*;
-
-
-
 public class encry {
     public static int p;
     public static int g;
     public static int a;
     public static BigInteger A;
     public static void main(String[] args) {
-        getKey("w");
+        getKey("wgg");
     }
 
     public static String getKey(String User){
       
         File keys = new File("keys"+"login.name"+".json");
-       //File keys = new File("test.txt");
        try {
         keys.createNewFile();
     } catch (IOException e1) {
@@ -28,15 +24,20 @@ public class encry {
     }
         String key = "";
         try {
-         
-           // read = new FileReader(keys);
-            JsonElement parser = JsonParser.parseReader(new FileReader(".\\keys"+"login.name"+".json"));
+            JsonElement parser = JsonParser.parseReader(new FileReader("keys"+"login.name"+".json"));
             JsonObject keylist = parser.getAsJsonObject();
+           if (keylist.has("User")) {
+            
             key = keylist.get(User).getAsString();
+           }
+           else{
+            key = sendrecv.send("createKey", new String[] { User });
+           }
 
         } catch (FileNotFoundException e) {
-            key = sendrecv.send("createKey", new String[] { User });
 
+           // bbbbb;
+            e.printStackTrace();
         }
        
        
@@ -49,8 +50,9 @@ public class encry {
        // keyWriter.close();
         ;
 
-      
-         
+       // if (key.equals("0")) {
+           // 
+
         
         
         //}
@@ -62,7 +64,7 @@ public class encry {
         
     }
 
-    public String[] newkey(String[] in) {
+    public static String[] newkey(String[] in) {
         Random randy = new Random();
 
         if (in.length == 0) {
@@ -89,7 +91,7 @@ public class encry {
         return numbers;
     }
 
-    public String endnewkey(String[] in) {
+    public static String endnewkey(String[] in) {
         String key = "";
 
         if (in.length == 3) {
