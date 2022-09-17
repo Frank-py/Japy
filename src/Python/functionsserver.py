@@ -159,10 +159,10 @@ class User():
                 val = (self.user, user2, user2, self.user)
                 cursor.execute(sql, val)
                 self.connection.commit()
-            else:
+            elif self.status == 2 and a != None:
                 if not self.user1binich:
                     sql = 'UPDATE KeyCache set B="%s" WHERE (user1 = "%s" AND user2 = "%s") OR (user1 = "%s" AND user2 = "%s");'
-                    val = (self.user, user2, user2, self.user)
+                    val = (a, self.user, user2, user2, self.user)
                     cursor.execute(sql, val)
                     self.connection.commit()
 
