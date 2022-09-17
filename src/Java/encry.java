@@ -17,16 +17,17 @@ public class encry {
         keys = new File("keys"+"login.name"+".json");
         try {
          keys.createNewFile();
-     }  catch (IOException e1) {
+         parser = JsonParser.parseReader(new FileReader(keys));
+         keylist = parser.getAsJsonObject();
+         Gson gson = new Gson();
+         FileWriter fileWriter;
+         fileWriter = new FileWriter(keys);
+        String[] in = {"a"};
+        gson.toJson( in,fileWriter);
+        fileWriter.close();
+        }  catch (Exception e1) {
          e1.printStackTrace();
-     }
-        try {
-            parser = JsonParser.parseReader(new FileReader("keys"+"login.name"+".json"));
-            keylist = parser.getAsJsonObject();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+     }  
          
       
              
@@ -35,6 +36,7 @@ public class encry {
         getKey("wgg");
     }
     public static String a(){
+
         
         
         return Integer.toString(a);
