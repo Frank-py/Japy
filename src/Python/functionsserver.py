@@ -17,8 +17,11 @@ class User():
         try:
             connection = mysql.connector.connect(
                 host="localhost",
-                user="root",
-                passwd="",
+   #             user="root",
+                user="admin",
+                passwd="4sdf38§$/WE3/FW§459fd2w3",
+   
+   #             passwd="",
                 database="Messenger"
         )
         except Error as e:
