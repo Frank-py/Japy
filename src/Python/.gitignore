@@ -1,5 +1,0 @@
- __pycache__/
- *.pyc
- 
-src\Python\__pycache__
-.\src\Python\__pycache__\
