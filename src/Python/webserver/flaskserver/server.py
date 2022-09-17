@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, json
 import os, sys, random
+import hashlib
 sys.path.insert(1, os.path.join(sys.path[0], '../..'))
 from functionsserver import *
 benutzer = None
@@ -11,7 +12,7 @@ def login():
     request_method = request.method
     if request_method == "POST":
         form = json.loads(request.data)
-        benutzer = User().checkaccount(form["content"][0], hashlib.md5(bytes(form['content'][1], encoding='UTF-8')).hexdigest(), "123")
+        benutzer = User().checkaccount(form["content"][0], hashlib.md5(bytes(form["content"][1], encoding='utf-8')).hexdigest())
         if benutzer.loggedin and benutzer.registriert:
             #redirect!
             return {"response": "202"}
