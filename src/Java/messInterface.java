@@ -35,10 +35,10 @@ public class messInterface {
 
     messInterface(int log) {
 
-        while (!logins) {
+      /*   while (!logins) {
             logins = login.loggedin;
             System.out.print("");
-        }
+        } */
 
         frame = new JFrame();
         frame.setLayout(new BorderLayout());

@@ -4,85 +4,44 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class login{
-  //int counter = 0;
-  public static String name;
-  public static boolean loggedin = false;
-  ImageIcon logo = new ImageIcon("Java/prof5.png");
+  static ImageIcon logo = new ImageIcon("Java/prof5.png");
   //ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
     //ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
-  JFrame frame = new JFrame();
-  Color color = new Color(27,37,43);
-  JLabel laby = new JLabel("Hier Anmelden:");
-  JPanel title = new JPanel();
-  JPanel UserInput = new JPanel(new GridLayout(8, 1));
-  JPanel button = new JPanel();
-  JPanel space = new JPanel();
-  JTextField user = new JTextField("");
-  JLabel UserTitle = new JLabel("Username: ");
-  JPasswordField pass = new JPasswordField();
-  JLabel PassTitle = new JLabel("Password: ");
-  JButton loginbu = new JButton("Login!");
-  JCheckBox robo = new JCheckBox("I'm not a robot");
-  JCheckBox EULA = new JCheckBox("Accept the EULA and our AGB");
-  JCheckBox news = new JCheckBox("Subscribe to the Newsletter", true);
-  KeyListener g = new KeyListener() {
-    public void keyPressed(KeyEvent e) {
-       if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-        if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
-          enter("2");
-  
-        } else if (EULA.isSelected() == false | robo.isSelected() == false) {
-          enter("3");
-        } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
-          enter("4");
-          } else {
-          try {
-            String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
-            name=user.getText();
-            enter(sendrecv.send( "login", lol));
+  static JFrame frame = new JFrame();
+  static Color color = new Color(27,37,43);
+  static JLabel laby = new JLabel("Hier Anmelden:");
+  static JPanel title = new JPanel();
+  static JPanel UserInput = new JPanel(new GridLayout(8, 1));
+  static JPanel button = new JPanel();
+  static JPanel space = new JPanel();
+  static JTextField user = new JTextField("");
+  static JLabel UserTitle = new JLabel("Username: ");
+  static JPasswordField pass = new JPasswordField();
+  static JLabel PassTitle = new JLabel("Password: ");
+  static JButton loginbu = new JButton("Login!");
+  static JCheckBox robo = new JCheckBox("I'm not a robot");
+  static JCheckBox EULA = new JCheckBox("Accept the EULA and our AGB");
+  static JCheckBox news = new JCheckBox("Subscribe to the Newsletter", true);
 
-            // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
-          } catch (Exception f) {
-            enter("5");
-          }
-        }
-      }
-    }
-    public void keyReleased(KeyEvent e) {}
-    public void keyTyped(KeyEvent e) {}
-  };
-  ActionListener act = new ActionListener() {
-    public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == loginbu) {
-        if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
-          enter("2");
+  /**
+   * 
+   */
+  public static void userlogin(){
+   
+    createWindow();
+    
   
-        } else if (EULA.isSelected() == false | robo.isSelected() == false) {
-          enter("3");
-        } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
-          enter("4");
-          } else {
-          try {
-            String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
-            name = user.getText();
-            enter(sendrecv.send( "login", lol));    
-            // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
-          } catch (Exception f) {
-            enter("5");
-          }
-        }
-      }
-    }
-  };
-  login(){
-    frame.setSize(320, 440);
-   // frame.setAlwaysOnTop(true);
-    frame.setLocationRelativeTo(null);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setTitle("Login");
-    frame.setResizable(false);
-    frame.setIconImage(logo.getImage());
-    frame.getContentPane().setBackground(color);
+}
+
+private  void createWindow() {
+  frame.setSize(320, 440);
+  // frame.setAlwaysOnTop(true);
+  frame.setLocationRelativeTo(null);
+  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  frame.setTitle("Login");
+  frame.setResizable(false);
+  frame.setIconImage(logo.getImage());
+  frame.getContentPane().setBackground(color);
     laby.setFont(new Font("MV Boli", Font.BOLD, 30));
     laby.setForeground(Color.white);
     title.setBackground(color);
@@ -124,23 +83,73 @@ public class login{
     UserInput.add(button);
     frame.add(title, BorderLayout.NORTH);
     frame.add(UserInput, BorderLayout.CENTER);
-    frame.setVisible(true);
-    
-    
+    frame.setVisible(true); 
   }
+
+ // public static String name;
+ // public static boolean loggedin = false;
+   KeyListener g = new KeyListener() {
+    public void keyPressed(KeyEvent e) {
+       if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+        name = user.getText();
+        if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
+          enter("2");
   
-  void enter(String recv){
+        } else if (EULA.isSelected() == false | robo.isSelected() == false) {
+          enter("3");
+        } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
+          enter("4");
+          } else {
+          try {
+            String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
+            name=user.getText();
+            enter(send( "login", lol));
+
+            // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
+          } catch (Exception f) {
+            enter("5");
+          }
+        }
+      }
+    }
+    public void keyReleased(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {}
+  };
+   ActionListener act = new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+      if (e.getSource() == loginbu) {
+        if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
+          enter("2");
+  
+        } else if (EULA.isSelected() == false | robo.isSelected() == false) {
+          enter("3");
+        } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
+          enter("4");
+          } else {
+          try {
+            String[] UP = { user.getText(), String.valueOf(pass.getPassword()) };
+           // name = user.getText();
+            enter(send( "login", UP));    
+            // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
+          } catch (Exception f) {
+            enter("5");
+          }
+        }
+      }
+    }
+  };
+  
+  static void enter(String recv){
     if (Integer.parseInt(recv) == 0) {
       frame.dispose();
       JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
-      loggedin = true;
+    //  loggedin = true;
       //new messInterface(0);
-      System.out.println("hallo");
       return;
      
     } else if (Integer.parseInt(recv) == 1) {
       frame.dispose();
-      loggedin = true;
+     // loggedin = true;
       //new messInterface(1);
       System.out.println("hall o");
       return;
