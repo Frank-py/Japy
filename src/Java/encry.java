@@ -4,6 +4,7 @@ import java.math.*;
 import java.util.*;
 import java.io.*;
 import com.google.gson.*;
+
 public class encry {
     public static int p;
     public static int g;
@@ -12,57 +13,55 @@ public class encry {
     public static File keys;
     public static JsonObject keylist;
     public static String key = "";
-    encry(){
+
+    encry() {
         JsonElement parser;
-        keys = new File("keys"+"login.name"+".json");
+        keys = new File("keys" + "login.name" + ".json");
         try {
-         keys.createNewFile();
-         parser = JsonParser.parseReader(new FileReader(keys));
-         keylist = parser.getAsJsonObject();
-         Gson gson = new Gson();
-         FileWriter fileWriter;
-         fileWriter = new FileWriter(keys);
-        String[] in = {"a"};
-        gson.toJson( in,fileWriter);
-        fileWriter.close();
-        }  catch (Exception e1) {
-         e1.printStackTrace();
-     }  
-         
-      
-             
+            keys.createNewFile();
+            parser = JsonParser.parseReader(new FileReader(keys));
+            keylist = parser.getAsJsonObject();
+            Gson gson = new Gson();
+            FileWriter fileWriter;
+            fileWriter = new FileWriter(keys);
+            String[] in = { "a" };
+            gson.toJson(in, fileWriter);
+            fileWriter.close();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+
     }
+
     public static void main(String[] args) {
         getKey("wgg");
     }
-    public static String a(){
 
-        
-        
+    public static String a() {
+
         return Integer.toString(a);
     }
 
-    public static String getKey(String User){
-        
-           if (keylist.has(User)) {
+    public static String getKey(String User) {
+
+        if (keylist.has(User)) {
             key = keylist.get(User).getAsString();
-           }
-           else{
+        } else {
             key = sendrecv.send("createKey", new String[] { User });
-           }
+        }
 
-           return key;
-       // FileWriter keyWriter = new FileWriter("..\\keys"+login.name+".json");
-       // keyWriter.write(""
-            
-       // );
-       // keyWriter.close(); 
+        return key;
+        // FileWriter keyWriter = new FileWriter("..\\keys"+login.name+".json");
+        // keyWriter.write(""
 
-       // if (key.equals("0")) {
-           // 
-        
-        //}
-        
+        // );
+        // keyWriter.close();
+
+        // if (key.equals("0")) {
+        //
+
+        // }
+
     }
 
     public static String[] newkey(String[] in) {
@@ -87,7 +86,7 @@ public class encry {
         BigInteger rando = BigInteger.valueOf(a);
         BigInteger A = gg.modPow(rando, pp);
 
-        String[] numbers = { pp.toString(10), gg.toString(10), A.toString(10) }; //,a
+        String[] numbers = { pp.toString(10), gg.toString(10), A.toString(10) }; // ,a
         return numbers;
     }
 
@@ -104,21 +103,20 @@ public class encry {
         return key;
     }
 
-    public static String[] decMes(String in,String key) {
+    public static String[] decMes(String in, String key) {
         String[] ary = in.split(";");
         System.out.println(Arrays.toString(ary));
-       int n = 0;
-       String[] out = new String[10000];
+        int n = 0;
+        String[] out = new String[10000];
         for (String i : ary) {
-        
-           
-           out[n]=decryption(i,key);
-           n++;
-            
+
+            out[n] = decryption(i, key);
+            n++;
+
         }
         System.out.println(Arrays.toString(out));
         return out;
-        
+
     }
 
     public static String encryption(String in, String key) {
