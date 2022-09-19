@@ -1,15 +1,25 @@
 
 Colors final
-Fix panel size main window(messinterface)
+
 logout
 
+nachrichten trennen
+ keine while Schleife
+  richtige Reihenfolge anzeigen
+   Design(looking at you background and top abstand verschoben)
+   verschlüsselung
+    Zeit anzeigen
+     minor bug fixes,
+write to json
+portability to phones
+server auf server
+settings menu
+echtes reCaptcha
+(nicht google api) vielleicht was witziges, wie z.b. mathe aufgaben
+Eingeloggt bleiben
+(z.b. durch cache auf dem Computer)
+Website noch
 
-seid ihr noch drin
-
-LINUX HALT
-Ja bei uns gehts
-es gibt ne todo.txt am besten da rein schreiben
-https://downdetector.com/status/discord/
 
 public static void scale() {
         JLabel background = new JLabel();
