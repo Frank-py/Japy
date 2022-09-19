@@ -71,8 +71,8 @@ public class sendrecv {
                 s = bf.readLine();
                 if (s.equals("0")) {
                     s = "";
-                    String [] pgA = encry.newkey(new String[]{});
-                    //s.append(in[0]);
+                    String[] pgA = encry.newkey(new String[] {});
+                    // s.append(in[0]);
                     out.print(pgA[0]);
                     out.flush();
                     bf.readLine();
@@ -82,18 +82,28 @@ public class sendrecv {
                     out.print(pgA[2]);
                     out.flush();
                     bf.readLine();
-                    
-                } 
-                if (s.equals("2")) {
-                    String[] Bap = new String[3];
-                    Bap[0] = bf.readLine();
-                    Bap[2] = bf.readLine();
-                    Bap[1] = encry.a();
-                    s = encry.endnewkey(Bap);
-
 
                 }
-                else{
+                if (s.equals("2")) {
+                    String[] Bap = new String[3];
+                    Bap[2] = bf.readLine();
+                    String g = bf.readLine();
+                    Bap[0] = bf.readLine();
+                    String[] pgA = encry.newkey(new String[] { Bap[2], g });
+                    Bap[1] = encry.a();
+                    out.print(pgA[0]);
+                    out.flush();
+                    bf.readLine();
+                    out.print(pgA[1]);
+                    out.flush();
+                    bf.readLine();
+                    out.print(pgA[2]);
+                    out.flush();
+                    bf.readLine();
+
+                    s = encry.endnewkey(Bap);
+
+                } else {
                     s = bf.readLine();
 
                 }
