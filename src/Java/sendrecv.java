@@ -10,17 +10,17 @@ public class sendrecv {
     public static String s;
     public static Socket socket;
 
-    public static Socket socket() {
+    sendrecv() {
 
         try {
             socket =   new Socket("localhost", 6000);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return socket;
+       
     }
 
-    public static String send(String Funktion, String in[]) {
+    public String send(String Funktion, String in[]) {
         try {
             s = null;
             bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
