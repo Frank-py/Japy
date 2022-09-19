@@ -20,7 +20,7 @@ Eingeloggt bleiben
 (z.b. durch cache auf dem Computer)
 Website noch
 
-
+ooooooooooo
 public static void scale() {
         JLabel background = new JLabel();
         Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(), Image.SCALE_SMOOTH);
