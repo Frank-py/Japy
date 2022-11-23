@@ -61,6 +61,7 @@ async def Client(reader,writer):
             await writer.drain()
             if await checkforquit(response, writer):
                 return
+
             data.append(response)
             if benutzer.searchaccount(data[1]):
                 writer.write("1\n".encode('utf-8'))
@@ -76,28 +77,23 @@ async def Client(reader,writer):
             if await checkforquit(response, writer):
                 data.append(response)
             data.append(response)
-            writer.write("200\n".encode("utf-8"))
-            await writer.drain()
+           
             response = (await reader.read(5000)).decode("utf-8")
             writer.write("200\n".encode("utf-8"))
             await writer.drain()
             if await checkforquit(response, writer):
                 return
             data.append(response)
-            writer.write("200\n".encode("utf-8"))
-            await writer.drain()
             print(data[2])
             benutzer.insertmessage(data[1], data[2]) 
             writer.write("200\n".encode("utf-8"))
             await writer.drain()
         if data[0] == "createKey":
-            response = (await reader.read(512)).decode("utf-8")
+            response = (await reader.read(512)).decode("utf-8") #user
             writer.write("200\n".encode("utf-8"))
             if await checkforquit(response, writer):
                 return
             data.append(response)
-            writer.write("200\n".encode("utf-8"))
-            await writer.drain()
             writer.write(benutzer.createKey(data[1]).encode("utf-8")+"\n".encode("utf-8"))
             await writer.drain()
             if benutzer.status == 1:
