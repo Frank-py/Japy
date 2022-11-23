@@ -47,7 +47,7 @@ public class encry {
         if (keylist.has(User)) {
             key = keylist.get(User).getAsString();
         } else {
-            key = sendrecv.send("createKey", new String[] { User });
+            key = sendrecv.createKey(User);
         }
 
         return key;
