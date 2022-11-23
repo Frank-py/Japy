@@ -13,7 +13,7 @@ async def Client(reader,writer):
         response = (await reader.read(512)).decode("utf-8")
         writer.write("200\n".encode("utf-8"))
         await writer.drain()
-        if checkforquit(response, writer):
+        if await checkforquit(response, writer):
             return
         data.append(response)
         if data[0] == "login":
@@ -21,7 +21,7 @@ async def Client(reader,writer):
                 response = (await reader.read(512)).decode("utf-8")
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
-                if checkforquit(response, writer):
+                if await checkforquit(response, writer):
                     return
                 data.append(response)
             benutzer = User().checkaccount(data[1], hashlib.md5(bytes(data[2], encoding='utf-8')).hexdigest())
@@ -41,7 +41,7 @@ async def Client(reader,writer):
         response = (await reader.read(512)).decode("utf-8")
         writer.write("200\n".encode("utf-8"))
         await writer.drain()
-        if checkforquit(response, writer):
+        if await checkforquit(response, writer):
             return
         data.append(response)
         if data[0] == "getMes":
