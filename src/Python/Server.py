@@ -13,9 +13,7 @@ async def Client(reader,writer):
         response = (await reader.read(512).decode("utf-8"))
         writer.write("200\n".encode("utf-8"))
         await writer.drain()
-        if response == "quit":
-            writer.write("quit\n".encode("utf-8"))
-            await writer.drain()
+        if checkforquit(response, writer):
             return
         data.append(response)
         if data[0] == "login":
@@ -23,9 +21,7 @@ async def Client(reader,writer):
                 response = (await reader.read(512).decode("utf-8"))
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
-                if response == "quit":
-                    writer.write("quit\n".encode("utf-8"))
-                    await writer.drain()
+                if checkforquit(response, writer):
                     return
                 data.append(response)
             benutzer = User().checkaccount(data[1], hashlib.md5(bytes(data[2], encoding='utf-8')).hexdigest())
@@ -45,9 +41,7 @@ async def Client(reader,writer):
         response = (await reader.read(512).decode("utf-8"))
         writer.write("200\n".encode("utf-8"))
         await writer.drain()
-        if response == "quit":
-            writer.write("quit\n".encode("utf-8"))
-            await writer.drain()
+        if checkforquit(response, writer):
             return
         data.append(response)
         if data[0] == "getMes":
@@ -55,9 +49,7 @@ async def Client(reader,writer):
             response = (await reader.read(512).decode("utf-8"))
             writer.write("200\n".encode("utf-8"))
             await writer.drain()
-            if response == "quit":
-                writer.write("quit\n".encode("utf-8"))
-                await writer.drain()
+            if checkforquit(response, writer):
                 return
             data.append(response)
             nachrichte = benutzer.checkformessages(data[1])
@@ -67,11 +59,8 @@ async def Client(reader,writer):
             response = (await reader.read(512).decode("utf-8"))
             writer.write("200\n".encode("utf-8"))
             await writer.drain()
-            if response == "quit":
-                writer.write("quit\n".encode("utf-8"))
-                await writer.drain()
-                return
-            data.append(response)
+            if checkforquit(response, writer):
+                data.append(response)
             if benutzer.searchaccount(data[1]):
                 writer.write("1\n".encode('utf-8'))
                 await writer.drain()
@@ -83,10 +72,8 @@ async def Client(reader,writer):
             response = (await reader.read(512).decode("utf-8"))
             writer.write("200\n".encode("utf-8"))
             await writer.drain()
-            if response == "quit":
-                writer.write("quit\n".encode("utf-8"))
-                await writer.drain()
-                return
+            if checkforquit(response, writer):
+                data.append(response)
             data.append(response)
             writer.write("200\n".encode("utf-8"))
             await writer.drain()
