@@ -16,15 +16,15 @@ public class encry {
 
     encry() {
         JsonElement parser;
-        keys = new File("keys" + "login.name" + ".json");
         try {
-            keys.createNewFile();
+            keys = new File("keys" + "login.name" + ".json");
+            new File("keys" + "login.name" + ".json").createNewFile();
             parser = JsonParser.parseReader(new FileReader(keys));
             keylist = parser.getAsJsonObject();
             Gson gson = new Gson();
             FileWriter fileWriter;
             fileWriter = new FileWriter(keys);
-            String[] in = { "a" };
+            String[] in = { "{user:passwort}" };
             gson.toJson(in, fileWriter);
             fileWriter.close();
         } catch (Exception e1) {
