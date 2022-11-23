@@ -10,7 +10,7 @@ async def checkforquit(text, writer):
 async def Client(reader,writer):
     while True:
         data = []
-        response = (await reader.read(512).decode("utf-8"))
+        response = (await reader.read(512)).decode("utf-8")
         writer.write("200\n".encode("utf-8"))
         await writer.drain()
         if checkforquit(response, writer):
@@ -18,7 +18,7 @@ async def Client(reader,writer):
         data.append(response)
         if data[0] == "login":
             for i in range(2):
-                response = (await reader.read(512).decode("utf-8"))
+                response = (await reader.read(512)).decode("utf-8")
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
                 if checkforquit(response, writer):
@@ -38,7 +38,7 @@ async def Client(reader,writer):
                 await writer.drain()
     while True: 
         data = []
-        response = (await reader.read(512).decode("utf-8"))
+        response = (await reader.read(512)).decode("utf-8")
         writer.write("200\n".encode("utf-8"))
         await writer.drain()
         if checkforquit(response, writer):
