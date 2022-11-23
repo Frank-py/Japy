@@ -60,7 +60,8 @@ async def Client(reader,writer):
             writer.write("200\n".encode("utf-8"))
             await writer.drain()
             if await checkforquit(response, writer):
-                data.append(response)
+                return
+            data.append(response)
             if benutzer.searchaccount(data[1]):
                 writer.write("1\n".encode('utf-8'))
                 await writer.drain()
