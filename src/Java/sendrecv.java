@@ -4,28 +4,19 @@ package Java;
 import java.io.*;
 import java.net.*;
 
-public class sendrecv {
+public class sendrecv{
     public static BufferedReader bf;
     public static PrintWriter out;
     public static String s;
     public static Socket socket;
 
-    sendrecv() {
-
+    public static String login(String in[]) {
         try {
             socket =   new Socket("localhost", 6000);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-       
-    }
-
-    public String send(String Funktion, String in[]) {
-        try {
-            s = null;
             bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
-            if (Funktion == "login") {
+            
+       
                 out.print("login");
                 out.flush();
                 bf.readLine();
@@ -36,7 +27,82 @@ public class sendrecv {
                 out.flush();
                 bf.readLine();
                 s = bf.readLine();
-            } else if (Funktion == "proofuser") {
+                return s;
+            } catch (IOException e) {
+                return null;
+            }
+        
+    }
+    public static String proofuser (String in) {
+    
+        try {
+        out.print("proofuser");
+        out.flush();
+        
+            bf.readLine();
+        out.print(in.replaceAll("\r", "").replaceAll("\n", ""));
+        out.flush();
+        bf.readLine();
+        return bf.readLine();
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+   public static String sendMes(String[] in) {
+    try {
+        out.print("sendMes");
+        out.flush();
+        bf.readLine();
+        out.print(in[0]);
+        out.flush();
+        bf.readLine();
+        out.print(in[1]);
+        out.flush();
+        bf.readLine();
+        return "Success";}
+        catch (IOException e) {
+            return null;
+        }
+        }
+
+       public static String getMes(String in)  {
+        
+            try {
+            out.print("getMes");
+            out.flush();
+                bf.readLine();
+            out.print(in);
+            out.flush();
+            bf.readLine();
+            return bf.readLine();
+            } catch (IOException e) {
+                return null;
+            }
+        } 
+
+
+
+
+
+
+    public String send(String Funktion, String in[]) {
+        try {
+            s = null;
+            bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new PrintWriter(socket.getOutputStream(), true);
+           /* if (Funktion == "login") {
+                out.print("login");
+                out.flush();
+                bf.readLine();
+                out.print(in[0].replaceAll("\r", "").replaceAll("\n", ""));
+                out.flush();
+                bf.readLine();
+                out.print(in[1].replaceAll("\r", "").replaceAll("\n", ""));
+                out.flush();
+                bf.readLine();
+                s = bf.readLine();
+            } if (Funktion == "proofuser") {
                 out.print("proofuser");
                 out.flush();
                 bf.readLine();
@@ -44,7 +110,7 @@ public class sendrecv {
                 out.flush();
                 bf.readLine();
                 s = bf.readLine();
-            } else if (Funktion == "sendMes") {
+            }  if (Funktion == "sendMes") {
                 out.print("sendMes");
                 out.flush();
                 bf.readLine();
@@ -54,8 +120,8 @@ public class sendrecv {
                 out.print(in[1]);
                 out.flush();
                 bf.readLine();
-                s = "Success";
-            } else if (Funktion == "getMes") {
+                s = "Success";}*/
+             if (Funktion == "getMes") {
                 out.print("getMes");
                 out.flush();
                 bf.readLine();

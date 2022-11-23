@@ -26,14 +26,68 @@ public class login{
   /**
    * 
    */
-  public static void userlogin(){
+  public static void main(){
    
-    createWindow();
+   // createWindow();
     
   
 }
 
-private  void createWindow() {
+public static void createWindow() {
+  KeyListener g = new KeyListener() {
+    public void keyPressed(KeyEvent e) {
+       if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+       // name = user.getText();
+        if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
+          enter("2");
+  
+        } else if (EULA.isSelected() == false | robo.isSelected() == false) {
+          enter("3");
+        } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
+          enter("4");
+          } else {
+          try {
+            String[] UP= { user.getText(), String.valueOf(pass.getPassword()) };
+           // name=user.getText();
+            if(enter(sendrecv.login(UP))==1){
+              run.loggedin(UP);
+            }
+
+            // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
+          } catch (Exception f) {
+            enter("5");
+          }
+        }
+      }
+    }
+    public void keyReleased(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {}
+  };
+   ActionListener act = new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+      if (e.getSource() == loginbu) {
+        if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
+          enter("2");
+  
+        } else if (EULA.isSelected() == false | robo.isSelected() == false) {
+          enter("3");
+        } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
+          enter("4");
+          } else {
+          try {
+            String[] UP = { user.getText(), String.valueOf(pass.getPassword()) };
+           // name = user.getText();
+           if(enter(sendrecv.login(UP))==1){
+            run.loggedin(UP);
+          }
+            // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
+          } catch (Exception f) {
+            enter("5");
+          }
+        }
+      }
+    }
+  };
   frame.setSize(320, 440);
   // frame.setAlwaysOnTop(true);
   frame.setLocationRelativeTo(null);
@@ -83,76 +137,29 @@ private  void createWindow() {
     UserInput.add(button);
     frame.add(title, BorderLayout.NORTH);
     frame.add(UserInput, BorderLayout.CENTER);
-    frame.setVisible(true); 
-  }
+    frame.setVisible(true);
+     
+  
 
  // public static String name;
  // public static boolean loggedin = false;
-   KeyListener g = new KeyListener() {
-    public void keyPressed(KeyEvent e) {
-       if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-        name = user.getText();
-        if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
-          enter("2");
   
-        } else if (EULA.isSelected() == false | robo.isSelected() == false) {
-          enter("3");
-        } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
-          enter("4");
-          } else {
-          try {
-            String[] lol = { user.getText(), String.valueOf(pass.getPassword()) };
-            name=user.getText();
-            enter(send( "login", lol));
-
-            // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
-          } catch (Exception f) {
-            enter("5");
-          }
-        }
-      }
-    }
-    public void keyReleased(KeyEvent e) {}
-    public void keyTyped(KeyEvent e) {}
-  };
-   ActionListener act = new ActionListener() {
-    public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == loginbu) {
-        if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
-          enter("2");
+}
   
-        } else if (EULA.isSelected() == false | robo.isSelected() == false) {
-          enter("3");
-        } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50){ 
-          enter("4");
-          } else {
-          try {
-            String[] UP = { user.getText(), String.valueOf(pass.getPassword()) };
-           // name = user.getText();
-            enter(send( "login", UP));    
-            // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
-          } catch (Exception f) {
-            enter("5");
-          }
-        }
-      }
-    }
-  };
-  
-  static void enter(String recv){
+  static int enter(String recv){
     if (Integer.parseInt(recv) == 0) {
       frame.dispose();
       JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
     //  loggedin = true;
       //new messInterface(0);
-      return;
+      return 1;
      
     } else if (Integer.parseInt(recv) == 1) {
       frame.dispose();
      // loggedin = true;
       //new messInterface(1);
       System.out.println("hall o");
-      return;
+      return 1;
     
     } else if (Integer.parseInt(recv) == 2) {
       EULA.setSelected(false);
@@ -161,7 +168,7 @@ private  void createWindow() {
 
       JOptionPane.showMessageDialog(null, "No or Wrong Password or Username, try again!", "Invalid UserInput",
           JOptionPane.ERROR_MESSAGE);
-      return ;
+      return 0;
     } else if (Integer.parseInt(recv) == 3) {
           JOptionPane.showMessageDialog(null, "Proof Humanity and Accept EULA", "Accept required Terms",
           JOptionPane.ERROR_MESSAGE);
@@ -181,7 +188,7 @@ private  void createWindow() {
             System.out.println(counter);
           }
           loginbu.setEnabled(true);*/
-          return ;
+          return 0;
     } else if (Integer.parseInt(recv) == 4){
           EULA.setSelected(false);
           news.setSelected(true);
@@ -189,13 +196,18 @@ private  void createWindow() {
           pass.setText("");
           user.setText("");
           JOptionPane.showMessageDialog(null, "Username or Password is too long, try again!", "Invalid UserInput", JOptionPane.ERROR_MESSAGE);
-          return ;
+          return 0;
       }
       else if (Integer.parseInt(recv) == 5) {
           JOptionPane.showMessageDialog(null, "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
           JOptionPane.ERROR_MESSAGE);
           frame.dispose();
-          return ;
-    }
+          return 0;
+      }
+      else{
+        return 0;
+      }
+        
+    
   }
 }
