@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from "./pages/Login"
 import NotFound from "./pages/NotFound"
 import Messenger from "./pages/Messenger"
+import React from 'react';
 import Logout from "./pages/Logout"
 const Router = () => {
     document.title = "Messenger";
