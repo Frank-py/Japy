@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch messInterface",
+            "request": "launch",
+            "mainClass": "Java.messInterface",
+            "projectName": "Japy_156e1437"
+        },
+        {
+            "type": "java",
             "name": "Launch run",
             "request": "launch",
             "mainClass": "Java.run",

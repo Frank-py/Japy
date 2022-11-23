@@ -10,6 +10,7 @@ public class messInterface {
     String[] user;
     String currentUser;
     int n = 0;
+    Color fontcolor = new Color(0xD4D4D4);
     public static boolean logins = false;
     JButton[] userliste = new JButton[100];
     JLayeredPane back = new JLayeredPane();
@@ -33,7 +34,7 @@ public class messInterface {
     public int heighttemp;
     public int widthtemp;
 
-    messInterface(int log) {
+    messInterface() {
 
       /*   while (!logins) {
             logins = login.loggedin;
@@ -43,7 +44,8 @@ public class messInterface {
         frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.setSize(1366, 768);
-        frame.setMinimumSize(new Dimension(370, 370));
+        frame.setVisible(true);
+         frame.setMinimumSize(new Dimension(370, 370));
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Messenger");
@@ -76,9 +78,7 @@ public class messInterface {
                         recv = "5";
                         newUser.setText("");
                     } else {
-                        String[] userf = { newUser.getText() };
-                        user = userf;
-                        recv = sendrecv.send("proofuser", user);
+                        recv = sendrecv.proofuser(newUser.getText());
                         Users.remove(newUser);
                         // Users.setSize(addUsers.getWidth(), frame.getHeight());
 
@@ -88,9 +88,7 @@ public class messInterface {
 
             }
 
-            public void keyReleased(KeyEvent e) {
-            }
-
+            public void keyReleased(KeyEvent e) {}
             public void keyTyped(KeyEvent e) {
             }
         };
@@ -101,7 +99,7 @@ public class messInterface {
                     newUser = new JTextField();
                     addUsers.setEnabled(false);
                     newUser.setFont(new Font("Consolas", Font.PLAIN, 25));
-                    newUser.setForeground(new Color(0x00FF00));
+                    newUser.setForeground(fontcolor);
                     newUser.setBackground(color);
                     newUser.setCaretColor(Color.white);
 
@@ -119,15 +117,17 @@ public class messInterface {
                     }
 
                 }
+
+                
             }
         };
 
         in.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
-                    sendrecv.send("sendMes", new String[] { currentUser, in.getText() });
+                    sendrecv.sendMes( new String[] { currentUser, in.getText() });
                     in.setText("");
-                    JLabel label = new JLabel(sendrecv.send("getMes", new String[] { currentUser }));
+                    JLabel label = new JLabel(sendrecv.getMes( currentUser));
                     label.setSize(100, 100);
 
                     chat.add(label);
@@ -148,7 +148,7 @@ public class messInterface {
         addUsers = new JButton("Add User");
         addUsers.setIcon(plus);
         addUsers.setFont(new Font("MV Boli", Font.BOLD, 20));
-        addUsers.setForeground(new Color(0xFFFFFF));
+        addUsers.setForeground(fontcolor);
         addUsers.setBackground(new Color(47, 49, 54));
         addUsers.setFocusable(false);
         addUsers.addActionListener(act);
@@ -169,11 +169,13 @@ public class messInterface {
         back.add(chat, Integer.valueOf(1));
         back.add(background, Integer.valueOf(0));
         frame.add(back, BorderLayout.EAST); // ??????
-        frame.setVisible(true);
-        reloadframe();
-        while (true) {
+        frame.setVisible(true);}
+       // reloadframe();
+    
+        
+      /*   while (true) {
             if (frame.getHeight() != heighttemp || frame.getWidth() != widthtemp) {
-                reloadframe();
+               // reloadframe();
             }
             // String[] recieve = sendrecv.recv();
             System.out.print("");
@@ -185,7 +187,7 @@ public class messInterface {
                 recv = "500";
                 userliste[n] = new JButton(user[0]);
                 userliste[n].setFont(new Font("MV Boli", Font.PLAIN, 35));
-                userliste[n].setBackground(new Color(47, 49, 54));
+                userliste[n].setBackground(new Color(47, 49, 54));q
                 userliste[n].setForeground(new Color(0xFFFFFF));
                 userliste[n].setFocusable(false);
                 userliste[n].addActionListener(act);
@@ -205,7 +207,7 @@ public class messInterface {
                 recv = "500";
             }
         }
-    }
+    }*/
 
     public void reloadframe() {
         heighttemp = frame.getHeight();
@@ -225,8 +227,8 @@ public class messInterface {
 
     // main for testing not necessary
     public static void main(String[] args) {
-        sendrecv.socket();
-        new messInterface(0);
+       // sendrecv.socket();
+        //new messInterface();
     }
 
     /*
@@ -244,7 +246,7 @@ public class messInterface {
     void newchat() {
         String key = encry.getKey(currentUser);
         
-        encry.decMes(sendrecv.send("getMes", new String[] { currentUser }),key);
+        encry.decMes(sendrecv.getMes(currentUser),key);
         JLabel label = new JLabel();
         label.setSize(10, 10);
 
