@@ -29,6 +29,7 @@ public class sendrecv{
                 s = bf.readLine();
                 return s;
             } catch (IOException e) {
+
                 return null;
             }
         
@@ -80,6 +81,60 @@ public class sendrecv{
                 return null;
             }
         } 
+
+        public static String createKey(String in) {
+           
+                try {
+                out.print("createKey");
+                out.flush();
+                    bf.readLine();
+                out.print(in);
+                s = bf.readLine();
+                if (s.equals("0")) {
+                    s = "";
+                    String[] pgA = encry.newkey(new String[] {});
+                    // s.append(in[0]);
+                    out.print(pgA[0]);
+                    out.flush();
+                    bf.readLine();
+                    out.print(pgA[1]);
+                    out.flush();
+                    bf.readLine();
+                    out.print(pgA[2]);
+                    out.flush();
+                    bf.readLine();
+
+                }
+                if (s.equals("2")) {
+                    String[] Bap = new String[3];
+                    Bap[2] = bf.readLine();
+                    String g = bf.readLine();
+                    Bap[0] = bf.readLine();
+                    String[] pgA = encry.newkey(new String[] { Bap[2], g });
+                    Bap[1] = encry.a();
+                    out.print(pgA[0]);
+                    out.flush();
+                    bf.readLine();
+                    out.print(pgA[1]);
+                    out.flush();
+                    bf.readLine();
+                    out.print(pgA[2]);
+                    out.flush();
+                    bf.readLine();
+
+                    return encry.endnewkey(Bap);
+
+                } else {
+                    return bf.readLine();
+
+                }
+
+                } catch (IOException e) {
+                   return null;
+                }
+            }
+            
+
 
 
 
