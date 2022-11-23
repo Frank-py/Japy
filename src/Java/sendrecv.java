@@ -87,8 +87,9 @@ public class sendrecv{
                 try {
                 out.print("createKey");
                 out.flush();
-                    bf.readLine();
+                bf.readLine();
                 out.print(in);
+                bf.readLine();
                 s = bf.readLine();
                 if (s.equals("0")) {
                     s = "";
@@ -130,6 +131,7 @@ public class sendrecv{
                 }
 
                 } catch (IOException e) {
+                    e.printStackTrace();
                    return null;
                 }
             }
