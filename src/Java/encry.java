@@ -43,8 +43,9 @@ public class encry {
     }
 
     public static String getKey(String User) {
-
+        System.out.println("fdsfs");
         if (keylist.has(User)) {
+           
             key = keylist.get(User).getAsString();
         } else {
             key = sendrecv.createKey(User);
@@ -86,7 +87,7 @@ public class encry {
         BigInteger rando = BigInteger.valueOf(a);
         BigInteger A = gg.modPow(rando, pp);
 
-        String[] numbers = { pp.toString(10), gg.toString(10), A.toString(10) }; // ,a
+        String[] numbers = { pp.toString(10), gg.toString(10), A.toString(10) }; 
         return numbers;
     }
 

@@ -89,11 +89,15 @@ public class sendrecv{
                 out.flush();
                 bf.readLine();
                 out.print(in);
+                out.flush();
                 bf.readLine();
                 s = bf.readLine();
                 if (s.equals("0")) {
                     s = "";
+                    System.out.println("0 received");
+                    
                     String[] pgA = encry.newkey(new String[] {});
+                    
                     // s.append(in[0]);
                     out.print(pgA[0]);
                     out.flush();
@@ -104,7 +108,7 @@ public class sendrecv{
                     out.print(pgA[2]);
                     out.flush();
                     bf.readLine();
-
+                    return "0";
                 }
                 if (s.equals("2")) {
                     String[] Bap = new String[3];
@@ -122,17 +126,16 @@ public class sendrecv{
                     out.print(pgA[2]);
                     out.flush();
                     bf.readLine();
-
                     return encry.endnewkey(Bap);
 
                 } else {
-                    return bf.readLine();
+                    return s;
 
                 }
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                   return null;
+                   return "nulll";
                 }
             }
             
