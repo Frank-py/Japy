@@ -78,15 +78,15 @@ public class messInterface {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     if (newUser.getText().length() > 1069 || newUser.getText().length() < 1) {
                         recv = "5";
-                        newUser.setText("");
+                        
                     } 
                     else {
                         recv = sendrecv.proofuser(newUser.getText());
                         if (recv.equals("0")) {
                             JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
                             recv = "500";
-                            //newUser.setText("");
-                            addUsers.setEnabled(true);
+                            
+                            //addUsers.setEnabled(true);
                         } else if (recv.equals("1")) {
                             recv = "500";
                             userliste[n] = new JButton(newUser.getText());
@@ -104,6 +104,7 @@ public class messInterface {
                                 }}});
                             Users.add(userliste[n], 1);
                             n++;
+                            Users.remove(newUser);
                             addUsers.setEnabled(true);
                             frame.setVisible(true);
                         } else if (recv.equals("4")) {
@@ -117,7 +118,8 @@ public class messInterface {
                                     JOptionPane.ERROR_MESSAGE);
                             recv = "500";
                         }
-                        Users.remove(newUser);
+                        //Users.remove(newUser);
+                        newUser.setText("");
                         // Users.setSize(addUsers.getWidth(), frame.getHeight());
 
                         frame.setVisible(true);
@@ -274,26 +276,25 @@ public class messInterface {
 
     void newchat() {
         String key = encry.getKey(currentUser);
+        if (key.equals("0")) {
+            JOptionPane.showMessageDialog(null,
+                                    "Invitation sent to user", "Good Luck",
+                                    JOptionPane.ERROR_MESSAGE);
+        }
+        else if(key.equals("1")){
+            JOptionPane.showMessageDialog(null,
+                                    "User has not accepted your invitation yet", "Ignored",
+                                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else{
         encry.decMes(sendrecv.getMes(currentUser), key);
         JLabel label = new JLabel();
         label.setSize(10, 10);
-
         chat.add(label);
-        /*
-         * 
-         * if (lol) {
-         * 
-         * chat.setSize(back.getWidth(), back.getHeight());
-         * chat.add(in);
-         * lol = false;
-         * }
-         */
         in.setText("");
-
-        // in.setSize(new Dimension(back.getWidth()-100, back.getHeight()-100));
-        // in.setSize(new Dimension(back.getWidth(), back.getHeight()));
-
         chat.add(in);
+        }
         frame.setVisible(true);
 
     }

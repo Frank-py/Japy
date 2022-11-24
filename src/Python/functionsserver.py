@@ -137,7 +137,7 @@ class User():
                     return "2"
         except Exception as e:
             return e
-    def insertkeys(self, user2, P=None, G=None, a=None):
+    def insertKeys(self, user2, P=None, G=None, a=None):
         cursor = self.connection.cursor()        
         try:
             if self.status == 0:

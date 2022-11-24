@@ -38,7 +38,6 @@ async def Client(reader,writer):
                     writer.write("2\n".encode('utf-8')) 
                     await writer.drain()
         while True: 
-            print("entered while")
             data = []
             response = (await reader.read(512)).decode("utf-8")
             writer.write("200\n".encode("utf-8"))
@@ -47,9 +46,8 @@ async def Client(reader,writer):
                 return
             
             data.append(response)
-            print(f"received something! {response}")
             if data[0] == "getMes":
-                print("getmes")
+                print("Get mes")
                 response = (await reader.read(512)).decode("utf-8")
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
@@ -73,9 +71,7 @@ async def Client(reader,writer):
                 else:
                     writer.write("0\n".encode('utf-8'))
                     await writer.drain()
-                print("finished proofuser")
             if data[0] == "sendMes":
-                print("Nachrichtanfrage erfolgreich abgeschlossen")
                 response = (await reader.read(512)).decode("utf-8")
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
@@ -89,26 +85,27 @@ async def Client(reader,writer):
                 if await checkforquit(response, writer):
                     return
                 data.append(response)
-                print(data[2])
                 benutzer.insertmessage(data[1], data[2]) 
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
             if data[0] == "createKey":
-                print("entered createKey")
                 response = (await reader.read(512)).decode("utf-8") #user
                 writer.write("200\n".encode("utf-8"))
                 if await checkforquit(response, writer):
                     return
                 data.append(response)
                 a = benutzer.createKey(data[1]).encode("utf-8")+"\n".encode("utf-8")
-                print(a)
-                writer.write(a)
-                print(f"wrote {a}")
-                await writer.drain()
                 if benutzer.status == 1:
+                    print("1")
+                    writer.write("1\n".encode("utf-8"))
+                    await writer.drain()
                     continue
-                if benutzer.status == 0:
+                elif benutzer.status == 0:
+                    writer.write(a)
+                    await writer.drain()
+                    print("0")
                     P = (await reader.read(512)).decode(encoding="utf-8")
+                    print(P)
                     writer.write("200\n".encode("utf-8"))
                     await writer.drain()
                     G = (await reader.read(512)).decode(encoding="utf-8")
@@ -118,7 +115,11 @@ async def Client(reader,writer):
                     writer.write("200\n".encode("utf-8"))
                     await writer.drain()
                     benutzer.insertKeys(data[1], P, G, A)
-                if benutzer.status == 2:
+                    print(f"{P:}{G:}{A:}")
+                elif benutzer.status == 2:
+                    writer.write(a)
+                    await writer.drain()
+                    print("2")
                     (P, G, A) = benutzer.getKeys(data[1])
                     writer.write(P.encode("utf-8"))
                     await writer.drain()

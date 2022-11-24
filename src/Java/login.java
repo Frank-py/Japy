@@ -158,7 +158,7 @@ public static void createWindow() {
       frame.dispose();
      // loggedin = true;
       //new messInterface(1);
-      System.out.println("hall o");
+      
       return 1;
     
     } else if (Integer.parseInt(recv) == 2) {
