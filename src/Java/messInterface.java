@@ -85,6 +85,7 @@ public class messInterface {
                         if (recv.equals("0")) {
                             JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
                             recv = "500";
+                            //newUser.setText("");
                             addUsers.setEnabled(true);
                         } else if (recv.equals("1")) {
                             recv = "500";
