@@ -38,13 +38,16 @@ async def Client(reader,writer):
                     writer.write("2\n".encode('utf-8')) 
                     await writer.drain()
         while True: 
+            print("entered while")
             data = []
             response = (await reader.read(512)).decode("utf-8")
             writer.write("200\n".encode("utf-8"))
             await writer.drain()
             if await checkforquit(response, writer):
                 return
+            
             data.append(response)
+            print(f"received something! {response}")
             if data[0] == "getMes":
                 print("getmes")
                 response = (await reader.read(512)).decode("utf-8")
@@ -70,6 +73,7 @@ async def Client(reader,writer):
                 else:
                     writer.write("0\n".encode('utf-8'))
                     await writer.drain()
+                print("finished proofuser")
             if data[0] == "sendMes":
                 print("Nachrichtanfrage erfolgreich abgeschlossen")
                 response = (await reader.read(512)).decode("utf-8")
@@ -90,12 +94,16 @@ async def Client(reader,writer):
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
             if data[0] == "createKey":
+                print("entered createKey")
                 response = (await reader.read(512)).decode("utf-8") #user
                 writer.write("200\n".encode("utf-8"))
                 if await checkforquit(response, writer):
                     return
                 data.append(response)
-                writer.write(benutzer.createKey(data[1]).encode("utf-8")+"\n".encode("utf-8"))
+                a = benutzer.createKey(data[1]).encode("utf-8")+"\n".encode("utf-8")
+                print(a)
+                writer.write(a)
+                print(f"wrote {a}")
                 await writer.drain()
                 if benutzer.status == 1:
                     continue
@@ -122,7 +130,8 @@ async def Client(reader,writer):
                     writer.write("200\n".encode("utf-8"))
                     await writer.drain()
                     benutzer.insertKeys(B)
-    except ConnectionResetError:
+    except (ConnectionResetError, BrokenPipeError) as E:
+        print(E)
         writer.close()
         await writer.wait_closed()
             
