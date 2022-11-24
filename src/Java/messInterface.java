@@ -30,22 +30,25 @@ public class messInterface {
     JTextField newUser;
     JPanel Users;
     public JLabel background;
+
     boolean createUser = false;
     public int heighttemp;
     public int widthtemp;
 
     messInterface() {
 
-      /*   while (!logins) {
-            logins = login.loggedin;
-            System.out.print("");
-        } */
+        /*
+         * while (!logins) {
+         * logins = login.loggedin;
+         * System.out.print("");
+         * }
+         */
 
         frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.setSize(1366, 768);
         frame.setVisible(true);
-         frame.setMinimumSize(new Dimension(370, 370));
+        frame.setMinimumSize(new Dimension(370, 370));
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Messenger");
@@ -66,7 +69,7 @@ public class messInterface {
 
         // chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
         // chat.setOpaque(false);
-        
+
         KeyListener enter = new KeyListener() {
 
             public void keyPressed(KeyEvent e) {
@@ -78,15 +81,15 @@ public class messInterface {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     if (newUser.getText().length() > 1069 || newUser.getText().length() < 1) {
                         recv = "5";
-                        
-                    } 
-                    else {
+
+                    } else {
                         recv = sendrecv.proofuser(newUser.getText());
                         if (recv.equals("0")) {
-                            JOptionPane.showMessageDialog(null, "User not found!", "User not found!", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "User not found!", "User not found!",
+                                    JOptionPane.ERROR_MESSAGE);
                             recv = "500";
-                            
-                            //addUsers.setEnabled(true);
+
+                            // addUsers.setEnabled(true);
                         } else if (recv.equals("1")) {
                             recv = "500";
                             userliste[n] = new JButton(newUser.getText());
@@ -94,14 +97,16 @@ public class messInterface {
                             userliste[n].setBackground(new Color(47, 49, 54));
                             userliste[n].setForeground(new Color(0xFFFFFF));
                             userliste[n].setFocusable(false);
-                            userliste[n].addActionListener(new ActionListener(){
+                            userliste[n].addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent e) {
-                                for (JButton o : userliste) {
-                                    if (e.getSource() == o) {
-                                        currentUser = o.getText();
-                                        newchat();
+                                    for (JButton o : userliste) {
+                                        if (e.getSource() == o) {
+                                            currentUser = o.getText();
+                                            newchat();
+                                        }
                                     }
-                                }}});
+                                }
+                            });
                             Users.add(userliste[n], 1);
                             n++;
                             Users.remove(newUser);
@@ -109,7 +114,8 @@ public class messInterface {
                             frame.setVisible(true);
                         } else if (recv.equals("4")) {
                             JOptionPane.showMessageDialog(null,
-                                    "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
+                                    "An unknown exception occured please try again! \nEnsure your internet connection",
+                                    "ERROR",
                                     JOptionPane.ERROR_MESSAGE);
                             recv = "500";
                         } else if (recv.equals("5")) {
@@ -118,24 +124,44 @@ public class messInterface {
                                     JOptionPane.ERROR_MESSAGE);
                             recv = "500";
                         }
-                        //Users.remove(newUser);
+                        // Users.remove(newUser);
                         newUser.setText("");
                         // Users.setSize(addUsers.getWidth(), frame.getHeight());
 
                         frame.setVisible(true);
-                
+
                     }
                 }
             }
+
             public void keyReleased(KeyEvent e) {
             }
 
             public void keyTyped(KeyEvent e) {
             }
         };
+        FocusListener bla = new FocusListener(){
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+                if (e.getSource() == newUser) {
+                    Users.remove(newUser);
+                    
+                }
+            }
+            
+        };
+
         ActionListener act = new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == addUsers) {
+
                     newUser = new JTextField();
                     addUsers.setEnabled(false);
                     newUser.setFont(new Font("Consolas", Font.PLAIN, 25));
@@ -150,25 +176,29 @@ public class messInterface {
                     frame.setVisible(true);
 
                 }
-                
 
-                
             }
         };
 
         in.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
-                    sendrecv.sendMes( new String[] { currentUser, in.getText() });
+                    sendrecv.sendMes(new String[] { currentUser, in.getText() });
                     in.setText("");
-                    JLabel label = new JLabel(sendrecv.getMes( currentUser));
+                    JLabel label = new JLabel(sendrecv.getMes(currentUser));
                     label.setSize(100, 100);
 
                     chat.add(label);
-                };
-            } public void keyReleased(KeyEvent e) {
-            }public void keyTyped(KeyEvent e) {
-            }});
+                }
+                ;
+            }
+
+            public void keyReleased(KeyEvent e) {
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
+        });
         Users = new JPanel();
         Users.setLayout(new GridLayout(11, 1));
         Users.setBackground(color);
@@ -180,6 +210,8 @@ public class messInterface {
         addUsers.setBackground(new Color(47, 49, 54));
         addUsers.setFocusable(false);
         addUsers.addActionListener(act);
+
+        
 
         Users.add(addUsers);
         Users.setPreferredSize(new Dimension(frame.getWidth() / 10 * 2, frame.getHeight()));
@@ -197,7 +229,8 @@ public class messInterface {
         back.add(chat, Integer.valueOf(1));
         back.add(background, Integer.valueOf(0));
         frame.add(back, BorderLayout.EAST); // ??????
-        frame.setVisible(true);}
+        frame.setVisible(true);
+    }
     // reloadframe();
 
     /*
@@ -278,24 +311,22 @@ public class messInterface {
         String key = encry.getKey(currentUser);
         if (key.equals("0")) {
             JOptionPane.showMessageDialog(null,
-                                    "Invitation sent to user", "Good Luck",
-                                    JOptionPane.ERROR_MESSAGE);
-        }
-        else if(key.equals("1")){
+                    "Invitation sent to user", "Good Luck",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (key.equals("1")) {
             JOptionPane.showMessageDialog(null,
-                                    "User has not accepted your invitation yet", "Ignored",
-                                    JOptionPane.ERROR_MESSAGE);
+                    "User has not accepted your invitation yet", "Ignored",
+                    JOptionPane.ERROR_MESSAGE);
             return;
+        } else {
+            encry.decMes(sendrecv.getMes(currentUser), key);
+            JLabel label = new JLabel();
+            label.setSize(10, 10);
+            chat.add(label);
+            in.setText("");
+            chat.add(in);
+            frame.setVisible(true);
         }
-        else{
-        encry.decMes(sendrecv.getMes(currentUser), key);
-        JLabel label = new JLabel();
-        label.setSize(10, 10);
-        chat.add(label);
-        in.setText("");
-        chat.add(in);
-        }
-        frame.setVisible(true);
 
     }
 }

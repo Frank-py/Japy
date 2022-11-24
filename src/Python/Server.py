@@ -92,7 +92,7 @@ async def Client(reader,writer):
                 response = (await reader.read(512)).decode("latin") #user
                 writer.write("200\n".encode("latin"))
                 if await checkforquit(response, writer):
-                    return
+                    return 
                 data.append(response)
                 a = benutzer.createKey(data[1]).encode("latin")+"\n".encode("latin")
                 if benutzer.status == 1:
@@ -121,12 +121,16 @@ async def Client(reader,writer):
                     await writer.drain()
                     print("2")
                     (P, G, A) = benutzer.getKeys(data[1])
-                    writer.write(P.encode("latin"))
+                    writer.write(str(P).encode("latin"))
                     await writer.drain()
-                    writer.write(G.encode("latin"))
+                    print("reached this point")
+                    print("P got sent")
+                    writer.write(str(G).encode("latin"))
                     await writer.drain()
-                    writer.write(A.encode("latin"))
+                    print("reached G")
+                    writer.write(str(A).encode("latin"))
                     await writer.drain()
+                    print("reached A")
                     B = (await reader.read(512)).decode(encoding="latin")
                     writer.write("200\n".encode("latin"))
                     await writer.drain()
