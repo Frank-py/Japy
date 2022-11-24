@@ -82,6 +82,7 @@ public static void createWindow() {
           }
             // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
           } catch (Exception f) {
+            f.printStackTrace();
             enter("5");
           }
         }

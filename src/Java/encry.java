@@ -24,8 +24,10 @@ public class encry {
             Gson gson = new Gson();
             FileWriter fileWriter;
             fileWriter = new FileWriter(keys);
+            fileWriter.append("{}");
+            fileWriter.flush();
             String[] in = { "{user:passwort}" };
-            gson.toJson(in, fileWriter);
+          //  gson.toJson(in, fileWriter);
             fileWriter.close();
         } catch (Exception e1) {
             e1.printStackTrace();

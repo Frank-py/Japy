@@ -99,6 +99,15 @@ class User():
             return len(nachrichten) != 0 
         except Exception as e:
             return e
+    def getKeys(self, user):
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute('SELECT P, G, A FROM KeyCache WHERE user1 = "%s" AND user2 = "%s";' % (user, self.user))
+            nachrichten = cursor.fetchall()
+            return tuple(nachrichten[0])
+        except Exception as e:
+            return e
+        
     def createKey(self, user2):
         cursor = self.connection.cursor()        
         try:
@@ -113,28 +122,35 @@ class User():
                     self.user1binich = True
                     self.status = 0
                     return "0"
+                else:
+                    self.user1binich = False
+                    self.status = 2
+                    return "2"
+            else:
+                self.status = 1
+                return "1"
                 
             # status es ist nichts in der Datenbank 0
             # status es ist PGA in der Datenbank
             # status es ist PGB in der Datenbank
               
-            cursor.execute('SELECT 1 FROM KeyCache WHERE user1 = "%s" AND user2 = "%s" AND A IS NOT NULL;' % (self.user, user2))
-            aexistiert = cursor.fetchall()
-            if len(aexistiert) != 0:
-                if self.user1binich:
-                    self.status = 1
-                    return "1" # a existiert ich bin a -> nichts machen
-                else:
-                    self.status = 2
-                    return "2" # a existiert ich bin aber nicht a sonderb b, d.h. ich muss a b generieren
+            # cursor.execute('SELECT 1 FROM KeyCache WHERE user1 = "%s" AND user2 = "%s" AND A IS NOT NULL;' % (self.user, user2))
+            # aexistiert = cursor.fetchall()
+            # if len(aexistiert) != 0:
+            #     if self.user1binich:
+            #         self.status = 1
+            #         return "1" # a existiert ich bin a -> nichts machen
+            #     else:
+            #         self.status = 2
+            #         return "2" # a existiert ich bin aber nicht a sonderb b, d.h. ich muss a b generieren
                  
-            else:
-                if not self.user1binich: # B existiert ich bin b also nichts machen
-                    self.status = 1
-                    return "1"
-                else:
-                    self.status = 2 #B existiert ich bin A also muss ich mir B snacken und danach löschen
-                    return "2"
+            # else:
+            #     if not self.user1binich: # B existiert ich bin b also nichts machen
+            #         self.status = 1
+            #         return "1"
+            #     else:
+            #         self.status = 2 #B existiert ich bin A also muss ich mir B snacken und danach löschen
+            #         return "2"
         except Exception as e:
             return e
     def insertKeys(self, user2, P=None, G=None, a=None):
