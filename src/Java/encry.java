@@ -17,17 +17,19 @@ public class encry {
     encry() {
         JsonElement parser;
         try {
-            keys = new File("keys" + "login.name" + ".json");
-            new File("keys" + "login.name" + ".json").createNewFile();
+            // keys = new File(./src/"keys" + "login.name" + ".json");
+            keys = new File("src/", "keys" + "login.name" + ".json");
+            keys.createNewFile();
             parser = JsonParser.parseReader(new FileReader(keys));
             keylist = parser.getAsJsonObject();
             Gson gson = new Gson();
             FileWriter fileWriter;
+            a = 12;
             fileWriter = new FileWriter(keys);
             fileWriter.append("{}");
             fileWriter.flush();
             String[] in = { "{user:passwort}" };
-          //  gson.toJson(in, fileWriter);
+            // gson.toJson(in, fileWriter);
             fileWriter.close();
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -47,7 +49,7 @@ public class encry {
     public static String getKey(String User) {
         System.out.println("fdsfs");
         if (keylist.has(User)) {
-           
+
             key = keylist.get(User).getAsString();
         } else {
             key = sendrecv.createKey(User);
@@ -85,11 +87,11 @@ public class encry {
         BigInteger gg = BigInteger.valueOf(g);
         BigInteger pp = BigInteger.valueOf(p);
 
-        a = randy.nextInt(1000000000);
+        // a = randy.nextInt(1000000000);
         BigInteger rando = BigInteger.valueOf(a);
         BigInteger A = gg.modPow(rando, pp);
 
-        String[] numbers = { pp.toString(10), gg.toString(10), A.toString(10) }; 
+        String[] numbers = { pp.toString(10), gg.toString(10), A.toString(10) };
         return numbers;
     }
 
