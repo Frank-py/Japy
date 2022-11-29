@@ -47,7 +47,6 @@ public class encry {
     }
 
     public static String getKey(String User) {
-        System.out.println("fdsfs");
         if (keylist.has(User)) {
 
             key = keylist.get(User).getAsString();

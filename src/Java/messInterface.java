@@ -124,37 +124,25 @@ public class messInterface {
                                     JOptionPane.ERROR_MESSAGE);
                             recv = "500";
                         }
-                        // Users.remove(newUser);
                         newUser.setText("");
-                        // Users.setSize(addUsers.getWidth(), frame.getHeight());
-
                         frame.setVisible(true);
-
                     }
                 }
-            }
-
-            public void keyReleased(KeyEvent e) {
-            }
-
-            public void keyTyped(KeyEvent e) {
-            }
+            } 
+            public void keyReleased(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {}
         };
-        FocusListener bla = new FocusListener() {
 
+        FocusListener bla = new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 if (e.getSource() == newUser) {
                     Users.remove(newUser);
-
                 }
             }
-
         };
 
         ActionListener act = new ActionListener() {
@@ -174,9 +162,7 @@ public class messInterface {
                     newUser.addKeyListener(enter);
 
                     frame.setVisible(true);
-
                 }
-
             }
         };
 
@@ -187,17 +173,12 @@ public class messInterface {
                     in.setText("");
                     JLabel label = new JLabel(sendrecv.getMes(currentUser));
                     label.setSize(100, 100);
-
                     chat.add(label);
                 }
                 ;
             }
-
-            public void keyReleased(KeyEvent e) {
-            }
-
-            public void keyTyped(KeyEvent e) {
-            }
+            public void keyReleased(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {}
         });
         Users = new JPanel();
         Users.setLayout(new GridLayout(11, 1));
@@ -217,67 +198,29 @@ public class messInterface {
         // Users.setSize(frame.getWidth()-100, frame.getHeight());
         // tUsers.setSize(frame.getWidth()/10*2, frame.getHeight());
         back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
-        System.out.println(Users.getWidth());
         chat.setLayout(new GridLayout(10, 1));
         chat.setBackground(Color.green);
         chat.setSize(100,100);
         back.setBackground(Color.red);
-        back.setOpaque(false);
+        back.setOpaque(true);
         chat.setOpaque(true);
         background = new JLabel(ba);
 
-        back.add(chat, Integer.valueOf(1));
         back.add(background, Integer.valueOf(0));
+        frame.setVisible(true);
         frame.add(back, BorderLayout.EAST); // ??????
         frame.setVisible(true);
+        back.add(chat, Integer.valueOf(1));
+        frame.setVisible(true);
+        System.out.println(Users.getWidth()+"rrr");
     }
     // reloadframe();
 
-    /*
-     * while (true) {
-     * if (frame.getHeight() != heighttemp || frame.getWidth() != widthtemp) {
-     * // reloadframe();
-     * }
-     * // String[] recieve = sendrecv.recv();
-     * System.out.print("");
-     * if (recv.equals("0")) {
-     * JOptionPane.showMessageDialog(null, "User not found!", "User not found!",
-     * JOptionPane.ERROR_MESSAGE);
-     * recv = "500";
-     * addUsers.setEnabled(true);
-     * } else if (recv.equals("1")) {
-     * recv = "500";
-     * userliste[n] = new JButton(user[0]);
-     * userliste[n].setFont(new Font("MV Boli", Font.PLAIN, 35));
-     * userliste[n].setBackground(new Color(47, 49, 54));q
-     * userliste[n].setForeground(new Color(0xFFFFFF));
-     * userliste[n].setFocusable(false);
-     * userliste[n].addActionListener(act);
-     * Users.add(userliste[n], 1);
-     * n++;
-     * addUsers.setEnabled(true);
-     * frame.setVisible(true);
-     * } else if (recv.equals("4")) {
-     * JOptionPane.showMessageDialog(null,
-     * "An unknown exception occured please try again! \nEnsure your internet connection"
-     * , "ERROR",
-     * JOptionPane.ERROR_MESSAGE);
-     * recv = "500";
-     * } else if (recv.equals("5")) {
-     * JOptionPane.showMessageDialog(null,
-     * "Invalid! Enter a valid Ussername", "OutOfBounds",
-     * JOptionPane.ERROR_MESSAGE);
-     * recv = "500";
-     * }
-     * }
-     * }
-     */
 
     public void reloadframe() {
         heighttemp = frame.getHeight();
         widthtemp = frame.getWidth();
         // Users.add(addUsers);
-
         // Users.setSize(addUsers.getWidth(), frame.getHeight());
 
         back.setSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
