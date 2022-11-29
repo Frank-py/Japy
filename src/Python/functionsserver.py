@@ -17,11 +17,11 @@ class User():
         try:
             connection = mysql.connector.connect(
                 host="localhost",
-            #user="root",
-            user="admin",
-            passwd="4sdf38§$/WE3/FW§459fd2w3",
+            user="root",
+           # user="admin",
+           # passwd="4sdf38§$/WE3/FW§459fd2w3",
    
-            #passwd="",
+            passwd="",
                 database="Messenger"
         )
         except Error as e:
