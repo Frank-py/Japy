@@ -312,13 +312,16 @@ public class messInterface {
         if (key.equals("0")) {
             JOptionPane.showMessageDialog(null,
                     "Invitation sent to user", "Good Luck",
-                    JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
         } else if (key.equals("1")) {
             JOptionPane.showMessageDialog(null,
                     "User has not accepted your invitation yet", "Ignored",
-                    JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.WARNING_MESSAGE);
             return;
         } else {
+             JOptionPane.showMessageDialog(null,
+                    "Generating Key ...", "Working ...",
+                    JOptionPane.INFORMATION_MESSAGE);
             String mes = sendrecv.getMes(currentUser);
             if (mes.length() != 0) {
                 encry.decMes(mes, key);
