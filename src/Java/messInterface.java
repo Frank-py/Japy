@@ -140,21 +140,21 @@ public class messInterface {
             public void keyTyped(KeyEvent e) {
             }
         };
-        FocusListener bla = new FocusListener(){
+        FocusListener bla = new FocusListener() {
 
-			@Override
-			public void focusGained(FocusEvent e) {
-				
-			}
+            @Override
+            public void focusGained(FocusEvent e) {
 
-			@Override
-			public void focusLost(FocusEvent e) {
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
                 if (e.getSource() == newUser) {
                     Users.remove(newUser);
-                    
+
                 }
             }
-            
+
         };
 
         ActionListener act = new ActionListener() {
@@ -211,16 +211,16 @@ public class messInterface {
         addUsers.setFocusable(false);
         addUsers.addActionListener(act);
 
-        
-
         Users.add(addUsers);
         Users.setPreferredSize(new Dimension(frame.getWidth() / 10 * 2, frame.getHeight()));
         frame.add(Users, BorderLayout.WEST);
         // Users.setSize(frame.getWidth()-100, frame.getHeight());
         // tUsers.setSize(frame.getWidth()/10*2, frame.getHeight());
         back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
+        System.out.println(Users.getWidth());
         chat.setLayout(new GridLayout(10, 1));
         chat.setBackground(Color.green);
+        chat.setSize(100,100);
         back.setBackground(Color.red);
         back.setOpaque(false);
         chat.setOpaque(true);
@@ -319,13 +319,17 @@ public class messInterface {
                     JOptionPane.ERROR_MESSAGE);
             return;
         } else {
-            encry.decMes(sendrecv.getMes(currentUser), key);
+            String mes = sendrecv.getMes(currentUser);
+            if (mes.length() != 0) {
+                encry.decMes(mes, key);
+            }
             JLabel label = new JLabel();
             label.setSize(10, 10);
             chat.add(label);
             in.setText("");
             chat.add(in);
             frame.setVisible(true);
+
         }
 
     }
