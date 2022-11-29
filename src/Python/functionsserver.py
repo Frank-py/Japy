@@ -127,6 +127,11 @@ class User():
                     self.status = 2
                     return "2"
             else:
+                cursor.execute('SELECT 1 FROM KeyCache WHERE user1 = "%s" AND user2 = "%s" AND B IS NULL;' % (self.user, user2))
+                nachrichten = cursor.fetchall()
+                if len(nachrichten) == 0:
+                    self.status = 3
+                    return "3"
                 self.status = 1
                 return "1"
                 

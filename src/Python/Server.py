@@ -116,7 +116,7 @@ async def Client(reader,writer):
                     await writer.drain()
                     benutzer.insertKeys(data[1], P, G, A)
                     print(f"{P:}{G:}{A:}")
-                elif benutzer.status == 2:
+                elif benutzer.status == 2 and benutzer.status == 3:
                     writer.write(a)
                     await writer.drain()
                     print("2")
