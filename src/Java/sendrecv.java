@@ -97,7 +97,6 @@ public class sendrecv{
                     System.out.println("0 received");
                     
                     String[] pgA = encry.newkey(new String[] {});
-                    
                     // s.append(in[0]);
                     out.print(pgA[0]);
                     out.flush();
