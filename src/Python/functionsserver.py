@@ -74,7 +74,7 @@ class User():
         try:
             cursor.execute('SELECT Message FROM Messages WHERE (recv = "%s" AND send = "%s") OR (recv = "%s" AND send = "%s")' % (self.user, recv, recv, self.user))
             nachrichten = cursor.fetchall() 
-            return str(";".join([i[0] for i in nachrichten]))
+            return str(";;;".join([i[0] for i in nachrichten]))
         except:
             return "error"
     def checkaccount(self, name, password):
@@ -145,18 +145,21 @@ class User():
         cursor = self.connection.cursor()        
         try:
             if self.status == 0 and (P, G) is not None:
+                print("wth")
                 sql = "INSERT INTO KeyCache (user1, user2, p, g, A) VALUES (%s, %s, %s, %s, %s);" # ich bin A also inserte ich alle values
                 val = (self.user, user, P, G, aorb)
                 cursor.execute(sql, val)
                 self.connection.commit()
                 return
             elif self.status == 2:
+                print("this shouuld be right, right?")
                 sql = "UPDATE KeyCache SET B = %s WHERE user1 = %s AND user2 = %s AND p is not NULL;"
+                print(aorb, user, self.user)
                 val = (aorb, user, self.user)
             cursor.execute(sql, val)
             self.connection.commit()
         except Exception as E:
-            print("An erro occured!")
+            print(E)
         
 
 

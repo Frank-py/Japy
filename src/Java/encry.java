@@ -98,7 +98,7 @@ public class encry {
     }
 
     public static String[] decMes(String in, String key) {
-        String[] messages = in.split(";");
+        String[] messages = in.split(";;;");
         System.out.println(Arrays.toString(messages));//ahaaaa
         int n = 0;
         String[] out = new String[messages.length];
