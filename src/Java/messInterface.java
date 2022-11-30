@@ -1,13 +1,10 @@
 package Java;
 
-//package Japy.src.Java;
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
-
 public class messInterface {
-    String[] user;
+    //String[] user;
     String currentUser;
     int n = 0;
     Color fontcolor = new Color(0xD4D4D4);
@@ -58,45 +55,38 @@ public class messInterface {
         // frame.setContentPane(back);????????????
         heighttemp = frame.getHeight();
         widthtemp = frame.getWidth();
-
-        // back.setSize(frame.getHeight(), frame.getWidth());
         // back.setBackground(Color.red);
         // back.setOpaque(true);
         in.setFont(new Font("Consolas", Font.PLAIN, 25));
         in.setForeground(Color.white);
         in.setCaretColor(Color.white);
         in.setBackground(color);
-
         // chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
         // chat.setOpaque(false);
-
         KeyListener enter = new KeyListener() {
-
             public void keyPressed(KeyEvent e) {
-
                 if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
                     frame.dispose();
                 }
-
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     if (newUser.getText().length() > 1069 || newUser.getText().length() < 1) {
                         recv = "5";
-
-                    } else {
+                    } 
+                    else {
                         recv = sendrecv.proofuser(newUser.getText());
                         if (recv.equals("0")) {
                             JOptionPane.showMessageDialog(null, "User not found!", "User not found!",
                                     JOptionPane.ERROR_MESSAGE);
                             recv = "500";
-
-                            // addUsers.setEnabled(true);
-                        } else if (recv.equals("1")) {
+                        } 
+                        else if (recv.equals("1")) {
                             recv = "500";
                             userliste[n] = new JButton(newUser.getText());
                             userliste[n].setFont(new Font("MV Boli", Font.PLAIN, 35));
                             userliste[n].setBackground(new Color(47, 49, 54));
                             userliste[n].setForeground(new Color(0xFFFFFF));
                             userliste[n].setFocusable(false);
+
                             userliste[n].addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent e) {
                                     for (JButton o : userliste) {
@@ -112,13 +102,15 @@ public class messInterface {
                             Users.remove(newUser);
                             addUsers.setEnabled(true);
                             frame.setVisible(true);
-                        } else if (recv.equals("4")) {
+                        } 
+                        else if (recv.equals("4")) {
                             JOptionPane.showMessageDialog(null,
                                     "An unknown exception occured please try again! \nEnsure your internet connection",
                                     "ERROR",
                                     JOptionPane.ERROR_MESSAGE);
                             recv = "500";
-                        } else if (recv.equals("5")) {
+                        } 
+                        else if (recv.equals("5")) {
                             JOptionPane.showMessageDialog(null,
                                     "Invalid! Enter a valid Ussername", "OutOfBounds",
                                     JOptionPane.ERROR_MESSAGE);
@@ -146,21 +138,17 @@ public class messInterface {
         };
 
         ActionListener act = new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == addUsers) {
-
                     newUser = new JTextField();
                     addUsers.setEnabled(false);
                     newUser.setFont(new Font("Consolas", Font.PLAIN, 25));
                     newUser.setForeground(fontcolor);
                     newUser.setBackground(color);
                     newUser.setCaretColor(Color.white);
-
                     Users.add(newUser, 1);
                     newUser.requestFocusInWindow();
                     newUser.addKeyListener(enter);
-
                     frame.setVisible(true);
                 }
             }
@@ -215,13 +203,11 @@ public class messInterface {
     }
     // reloadframe();
 
-
     public void reloadframe() {
         heighttemp = frame.getHeight();
         widthtemp = frame.getWidth();
         // Users.add(addUsers);
         // Users.setSize(addUsers.getWidth(), frame.getHeight());
-
         back.setSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
 
         back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
@@ -229,12 +215,6 @@ public class messInterface {
         background.setSize(frame.getWidth() - Users.getWidth(), frame.getHeight());
         Users.setPreferredSize(new Dimension(frame.getWidth() / 10 * 2, frame.getHeight()));
 
-    }
-
-    // main for testing not necessary
-    public static void main(String[] args) {
-        // sendrecv.socket();
-        // new messInterface();
     }
 
     /*

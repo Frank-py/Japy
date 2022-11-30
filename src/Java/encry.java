@@ -71,8 +71,7 @@ public class encry {
     public static String[] newkey(String[] in) {
         Random randy = new Random();
 
-        if (in.length == 0) {
-            // Neu erstellte p und g
+        if (in.length == 0) { // Neu erstellte p und g
             do {
                 p = randy.nextInt(1000000000);
             } while (!isPrime(p) | p < 1000000);
@@ -85,48 +84,35 @@ public class encry {
 
         BigInteger gg = BigInteger.valueOf(g);
         BigInteger pp = BigInteger.valueOf(p);
-
         // a = randy.nextInt(1000000000);
         BigInteger rando = BigInteger.valueOf(a);
         BigInteger A = gg.modPow(rando, pp);
-
         String[] numbers = { pp.toString(10), gg.toString(10), A.toString(10) };
         return numbers;
     }
 
     public static String endnewkey(String[] in) {
-        String key = "";
-
-        if (in.length == 3) {
-            key = new BigInteger(in[2]).modPow(new BigInteger(in[1]), new BigInteger(in[0])).toString(10);
-
-        } else {
-
-        }
-
-        return key;
+        //String key = "";
+        
+        return new BigInteger(in[2]).modPow(new BigInteger(in[1]), new BigInteger(in[0])).toString(10);;
     }
 
     public static String[] decMes(String in, String key) {
-        String[] ary = in.split(";");
-        System.out.println(Arrays.toString(ary));
+        String[] messages = in.split(";");
+        System.out.println(Arrays.toString(messages));//ahaaaa
         int n = 0;
         String[] out = new String[10000];
-        for (String i : ary) {
-
+        for (String i : messages) {
             out[n] = decryption(i, key);
             n++;
-
         }
-        System.out.println(Arrays.toString(out));
+        System.out.println(Arrays.toString(out));//ahaaaa
         return out;
-
     }
 
     public static String encryption(String in, String key) {
         int keyInt = Integer.parseInt(key);
         key = Integer.toBinaryString(keyInt);
-
         in = Stringtobinary(in);
         String res = crypt(in, key);
         return res;
@@ -135,10 +121,8 @@ public class encry {
     public static String decryption(String in, String key) {
         int keyInt = Integer.parseInt(key);
         key = Integer.toBinaryString(keyInt);
-
         in = crypt(in, key);
         String res = Binarytostring(in);
-
         return res;
     }
 
@@ -156,12 +140,14 @@ public class encry {
         int keyLen = key.length();
         String temp = key;
         String out = "";
+
         while (messLen > keyLen) {
             key = key + temp;
             keyLen = key.length();
         }
         char[] messC = mess.toCharArray();
         char[] keyC = key.toCharArray();
+        
         for (int x = 0; x < mess.length(); x++) {
             if (keyC[x] == messC[x]) {
                 out = out + 0;
