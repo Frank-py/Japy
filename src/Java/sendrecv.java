@@ -79,13 +79,16 @@ public class sendrecv {
 
     public static String createKey(String in) {
         try {
+            System.out.println("why the penis isnt this dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddworkgin");
             out.print("createKey");
             out.flush();
             bf.readLine();
             out.print(in);
-            out.flush();
-            bf.readLine();
+            System.out.println(in);
+            out.flush();    
+            System.out.println(bf.readLine()); 
             s = bf.readLine();
+            System.out.println(s);
             if (s.equals("0")) { // Du bist benutzer A
                 s = "";
                 System.out.println("0 received");
@@ -103,13 +106,14 @@ public class sendrecv {
                 return "0";
             }
             if (s.equals("2")) { // du bist benutzer B
+                System.out.println("didnt even reach this part");
                 String[] Bap = new String[3];
                 Bap[2] = bf.readLine();
                 String g = bf.readLine();
                 Bap[0] = bf.readLine();
                 String A = encry.newkey(new String[] { Bap[2], g })[2];
-                System.out.println(A);
                 Bap[1] = encry.a();
+                System.out.println(A + "2222fff");
                 out.print(A);
                 out.flush();
                 bf.readLine();

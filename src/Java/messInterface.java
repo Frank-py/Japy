@@ -3,8 +3,9 @@ package Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 public class messInterface {
-    //String[] user;
+    // String[] user;
     String currentUser;
     int n = 0;
     Color fontcolor = new Color(0xD4D4D4);
@@ -71,15 +72,13 @@ public class messInterface {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     if (newUser.getText().length() > 1069 || newUser.getText().length() < 1) {
                         recv = "5";
-                    } 
-                    else {
+                    } else {
                         recv = sendrecv.proofuser(newUser.getText());
                         if (recv.equals("0")) {
                             JOptionPane.showMessageDialog(null, "User not found!", "User not found!",
                                     JOptionPane.ERROR_MESSAGE);
                             recv = "500";
-                        } 
-                        else if (recv.equals("1")) {
+                        } else if (recv.equals("1")) {
                             recv = "500";
                             userliste[n] = new JButton(newUser.getText());
                             userliste[n].setFont(new Font("MV Boli", Font.PLAIN, 35));
@@ -102,15 +101,13 @@ public class messInterface {
                             Users.remove(newUser);
                             addUsers.setEnabled(true);
                             frame.setVisible(true);
-                        } 
-                        else if (recv.equals("4")) {
+                        } else if (recv.equals("4")) {
                             JOptionPane.showMessageDialog(null,
                                     "An unknown exception occured please try again! \nEnsure your internet connection",
                                     "ERROR",
                                     JOptionPane.ERROR_MESSAGE);
                             recv = "500";
-                        } 
-                        else if (recv.equals("5")) {
+                        } else if (recv.equals("5")) {
                             JOptionPane.showMessageDialog(null,
                                     "Invalid! Enter a valid Ussername", "OutOfBounds",
                                     JOptionPane.ERROR_MESSAGE);
@@ -120,15 +117,20 @@ public class messInterface {
                         frame.setVisible(true);
                     }
                 }
-            } 
-            public void keyReleased(KeyEvent e) {}
-            public void keyTyped(KeyEvent e) {}
+            }
+
+            public void keyReleased(KeyEvent e) {
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
         };
 
         FocusListener bla = new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
             }
+
             @Override
             public void focusLost(FocusEvent e) {
                 if (e.getSource() == newUser) {
@@ -160,15 +162,23 @@ public class messInterface {
         in.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
-                    sendrecv.sendMes(new String[] { currentUser, encry.encryption(in.getText(), encry.getKey(currentUser)) });
+                    System.out.println(currentUser);
+                    // currentUser = "vali";
+                    // String key = encry.getKey(currentUser);
+                    sendrecv.sendMes(
+                            new String[] { currentUser, encry.encryption(in.getText(), encry.getKey(currentUser)) });
                     in.setText("");
-                   // JLabel label = new JLabel(sendrecv.getMes(currentUser));
-                   // label.setSize(100, 100);
-                   // chat.add(label);
+                    // JLabel label = new JLabel(sendrecv.getMes(currentUser));
+                    // label.setSize(100, 100);
+                    // chat.add(label);
                 }
             }
-            public void keyReleased(KeyEvent e) {}
-            public void keyTyped(KeyEvent e) {}
+
+            public void keyReleased(KeyEvent e) {
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
         });
         Users = new JPanel();
         Users.setLayout(new GridLayout(11, 1));
@@ -190,7 +200,7 @@ public class messInterface {
         frame.setVisible(true);
         chat.setLayout(new GridLayout(10, 1));
         chat.setBackground(Color.black);
-        
+
         back.setBackground(Color.red);
         chat.setOpaque(true);
         background = new JLabel(ba);
@@ -198,7 +208,7 @@ public class messInterface {
         back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
         frame.add(back, BorderLayout.EAST); // ??????
         frame.setVisible(true);
-        chat.setSize(back.getWidth(),back.getHeight());
+        chat.setSize(back.getWidth(), back.getHeight());
         back.add(chat, Integer.valueOf(1));
         frame.setVisible(true);
         // System.out.println(back.getWidth()+"rrr");
@@ -233,7 +243,7 @@ public class messInterface {
      */
 
     void newchat() {
-       String key = encry.getKey(currentUser);
+        String key = encry.getKey(currentUser);
         if (key.equals("0")) {
             JOptionPane.showMessageDialog(null,
                     "Invitation sent to user", "Good Luck",
@@ -243,16 +253,19 @@ public class messInterface {
                     "User has not accepted your invitation yet", "Ignored",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-             JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(null,
                     "Generating Key ...", "Working ...",
                     JOptionPane.INFORMATION_MESSAGE);
             String mes = sendrecv.getMes(currentUser);
-            if (mes.length() != 0) {
-               String[] decMessages = encry.decMes(mes, key);
-            
-            JLabel messages = new JLabel(decMessages[0]);
-            messages.setSize(100, 100);
-            chat.add(messages);
+            if (mes.length() >= 8) {
+                System.out.println(key + "|<- key");
+                String[] decMessages = encry.decMes(mes, key);
+
+                JLabel messages = new JLabel(decMessages[0]);
+                messages.setForeground(Color.white);
+                messages.setBackground(new Color(0, 255, 0));
+                messages.setSize(chat.getWidth(), 100);
+                chat.add(messages);
             }
             in.setText("");
             chat.add(in);
