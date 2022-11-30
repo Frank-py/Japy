@@ -4,10 +4,9 @@ Colors final
 logout
 
 nachrichten trennen
- keine while Schleife
   richtige Reihenfolge anzeigen
    Design(looking at you background and top abstand verschoben)
-   verschlüsselung
+   verschlüsselung joa
     Zeit anzeigen
      minor bug fixes,
 write to json
@@ -17,6 +16,7 @@ settings menu
 echtes reCaptcha
 (nicht google api) vielleicht was witziges, wie z.b. mathe aufgaben
 Eingeloggt bleiben
+conversations and keys remember
 (z.b. durch cache auf dem Computer)
 Website noch
 
