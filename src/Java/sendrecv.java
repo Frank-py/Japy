@@ -2,6 +2,7 @@ package Java;
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 
 public class sendrecv {
     public static BufferedReader bf;
@@ -12,8 +13,8 @@ public class sendrecv {
     public static String login(String in[]) {
         try {
             socket = new Socket("localhost", 6000);
-            bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
+            bf = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+            out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
             out.print("login");
             out.flush();
             bf.readLine();

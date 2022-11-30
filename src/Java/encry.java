@@ -103,9 +103,10 @@ public class encry {
         int n = 0;
         String[] out = new String[10000];
         for (String i : messages) {
-            out[n] = decryption(i, key);
+            out[n] = decryption(Stringtobinary(i), key);
             n++;
         }
+        System.out.print("printing garbage: ");
         System.out.println(Arrays.toString(out));//ahaaaa
         return out;
     }
@@ -114,7 +115,8 @@ public class encry {
         int keyInt = Integer.parseInt(key);
         key = Integer.toBinaryString(keyInt);
         in = Stringtobinary(in);
-        String res = crypt(in, key);
+        String res = Binarytostring( crypt(in, key));
+        
         return res;
     }
 

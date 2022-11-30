@@ -18,6 +18,7 @@ public class messInterface {
     ImageIcon ba = new ImageIcon("src\\Java\\Backgroundy.png");
     ImageIcon logo = new ImageIcon("Java/prof5.png");
     ImageIcon plus = new ImageIcon("Java/plus.png");
+    String key;
     // ImageIcon ba = new ImageIcon("Java/Backgroundy.png");
     // Image img = ba.getImage();
     JPanel chat = new JPanel();
@@ -160,11 +161,11 @@ public class messInterface {
         in.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
-                    sendrecv.sendMes(new String[] { currentUser, in.getText() });
+                    sendrecv.sendMes(new String[] { currentUser, encry.encryption(in.getText(), key) });
                     in.setText("");
-                    JLabel label = new JLabel(sendrecv.getMes(currentUser));
-                    label.setSize(100, 100);
-                    chat.add(label);
+                   // JLabel label = new JLabel(sendrecv.getMes(currentUser));
+                   // label.setSize(100, 100);
+                   // chat.add(label);
                 }
             }
             public void keyReleased(KeyEvent e) {}
@@ -233,7 +234,7 @@ public class messInterface {
      */
 
     void newchat() {
-        String key = encry.getKey(currentUser);
+        key = encry.getKey(currentUser);
         if (key.equals("0")) {
             JOptionPane.showMessageDialog(null,
                     "Invitation sent to user", "Good Luck",
@@ -248,11 +249,12 @@ public class messInterface {
                     JOptionPane.INFORMATION_MESSAGE);
             String mes = sendrecv.getMes(currentUser);
             if (mes.length() != 0) {
-                encry.decMes(mes, key);
+               String[] decMessages = encry.decMes(mes, key);
+            
+            JLabel messages = new JLabel(decMessages[0]);
+            messages.setSize(100, 100);
+            chat.add(messages);
             }
-            JLabel label = new JLabel();
-            label.setSize(10, 10);
-            chat.add(label);
             in.setText("");
             chat.add(in);
             frame.setVisible(true);
