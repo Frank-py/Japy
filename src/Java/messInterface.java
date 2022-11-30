@@ -18,7 +18,6 @@ public class messInterface {
     ImageIcon ba = new ImageIcon("src\\Java\\Backgroundy.png");
     ImageIcon logo = new ImageIcon("Java/prof5.png");
     ImageIcon plus = new ImageIcon("Java/plus.png");
-    String key;
     // ImageIcon ba = new ImageIcon("Java/Backgroundy.png");
     // Image img = ba.getImage();
     JPanel chat = new JPanel();
@@ -161,7 +160,7 @@ public class messInterface {
         in.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
-                    sendrecv.sendMes(new String[] { currentUser, encry.encryption(in.getText(), key) });
+                    sendrecv.sendMes(new String[] { currentUser, encry.encryption(in.getText(), encry.getKey(currentUser)) });
                     in.setText("");
                    // JLabel label = new JLabel(sendrecv.getMes(currentUser));
                    // label.setSize(100, 100);
@@ -190,7 +189,7 @@ public class messInterface {
         // tUsers.setSize(frame.getWidth()/10*2, frame.getHeight());
         frame.setVisible(true);
         chat.setLayout(new GridLayout(10, 1));
-        chat.setBackground(Color.green);
+        chat.setBackground(Color.black);
         
         back.setBackground(Color.red);
         chat.setOpaque(true);
@@ -234,7 +233,7 @@ public class messInterface {
      */
 
     void newchat() {
-        key = encry.getKey(currentUser);
+       String key = encry.getKey(currentUser);
         if (key.equals("0")) {
             JOptionPane.showMessageDialog(null,
                     "Invitation sent to user", "Good Luck",

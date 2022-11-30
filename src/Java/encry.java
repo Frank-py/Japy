@@ -101,7 +101,7 @@ public class encry {
         String[] messages = in.split(";");
         System.out.println(Arrays.toString(messages));//ahaaaa
         int n = 0;
-        String[] out = new String[10000];
+        String[] out = new String[messages.length];
         for (String i : messages) {
             out[n] = decryption(Stringtobinary(i), key);
             n++;
