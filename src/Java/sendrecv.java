@@ -1,5 +1,4 @@
 package Java;
-//package Japy.src.Java;
 
 import java.io.*;
 import java.net.*;
@@ -10,13 +9,11 @@ public class sendrecv {
     public static String s;
     public static Socket socket;
     public static String test;
-
     public static String login(String in[]) {
         try {
             socket =   new Socket("localhost", 6000);
             bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
-
             out.print("login");
             out.flush();
             bf.readLine();
@@ -32,15 +29,12 @@ public class sendrecv {
 
             return null;
         }
-
     }
 
     public static String proofuser(String in) {
-
         try {
             out.print("proofuser");
             out.flush();
-
             bf.readLine();
             out.print(in.replaceAll("\r", "").replaceAll("\n", ""));
             out.flush();
@@ -69,7 +63,6 @@ public class sendrecv {
     }
 
     public static String getMes(String in) {
-
         try {
             out.print("getMes");
             out.flush();
@@ -84,7 +77,6 @@ public class sendrecv {
     }
 
     public static String createKey(String in) {
-
         try {
             out.print("createKey");
             out.flush();
@@ -110,20 +102,17 @@ public class sendrecv {
                 return "0";
             }
             if (s.equals("2")) { // du bist benutzer B
-
                 String[] Bap = new String[3];
                 Bap[2] = bf.readLine();
                 String g = bf.readLine();
                 Bap[0] = bf.readLine();
                 String A = encry.newkey(new String[] { Bap[2], g })[2];
-
                 System.out.println(A);
                 Bap[1] = encry.a();
                 out.print(A);
                 out.flush();
                 bf.readLine();
                 return encry.endnewkey(Bap);
-
             }
             if (s.equals("3")) { // looser du bist immer noch A
                 String[] Bap = new String[3];
@@ -133,10 +122,9 @@ public class sendrecv {
                 return encry.endnewkey(Bap);
             } else { // gönn dir ne Pause
                 return s;
-
             }
-
-        } catch (IOException e) {
+        } 
+         catch (IOException e) {
             e.printStackTrace();
             return "nulll";
         }
@@ -178,7 +166,7 @@ public class sendrecv {
              * out.flush();
              * bf.readLine();
              * s = "Success";}
-             */
+             
             if (Funktion == "getMes") {
                 out.print("getMes");
                 out.flush();
@@ -232,7 +220,7 @@ public class sendrecv {
 
                 }
 
-            } else if (Funktion == "isKey") {
+            }*/ if (Funktion == "isKey") {
                 out.print("isKey");
                 out.flush();
                 bf.readLine();
@@ -251,11 +239,4 @@ public class sendrecv {
         return s;
     }
 
-    // public static String[] recv() {
-    // String[] lol = {};
-    // bf.readLine();
-    // if (bf.readline == "recvkey") {
-    // return lol;
-
-    // }
 }
