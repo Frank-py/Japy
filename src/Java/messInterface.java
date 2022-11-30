@@ -175,7 +175,6 @@ public class messInterface {
                     label.setSize(100, 100);
                     chat.add(label);
                 }
-                ;
             }
             public void keyReleased(KeyEvent e) {}
             public void keyTyped(KeyEvent e) {}
@@ -193,26 +192,26 @@ public class messInterface {
         addUsers.addActionListener(act);
 
         Users.add(addUsers);
-        Users.setPreferredSize(new Dimension(frame.getWidth() / 10 * 2, frame.getHeight()));
+        Users.setPreferredSize(new Dimension(frame.getWidth() / 10 * 3, frame.getHeight()));
         frame.add(Users, BorderLayout.WEST);
         // Users.setSize(frame.getWidth()-100, frame.getHeight());
         // tUsers.setSize(frame.getWidth()/10*2, frame.getHeight());
-        back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
+        frame.setVisible(true);
         chat.setLayout(new GridLayout(10, 1));
         chat.setBackground(Color.green);
-        chat.setSize(100,100);
+        
         back.setBackground(Color.red);
-        back.setOpaque(true);
         chat.setOpaque(true);
         background = new JLabel(ba);
-
         back.add(background, Integer.valueOf(0));
-        frame.setVisible(true);
+        back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
         frame.add(back, BorderLayout.EAST); // ??????
         frame.setVisible(true);
+        chat.setSize(back.getWidth(),back.getHeight());
         back.add(chat, Integer.valueOf(1));
         frame.setVisible(true);
-        System.out.println(Users.getWidth()+"rrr");
+        // System.out.println(back.getWidth()+"rrr");
+        // System.out.println(frame.getWidth());
     }
     // reloadframe();
 

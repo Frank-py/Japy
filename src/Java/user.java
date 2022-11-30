@@ -5,7 +5,7 @@ import java.net.*;
 
 public class user {
 
-    public   BufferedReader bf;
+    /*public   BufferedReader bf;
     public   PrintWriter out;
     public   String s;
     public   Socket socket;
@@ -139,6 +139,6 @@ public class user {
     // if (bf.readline == "recvkey") {
     // return lol;
 
-    // }
+    // }*/
 
 }
