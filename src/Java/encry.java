@@ -94,7 +94,7 @@ public class encry {
     public static String endnewkey(String[] in) {
         //String key = "";
         
-        return new BigInteger(in[2]).modPow(new BigInteger(in[1]), new BigInteger(in[0])).toString(10);;
+        return new BigInteger(in[2]).modPow(new BigInteger(in[1]), new BigInteger(in[0])).toString(10);
     }
 
     public static String[] decMes(String in, String key) {

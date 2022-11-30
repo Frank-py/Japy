@@ -133,6 +133,8 @@ public class messInterface {
             public void focusLost(FocusEvent e) {
                 if (e.getSource() == newUser) {
                     Users.remove(newUser);
+                    addUsers.setEnabled(true);
+                    frame.setVisible(true);
                 }
             }
         };
@@ -141,6 +143,7 @@ public class messInterface {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == addUsers) {
                     newUser = new JTextField();
+                    newUser.addFocusListener(bla);
                     addUsers.setEnabled(false);
                     newUser.setFont(new Font("Consolas", Font.PLAIN, 25));
                     newUser.setForeground(fontcolor);
