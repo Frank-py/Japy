@@ -17,11 +17,12 @@ class User():
         try:
             connection = mysql.connector.connect(
                 host="localhost",
-            user="root",
-           # user="admin",
-           # passwd="4sdf38§$/WE3/FW§459fd2w3",
+           # user="root",
+            user="admin",
+            passwd="4sdf38§$/WE3/FW§459fd2w3",
    
-            passwd="",
+  
+  #          passwd="",
                 database="Messenger"
         )
         except Error as e:
@@ -71,12 +72,9 @@ class User():
     def checkformessages(self, recv):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT message FROM Messages WHERE recv = "%s" AND send = "%s";' % (self.user, recv))
-            nachrichten = cursor.fetchall()
-            listen = []
-            for i in nachrichten:
-                listen.append(i[0])
-            return str(";".join(listen))
+            cursor.execute('SELECT Message FROM Messages WHERE (recv = "%s" AND send = "%s") OR (recv = "%s" AND send = "%s")' % (self.user, recv, recv, self.user))
+            nachrichten = cursor.fetchall() 
+            return str(";".join([i[0] for i in nachrichten]))
         except:
             return "error"
     def checkaccount(self, name, password):

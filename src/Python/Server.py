@@ -54,7 +54,9 @@ async def Client(reader,writer):
                 if await checkforquit(response, writer):
                     return
                 data.append(response)
+                print(f"reached this point {data[1] = }")
                 nachrichte = benutzer.checkformessages(data[1])
+                print(nachrichte)
                 writer.write(nachrichte.encode("latin")+"\n".encode("latin"))
                 await writer.drain()
             if data[0] == "proofuser":
