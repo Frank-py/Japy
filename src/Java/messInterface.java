@@ -242,7 +242,6 @@ public class messInterface {
             JOptionPane.showMessageDialog(null,
                     "User has not accepted your invitation yet", "Ignored",
                     JOptionPane.WARNING_MESSAGE);
-            return;
         } else {
              JOptionPane.showMessageDialog(null,
                     "Generating Key ...", "Working ...",
@@ -257,7 +256,6 @@ public class messInterface {
             in.setText("");
             chat.add(in);
             frame.setVisible(true);
-
         }
 
     }

@@ -151,15 +151,10 @@ public static void createWindow() {
     if (Integer.parseInt(recv) == 0) {
       frame.dispose();
       JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
-    //  loggedin = true;
-      //new messInterface(0);
       return 1;
      
     } else if (Integer.parseInt(recv) == 1) {
       frame.dispose();
-     // loggedin = true;
-      //new messInterface(1);
-      
       return 1;
     
     } else if (Integer.parseInt(recv) == 2) {

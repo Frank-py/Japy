@@ -10,22 +10,21 @@ async def checkforquit(text, writer):
 async def Client(reader,writer):
     try:
         while True:
-            data = []
-            response = (await reader.read(512)).decode("latin")
+            command_request = (await reader.read(512)).decode("latin")
             writer.write("200\n".encode("latin"))
             await writer.drain()
-            if await checkforquit(response, writer):
+            if await checkforquit(command_request, writer):
                 return
-            data.append(response)
-            if data[0] == "login":
+            user_and_password = []
+            if command_request == "login":
                 for i in range(2):
-                    response = (await reader.read(512)).decode("latin")
+                    response = (await reader.read(512)).decode("latin") # adds user and password to list
                     writer.write("200\n".encode("latin"))
                     await writer.drain()
                     if await checkforquit(response, writer):
                         return
-                    data.append(response)
-                benutzer = User().checkaccount(data[1], hashlib.md5(bytes(data[2], encoding='latin')).hexdigest())
+                    user_and_password.append(response)
+                benutzer = User().checkaccount(user_and_password[0], hashlib.md5(bytes(user_and_password[1], encoding='latin')).hexdigest())
                 if benutzer.loggedin and benutzer.registriert:
                     writer.write("0\n".encode('latin'))
                     await writer.drain()
@@ -38,76 +37,63 @@ async def Client(reader,writer):
                     writer.write("2\n".encode('latin')) 
                     await writer.drain()
         while True: 
-            data = []
-            response = (await reader.read(512)).decode("latin")
+            command_request = (await reader.read(512)).decode("latin")
             writer.write("200\n".encode("latin"))
             await writer.drain()
             if await checkforquit(response, writer):
                 return
-            
-            data.append(response)
-            if data[0] == "getMes":
-                print("Get mes")
-                response = (await reader.read(512)).decode("latin")
+           
+            if command_request == "getMes":
+                user = (await reader.read(512)).decode("latin")
                 writer.write("200\n".encode("latin"))
                 await writer.drain()
-                if await checkforquit(response, writer):
+                if await checkforquit(user, writer):
                     return
-                data.append(response)
-                print(f"reached this point {data[1] = }")
-                nachrichte = benutzer.checkformessages(data[1])
-                print(nachrichte)
-                writer.write(nachrichte.encode("latin")+"\n".encode("latin"))
+                messages = benutzer.checkformessages(user)
+                writer.write(messages.encode("latin")+"\n".encode("latin"))
                 await writer.drain()
-            if data[0] == "proofuser":
-                response = (await reader.read(512)).decode("latin")
+            if command_request == "proofuser":
+                user = (await reader.read(512)).decode("latin")
                 writer.write("200\n".encode("latin"))
                 await writer.drain()
-                if await checkforquit(response, writer):
+                if await checkforquit(user, writer):
                     return
 
-                data.append(response)
-                if benutzer.searchaccount(data[1]):
+                if benutzer.searchaccount(user):
                     writer.write("1\n".encode('latin'))
                     await writer.drain()
                 else:
                     writer.write("0\n".encode('latin'))
                     await writer.drain()
-            if data[0] == "sendMes":
-                response = (await reader.read(512)).decode("latin")
+            if command_request == "sendMes":
+                user = (await reader.read(512)).decode("latin")
                 writer.write("200\n".encode("latin"))
                 await writer.drain()
-                if await checkforquit(response, writer):
-                    data.append(response)
-                data.append(response)
-            
-                response = (await reader.read(5000)).decode("latin")
-                writer.write("200\n".encode("latin"))
-                await writer.drain()
-                if await checkforquit(response, writer):
+                if await checkforquit(user, writer):
                     return
-                data.append(response)
-                benutzer.insertmessage(data[1], data[2]) 
+            
+                messages = (await reader.read(5000)).decode("latin")
+                writer.write("200\n".encode("latin"))
+                await writer.drain()
+                if await checkforquit(messages, writer):
+                    return
+                benutzer.insertmessage(user, messages) 
                 writer.write("200\n".encode("latin"))
                 await writer.drain()
             if data[0] == "createKey":
-                response = (await reader.read(512)).decode("latin") #user
+                user = (await reader.read(512)).decode("latin") #user
                 writer.write("200\n".encode("latin"))
-                if await checkforquit(response, writer):
+                if await checkforquit(user, writer):
                     return 
-                data.append(response)
-                a = benutzer.createKey(data[1]).encode("latin")+"\n".encode("latin")
+                status = benutzer.createKey(user).encode("latin")+"\n".encode("latin")
                 if benutzer.status == 1:
-                    print("1")
                     writer.write("1\n".encode("latin"))
                     await writer.drain()
                     continue
                 elif benutzer.status == 0:
-                    writer.write(a)
+                    writer.write(status)
                     await writer.drain()
-                    print("0")
                     P = (await reader.read(512)).decode(encoding="latin")
-                    print(P)
                     writer.write("200\n".encode("latin"))
                     await writer.drain()
                     G = (await reader.read(512)).decode(encoding="latin")
@@ -119,26 +105,21 @@ async def Client(reader,writer):
                     benutzer.insertKeys(data[1], P, G, A)
                     print(f"{P:}{G:}{A:}")
                 elif benutzer.status == 2:
-                    print(a)
-                    writer.write(a)
+                    writer.write(status)
                     await writer.drain()
-                    print("2")
                     P,G,A = benutzer.getKeys(data[1])
                     writer.write((P+"\n").encode("latin"))
                     await writer.drain()
-                    print(f"sent {P =}")
                     writer.write((G+"\n").encode("latin"))
                     await writer.drain()
-                    print(f"sent {G =}")
                     writer.write((A+"\n").encode("latin"))
                     await writer.drain()
-                    print(f"sent {A =}")
                     B = (await reader.read(512)).decode(encoding="latin")
                     writer.write("200\n".encode("latin"))
                     await writer.drain()
                     benutzer.insertKeys(user=data[1], aorb = B)
                 elif benutzer.status == 3:
-                    writer.write(a)
+                    writer.write(status)
                     await writer.drain()
                     P, B = benutzer.getKeys(data[1])
                     writer.write((P+"\n").encode("latin"))
