@@ -20,7 +20,7 @@ public class wee {
                     
                     
                 }
-            System.out.println(x);
+          
             break;
             }
             n+=1;

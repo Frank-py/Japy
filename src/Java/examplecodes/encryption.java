@@ -10,12 +10,12 @@ public class encryption {
     Random randy = new Random();
     String key = "";
     int ran;
-    System.out.println("Do you want to create key for \"Diffie-Hellman-Schlüsselaustauschverfahren\"?");
+  
     boolean create = scanny.nextBoolean();
     if (create) {
-      System.out.println("Enter g or enter 0 to generate g");
+    
       int g = scanny.nextInt();
-      System.out.println("Enter the primenumber p or 0 to generate p");
+    
       int p = scanny.nextInt();
       if (p == 0) {
         do {
@@ -32,25 +32,25 @@ public class encryption {
       } while (ran <= 1);
       BigInteger rando = BigInteger.valueOf(ran);
       BigInteger A = gg.modPow(rando, pp);
-      System.out.println("\n g = " + g + "\n p = " + p + "\n A = " + A + "\n a = " + ran);
-      System.out.println("Pass A to your Friend and enter your friends Number B");
+    
+    
       int B = scanny.nextInt();
       BigInteger BB = BigInteger.valueOf(B);
       BigInteger key2 = BB.modPow(rando, pp);
       key = key2.toString(10);
-      System.out.println("Your private key is: " + key);
+    
     } else {
-      System.out.println("Enter crypt key:");
+    
       key = scanny.next();
     }
 
-    System.out.println("type true to decrypt (entschlüsseln), type false to encrypt (verschlüsseln)");
+  
     boolean crypt = scanny.nextBoolean();
     
     Scanner scanny2 = new Scanner(System.in);
     int keyInt = Integer.parseInt(key);
     key = Integer.toBinaryString(keyInt);
-    System.out.println("Enter Message:");
+  
     String mess = scanny2.nextLine();
     String res = "";
     scanny.close();
@@ -63,7 +63,7 @@ public class encryption {
       mess = Stringtobinary(mess);
       res = crypt(mess, key);
     }
-    System.out.println(res);
+  
   }
 
   public static String Binarytostring(String in) {
