@@ -78,14 +78,27 @@ class User():
             self.connection.commit()
         except:
             print("error")
-    def checkformessages(self, recv):
+    def checkformessages(self, recv = None):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s")' % (self.user, recv))
-            nachrichten_empfangen = cursor.fetchall() 
-            cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s")' % (recv, self.user))
-            nachrichten_gesendet = cursor.fetchall()
-            return str(";;;".join([i[0] for i in nachrichten]))
+            if recv != None: 
+                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s");' % (self.user, recv))
+                nachrichten_empfangen = cursor.fetchall() 
+                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s");' % (recv, self.user))
+                nachrichten_gesendet = cursor.fetchall()
+                return str(";;;".join([i[0] for i in nachrichten]))
+            else:
+                returnable_list = []
+                cursor.execute('SELECT TIME, send, recv, Message From Messages WHERE (recv = "%s");'  % self.user)
+                for i in cursor.fetchall():
+                    if i not in self.lastmessages:
+                        returnable_list.append(i)
+                    else:
+                        self.lastmessages.append(i)
+                return returnable_list
+                        
+                        
+
         except:
             return "error"
     def checkaccount(self, name, password):

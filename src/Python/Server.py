@@ -29,6 +29,7 @@ async def Client(reader,writer):
                 if benutzer.loggedin and benutzer.registriert:
                     writer.write("0\n".encode('utf-8'))
                     await writer.drain()
+                    benutzer.fetch_friends()
                     break
                 elif benutzer.loggedin:
                     writer.write("1\n".encode('utf-8'))
@@ -38,6 +39,7 @@ async def Client(reader,writer):
                     writer.write("2\n".encode('utf-8')) 
                     await writer.drain()
         while True: 
+            benutzer.checkformessages()
             
             command_request = (await reader.read(512)).decode("utf-8")
             writer.write("200\n".encode("utf-8"))
