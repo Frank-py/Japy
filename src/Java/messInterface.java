@@ -257,6 +257,7 @@ public class messInterface {
                     "Generating Key ...", "Working ...",
                     JOptionPane.INFORMATION_MESSAGE);
             String mes = sendrecv.getMes(currentUser);
+            System.out.println(mes);
             if (mes.length() >= 8) {
               
                 String[] decMessages = encry.decMes(mes, key);

@@ -44,19 +44,19 @@ async def Client(reader,writer):
                 return
            
             if command_request == "getMes":
-                print("getMes")
+                
                 user = (await reader.read(512)).decode("utf-8")
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
                 if await checkforquit(user, writer):
                     return
                 messages = benutzer.checkformessages(user)
-                print(messages)
+                
                 writer.write((messages+"\n").encode("utf-8"))
                 await writer.drain()
                 continue
             elif command_request == "proofuser":
-                print("proofuser")
+                
                 user = (await reader.read(512)).decode("utf-8")
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
@@ -70,7 +70,7 @@ async def Client(reader,writer):
                     writer.write("0\n".encode('utf-8'))
                     await writer.drain()
             elif command_request == "sendMes":
-                print("sendMes")
+                
                 userMes = (await reader.read(512)).decode("utf-8")
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
@@ -78,16 +78,16 @@ async def Client(reader,writer):
                     return
             
                 messages = (await reader.read(5000)).decode("utf-8")
-                print(messages)
+                
                 writer.write("200\n".encode("utf-8"))
                 await writer.drain()
                 if await checkforquit(messages, writer):
                     return
                 benutzer.insertmessage(userMes, messages) 
             elif command_request == "createKey":
-                print("createKey")
+                
                 user = (await reader.read(512)).decode("utf-8") #user
-                print("user = ", user)
+                
                 writer.write("200\n".encode("utf-8"))
                 if await checkforquit(user, writer):
                     return 
@@ -109,28 +109,28 @@ async def Client(reader,writer):
                     writer.write("200\n".encode("utf-8"))
                     await writer.drain()
                     benutzer.insertKeys(user, P, G, A)
-                    print(f"{P:}{G:}{A:}")
+                    
                 elif benutzer.status == 2:
                     writer.write(status)
                     await writer.drain()
-                    print("sent", status)
+                    
                     P,G,A = benutzer.getKeys(user)
                     writer.write((P+"\n").encode("utf-8"))
                     await writer.drain()
-                    print("sent P " + P)
+                    
                     writer.write((G+"\n").encode("utf-8"))
                     await writer.drain()
-                    print("sent G")
+                    
                     writer.write((A+"\n").encode("utf-8"))
                     await writer.drain()
-                    print("sent A")
+                    
                     B = (await reader.read(512)).decode(encoding="utf-8")
-                    print("B", B)
+                    
                     writer.write("200\n".encode("utf-8"))
                     await writer.drain()
                     benutzer.insertKeys(user=user, aorb = B)
                 elif benutzer.status == 3:
-                    print("3")
+                    
                     writer.write(status)
                     await writer.drain()
                     P, B = benutzer.getKeys(user)
@@ -138,11 +138,11 @@ async def Client(reader,writer):
                     await writer.drain()
                     writer.write((B+"\n").encode("utf-8"))
                     await writer.drain()
-                print(status)
+                
                     
 
     except (ConnectionResetError, BrokenPipeError) as E:
-        print(E)
+        
         writer.close()
             
 async def main():
