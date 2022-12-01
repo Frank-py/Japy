@@ -73,6 +73,7 @@ public class sendrecv {
             bf.readLine();
             return bf.readLine();
         } catch (IOException e) {
+            e.printStackTrace();
             return null;
         }
     }
