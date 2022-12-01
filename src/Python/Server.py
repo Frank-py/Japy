@@ -1,6 +1,7 @@
 import asyncio, hashlib
 from functionsserver import *
 PORT = 6000
+
 async def checkforquit(text, writer): 
     if text == "quit":
         writer.write("quit\n".encode("utf-8"))
@@ -37,11 +38,13 @@ async def Client(reader,writer):
                     writer.write("2\n".encode('utf-8')) 
                     await writer.drain()
         while True: 
+            
             command_request = (await reader.read(512)).decode("utf-8")
             writer.write("200\n".encode("utf-8"))
             await writer.drain()
             if await checkforquit(response, writer):
                 return
+            
            
             if command_request == "getMes":
                 

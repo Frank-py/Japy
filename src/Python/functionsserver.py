@@ -1,7 +1,7 @@
 from atexit import register
 import mysql.connector
 from mysql.connector import Error
-from time import gmtime, strftime
+from time import localtime, strftime
 import versch
 class User():
     def __init__(self, user=None, password=None, date=None, loggedin=None, registriert=False):
@@ -12,6 +12,7 @@ class User():
         self.connection = self.create_connection()
         self.loggedin = loggedin
         self.registriert = registriert
+        self.friends = []
     def create_connection(self):
         connection = None
         try:
@@ -51,7 +52,7 @@ class User():
     def register(cls, connection, username, password):
         cursor = connection.cursor()
         try:
-            now = str(strftime("%Y-%m-%d %H:%M:%S", gmtime())).strip("'")
+            now = str(strftime("%Y-%m-%d %H:%M:%S", localtime())).strip("'")
             sql = "INSERT INTO People (Username, Password, CD) VALUES (%s, %s, %s);"
             val = (username, password, now)
             cursor.execute(sql, val)
@@ -59,11 +60,27 @@ class User():
             return cls(username, password, now, True, True)
         except Error as e:
             return e
+    def fetch_friends(self):
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute('SELECT recv from Messages where send = "%s")', (self.user))
+            friends = cursor.fetchall()
+            cursor.execute('SELECT send from Messages where recv = "%s")', (self.user))
+            friends = set(friends[0],
+
+
+            
+        
+        
+        except:
+            print("idk man")
+        
+
     def insertmessage(self, recv, text):
         cursor = self.connection.cursor()
         try:
             sql = "INSERT INTO Messages (send, recv, Message, Time) VALUES (%s, %s, %s, %s);"
-            now = str(strftime("%Y-%m-%d %H:%M:%S", gmtime())).strip("'")
+            now = str(strftime("%Y-%m-%d %H:%M:%S", localtime())).strip("'")
             val = (self.user, recv, text, now)
             cursor.execute(sql, val)
             self.connection.commit()
@@ -72,8 +89,10 @@ class User():
     def checkformessages(self, recv):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT Message FROM Messages WHERE (recv = "%s" AND send = "%s") OR (recv = "%s" AND send = "%s")' % (self.user, recv, recv, self.user))
-            nachrichten = cursor.fetchall() 
+            cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s")' % (self.user, recv))
+            nachrichten_empfangen = cursor.fetchall() 
+            cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s")' % (recv, self.user))
+            nachrichten_gesendet = cursor.fetchall()
             return str(";;;".join([i[0] for i in nachrichten]))
         except:
             return "error"

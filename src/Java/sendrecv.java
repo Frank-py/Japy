@@ -87,7 +87,7 @@ public class sendrecv {
             out.print(in);
           
             out.flush();    
-          
+            bf.readLine();
             s = bf.readLine();
           
             if (s.equals("0")) { // Du bist benutzer A
