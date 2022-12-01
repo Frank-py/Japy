@@ -12,7 +12,6 @@ class User():
         self.connection = self.create_connection()
         self.loggedin = loggedin
         self.registriert = registriert
-        self.friends = []
     def create_connection(self):
         connection = None
         try:
@@ -64,18 +63,11 @@ class User():
         cursor = self.connection.cursor()
         try:
             cursor.execute('SELECT recv from Messages where send = "%s")', (self.user))
-            friends = cursor.fetchall()
+            self.friends = cursor.fetchall()
             cursor.execute('SELECT send from Messages where recv = "%s")', (self.user))
-            friends = set(friends[0])
-
-
-            
-        
-        
+            self.friends = set(cursor.fetchall[0], self.friends)  
         except:
             print("idk man")
-        
-
     def insertmessage(self, recv, text):
         cursor = self.connection.cursor()
         try:
