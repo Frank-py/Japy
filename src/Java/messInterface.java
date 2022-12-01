@@ -28,6 +28,7 @@ public class messInterface {
     JTextField newUser;
     JPanel Users;
     public JLabel background;
+    private String[] oldMessages = { "" };
 
     boolean createUser = false;
     public int heighttemp;
@@ -52,7 +53,6 @@ public class messInterface {
         frame.setTitle("Messenger");
         frame.setIconImage(logo.getImage());
         frame.getContentPane().setBackground(color);
-
         // frame.setContentPane(back);????????????
         heighttemp = frame.getHeight();
         widthtemp = frame.getWidth();
@@ -162,7 +162,7 @@ public class messInterface {
         in.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
-                  
+
                     // currentUser = "vali";
                     // String key = encry.getKey(currentUser);
                     sendrecv.sendMes(
@@ -259,14 +259,20 @@ public class messInterface {
             String mes = sendrecv.getMes(currentUser);
             System.out.println(mes);
             if (mes.length() >= 8) {
-              
+                JLabel messages;
+                messages = new JLabel();
+                chat.remove(messages);
                 String[] decMessages = encry.decMes(mes, key);
 
-                JLabel messages = new JLabel(decMessages[0]);
-                messages.setForeground(Color.white);
-                messages.setBackground(new Color(0, 255, 0));
-                messages.setSize(chat.getWidth(), 100);
-                chat.add(messages);
+                for (int x = 0; x < decMessages.length - oldMessages.length; x++) {
+                    messages = new JLabel(decMessages[decMessages.length - 1 - x]);
+                    messages.setBackground(new Color(0, 255, 0));
+                    messages.setForeground(Color.white);
+                    messages.setSize(chat.getWidth(), 100);
+                    chat.add(messages);
+                    oldMessages = decMessages;
+                }
+
             }
             in.setText("");
             chat.add(in);
