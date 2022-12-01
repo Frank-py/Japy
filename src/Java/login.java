@@ -178,10 +178,10 @@ public static void createWindow() {
             try {
               Thread.sleep(100);
             } catch (Exception i) {
-              System.out.println("sldöjkhkvhsjkhheshjdfsjljflsajfjsaf" + i);
+            
             }
             counter++;
-            System.out.println(counter);
+          
           }
           loginbu.setEnabled(true);*/
           return 0;

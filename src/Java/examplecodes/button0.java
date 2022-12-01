@@ -46,7 +46,7 @@ public class button0 extends JFrame implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==button) {
-                System.out.println("poo");
+              
                 button.setEnabled(false);
                 label.setVisible(true);
             }	

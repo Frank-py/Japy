@@ -162,7 +162,7 @@ public class messInterface {
         in.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
-                    System.out.println(currentUser);
+                  
                     // currentUser = "vali";
                     // String key = encry.getKey(currentUser);
                     sendrecv.sendMes(
@@ -258,7 +258,7 @@ public class messInterface {
                     JOptionPane.INFORMATION_MESSAGE);
             String mes = sendrecv.getMes(currentUser);
             if (mes.length() >= 8) {
-                System.out.println(key + "|<- key");
+              
                 String[] decMessages = encry.decMes(mes, key);
 
                 JLabel messages = new JLabel(decMessages[0]);

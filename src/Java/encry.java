@@ -98,29 +98,29 @@ public class encry {
     }
 
     public static String[] decMes(String in, String key) {
+        Base64.Decoder dec = Base64.getDecoder();
         String[] messages = in.split(";;;");
-        System.out.println(Arrays.toString(messages));//ahaaaa
         int n = 0;
         String[] out = new String[messages.length];
         for (String i : messages) {
-            out[n] = decryption(Stringtobinary(i), key);
+            out[n] = decryption(Stringtobinary(new String(dec.decode(i))), key);
             n++;
         }
-        System.out.print("printing garbage: ");
-        System.out.println(Arrays.toString(out));//ahaaaa
         return out;
     }
 
     public static String encryption(String in, String key) {
-        int keyInt = Integer.parseInt(key);
-        key = Integer.toBinaryString(keyInt);
+        key = Integer.toBinaryString(Integer.parseInt(key));
         in = Stringtobinary(in);
-        String res = Binarytostring( crypt(in, key));
-        
-        return res;
+        Base64.Encoder enc = Base64.getEncoder();
+        in = enc.encodeToString(Binarytostring(crypt(in, key)).getBytes());
+        return in;
     }
 
     public static String decryption(String in, String key) {
+        // key = Integer.toBinaryString(Integer.parseInt(key));
+        // in = Binarytostring(crypt(Stringtobinary(in), key));
+        // return in;
         int keyInt = Integer.parseInt(key);
         key = Integer.toBinaryString(keyInt);
         in = crypt(in, key);
@@ -181,7 +181,7 @@ public class encry {
         for (int x = 0; x <= numbers.length - 1; x++) {
             char c = (char) Integer.parseInt(numbers[x], 2);
             out = out + c;
-        }
+        } 
         return out;
     }
 }
