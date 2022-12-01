@@ -89,10 +89,8 @@ class User():
     def checkformessages(self, recv):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s")' % (self.user, recv))
-            nachrichten_empfangen = cursor.fetchall() 
-            cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s")' % (recv, self.user))
-            nachrichten_gesendet = cursor.fetchall()
+            cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s") OR (recv = "%s" AND send = "%s")' % (self.user, recv, recv, self.user))
+            nachrichten = cursor.fetchall() 
             return str(";;;".join([i[0] for i in nachrichten]))
         except:
             return "error"
