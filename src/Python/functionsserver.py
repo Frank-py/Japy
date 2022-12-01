@@ -66,7 +66,7 @@ class User():
             cursor.execute('SELECT recv from Messages where send = "%s")', (self.user))
             friends = cursor.fetchall()
             cursor.execute('SELECT send from Messages where recv = "%s")', (self.user))
-            friends = set(friends[0],
+            friends = set(friends[0])
 
 
             
