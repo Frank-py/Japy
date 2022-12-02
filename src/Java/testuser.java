@@ -22,8 +22,9 @@ public class testuser {
 
     }
 
-public void newchat(chat newchat){
-    chats[NumberOfChats] = newchat;
+public void newchat(String newchat){
+
+    chats[NumberOfChats] = new chat (newchat);
     this.NumberOfChats ++;
 }
     

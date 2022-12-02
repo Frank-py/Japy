@@ -19,7 +19,7 @@ public class functions {
             JOptionPane.showMessageDialog(null, "User not found!", "User not found!",
                     JOptionPane.ERROR_MESSAGE);
         } else if (recv.equals("1")) {
-            
+            this.newchat(UserName);
             userliste[n] = new JButton(newUser.getText());
             userliste[n].setFont(new Font("MV Boli", Font.PLAIN, 35));
             userliste[n].setBackground(new Color(47, 49, 54));
