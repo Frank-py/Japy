@@ -22,7 +22,7 @@ public class messInterface {
     // ImageIcon ba = new ImageIcon("Java/Backgroundy.png");
     // Image img = ba.getImage();
     JPanel chat = new JPanel();
-    JTextField in = new JTextField();
+    JTextField writeMessage = new JTextField();
     JButton addUsers;
     JFrame frame;
     JTextField newUser;
@@ -35,7 +35,6 @@ public class messInterface {
     public int widthtemp;
 
     messInterface() {
-
         /*
          * while (!logins) {
          * logins = login.loggedin;
@@ -58,10 +57,10 @@ public class messInterface {
         widthtemp = frame.getWidth();
         // back.setBackground(Color.red);
         // back.setOpaque(true);
-        in.setFont(new Font("Consolas", Font.PLAIN, 25));
-        in.setForeground(Color.white);
-        in.setCaretColor(Color.white);
-        in.setBackground(color);
+        writeMessage.setFont(new Font("Consolas", Font.PLAIN, 25));
+        writeMessage.setForeground(Color.white);
+        writeMessage.setCaretColor(Color.white);
+        writeMessage.setBackground(color);
         // chat.setLayout(new BoxLayout(chat,BoxLayout.Y_AXIS));
         // chat.setOpaque(false);
         KeyListener enter = new KeyListener() {
@@ -85,6 +84,7 @@ public class messInterface {
                             userliste[n].setBackground(new Color(47, 49, 54));
                             userliste[n].setForeground(new Color(0xFFFFFF));
                             userliste[n].setFocusable(false);
+                           
 
                             userliste[n].addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent e) {
@@ -159,15 +159,15 @@ public class messInterface {
             }
         };
 
-        in.addKeyListener(new KeyListener() {
+        writeMessage.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
-                if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && in.getText().length() > 0) {
+                if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && writeMessage.getText().length() > 0) {
 
                     // currentUser = "vali";
                     // String key = encry.getKey(currentUser);
                     sendrecv.sendMes(
-                            new String[] { currentUser, encry.encryption(in.getText(), encry.getKey(currentUser)) });
-                    in.setText("");
+                            new String[] { currentUser, encry.encryption(writeMessage.getText(), encry.getKey(currentUser)) });
+                            writeMessage.setText("");
                     // JLabel label = new JLabel(sendrecv.getMes(currentUser));
                     // label.setSize(100, 100);
                     // chat.add(label);
@@ -241,8 +241,12 @@ public class messInterface {
      * back.remove(background);
      * frame.setVisible(true);
      */
+    
+    
 
     void newchat() {
+        chat d = new chat("ee");
+        System.out.println(d.name);
         String key = encry.getKey(currentUser);
         if (key.equals("0")) {
             JOptionPane.showMessageDialog(null,
@@ -253,6 +257,7 @@ public class messInterface {
                     "User has not accepted your invitation yet", "Ignored",
                     JOptionPane.WARNING_MESSAGE);
         } else {
+
             JOptionPane.showMessageDialog(null,
                     "Generating Key ...", "Working ...",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -274,8 +279,8 @@ public class messInterface {
                 }
 
             }
-            in.setText("");
-            chat.add(in);
+            writeMessage.setText("");
+            chat.add(writeMessage);
             frame.setVisible(true);
         }
 
