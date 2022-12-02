@@ -7,8 +7,10 @@ public class testuser {
     private messInterface main;
     private encry secure;
     private chat[] chats;
+    private int NumberOfChats;
 
     testuser(String[] UP){
+    this.NumberOfChats = 0;
     this.username = UP[0];
     this.pw = UP[1];
     this.a = encry.a();
@@ -19,6 +21,10 @@ public class testuser {
 
 
     }
-    
+
+public void newchat(chat newchat){
+    chats[NumberOfChats] = newchat;
+    this.NumberOfChats ++;
+}
     
 }
