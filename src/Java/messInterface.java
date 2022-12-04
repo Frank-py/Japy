@@ -29,10 +29,11 @@ public class messInterface {
     JPanel Users;
     public JLabel background;
     private String[] oldMessages = { "" };
-
+    chat[] chats = new chat[100];
     boolean createUser = false;
     public int heighttemp;
     public int widthtemp;
+    
 
     messInterface() {
         /*
@@ -78,30 +79,49 @@ public class messInterface {
                                     JOptionPane.ERROR_MESSAGE);
                             recv = "500";
                         } else if (recv.equals("1")) {
+                            currentUser = newUser.getText();
                             recv = "500";
-                            userliste[n] = new JButton(newUser.getText());
-                            userliste[n].setFont(new Font("MV Boli", Font.PLAIN, 35));
-                            userliste[n].setBackground(new Color(47, 49, 54));
-                            userliste[n].setForeground(new Color(0xFFFFFF));
-                            userliste[n].setFocusable(false);
+                            chats[n] = new chat(currentUser);
+                            JButton Useruser = new JButton(newUser.getText());
+                            Useruser.setFont(new Font("MV Boli", Font.PLAIN, 35));
+                            Useruser.setBackground(new Color(47, 49, 54));
+                            Useruser.setForeground(new Color(0xFFFFFF));
+                            Useruser.setFocusable(false);
                            
 
-                            userliste[n].addActionListener(new ActionListener() {
+                            Useruser.addActionListener(new ActionListener() {
+                                
+                                
                                 public void actionPerformed(ActionEvent e) {
-                                    for (JButton o : userliste) {
-                                        if (e.getSource() == o) {
-                                            currentUser = o.getText();
-                                            newchat();
+                                    for (chat ch : chats) {
+                                        System.out.println(ch.name);
+                                       // System.out.println("ch.name");
+                                        if (ch.name.equals(((JButton)e.getSource()).getText())) {
+                                            ch.getMessages();
+                                            System.out.println(ch.name + "eebfeeeeeeeee");
+                                            currentUser = ch.name;
+                                            break;
                                         }
+                                        
                                     }
+                                    newchat();
+
+                                    // for (JButton o : userliste) {
+                                    //     if (e.getSource() == o) {
+                                            
+                                    //       //  newchat();
+                                    //     }
+                                    // }
                                 }
                             });
-                            Users.add(userliste[n], 1);
+                            Users.add(Useruser, 1);
                             n++;
                             Users.remove(newUser);
                             addUsers.setEnabled(true);
                             frame.setVisible(true);
-                        } else if (recv.equals("4")) {
+                        }
+
+                         else if (recv.equals("4")) {
                             JOptionPane.showMessageDialog(null,
                                     "An unknown exception occured please try again! \nEnsure your internet connection",
                                     "ERROR",
@@ -115,9 +135,10 @@ public class messInterface {
                         }
                         newUser.setText("");
                         frame.setVisible(true);
-                    }
                 }
             }
+                }
+            
 
             public void keyReleased(KeyEvent e) {
             }
@@ -245,12 +266,23 @@ public class messInterface {
     
 
     void newchat() {
-        chat d = new chat("ee");
-        System.out.println(d.name);
-        String key = encry.getKey(currentUser);
+       // chat d = new chat("ee");
+        //System.out.println(d.name);
+        String key = "0";
+        for (chat ch : chats) {
+            if (ch.name.equals(currentUser)) {
+                ch.getMessages();
+                key = ch.key();
+
+
+                break;
+            }
+            
+        }
+        
         if (key.equals("0")) {
             JOptionPane.showMessageDialog(null,
-                    "Invitation sent to user", "Good Luck",
+                    "Invitation sent to user(or it crashed(50/50 chance))", "Good Luck",
                     JOptionPane.INFORMATION_MESSAGE);
         } else if (key.equals("1")) {
             JOptionPane.showMessageDialog(null,

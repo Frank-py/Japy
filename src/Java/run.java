@@ -1,7 +1,7 @@
 package Java;
 public class run {
   public static void main(String[] args) {
-    new messtest();   
+   // new messtest();   
    login.createWindow();
   }
   public static void loggedin(String[] UP){

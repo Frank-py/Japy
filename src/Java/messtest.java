@@ -11,6 +11,7 @@ public class messtest {
     Color colortheme;
     ImageIcon logo;
     JPanel chat;
+    String recv;
     JTextField writeMessage;
     JButton addUsers;
     JFrame frame;

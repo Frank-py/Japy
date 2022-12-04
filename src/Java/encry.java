@@ -74,8 +74,10 @@ public class encry {
 
         if (in.length == 0) { // Neu erstellte p und g
             do {
-                p = randy.nextInt(1000000000);
-            } while (!isPrime(p) | p < 1000000);
+                //p = randy.nextInt(1000000000);
+                p = randy.nextInt(1000);
+                //p<1000000
+            } while (!isPrime(p) | p < 100);
             g = randy.nextInt(p - 1);
 
         } else {
