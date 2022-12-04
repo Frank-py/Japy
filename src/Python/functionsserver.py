@@ -96,8 +96,6 @@ class User():
                     else:
                         self.lastmessages.append(i)
                 return returnable_list
-                        
-                        
 
         except:
             return "error"
