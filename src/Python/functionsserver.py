@@ -93,7 +93,10 @@ class User():
                 cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s");' % (recv, self.user))
                 nachrichten_gesendet = cursor.fetchall()
                 messages.append(nachrichten_gesendet)
-            return messages 
+            if len(messages) == 0:
+                return ""
+            else:
+                return ";;;".join(messages)
 
         except:
             return "error"
@@ -115,17 +118,17 @@ class User():
     #except Error as e:
     #    print(e)
     #return messages
-    #def checkaccount(self, name):
-    #    cursor = self.connection.cursor()
-    #    try:
-    #        cursor.execute('SELECT * FROM People WHERE Username = "%s";' % (name))
-    #        nachrichten = cursor.fetchall()
-    #        if nachrichten:
-    #            return True # login
-    #        else:    
-    #            return False #register
-    #    except Exception as e:
-    #        return e
+    def checkaccount(self, name):
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute('SELECT * FROM People WHERE Username = "%s";' % (name))
+            nachrichten = cursor.fetchall()
+            if nachrichten:
+                return True # login
+            else:    
+                return False #register
+        except Exception as e:
+            return e
     def searchaccount(self, user):
         cursor = self.connection.cursor()
         try:
