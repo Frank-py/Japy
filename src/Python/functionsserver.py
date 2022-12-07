@@ -2,17 +2,14 @@ from atexit import register
 import mysql.connector
 from mysql.connector import Error
 from time import localtime, strftime
-import versch
+import versch, bcrypt
 class User():
-    def __init__(self, user=None, password=None, date=None, loggedin=None, registriert=False):
+    def __init__(self, user=None, date=None, loggedin=False, registriert=False):
         self.user = user
-        self.password = password
         self.status = 0 
-        self.date = date
         self.connection = self.create_connection()
         self.loggedin = loggedin
         self.registriert = registriert
-        self.friends = []
     def create_connection(self):
         connection = None
         try:
@@ -36,46 +33,42 @@ class User():
             print("Database created successfully")
         except Error as e:
             print(f"The error '{e}' occurred")
-    @classmethod
-    def login(cls, connection, user, password):
-        cursor = connection.cursor()
+    def login(self, user, password):
+        cursor = self.connection.cursor()
         try:
             cursor.execute('SELECT Password from People where Username = "%s";' % (user))
-            myresult = cursor.fetchone()[0]
-            if myresult == password:
-                return cls(user, password, None, True, False)
+            stored_password = cursor.fetchone()[0]
+            if bcrypt.checkpw(password.encode("utf-8"), stored_password.encode("utf-8")):
+                self.user = user
+                self.loggedin = True
+                self.registriert = False
             else:
-                return cls(None, None, None, False, False)
+                self.loggedin = False
+                self.registriert = False
         except Error as e:
             print(e)
-    @classmethod
-    def register(cls, connection, username, password):
-        cursor = connection.cursor()
+    def register(self, username, password):
+        cursor = self.connection.cursor()
         try:
             now = str(strftime("%Y-%m-%d %H:%M:%S", localtime())).strip("'")
             sql = "INSERT INTO People (Username, Password, CD) VALUES (%s, %s, %s);"
             val = (username, password, now)
             cursor.execute(sql, val)
-            connection.commit()
-            return cls(username, password, now, True, True)
+            self.connection.commit()
+            self.user = username
+            self.loggedin = True
+            self.registriert = True
         except Error as e:
-            return e
+            print(e)
     def fetch_friends(self):
         cursor = self.connection.cursor()
         try:
             cursor.execute('SELECT recv from Messages where send = "%s")', (self.user))
-            friends = cursor.fetchall()
+            self.friends = cursor.fetchall()
             cursor.execute('SELECT send from Messages where recv = "%s")', (self.user))
-            friends = set(friends[0])
-
-
-            
-        
-        
+            self.friends = set(cursor.fetchall[0], self.friends)  
         except:
             print("idk man")
-        
-
     def insertmessage(self, recv, text):
         cursor = self.connection.cursor()
         try:
@@ -86,24 +79,37 @@ class User():
             self.connection.commit()
         except:
             print("error")
-    def checkformessages(self, recv):
+    def checkformessages(self, recv = None):
         cursor = self.connection.cursor()
         try:
-            cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s") OR (recv = "%s" AND send = "%s")' % (self.user, recv, recv, self.user))
-            nachrichten = cursor.fetchall() 
-            return str(";;;".join([i[0] for i in nachrichten]))
+            if recv != None: 
+                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s");' % (self.user, recv))
+                nachrichten_empfangen = cursor.fetchall() 
+                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s");' % (recv, self.user))
+                nachrichten_gesendet = cursor.fetchall()
+                return str(";;;".join([i[0] for i in nachrichten]))
+            else:
+                returnable_list = []
+                cursor.execute('SELECT TIME, send, recv, Message From Messages WHERE (recv = "%s");'  % self.user)
+                for i in cursor.fetchall():
+                    if i not in self.lastmessages:
+                        returnable_list.append(i)
+                    else:
+                        self.lastmessages.append(i)
+                return returnable_list
+
         except:
             return "error"
-    def checkaccount(self, name, password):
+    def checkaccount(self, name):
         cursor = self.connection.cursor()
         try:
             cursor.execute('SELECT * FROM People WHERE Username = "%s";' % (name))
             nachrichten = cursor.fetchall()
-            try:
-                if name == nachrichten[0][0]:
-                    return self.login(self.connection, name, password)
-            except:    
-                return self.register(self.connection, name, password)
+            if nachrichten:
+                return True # login
+            else:    
+                print("registER=!=!==!=!")
+                return False #register
         except Exception as e:
             return e
     def searchaccount(self, user):
