@@ -15,12 +15,12 @@ class User():
         try:
             connection = mysql.connector.connect(
                  host="localhost",
-              user="***REMOVED***",
             #  user="***REMOVED***",
-           #   passwd="***REMOVED***",
+              user="***REMOVED***",
+              passwd="***REMOVED***",
    
   
-              passwd="***REMOVED***",
+            #  passwd="***REMOVED***",
                   database="***REMOVED***"
         )
         except Error as e:
@@ -81,37 +81,51 @@ class User():
             print("error")
     def checkformessages(self, recv = None):
         cursor = self.connection.cursor()
+        messages = []
         try:
             if recv != None: 
-                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s");' % (self.user, recv))
-                nachrichten_empfangen = cursor.fetchall() 
-                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" AND send = "%s");' % (recv, self.user))
-                nachrichten_gesendet = cursor.fetchall()
-                return str(";;;".join([i[0] for i in nachrichten]))
+                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s");' % (self.user))
+                messages = cursor.fetchall() 
             else:
-                returnable_list = []
-                cursor.execute('SELECT TIME, send, recv, Message From Messages WHERE (recv = "%s");'  % self.user)
-                for i in cursor.fetchall():
-                    if i not in self.lastmessages:
-                        returnable_list.append(i)
-                    else:
-                        self.lastmessages.append(i)
-                return returnable_list
+                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s");' % (self.user, recv))
+                nachrichten_empfangen = cursor.fetchall() 
+                messages.append(nachrichten_empfangen)
+                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s");' % (recv, self.user))
+                nachrichten_gesendet = cursor.fetchall()
+                messages.append(nachrichten_gesendet)
+            return messages 
 
         except:
             return "error"
-    def checkaccount(self, name):
-        cursor = self.connection.cursor()
-        try:
-            cursor.execute('SELECT * FROM People WHERE Username = "%s";' % (name))
-            nachrichten = cursor.fetchall()
-            if nachrichten:
-                return True # login
-            else:    
-                print("registER=!=!==!=!")
-                return False #register
-        except Exception as e:
-            return e
+    #def checkformessages(self, recv = None, offset = 1):
+    #cursor = self.connection.cursor()
+    #messages = []
+    #try:
+    #    if recv != None: 
+    #        cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and displayed = false) ORDER BY Time DESC LIMIT 5;' % (self.user))
+    #        messages = cursor.fetchall()
+    #        cursor.execute('UPDATE Messages SET displayed = true WHERE (recv = "%s" and displayed = false);' % (self.user))
+    #    else:
+    #        cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s" and displayed = false) ORDER BY Time DESC LIMIT 5 OFFSET 5*%s;' % (self.user, recv, offset))
+    #        nachrichten_empfangen = cursor.fetchall()
+    #        cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s" and displayed = false) ORDER BY Time DESC LIMIT 5;' % (recv, self.user))
+    #        nachrichten_gesendet = cursor.fetchall() 
+    #        messages.append(nachrichten_gesendet)
+    #        cursor.execute('UPDATE Messages SET displayed = true WHERE (recv = "%s" and send "%s" and displayed = false) ;' % (self.user, recv))
+    #except Error as e:
+    #    print(e)
+    #return messages
+    #def checkaccount(self, name):
+    #    cursor = self.connection.cursor()
+    #    try:
+    #        cursor.execute('SELECT * FROM People WHERE Username = "%s";' % (name))
+    #        nachrichten = cursor.fetchall()
+    #        if nachrichten:
+    #            return True # login
+    #        else:    
+    #            return False #register
+    #    except Exception as e:
+    #        return e
     def searchaccount(self, user):
         cursor = self.connection.cursor()
         try:

@@ -53,7 +53,6 @@ async def Client(reader,writer):
                     writer.write("2\n".encode('utf-8')) 
                     await writer.drain()
         while True: 
-            #benutzer.checkformessages()
             
             command_request = (await reader.read(512)).decode("utf-8")
             writer.write(RESPONSE_VALUE)
