@@ -268,7 +268,7 @@ public class messInterface {
     void newchat() {
        // chat d = new chat("ee");
         //System.out.println(d.name);
-        String key = "0";
+        String key = "";
         for (chat ch : chats) {
             if (ch.name.equals(currentUser)) {
                 ch.getMessages();
@@ -280,18 +280,20 @@ public class messInterface {
             
         }
         
-        if (key.equals("0")) {
-            JOptionPane.showMessageDialog(null,
-                    "Invitation sent to user(or it crashed(50/50 chance))", "Good Luck",
-                    JOptionPane.INFORMATION_MESSAGE);
-        } else if (key.equals("1")) {
-            JOptionPane.showMessageDialog(null,
-                    "User has not accepted your invitation yet", "Ignored",
-                    JOptionPane.WARNING_MESSAGE);
-        } else {
+        // if (key.equals("0")) {
+        //     joptionpane.showmessagedialog(null,
+        //             "invitation sent to user(or it crashed(50/50 chance))", "good luck",
+        //             joptionpane.information_message);
+        // } else if (key.equals("1")) {
+        //     joptionpane.showmessagedialog(null,
+        //             "user has not accepted your invitation yet", "ignored",
+        //             joptionpane.warning_message);
+       
+if (!key.equals("")) {
+    
 
             JOptionPane.showMessageDialog(null,
-                    "Generating Key ...", "Working ...",
+                    "generating key ...", "working ...",
                     JOptionPane.INFORMATION_MESSAGE);
             String mes = sendrecv.getMes(currentUser);
             System.out.println(mes);
@@ -315,6 +317,7 @@ public class messInterface {
             chat.add(writeMessage);
             frame.setVisible(true);
         }
+        
 
     }
 }

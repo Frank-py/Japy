@@ -27,7 +27,7 @@ public class sendrecv {
             s = bf.readLine();
             return s;
         } catch (IOException e) {
-
+            e.printStackTrace();
             return null;
         }
     }
@@ -121,12 +121,13 @@ public class sendrecv {
                 return encry.endnewkey(Bap);
             }
             if (s.equals("3")) { // looser du bist immer noch A
-                String[] Bap = new String[3];
+                String[] Bap = new String[3];   
                 Bap[2] = bf.readLine();
                 Bap[0] = bf.readLine();
                 Bap[1] = encry.a();
                 return encry.endnewkey(Bap);
-            } else { // gönn dir ne Pause
+            } else { // gönn dir ne Pause return 1
+                System.out.println("gggf");
                 return s;
             }
         } 
