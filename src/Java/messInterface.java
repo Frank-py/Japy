@@ -36,7 +36,7 @@ public class messInterface {
     public int heighttemp;
     public int widthtemp;
 
-    messInterface() {
+    messInterface(testuser user) {
 
         frame = new JFrame();
         frame.setLayout(new BorderLayout());

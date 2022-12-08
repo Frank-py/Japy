@@ -3,6 +3,7 @@ package Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import com.google.gson.Gson;
 
 public class messtest {
 
@@ -19,20 +20,25 @@ public class messtest {
     JPanel Users;
     Font stdFont;
     KeyListener enter;
+    JButton Useruser;
+    ActionListener UserPressed;
+    testuser me;
 
-    //JLabel background;
-    
-    messtest(){
+    // JLabel background;
+
+    messtest(testuser me) {
+        this.me = me;
         initialize();
         listen();
-        
-
 
     }
 
-    void initialize(){
+    void initialize() {
 
-        //initializing the frame
+        // colors
+        colortheme = new Color(27, 37, 43);
+
+        // initializing the frame
         frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.setSize(1366, 768);
@@ -42,126 +48,119 @@ public class messtest {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Messenger");
         frame.setIconImage(logo.getImage());
-        frame.getContentPane().setBackground(color);
+        frame.getContentPane().setBackground(colortheme);
 
-        //creating the chat textfield
+        // creating the JButton for Usernames
+        Useruser = new JButton();
+        Useruser.setFont(new Font("MV Boli", Font.PLAIN, 35));
+        Useruser.setBackground(new Color(47, 49, 54));
+        Useruser.setForeground(new Color(0xFFFFFF));
+        Useruser.setFocusable(false);
+
+        // creating the chat textfield
         writeMessage.setFont(new Font("Consolas", Font.PLAIN, 25));
         writeMessage.setForeground(Color.white);
         writeMessage.setCaretColor(Color.white);
-        writeMessage.setBackground(color);
+        writeMessage.setBackground(colortheme);
+
+        // creating the addUser JButton
 
     }
 
-    
-    void listen(){
-        
+    void listen() {
 
-    }
+        // checks if an added user is clicked
+        UserPressed = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String textuser = ((JButton) e.getSource()).getText();
+                if (me.openchat(textuser)) {
+                    // creates the chat interface visually
+                    newchat();
+                    // loads the messages to the chat if necessary
+                    loadMes(me.getMes(textuser, 5));
+                } else{
+                    // displaying the error message when key isn´t ready
+                    JOptionPane.showMessageDialog(null,
+                            "User has not accepted your invitation yet", "Ignored",
+                            JOptionPane.WARNING_MESSAGE);
+                }
 
-    
-}
+            }
+        };
 
-
-
-        KeyListener enter = new KeyListener() {
+        // keylistener with a variety of functions
+        enter = new KeyListener() {
             public void keyPressed(KeyEvent e) {
+
+                // closes frame when esc is pressed
                 if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
                     frame.dispose();
                 }
+
+                // recognises user pressed enter to add new user
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+
+                    // checks if the username is valid
                     if (newUser.getText().length() > 1069 || newUser.getText().length() < 1) {
-                        recv = "5";
-                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                "Invalid! Enter a valid username.", "OutOfBounds",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    // verifies the user with the database
+                    else {
                         recv = sendrecv.proofuser(newUser.getText());
+
+                        // ERROR user is not in database
                         if (recv.equals("0")) {
-                            JOptionPane.showMessageDialog(null, "User not found!", "User not found!",
+                            JOptionPane.showMessageDialog(null, "User not found!",
+                                    "Check spelling or send your partner a link to join this messenger.",
                                     JOptionPane.ERROR_MESSAGE);
-                            recv = "500";
-                        } else if (recv.equals("1")) {
-                            currentUser = newUser.getText();
-                            recv = "500";
-                            chats[n] = new chat(currentUser);
-                           
+                        }
 
-                            JButton Useruser = new JButton(newUser.getText());
-                            Useruser.setFont(new Font("MV Boli", Font.PLAIN, 35));
-                            Useruser.setBackground(new Color(47, 49, 54));
-                            Useruser.setForeground(new Color(0xFFFFFF));
-                            Useruser.setFocusable(false);
-                           
-
-                            Useruser.addActionListener(new ActionListener() {                               
-                                
-                                public void actionPerformed(ActionEvent e) {
-                                    for (chat ch : chats) {
-                                        System.out.println(ch.name);
-                                       // System.out.println("ch.name");
-                                        if (ch.name.equals(((JButton)e.getSource()).getText())) {
-                                            ch.getMessages();
-                                            currentUser = ch.name;
-                                            break;
-                                        }
-                                       // System.out.println( gon.toJson(ch.json));
-                                        
-                                    }
-                                    newchat();
-
-                                    // for (JButton o : userliste) {
-                                    //     if (e.getSource() == o) {
-                                            
-                                    //       //  newchat();
-                                    //     }
-                                    // }
-                                }
-                            });
+                        else if (recv.equals("1")) {
+                            me.newchat(newUser.getText());
+                            Useruser.setText(newUser.getText());
+                            Useruser.addActionListener(UserPressed);
                             Users.add(Useruser, 1);
-                            n++;
                             Users.remove(newUser);
                             addUsers.setEnabled(true);
                             frame.setVisible(true);
                         }
 
-                         else if (recv.equals("4")) {
+                        else {
                             JOptionPane.showMessageDialog(null,
-                                    "An unknown exception occured please try again! \nEnsure your internet connection",
+                                    "An unknown exception occured please try again! \nEnsure your internet connection.",
                                     "ERROR",
                                     JOptionPane.ERROR_MESSAGE);
-                            recv = "500";
-                        } else if (recv.equals("5")) {
-                            JOptionPane.showMessageDialog(null,
-                                    "Invalid! Enter a valid Ussername", "OutOfBounds",
-                                    JOptionPane.ERROR_MESSAGE);
-                            recv = "500";
                         }
-                        newUser.setText("");
+
                         frame.setVisible(true);
+                    }
                 }
             }
-                }
-            
 
             public void keyReleased(KeyEvent e) {
             }
+
             public void keyTyped(KeyEvent e) {
             }
         };
 
-        FocusListener bla = new FocusListener() {
+    }
+
+    void loadMes(String[] Mes) {
+
+    }
+
+    FocusListener bla = new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
             }
 
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (e.getSource() == newUser) {
-                    Users.remove(newUser);
-                    addUsers.setEnabled(true);
-                    frame.setVisible(true);
-                }
-            }
-        };
+    @Override public void focusLost(FocusEvent e){if(e.getSource()==newUser){Users.remove(newUser);addUsers.setEnabled(true);frame.setVisible(true);}}};
 
-        ActionListener act = new ActionListener() {
+    ActionListener act = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == addUsers) {
                     newUser = new JTextField();
@@ -234,84 +233,81 @@ public class messtest {
         // System.out.println(back.getWidth()+"rrr");
         // System.out.println(frame.getWidth());
 
-        
+    public void reloadframe() {
 
+        // Users.add(addUsers);
+        // Users.setSize(addUsers.getWidth(), frame.getHeight());
+        back.setSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
 
-public void reloadframe() {
-    heighttemp = frame.getHeight();
-    widthtemp = frame.getWidth();
-    // Users.add(addUsers);
-    // Users.setSize(addUsers.getWidth(), frame.getHeight());
-    back.setSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
-
-    back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
-    chat.setSize(back.getWidth(), back.getHeight());
-    background.setSize(frame.getWidth() - Users.getWidth(), frame.getHeight());
-    Users.setPreferredSize(new Dimension(frame.getWidth() / 10 * 2, frame.getHeight()));
-
-}
-
-/*
- * JLabel background = new JLabel();
- * Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(),
- * Image.SCALE_SMOOTH);
- * ImageIcon bascale = new ImageIcon(imgscale);
- * background.setIcon(bascale);
- * background.setSize(back.getWidth(), back.getHeight());
- * back.add(background, Integer.valueOf(0));
- * back.remove(background);
- * frame.setVisible(true);
- */
-
-void newchat() {
-    // chat d = new chat("ee");
-    // System.out.println(d.name);
-    String key = "";
-    for (chat ch : chats) {
-        if (ch.name.equals(currentUser)) {
-            ch.getMessages();
-            key = ch.key();
-
-            break;
-        }
+        back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
+        chat.setSize(back.getWidth(), back.getHeight());
+        background.setSize(frame.getWidth() - Users.getWidth(), frame.getHeight());
+        Users.setPreferredSize(new Dimension(frame.getWidth() / 10 * 2, frame.getHeight()));
 
     }
 
-    // if (key.equals("0")) {
-    // joptionpane.showmessagedialog(null,
-    // "invitation sent to user(or it crashed(50/50 chance))", "good luck",
-    // joptionpane.information_message);
-    // } else if (key.equals("1")) {
-    // joptionpane.showmessagedialog(null,
-    // "user has not accepted your invitation yet", "ignored",
-    // joptionpane.warning_message);
+    /*
+     * JLabel background = new JLabel();
+     * Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(),
+     * Image.SCALE_SMOOTH);
+     * ImageIcon bascale = new ImageIcon(imgscale);
+     * background.setIcon(bascale);
+     * background.setSize(back.getWidth(), back.getHeight());
+     * back.add(background, Integer.valueOf(0));
+     * back.remove(background);
+     * frame.setVisible(true);
+     */
 
-    if (!key.equals("")) {
+    public void newchat() {
+        // chat d = new chat("ee");
+        // System.out.println(d.name);
+        String key = "";
+        for (chat ch : chats) {
+            if (ch.name.equals(currentUser)) {
+                ch.getMessages();
+                key = ch.key();
 
-        JOptionPane.showMessageDialog(null,
-                "generating key ...", "working ...",
-                JOptionPane.INFORMATION_MESSAGE);
-        String mes = sendrecv.getMes(currentUser);
-        System.out.println(mes);
-        if (mes.length() >= 8) {
-            JLabel messages;
-            messages = new JLabel();
-            chat.remove(messages);
-            String[] decMessages = encry.decMes(mes, key);
-
-            for (int x = 0; x < decMessages.length - oldMessages.length; x++) {
-                messages = new JLabel(decMessages[decMessages.length - 1 - x]);
-                messages.setBackground(new Color(0, 255, 0));
-                messages.setForeground(Color.white);
-                messages.setSize(chat.getWidth(), 100);
-                chat.add(messages);
-                oldMessages = decMessages;
+                break;
             }
 
         }
-        writeMessage.setText("");
-        chat.add(writeMessage);
-        frame.setVisible(true);
-    }
 
+        // if (key.equals("0")) {
+        // joptionpane.showmessagedialog(null,
+        // "invitation sent to user(or it crashed(50/50 chance))", "good luck",
+        // joptionpane.information_message);
+        // } else if (key.equals("1")) {
+        // joptionpane.showmessagedialog(null,
+        // "user has not accepted your invitation yet", "ignored",
+        // joptionpane.warning_message);
+
+        if (!key.equals("")) {
+
+            JOptionPane.showMessageDialog(null,
+                    "generating key ...", "working ...",
+                    JOptionPane.INFORMATION_MESSAGE);
+            String mes = sendrecv.getMes(currentUser);
+            System.out.println(mes);
+            if (mes.length() >= 8) {
+                JLabel messages;
+                messages = new JLabel();
+                chat.remove(messages);
+                String[] decMessages = encry.decMes(mes, key);
+
+                for (int x = 0; x < decMessages.length - oldMessages.length; x++) {
+                    messages = new JLabel(decMessages[decMessages.length - 1 - x]);
+                    messages.setBackground(new Color(0, 255, 0));
+                    messages.setForeground(Color.white);
+                    messages.setSize(chat.getWidth(), 100);
+                    chat.add(messages);
+                    oldMessages = decMessages;
+                }
+
+            }
+            writeMessage.setText("");
+            chat.add(writeMessage);
+            frame.setVisible(true);
+        }
+
+    }
 }

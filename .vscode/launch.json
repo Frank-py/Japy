@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch run",
+            "request": "launch",
+            "mainClass": "Java.run",
+            "projectName": "Japy_83d69226"
+        },
+        {
+            "type": "java",
             "name": "Launch encry",
             "request": "launch",
             "mainClass": "Java.encry",
