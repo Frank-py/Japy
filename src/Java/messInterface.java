@@ -32,10 +32,9 @@ public class messInterface {
     public JLabel background;
     private String[] oldMessages = { "" };
     chat[] chats = new chat[100];
-    //boolean createUser = false;
+    // boolean createUser = false;
     public int heighttemp;
     public int widthtemp;
-    
 
     messInterface() {
 
@@ -78,36 +77,34 @@ public class messInterface {
                             currentUser = newUser.getText();
                             recv = "500";
                             chats[n] = new chat(currentUser);
-                           
 
                             JButton Useruser = new JButton(newUser.getText());
                             Useruser.setFont(new Font("MV Boli", Font.PLAIN, 35));
                             Useruser.setBackground(new Color(47, 49, 54));
                             Useruser.setForeground(new Color(0xFFFFFF));
                             Useruser.setFocusable(false);
-                           
 
-                            Useruser.addActionListener(new ActionListener() {                               
-                                
+                            Useruser.addActionListener(new ActionListener() {
+
                                 public void actionPerformed(ActionEvent e) {
                                     for (chat ch : chats) {
                                         System.out.println(ch.name);
-                                       // System.out.println("ch.name");
-                                        if (ch.name.equals(((JButton)e.getSource()).getText())) {
+                                        // System.out.println("ch.name");
+                                        if (ch.name.equals(((JButton) e.getSource()).getText())) {
                                             ch.getMessages();
                                             currentUser = ch.name;
                                             break;
                                         }
-                                       // System.out.println( gon.toJson(ch.json));
-                                        
+                                        // System.out.println( gon.toJson(ch.json));
+
                                     }
                                     newchat();
 
                                     // for (JButton o : userliste) {
-                                    //     if (e.getSource() == o) {
-                                            
-                                    //       //  newchat();
-                                    //     }
+                                    // if (e.getSource() == o) {
+
+                                    // // newchat();
+                                    // }
                                     // }
                                 }
                             });
@@ -118,7 +115,7 @@ public class messInterface {
                             frame.setVisible(true);
                         }
 
-                         else if (recv.equals("4")) {
+                        else if (recv.equals("4")) {
                             JOptionPane.showMessageDialog(null,
                                     "An unknown exception occured please try again! \nEnsure your internet connection",
                                     "ERROR",
@@ -132,13 +129,13 @@ public class messInterface {
                         }
                         newUser.setText("");
                         frame.setVisible(true);
+                    }
                 }
             }
-                }
-            
 
             public void keyReleased(KeyEvent e) {
             }
+
             public void keyTyped(KeyEvent e) {
             }
         };
@@ -183,8 +180,9 @@ public class messInterface {
                     // currentUser = "vali";
                     // String key = encry.getKey(currentUser);
                     sendrecv.sendMes(
-                            new String[] { currentUser, encry.encryption(writeMessage.getText(), encry.getKey(currentUser)) });
-                            writeMessage.setText("");
+                            new String[] { currentUser,
+                                    encry.encryption(writeMessage.getText(), encry.getKey(currentUser)) });
+                    writeMessage.setText("");
                     // JLabel label = new JLabel(sendrecv.getMes(currentUser));
                     // label.setSize(100, 100);
                     // chat.add(label);
@@ -258,35 +256,31 @@ public class messInterface {
      * back.remove(background);
      * frame.setVisible(true);
      */
-    
-    
 
     void newchat() {
-       // chat d = new chat("ee");
-        //System.out.println(d.name);
+        // chat d = new chat("ee");
+        // System.out.println(d.name);
         String key = "";
         for (chat ch : chats) {
             if (ch.name.equals(currentUser)) {
                 ch.getMessages();
                 key = ch.key();
 
-
                 break;
             }
-            
+
         }
-        
+
         // if (key.equals("0")) {
-        //     joptionpane.showmessagedialog(null,
-        //             "invitation sent to user(or it crashed(50/50 chance))", "good luck",
-        //             joptionpane.information_message);
+        // joptionpane.showmessagedialog(null,
+        // "invitation sent to user(or it crashed(50/50 chance))", "good luck",
+        // joptionpane.information_message);
         // } else if (key.equals("1")) {
-        //     joptionpane.showmessagedialog(null,
-        //             "user has not accepted your invitation yet", "ignored",
-        //             joptionpane.warning_message);
-       
-if (!key.equals("")) {
-    
+        // joptionpane.showmessagedialog(null,
+        // "user has not accepted your invitation yet", "ignored",
+        // joptionpane.warning_message);
+
+        if (!key.equals("")) {
 
             JOptionPane.showMessageDialog(null,
                     "generating key ...", "working ...",
@@ -313,7 +307,6 @@ if (!key.equals("")) {
             chat.add(writeMessage);
             frame.setVisible(true);
         }
-        
 
     }
 }

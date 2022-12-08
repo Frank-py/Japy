@@ -6,6 +6,9 @@ import com.google.gson.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Map;
+import java.nio.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 // keyslogin.namedeseingelogtenusers.json
 // password damit man eingeloggt bleiben kann
@@ -26,7 +29,7 @@ public class chat {
     private JFrame frame;
     
 
-    chat(String name) { // schreibt in File für jeden Chat Objekt
+    chat(String name, String code) { // schreibt in File für jeden Chat Objekt
         this.name = name;
         this.key = key();
         
@@ -34,43 +37,41 @@ public class chat {
        in.setText("");
        chat.add(in);
        frame.setVisible(true);
-       File Datei = new File("src/" + hzr + ".json");
-       if (!Datei.exists() || !Datei.isDirectory()) {
+    //    File Datei = new File("src/" + hzr + ".json");
+    //    if (!Datei.exists() || !Datei.isDirectory()) {
+    //     try {
+    //         Datei.createNewFile();
+    //         FileWriter fileWriter = new FileWriter(Datei);
+    //         Map<String, String> jsonObject = new HashMap<String, String>();
+    //         jsonObject.put("password", "asdf");
+    //         fileWriter.write(jsonObject.toString());
+    //         fileWriter.flush();
+    //         fileWriter.close();
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+
+    //    }
+        File Datei = new File("src/" + jj + ".json");
+        Path filePath = Path.of("src/"+ jj + ".json");
+        String content;
         try {
-            Datei.createNewFile();
+            content = Files.readString(filePath);
+            JsonObject jsonObject = JsonParser.parseString(content).getAsJsonObject();
+            jsonObject.put(jj, code);
             FileWriter fileWriter = new FileWriter(Datei);
-            Map<String, String> jsonObject = new HashMap<String, String>();
-            jsonObject.put("password", "asdf");
             fileWriter.write(jsonObject.toString());
             fileWriter.flush();
             fileWriter.close();
+
+            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-       }
-        Datei = new File("src/" + hzr + ".json");
-        FileWriter fileWriter = new FileWriter(Datei);
-        try (FileReader reader = new FileReader("employees.json"))
-        {
-        JsonObject jsonObject = JsonParser.parseString(reader).getAsJsonObject();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } 
-
     }   
-
-    JsonObject json(){
-        ;
-        if(f.exists() && !f.isDirectory()) { 
-    // do something
-}
         
-        
-    }
 
     String key() {
         key = encry.getKey(this.name);

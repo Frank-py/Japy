@@ -42,6 +42,7 @@ public class encry {
 
     public static String a() {
         
+        
 
         return Integer.toString(a);
     }

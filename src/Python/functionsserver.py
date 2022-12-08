@@ -2,7 +2,7 @@ from atexit import register
 import mysql.connector
 from mysql.connector import Error
 from time import localtime, strftime
-import versch, bcrypt
+import versch, bcrypt, json
 class User():
     def __init__(self, user=None, date=None, loggedin=False, registriert=False):
         self.user = user
@@ -15,12 +15,12 @@ class User():
         try:
             connection = mysql.connector.connect(
                  host="localhost",
+            #  user="***REMOVED***",
               user="***REMOVED***",
-           
-          
+              passwd="***REMOVED***",
    
   
-              passwd="***REMOVED***",
+            #  passwd="***REMOVED***",
                   database="***REMOVED***"
         )
         except Error as e:
@@ -79,45 +79,88 @@ class User():
             self.connection.commit()
         except:
             print("error")
-    def checkformessages(self, recv = None):
+   # def checkformessages(self, recv = None):
+   #     cursor = self.connection.cursor()
+   #     messages = []
+   #     try:
+   #         if recv != None: 
+   #             cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s");' % (self.user))
+   #             messages = cursor.fetchall() 
+   #         else:
+   #             cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s");' % (self.user, recv))
+   #             nachrichten_empfangen = cursor.fetchall() 
+   #             messages.append(nachrichten_empfangen)
+   #             cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s");' % (recv, self.user))
+   #             nachrichten_gesendet = cursor.fetchall()
+   #             messages.append(nachrichten_gesendet)
+   #         if len(messages) == 0:
+   #             return ""
+   #         else:
+   #             return ";;;".join(messages)
+
+   #     except:
+   #         return "error"
+    def check_for_messages(self, recv=None, offset=1):
         cursor = self.connection.cursor()
         messages = []
         try:
-            if recv != None: 
-                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s");' % (self.user))
-                messages = cursor.fetchall() 
+            if recv is not None:
+                executed_cmd = 'SELECT Time, Message, send, recv FROM Messages WHERE ((recv = "{}" and send = "{}") or (recv = "{}" and send = "{}") and displayed = false) ORDER BY Time DESC LIMIT 5 OFFSET 5*{};'.format(self.user, recv, recv, self.user, offset)
+                cursor.execute(executed_cmd)
+                rows = cursor.fetchall()
+                for row in rows:
+                    messages.append({
+                        "message": row[1],
+                        "send": row[2],
+                        "recv": row[3],
+                        "time": row[0],
+                    })
+                cursor.execute('UPDATE Messages SET displayed = true WHERE (recv = "%s" and displayed = false);' % (self.user))
             else:
-                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s");' % (self.user, recv))
-                nachrichten_empfangen = cursor.fetchall() 
-                messages.append(nachrichten_empfangen)
-                cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s");' % (recv, self.user))
-                nachrichten_gesendet = cursor.fetchall()
-                messages.append(nachrichten_gesendet)
+                executed_cmd = 'SELECT Time, Message, send, recv FROM Messages WHERE (recv = "{}" and displayed = false) ORDER BY Time DESC LIMIT 5 OFFSET 5*{};'.format(self.user, offset)
+                cursor.execute(executed_cmd)
+                rows = cursor.fetchall()
+                for row in rows:
+                    messages.append({
+                        "message": row[1],
+                        "send": row[2],
+                        "recv": row[3],
+                        "time": row[0],
+                    })
+                cursor.execute('UPDATE Messages SET displayed = true WHERE (recv = "%s" and send = "%s" and displayed = false);' % (self.user, recv))
+
             if len(messages) == 0:
                 return ""
             else:
-                return ";;;".join(messages)
+                return json.dumps(messages)
 
         except:
-            return "error"
+            return "error"   
     #def checkformessages(self, recv = None, offset = 1):
     #cursor = self.connection.cursor()
     #messages = []
     #try:
     #    if recv != None: 
-    #        cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and displayed = false) ORDER BY Time DESC LIMIT 5;' % (self.user))
+    #        executed_cmd = 'SELECT Time, Message FROM Messages WHERE (recv = "{}" and displayed = false) ORDER BY Time DESC LIMIT 5 OFFSET 5*{};'.format(self.user, recv, offset)
+    #        cursor.execute(executed_cmd)
     #        messages = cursor.fetchall()
     #        cursor.execute('UPDATE Messages SET displayed = true WHERE (recv = "%s" and displayed = false);' % (self.user))
     #    else:
-    #        cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s" and displayed = false) ORDER BY Time DESC LIMIT 5 OFFSET 5*%s;' % (self.user, recv, offset))
+#            executed_cmd = 'SELECT Time, Message FROM Messages WHERE (recv = "{}" and send "{}" and displayed = false) ORDER BY Time DESC LIMIT 5 OFFSET 5*{};'.format(self.user, recv, offset)
+    #        cursor.execute(executed_cmd)
     #        nachrichten_empfangen = cursor.fetchall()
-    #        cursor.execute('SELECT Time, Message FROM Messages WHERE (recv = "%s" and send "%s" and displayed = false) ORDER BY Time DESC LIMIT 5;' % (recv, self.user))
+#            executed_cmd = 'SELECT Time, Message FROM Messages WHERE (recv = "{}" and send "{}" and displayed = false) ORDER BY Time DESC LIMIT 5 OFFSET 5*{};'.format(recv, self.user, offset)
+    #        cursor.execute(executed_cmd)
     #        nachrichten_gesendet = cursor.fetchall() 
     #        messages.append(nachrichten_gesendet)
     #        cursor.execute('UPDATE Messages SET displayed = true WHERE (recv = "%s" and send "%s" and displayed = false) ;' % (self.user, recv))
-    #except Error as e:
-    #    print(e)
-    #return messages
+    #        if len(messages) == 0:
+    #            return ""
+    #        else:
+    #            return ";;;".join(messages)
+
+    #    except:
+    #        return "error"
     def checkaccount(self, name):
         cursor = self.connection.cursor()
         try:
