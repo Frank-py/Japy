@@ -1,16 +1,18 @@
 package Java;
 
 import javax.swing.*;
+
+import com.google.gson.Gson;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class messInterface {
+    Gson gon = new Gson();
     // String[] user;
     String currentUser;
     int n = 0;
     Color fontcolor = new Color(0xD4D4D4);
-    public static boolean logins = false;
-    JButton[] userliste = new JButton[100];
     JLayeredPane back = new JLayeredPane();
     String recv = "500";
     Color color = new Color(27, 37, 43);
@@ -30,18 +32,12 @@ public class messInterface {
     public JLabel background;
     private String[] oldMessages = { "" };
     chat[] chats = new chat[100];
-    boolean createUser = false;
+    //boolean createUser = false;
     public int heighttemp;
     public int widthtemp;
     
 
     messInterface() {
-        /*
-         * while (!logins) {
-         * logins = login.loggedin;
-         * System.out.print("");
-         * }
-         */
 
         frame = new JFrame();
         frame.setLayout(new BorderLayout());
@@ -82,6 +78,8 @@ public class messInterface {
                             currentUser = newUser.getText();
                             recv = "500";
                             chats[n] = new chat(currentUser);
+                           
+
                             JButton Useruser = new JButton(newUser.getText());
                             Useruser.setFont(new Font("MV Boli", Font.PLAIN, 35));
                             Useruser.setBackground(new Color(47, 49, 54));
@@ -89,8 +87,7 @@ public class messInterface {
                             Useruser.setFocusable(false);
                            
 
-                            Useruser.addActionListener(new ActionListener() {
-                                
+                            Useruser.addActionListener(new ActionListener() {                               
                                 
                                 public void actionPerformed(ActionEvent e) {
                                     for (chat ch : chats) {
@@ -98,10 +95,10 @@ public class messInterface {
                                        // System.out.println("ch.name");
                                         if (ch.name.equals(((JButton)e.getSource()).getText())) {
                                             ch.getMessages();
-                                            System.out.println(ch.name + "eebfeeeeeeeee");
                                             currentUser = ch.name;
                                             break;
                                         }
+                                       // System.out.println( gon.toJson(ch.json));
                                         
                                     }
                                     newchat();
@@ -142,7 +139,6 @@ public class messInterface {
 
             public void keyReleased(KeyEvent e) {
             }
-
             public void keyTyped(KeyEvent e) {
             }
         };

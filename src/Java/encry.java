@@ -1,5 +1,4 @@
 package Java;
-
 import java.math.*;
 import java.util.*;
 import java.io.*;
@@ -42,13 +41,14 @@ public class encry {
     }
 
     public static String a() {
+        
 
         return Integer.toString(a);
     }
 
     public static String getKey(String User) {
         if (keylist.has(User)) {
-
+            
             key = keylist.get(User).getAsString();
         } else {
         

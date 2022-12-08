@@ -1,8 +1,17 @@
 package Java;
 
 import javax.swing.*;
+import java.io.*;
+import com.google.gson.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Map;
+import java.util.HashMap;
+// keyslogin.namedeseingelogtenusers.json
+// password damit man eingeloggt bleiben kann
+// alle as mit dem der current user schreibt
+
+
 
 
 public class chat {
@@ -15,14 +24,52 @@ public class chat {
     private JTextField in;
     private JPanel chat;
     private JFrame frame;
+    
 
-    chat(String name) {
+    chat(String name) { // schreibt in File für jeden Chat Objekt
         this.name = name;
         this.key = key();
+        
 
-      //  in.setText("");
-      //  chat.add(in);
-       // frame.setVisible(true);
+       in.setText("");
+       chat.add(in);
+       frame.setVisible(true);
+       File Datei = new File("src/" + hzr + ".json");
+       if (!Datei.exists() || !Datei.isDirectory()) {
+        try {
+            Datei.createNewFile();
+            FileWriter fileWriter = new FileWriter(Datei);
+            Map<String, String> jsonObject = new ();
+            jsonObject.put("password", "password");
+            fileWriter.write(jsonObject.toString());
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+       }
+        Datei = new File("src/" + hzr + ".json");
+        FileWriter fileWriter = new FileWriter(Datei);
+        try (FileReader reader = new FileReader("employees.json"))
+        {
+        JsonObject jsonObject = JsonParser.parseString(reader).getAsJsonObject();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } 
+
+    }   
+
+    JsonObject json(){
+        ;
+        if(f.exists() && !f.isDirectory()) { 
+    // do something
+}
+        
+        
     }
 
     String key() {
