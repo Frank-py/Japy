@@ -52,14 +52,13 @@ public class chat {
     //     }
 
     //    }
-        File Datei = new File("src/" + jj + ".json");
-        Path filePath = Path.of("src/"+ jj + ".json");
+        userjson = new File("src/" + jj + ".json");
         String content;
         try {
-            content = Files.readString(filePath);
+            content = Files.readString(Path.of("src/"+ jj + ".json"));
             JsonObject jsonObject = JsonParser.parseString(content).getAsJsonObject();
             jsonObject.put(jj, code);
-            FileWriter fileWriter = new FileWriter(Datei);
+            FileWriter fileWriter = new FileWriter(userjson);
             fileWriter.write(jsonObject.toString());
             fileWriter.flush();
             fileWriter.close();

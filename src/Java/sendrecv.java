@@ -32,7 +32,7 @@ public class sendrecv {
         }
     }
 
-    public static String proofuser(String in) {
+    public static boolean proofuser(String in) {
         try {
             out.print("proofuser");
             out.flush();
@@ -40,9 +40,14 @@ public class sendrecv {
             out.print(in.replaceAll("\r", "").replaceAll("\n", ""));
             out.flush();
             bf.readLine();
-            return bf.readLine();
+            
+            if (bf.readLine().equals(1)) {
+                return true;
+            } else {
+               return false;
+            }
         } catch (IOException e) {
-            return null;
+            return false ;
         }
     }
 
