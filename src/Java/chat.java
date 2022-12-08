@@ -39,8 +39,8 @@ public class chat {
         try {
             Datei.createNewFile();
             FileWriter fileWriter = new FileWriter(Datei);
-            Map<String, String> jsonObject = new ();
-            jsonObject.put("password", "password");
+            Map<String, String> jsonObject = new HashMap<String, String>();
+            jsonObject.put("password", "asdf");
             fileWriter.write(jsonObject.toString());
             fileWriter.flush();
             fileWriter.close();
