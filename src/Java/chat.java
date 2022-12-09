@@ -55,7 +55,7 @@ public class chat {
         userjson = new File("src/" + jj + ".json");
         String content;
         try {
-            content = Files.readString(Path.of("src/"+ jj + ".json"));
+            content = Files.readString(Path.of("src/" + ".json"));
             JsonObject jsonObject = JsonParser.parseString(content).getAsJsonObject();
             jsonObject.put(jj, code);
             FileWriter fileWriter = new FileWriter(userjson);

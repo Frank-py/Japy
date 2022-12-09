@@ -1,9 +1,7 @@
 package Java;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import com.google.gson.*;
 import java.nio.*;
 import java.nio.file.*;
@@ -44,15 +42,31 @@ public class testuser {
         //chats[NumberOfChats] = new chat(newchat);
         // this.NumberOfChats++;
 
-        String content;
+        
         try {
-            content = Files.readString(this.keys.toPath());
-            JsonObject jsonObject = JsonParser.parseString(content).getAsJsonObject();
+            JsonObject jsonObject;
+            JsonElement jsonElement;
+            jsonElement = JsonParser.parseString(Arrays.toString(Files.readAllLines(this.keys.toPath()).toArray(new String [0]))).getAsJsonObject().get(user);
+
+           // jsonObject = JsonParser.parseString(Arrays.toString(Files.readAllLines(this.keys.toPath()).toArray(new String [0]))).getAsJsonObject().get(user); 
+           jsonObject = (JsonObject)JsonParser.parseString(Arrays.toString(Files.readAllLines(this.keys.toPath()).toArray(new String [0]))).getAsJsonObject().get(user);
+            if ( JsonParser.parseString(Arrays.toString(Files.readAllLines(this.keys.toPath()).toArray(new String [0]))).getAsJsonObject().get(user)==null) {
+                //create entry
+                //write temp a no key
+                //start creating key
+            }
+            else{
+
+                    jsonObject.get("key");
+            }
+
+            json = JsonParser.parseString(Arrays.toString(Files.readAllLines(this.keys.toPath()).toArray(new String [0]))).getAsJsonObject().toString();
             jsonObject.put(jj, code);
             FileWriter fileWriter = new FileWriter(userjson);
             fileWriter.write(jsonObject.toString());
             fileWriter.flush();
             fileWriter.close();
+            jsonObject.get(json)
 
             
 
