@@ -111,7 +111,7 @@ public class sendrecv {
                 out.print(pgA[2]);
                 out.flush();
                 bf.readLine();
-                return "0";
+                return "";
             }
             if (s.equals("2")) { // du bist benutzer B
               
@@ -135,7 +135,7 @@ public class sendrecv {
                 return encry.endnewkey(Bap);
             } else { // gönn dir ne Pause return 1
                 System.out.println("gggf");
-                return s;
+                return "";
             }
         } 
          catch (IOException e) {

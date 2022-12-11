@@ -12,16 +12,13 @@ public class encry {
     public static File keys;
     public static JsonObject keylist;
     public static String key = "";
+    testuser User;
 
-    encry() {
+    encry(testuser User) {
+        this.User = User;
         JsonElement parser;
         try {
-            // keys = new File(./src/"keys" + "login.name" + ".json");
-            keys = new File("src/", "keys" + "login.name" + ".json");
-            keys.createNewFile();
-            parser = JsonParser.parseReader(new FileReader(keys));
-            keylist = parser.getAsJsonObject();
-            Gson gson = new Gson();
+            
             FileWriter fileWriter;
             a = 12;
             fileWriter = new FileWriter(keys);
@@ -36,37 +33,24 @@ public class encry {
 
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         getKey("wgg");
     }
 
-    public static String a() {
-        
-        
-
+    public String a() {
         return Integer.toString(a);
     }
 
-    public static String getKey(String User) {
-        if (keylist.has(User)) {
+    public String getKey(String username) {
+        String key = User.getValue(username,"key");
+        if (key.equals("")) {
             
-            key = keylist.get(User).getAsString();
-        } else {
+                return sendrecv.createKey(username);
+            }  
+         else {
+            return key;
         
-            key = sendrecv.createKey(User);
         }
-
-        return key;
-        // FileWriter keyWriter = new FileWriter("..\\keys"+login.name+".json");
-        // keyWriter.write(""
-
-        // );
-        // keyWriter.close();
-
-        // if (key.equals("0")) {
-        //
-
-        // }
 
     }
 

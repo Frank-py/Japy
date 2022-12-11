@@ -17,6 +17,7 @@ public class messtest {
     JTextField newUser, writeMessage;
     KeyListener enter;
     ActionListener UserPressed, addListener;
+    WindowListener listener;
 
     // JLabel background;
 
@@ -72,6 +73,16 @@ public class messtest {
         newUser.setBackground(colortheme);
         newUser.setCaretColor(caretColor);
         newUser.addKeyListener(enter);
+
+        // check if window got closed
+        listener = new WindowAdapter() {
+        public void windowClosing(WindowEvent evt) {
+            Frame frame = (Frame) evt.getSource();
+            System.out.println("Closing = "+frame.getTitle());
+            me.close();
+            
+        }
+        };
 
     }
 
