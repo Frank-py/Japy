@@ -20,13 +20,14 @@ public class testuser {
         this.pw = UP[1];
         this.main = new messtest(this);
         try {
-            writer = new FileWriter(keys);
-            reader = new FileReader(keys);
-            tokener = new JSONTokener(reader);
 
             // this.filePath = Path.of("src/" + this.username + ".json");
             this.secure = new encry(this);
             this.keys = new File("src/", this.username + ".json");
+            
+            writer = new FileWriter(keys);
+            reader = new FileReader(keys);
+            tokener = new JSONTokener(reader);
 
             this.keys.createNewFile();
             // Map<String, String> jsonObject = new HashMap<String, String>();
@@ -114,5 +115,8 @@ public class testuser {
         // add get messages
         String[] decMessages = encry.decMes(sendrecv.getMes(user, start, end), getValue(user, "key"));
         return decMessages;
+    }
+    public void sendMes(String Mes){
+
     }
 }

@@ -16,20 +16,8 @@ public class encry {
 
     encry(testuser User) {
         this.User = User;
-        JsonElement parser;
-        try {
-            
-            FileWriter fileWriter;
             a = 12;
-            fileWriter = new FileWriter(keys);
-            fileWriter.append("{}");
-            fileWriter.flush();
-            String[] in = { "{user:passwort}" };
-            // gson.toJson(in, fileWriter);
-            fileWriter.close();
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
+        
 
     }
 

@@ -1,34 +1,47 @@
 package Java.examplecodes;
 
-/**
- * 42
- */
-public class ninetytwo {
+    import java.awt.FlowLayout;  
 
-    public static int res = 0;
+import javax.swing.*;
 
-    public static void main(String[] args) {
-        for (int i = 1; i < 10000000; i++) {
-            int n = i;
-            while (n!=89 && n!=1) {
-                n=sum(n);
-            }
-            
-            if(n==89){
-                res++;
-            }
-           
-        }
       
-           // System.out.println(i);
+    public class ninetytwo {  
+        
+      
+        private static void createAndShowGUI() {  
+      
+            // Create and set up the window.  
+            final JFrame frame = new JFrame("Scroll Pane Example");  
+      
+            // Display the window.  
+            frame.setSize(500, 500);  
+            frame.setVisible(true);  
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+      
+            // set flow layout for the frame  
+            frame.getContentPane().setLayout(new FlowLayout());  
+            JPanel panel = new JPanel();
+            panel.setSize(200,200);
+            JTextArea textArea = new JTextArea(20,20);  
+            
+            textArea.setEnabled(false);
+            textArea.setText("nugsgsdgegll\n\n\n\n\ngsddgsdgsgd");
 
-        }
-        public static int sum(int n){
-            int sum = 0;
-            while(n>0){
-                sum = sum + (n%10)*(n%10);
-                n = n/10;
-            }
-            return sum;
-        }
-}
+            JScrollPane scrollableTextArea = new JScrollPane(textArea);
+      
+            scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
+            scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+      
+            frame.getContentPane().add(scrollableTextArea);  
+        }  
+        public static void main(String[] args) {  
+      
+      
+            javax.swing.SwingUtilities.invokeLater(new Runnable() {  
+      
+                public void run() {  
+                    createAndShowGUI();  
+                }  
+            });  
+        }  
+    }  
