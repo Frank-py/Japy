@@ -7,8 +7,8 @@ import com.google.gson.Gson;
 
 public class messtest {
     testuser me;
-    JFrame frame;   
-    Font stdFont; 
+    JFrame frame;
+    Font stdFont;
     Color caretColor, colortheme, fontColor;
     JLayeredPane back;
     ImageIcon logo;
@@ -49,6 +49,7 @@ public class messtest {
         frame.setTitle("Messenger");
         frame.setIconImage(logo.getImage());
         frame.getContentPane().setBackground(colortheme);
+        frame.addWindowListener(listener);
 
         // creating the JButton for Usernames
         Useruser = new JButton();
@@ -74,19 +75,16 @@ public class messtest {
         newUser.setCaretColor(caretColor);
         newUser.addKeyListener(enter);
 
-        // check if window got closed
-        listener = new WindowAdapter() {
-        public void windowClosing(WindowEvent evt) {
-            Frame frame = (Frame) evt.getSource();
-            System.out.println("Closing = "+frame.getTitle());
-            me.close();
-            
-        }
-        };
-
     }
 
     void listen() {
+
+        // checks if window got closed
+        listener = new WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
+                me.close();
+            }
+        };
 
         // checks if an added user is clicked
         UserPressed = new ActionListener() {
@@ -94,9 +92,8 @@ public class messtest {
                 String textuser = ((JButton) e.getSource()).getText();
                 if (me.openchat(textuser)) {
                     // creates the chat interface visually
-                    newchat();
+                    newchat();dfsfsfds
                     // loads the messages to the chat if necessary
-                    loadMes(me.getMes(textuser, 5));
                 } else {
                     // displaying the error message when key is not ready
                     JOptionPane.showMessageDialog(null,
@@ -116,15 +113,15 @@ public class messtest {
                     frame.dispose();
                 }
 
-                if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && writeMessage.getText().length() > 0 && e.getSource() == writeMessage) {
-                    
+                if (e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_ENTER && writeMessage.getText().length() > 0
+                        && e.getSource() == writeMessage) {
+
                     // String key = encry.getKey(currentUser);
                     me.sendMes(writeMessage.getText());
 
-
-
                     // sendrecv.sendMes(
-                    //         new String[] { currentUser, encry.encryption(writeMessage.getText(), encry.getKey(currentUser)) });
+                    // new String[] { currentUser, encry.encryption(writeMessage.getText(),
+                    // encry.getKey(currentUser)) });
                     // writeMessage.setText("");
                 }
 
@@ -140,11 +137,10 @@ public class messtest {
                     }
                     // verifies the user with the database
                     else {
-                        // user is in database
-                        if (me.proofUser(newUser.getText())) {
+                        // user is in database and data written to json
+                        if (me.newchat(newUser.getText())) {
 
                             // creates new userbutton and rearranges the layout
-                            me.newchat(newUser.getText());
                             Useruser.setText(newUser.getText());
                             Users.remove(newUser);
                             Users.add(Useruser, 1);
@@ -174,10 +170,10 @@ public class messtest {
             public void actionPerformed(ActionEvent e) {
                 // checks the source of the event
                 if (e.getSource() == addUsers) {
-                    // adds the user to the users
+                    // adds the textfield to the sidebar
                     addUsers.setEnabled(false);
                     Users.add(newUser, 1);
-                    newUser.requestFocusInWindow(); 
+                    newUser.requestFocusInWindow();
                     frame.setVisible(true);
                 }
             }
@@ -185,9 +181,23 @@ public class messtest {
     }
 
     // load messages to chat
-    void loadMes(String[] Mes) {
+    void loadMes(String[] mes) {
+
+    
+    //todo show on screen
 
     }
+
+    void newchat(String User){
+        
+        me.getMes(User,0,5);
+        
+
+    }
+
+
+
+
 
     {
         writeMessage.addKeyListener(enter);
@@ -250,7 +260,7 @@ public class messtest {
      * frame.setVisible(true);
      */
 
-    public void newchat() {
+    //public void newchat() {
         // chat d = new chat("ee");
         // System.out.println(d.name);
         String key = "";

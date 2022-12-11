@@ -111,13 +111,15 @@ class User():
 
    #     except:
    #         return "error"
-    def check_for_messages(self, recv=None, offset=1):
+    def check_for_messages(self, recv=None, anfang=0, ende=5):
         cursor = self.connection.cursor()
         messages = []
         try:
             if recv is not None:
-                executed_cmd = 'SELECT Time, Message, send, recv FROM Messages WHERE ((recv = "{}" and send = "{}") or (recv = "{}" and send = "{}") and displayed = false) ORDER BY Time DESC LIMIT 5 OFFSET 5*{};'.format(
-                    self.user, recv, recv, self.user, offset)
+                executed_cmd = 'SELECT Time, Message, send, recv FROM Messages WHERE ((recv = "{}" and send = "{}") or (recv = "{}" and send = "{}")) ORDER BY Time DESC LIMIT {} OFFSET {};'.format(
+                    self.user, recv, recv, self.user, str(ende-anfang+1), str(anfang))
+                #executed_cmd = 'SELECT Time, Message, send, recv FROM Messages WHERE ((recv = "{}" and send = "{}") or (recv = "{}" and send = "{}") and displayed = false) ORDER BY Time DESC LIMIT 5 OFFSET 5*{};'.format(
+                #    self.user, recv, recv, self.user, Anzahl)
                 cursor.execute(executed_cmd)
                 rows = cursor.fetchall()
                 for row in rows:
@@ -131,7 +133,7 @@ class User():
                     'UPDATE Messages SET displayed = true WHERE (recv = "%s" and displayed = false);' % (self.user))
             else:
                 executed_cmd = 'SELECT Time, Message, send, recv FROM Messages WHERE (recv = "{}" and displayed = false) ORDER BY Time DESC LIMIT 5 OFFSET 5*{};'.format(
-                    self.user, offset)
+                    self.user, Anzahl)
                 cursor.execute(executed_cmd)
                 rows = cursor.fetchall()
                 for row in rows:

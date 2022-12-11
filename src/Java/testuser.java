@@ -1,24 +1,18 @@
 package Java;
 
 import java.io.*;
-import java.util.*;
-// import com.google.gson.*;
-// import com.google.gson.stream.*;
 import org.json.*;
-import java.nio.*;
-import java.nio.file.*;
 
 public class testuser {
     public String username;
     private String pw;
     private messtest main;
     private encry secure;
-    private chat[] chats;
-    private int NumberOfChats;
     public File keys;
     File userjson;
     JSONTokener tokener;
     FileWriter writer;
+    FileReader reader;
 
     // the user currently loggedin
     testuser(String[] UP) {
@@ -27,7 +21,8 @@ public class testuser {
         this.main = new messtest(this);
         try {
             writer = new FileWriter(keys);
-            tokener = new JSONTokener(new FileReader(keys));
+            reader = new FileReader(keys);
+            tokener = new JSONTokener(reader);
 
             // this.filePath = Path.of("src/" + this.username + ".json");
             this.secure = new encry(this);
@@ -42,47 +37,32 @@ public class testuser {
     }
 
     // creates a new chat between two users
-    public void newchat(String username) {
+    public boolean newchat(String username) {
 
-        // JSONWriter;
+        if (sendrecv.proofuser(username)) {
 
-        // InputStream is = testuser.class.getResourceAsStream(resourceName);
-        JSONObject User = new JSONObject();
-        // userjsonObject =
-        // (JSONObject)JsonParser.parseString(Files.readString(this.keys.toPath())).getAsJsonObject().get(user);
-        // System.out.println(User.get("messages"));
-        // jsonObject =
-        // JsonParser.parseString(Arrays.toString(Files.readAllLines(this.keys.toPath()).toArray(new
-        // String [0]))).getAsJsonObject().get(user);
+            // only executes if user is not in json
+            if (getValue(username, "messages").equals(null)) {
 
-        if (getValue(username, "messages").equals(null)) {
-
-            JSONObject userjson = new JSONObject()
-                    .put("atemp", secure.a())
-                    .put("Messages", new JSONArray())
-                    .put("key", secure.getKey(username));
-            User.put(username, userjson);
-
-        } else {
-
-            // jsonObject.get("key");
+                // writes the user + attributes to json
+                JSONObject userjson = new JSONObject()
+                        .put("atemp", secure.a())
+                        .put("Messages", new JSONArray())
+                        .put("key", secure.getKey(username));
+                JSONObject json = new JSONObject(tokener);
+                try {
+                    writer.write((json.put(username, userjson)).toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return true;
         }
-
-        // JsonParser.parseString(Arrays.toString(Files.readAllLines(this.keys.toPath()).toArray(new
-        // String [0]))).getAsJsonObject().toString();
-        // jsonObject.put(jj, code);
-        // FileWriter fileWriter = new FileWriter(userjson);
-        // fileWriter.write(JSONObject.toString());
-        // fileWriter.flush();
-        // fileWriter.close();
-        // jsonObject.get(json)
-
-        // Write the JSON object to a file
-
+        return false;
     }
 
+    // gets the value for the given key and user
     public String getValue(String username, String key) {
-
         try {
             JSONObject User = (JSONObject) new JSONObject(tokener).get(username);
             return User.get(key).toString();
@@ -92,12 +72,9 @@ public class testuser {
         }
     }
 
+    // sets the value for the given key and user
     public void setValue(String username, String key, String value) {
         JSONObject json = new JSONObject(tokener);
-
-        // JSONObject user = (JSONObject) json.get(username);
-
-        // user.put(key, value);
         json.put(username, ((JSONObject) json.get(username)).put(key, value));
 
         try {
@@ -108,36 +85,34 @@ public class testuser {
 
     }
 
-    // }
-
-    // // checks if chat is ready to open (key is fully generated)
+    // checks if chat is ready to open (key is fully generated)
     public boolean openchat(String user) {
+        if (!getValue(user, "key").equals("")) {
+            return true;
+        }
+       
 
         // add check for key
-        return true;
+        return false;
     }
 
-}
-
     // closes everything neccessary and finishes up
-public void close() {
-    
+    public void close() {
+        sendrecv.sendClose();
+        try {
+            writer.close();
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Couldn't close Reader or Writer!");
+            e.printStackTrace();
+        }
+    }
 
+    // asks the server for new messages and proofs if any are locally safed
+    public String[] getMes(String user, int start, int end) {
 
+        // add get messages
+        String[] decMessages = encry.decMes(sendrecv.getMes(user, start, end), getValue(user, "key"));
+        return decMessages;
+    }
 }
-
-// // asks server for user approval
-// public boolean proofUser(String user){
-// // passes on the boolean
-// return sendrecv.proofuser(user);
-// }
-
-// // asks the server for hew messages and proofs if any are locally safed
-// public String[] getMes(String user, int amount){
-
-// // add get messages
-// String mes[] = new String[amount];
-// return mes;
-// }
-
-// }
