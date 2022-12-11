@@ -42,7 +42,7 @@ public class sendrecv {
             out.flush();
             bf.readLine();
 
-            if (bf.readLine().equals(1)) {
+            if (bf.readLine().equals("1")) {
                 return true;
             } else {
                 return false;

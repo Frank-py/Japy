@@ -1,16 +1,12 @@
 package Java;
 import java.math.*;
 import java.util.*;
-import java.io.*;
-import com.google.gson.*;
 
 public class encry {
     public static int p;
     public static int g;
     public static int a;
     public static BigInteger A;
-    public static File keys;
-    public static JsonObject keylist;
     public static String key = "";
     testuser User;
 

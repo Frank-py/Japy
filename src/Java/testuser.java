@@ -1,6 +1,9 @@
 package Java;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import org.json.*;
 
 public class testuser {
@@ -10,7 +13,6 @@ public class testuser {
     private encry secure;
     public File keys;
     File userjson;
-    JSONTokener tokener;
     FileWriter writer;
     FileReader reader;
 
@@ -24,12 +26,15 @@ public class testuser {
             // this.filePath = Path.of("src/" + this.username + ".json");
             this.secure = new encry(this);
             this.keys = new File("src/", this.username + ".json");
-            
-            writer = new FileWriter(keys);
-            reader = new FileReader(keys);
-            tokener = new JSONTokener(reader);
-
             this.keys.createNewFile();
+
+            String ini = Files.readString(Path.of("src/" + this.username + ".json"));
+    
+
+            writer = new FileWriter(keys);
+            writer.write(ini);
+            writer.flush();
+
             // Map<String, String> jsonObject = new HashMap<String, String>();
 
         } catch (Exception e1) {
@@ -41,21 +46,25 @@ public class testuser {
     public boolean newchat(String username) {
 
         if (sendrecv.proofuser(username)) {
+            System.out.println(username);
 
             // only executes if user is not in json
-            if (getValue(username, "messages").equals(null)) {
-
+            if (getValue(username, "Messages") == null) {
+                System.out.println(username);
                 // writes the user + attributes to json
                 JSONObject userjson = new JSONObject()
                         .put("atemp", secure.a())
                         .put("Messages", new JSONArray())
-                        .put("key", secure.getKey(username));
-                JSONObject json = new JSONObject(tokener);
+                        .put("key", "secure.getKey(username)");
+                JSONObject json;
                 try {
+                    json = new JSONObject(Files.readString(Path.of("src/" + this.username + ".json")));
                     writer.write((json.put(username, userjson)).toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    writer.flush();
+                } catch (JSONException | IOException e1) {
+                    e1.printStackTrace();
                 }
+
             }
             return true;
         }
@@ -65,12 +74,19 @@ public class testuser {
     // gets the value for the given key and user
     public String getValue(String username, String key) {
         try {
-            JSONObject User = (JSONObject) new JSONObject(tokener).get(username);
+            String jsonstring = Files.readString(Path.of("src/" + this.username + ".json"));
+            JSONObject json = new JSONObject(jsonstring);
+            writer.write(json.toString());
+            writer.flush();
+            JSONObject User = (JSONObject) json.get(username);
             return User.get(key).toString();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
             return null;
         }
+
+        
     }
 
     // sets the value for the given key and user
@@ -80,6 +96,7 @@ public class testuser {
 
         try {
             writer.write(json.toString());
+            writer.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,9 +106,9 @@ public class testuser {
     // checks if chat is ready to open (key is fully generated)
     public boolean openchat(String user) {
         if (!getValue(user, "key").equals("")) {
+            System.out.println("22222");
             return true;
         }
-       
 
         // add check for key
         return false;
@@ -116,7 +133,8 @@ public class testuser {
         String[] decMessages = encry.decMes(sendrecv.getMes(user, start, end), getValue(user, "key"));
         return decMessages;
     }
-    public void sendMes(String Mes){
+
+    public void sendMes(String Mes) {
 
     }
 }

@@ -19,8 +19,4 @@ public class run {
   public static void loggedin(String[] UP) {
     user = new testuser(UP);
   }
-
-  public static testuser getUser() {
-    return user;
-  }
 }
