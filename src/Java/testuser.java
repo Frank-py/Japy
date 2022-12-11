@@ -15,6 +15,7 @@ public class testuser {
     File userjson;
     FileWriter writer;
     FileReader reader;
+    Path path;
 
     // the user currently loggedin
     testuser(String[] UP) {
@@ -26,9 +27,10 @@ public class testuser {
             // this.filePath = Path.of("src/" + this.username + ".json");
             this.secure = new encry(this);
             this.keys = new File("src/", this.username + ".json");
+            this.path = this.keys.toPath();
             this.keys.createNewFile();
 
-            String ini = Files.readString(Path.of("src/" + this.username + ".json"));
+            String ini = Files.readString(path);
     
 
             writer = new FileWriter(keys);
@@ -58,7 +60,7 @@ public class testuser {
                         .put("key", "secure.getKey(username)");
                 JSONObject json;
                 try {
-                    json = new JSONObject(Files.readString(Path.of("src/" + this.username + ".json")));
+                    json = new JSONObject(Files.readString(path));
                     writer.write((json.put(username, userjson)).toString());
                     writer.flush();
                 } catch (JSONException | IOException e1) {
@@ -74,8 +76,7 @@ public class testuser {
     // gets the value for the given key and user
     public String getValue(String username, String key) {
         try {
-            String jsonstring = Files.readString(Path.of("src/" + this.username + ".json"));
-            JSONObject json = new JSONObject(jsonstring);
+            JSONObject json = new JSONObject(Files.readString(path));
             writer.write(json.toString());
             writer.flush();
             JSONObject User = (JSONObject) json.get(username);
@@ -91,10 +92,10 @@ public class testuser {
 
     // sets the value for the given key and user
     public void setValue(String username, String key, String value) {
-        JSONObject json = new JSONObject(tokener);
-        json.put(username, ((JSONObject) json.get(username)).put(key, value));
 
         try {
+        JSONObject json = new JSONObject(Files.readString(path));
+        json.put(username, ((JSONObject) json.get(username)).put(key, value));
             writer.write(json.toString());
             writer.flush();
         } catch (Exception e) {
