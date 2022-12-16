@@ -21,8 +21,8 @@ public class login {
   static JPasswordField pass = new JPasswordField();
   static JLabel PassTitle = new JLabel("Password: ");
   static JButton loginbu = new JButton("Login!");
-  static JCheckBox robo = new JCheckBox("I'm not a robot");
-  static JCheckBox EULA = new JCheckBox("Accept the EULA and our AGB");
+  static JCheckBox robo = new JCheckBox("I'm not a robot", true);
+  static JCheckBox EULA = new JCheckBox("Accept the EULA and our AGB", true);
   static JCheckBox news = new JCheckBox("Subscribe to the Newsletter", true);
 
   /**

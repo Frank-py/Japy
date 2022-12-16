@@ -26,9 +26,19 @@ public class testuser {
 
             // this.filePath = Path.of("src/" + this.username + ".json");
             this.secure = new encry(this);
+            String ini;
+            if (keys.exists()) {
+             ini = Files.readString(path);
+         }
+         else{
+
             this.keys = new File("src/", this.username + ".json");
-            this.path = this.keys.toPath();
+         }
+                
             this.keys.createNewFile();
+
+            this.path = this.keys.toPath();
+
 
             String ini = Files.readString(path);
     

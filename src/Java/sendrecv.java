@@ -2,12 +2,11 @@ package Java;
 
 import java.io.*;
 import java.net.*;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.*;
 
 public class sendrecv {
     public static BufferedReader bf;
     public static PrintWriter out;
-    public static String s;
     public static Socket socket;
     public static String test;
 
@@ -24,9 +23,8 @@ public class sendrecv {
             bf.readLine();
             out.print(in[1].replaceAll("\r", "").replaceAll("\n", ""));
             out.flush();
-            bf.readLine();
-            s = bf.readLine();
-            return s;
+            bf.readLine(); 
+            return bf.readLine(); 
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -106,6 +104,7 @@ public class sendrecv {
 
     public static String createKey(String in) {
         try {
+            String s;
 
             out.print("createKey");
             out.flush();
