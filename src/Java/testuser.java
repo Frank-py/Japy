@@ -6,6 +6,8 @@ import java.nio.file.Path;
 
 import org.json.*;
 
+import com.google.gson.JsonParser;
+
 public class testuser {
     public String username;
     private String pw;
@@ -15,6 +17,8 @@ public class testuser {
     File userjson;
     FileWriter writer;
     FileReader reader;
+    JsonParser parser;
+
     Path path;
 
     // the user currently loggedin
@@ -26,25 +30,21 @@ public class testuser {
 
             // this.filePath = Path.of("src/" + this.username + ".json");
             this.secure = new encry(this);
-            String ini;
-            if (keys.exists()) {
-             ini = Files.readString(path);
-         }
-         else{
-
+            String initialize;
             this.keys = new File("src/", this.username + ".json");
-         }
-                
-            this.keys.createNewFile();
-
             this.path = this.keys.toPath();
+            if (this.keys.exists()) {
+                initialize = Files.readString(this.path);
 
+            } else {
+                initialize = "{}";
+                this.keys.createNewFile();
 
-            String ini = Files.readString(path);
-    
+            }
 
-            writer = new FileWriter(keys);
-            writer.write(ini);
+            reader = new FileReader(keys);
+            writer = new FileWriter(keys, false);
+            writer.write(initialize);
             writer.flush();
 
             // Map<String, String> jsonObject = new HashMap<String, String>();
@@ -70,8 +70,9 @@ public class testuser {
                         .put("key", "secure.getKey(username)");
                 JSONObject json;
                 try {
-                    json = new JSONObject(Files.readString(path));
+                    json = new JSONObject(reader.read());
                     writer.write((json.put(username, userjson)).toString());
+                    System.out.println((json.put(username, userjson)).toString());
                     writer.flush();
                 } catch (JSONException | IOException e1) {
                     e1.printStackTrace();
@@ -86,9 +87,9 @@ public class testuser {
     // gets the value for the given key and user
     public String getValue(String username, String key) {
         try {
-            JSONObject json = new JSONObject(Files.readString(path));
-            writer.write(json.toString());
-            writer.flush();
+            JSONObject json = new JSONObject(reader.read());
+            // writer.write(json.toString());
+            // writer.flush();
             JSONObject User = (JSONObject) json.get(username);
             return User.get(key).toString();
         } catch (Exception e1) {
@@ -97,15 +98,14 @@ public class testuser {
             return null;
         }
 
-        
     }
 
     // sets the value for the given key and user
     public void setValue(String username, String key, String value) {
 
         try {
-        JSONObject json = new JSONObject(Files.readString(path));
-        json.put(username, ((JSONObject) json.get(username)).put(key, value));
+            JSONObject json = new JSONObject(Files.readString(path));
+            json.put(username, ((JSONObject) json.get(username)).put(key, value));
             writer.write(json.toString());
             writer.flush();
         } catch (Exception e) {
