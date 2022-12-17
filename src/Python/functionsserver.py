@@ -112,19 +112,20 @@ class User():
         messages = []
         try:
             if recv != None: 
-                cursor.execute('SELECT Message FROM Messages WHERE (recv = "%s");' % (self.user))
+                cursor.execute('SELECT Message FROM Messages WHERE recv = "%s" ORDER BY Time DESC LIMIT %s OFFSET %s;' % (self.user, ende-anfang+1, anfang-1))
                 messages = cursor.fetchall() 
             else:
-                cursor.execute('SELECT Message FROM Messages WHERE (recv = "%s" and send "%s");' % (self.user, recv))
+                cursor.execute('SELECT Message FROM Messages WHERE (recv = "%s" and send "%s") ORDER BY Time DESC LIMIT %s OFFSET %s;' % (self.user, recv, ende-anfang+1, anfang-1))
                 nachrichten_empfangen = cursor.fetchall() 
                 messages.append(nachrichten_empfangen)
-                cursor.execute('SELECT Message FROM Messages WHERE (recv = "%s" and send "%s");' % (recv, self.user))
+                cursor.execute('SELECT Message FROM Messages WHERE (recv = "%s" and send "%s") ORDER BY Time DESC LIMIT %s OFFSET %s;' % (recv, self.user, ende-anfang+1, anfang-1))
                 nachrichten_gesendet = cursor.fetchall()
                 messages.append(nachrichten_gesendet)
             if len(messages) == 0:
                 return ""
             else:
-                return json.dumps(messages)
+                return ";;;".join(messages)
+                #return json.dumps(messages)
 
         except:
             return "error"
