@@ -183,7 +183,7 @@ async def Client(reader,writer):
 
  
 async def main():
-    server = await asyncio.start_server(Client, 'localhost', PORT)
+    server = await asyncio.start_server(Client, '0.0.0.0', PORT)
     async with server:
         await server.serve_forever()
 if __name__ == '__main__':
