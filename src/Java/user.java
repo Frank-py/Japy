@@ -5,6 +5,9 @@ import java.net.*;
 
 public class user {
 
+    public static void newchat(String text) {
+    }
+
     /*public   BufferedReader bf;
     public   PrintWriter out;
     public   String s;

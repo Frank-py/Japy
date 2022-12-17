@@ -5,31 +5,27 @@ MAX_MESSAGE_LENGTH = 1000
 RESPONSE_VALUE = "200\n".encode("utf-8")
 
 async def checkforquit(text, writer): 
-    if text == "quit":
-        writer.write("quit\n".encode("utf-8"))
+    if text == "quit" or text == "logout":
+        writer.write(RESPONSE_VALUE)
         await writer.drain()
-        return True 
-    elif text == "logout":
-        writer.write("logout\n".encode("utf-8"))
-        await writer.drain()
-        return True 
+        writer.close()
 
 async def Client(reader,writer):
     try:
         while True:
             command_request = (await reader.read(512)).decode("utf-8")
-            writer.write(RESPONSE_VALUE)
-            await writer.drain()
             if await checkforquit(command_request, writer):
                 return
+            writer.write(RESPONSE_VALUE)
+            await writer.drain()
             user_and_password = []
             if command_request == "login":
                 for i in range(2):
                     response = (await reader.read(512)).decode("utf-8") # adds user and password to list
-                    writer.write(RESPONSE_VALUE)
-                    await writer.drain()
                     if await checkforquit(response, writer):
                         return
+                    writer.write(RESPONSE_VALUE)
+                    await writer.drain()
                     user_and_password.append(response)
                 password = user_and_password[1]
                 salt = bcrypt.gensalt()
@@ -55,20 +51,30 @@ async def Client(reader,writer):
         while True: 
             
             command_request = (await reader.read(512)).decode("utf-8")
-            writer.write(RESPONSE_VALUE)
-            await writer.drain()
             if await checkforquit(response, writer):
                 return
-            
-           
+            writer.write(RESPONSE_VALUE)
+            await writer.drain()
+
             if command_request == "getMes":
                 
                 user = (await reader.read(512)).decode("utf-8")
-                writer.write(RESPONSE_VALUE)
-                await writer.drain()
                 if await checkforquit(user, writer):
                     return
-                messages = benutzer.checkformessages(user)
+                writer.write(RESPONSE_VALUE)
+                await writer.drain()
+
+                anfangswert = (await reader.read(512)).decode("utf-8")
+                if await checkforquit(anfangswert, writer):
+                    return
+                writer.write(RESPONSE_VALUE)
+                await writer.drain()
+                endwert = (await reader.read(512)).decode("utf-8")
+                if await checkforquit(endwert, writer):
+                    return
+                writer.write(RESPONSE_VALUE)
+                await writer.drain()
+                messages = benutzer.checkformessages(recv = user, anfang = int(anfangswert), ende = int(endwert))
                 
                 writer.write((messages+"\n").encode("utf-8"))
                 await writer.drain()
@@ -76,10 +82,10 @@ async def Client(reader,writer):
             elif command_request == "proofuser":
                 
                 user = (await reader.read(512)).decode("utf-8")
-                writer.write(RESPONSE_VALUE)
-                await writer.drain()
                 if await checkforquit(user, writer):
                     return
+                writer.write(RESPONSE_VALUE)
+                await writer.drain()
 
                 if benutzer.searchaccount(user):
                     writer.write("1\n".encode('utf-8'))
@@ -90,29 +96,28 @@ async def Client(reader,writer):
             elif command_request == "sendMes":
                 
                 userMes = (await reader.read(512)).decode("utf-8")
-                writer.write(RESPONSE_VALUE)
-                await writer.drain()
                 if await checkforquit(user, writer):
                     return
-            
-                messages = (await reader.read(10000)).decode("utf-8")
-                if len(messages) > MAX_MESSAGE_LENGTH:
-                    writer.write("300\n".encode('utf-8'))
-                    await writer.drain()
-                    return
-                
                 writer.write(RESPONSE_VALUE)
                 await writer.drain()
+            
+                messages = (await reader.read(10000)).decode("utf-8")
                 if await checkforquit(messages, writer):
                     return
+                if len(messages) > MAX_MESSAGE_LENGTH:
+                    writer.write("300\n".encode('utf-8'))
+                    continue
+                else:
+                    writer.write(RESPONSE_VALUE)
+                await writer.drain()
                 benutzer.insertmessage(userMes, messages) 
             elif command_request == "createKey":
                 
                 user = (await reader.read(512)).decode("utf-8") #user
-                
-                writer.write(RESPONSE_VALUE)
                 if await checkforquit(user, writer):
                     return 
+                writer.write(RESPONSE_VALUE)
+                writer.drain()
                 status = benutzer.createKey(user).encode("utf-8")+"\n".encode("utf-8")
                 if benutzer.status == 1:
                     writer.write("1\n".encode("utf-8"))
@@ -122,12 +127,18 @@ async def Client(reader,writer):
                     writer.write(status)
                     await writer.drain()
                     P = (await reader.read(512)).decode(encoding="utf-8")
+                    if checkforquit(P, writer):
+                        return
                     writer.write(RESPONSE_VALUE)
                     await writer.drain()
                     G = (await reader.read(512)).decode(encoding="utf-8")
+                    if checkforquit(G, writer):
+                        return
                     writer.write(RESPONSE_VALUE)
                     await writer.drain()
                     A = (await reader.read(512)).decode(encoding="utf-8")
+                    if checkforquit(A, writer):
+                        return
                     writer.write(RESPONSE_VALUE)
                     await writer.drain()
                     benutzer.insertKeys(user, P, G, A)
@@ -147,6 +158,8 @@ async def Client(reader,writer):
                     await writer.drain()
                     
                     B = (await reader.read(512)).decode(encoding="utf-8")
+                    if checkforquit(B, writer):
+                        return
                     
                     writer.write(RESPONSE_VALUE)
                     await writer.drain()

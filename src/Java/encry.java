@@ -1,71 +1,40 @@
 package Java;
-
 import java.math.*;
 import java.util.*;
-import java.io.*;
-import com.google.gson.*;
 
 public class encry {
     public static int p;
     public static int g;
     public static int a;
     public static BigInteger A;
-    public static File keys;
-    public static JsonObject keylist;
     public static String key = "";
+    testuser User;
 
-    encry() {
-        JsonElement parser;
-        try {
-            // keys = new File(./src/"keys" + "login.name" + ".json");
-            keys = new File("src/", "keys" + "login.name" + ".json");
-            keys.createNewFile();
-            parser = JsonParser.parseReader(new FileReader(keys));
-            keylist = parser.getAsJsonObject();
-            Gson gson = new Gson();
-            FileWriter fileWriter;
+    encry(testuser User) {
+        this.User = User;
             a = 12;
-            fileWriter = new FileWriter(keys);
-            fileWriter.append("{}");
-            fileWriter.flush();
-            String[] in = { "{user:passwort}" };
-            // gson.toJson(in, fileWriter);
-            fileWriter.close();
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
+        
 
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         getKey("wgg");
     }
 
-    public static String a() {
-
+    public String a() {
         return Integer.toString(a);
     }
 
-    public static String getKey(String User) {
-        if (keylist.has(User)) {
-
-            key = keylist.get(User).getAsString();
-        } else {
+    public String getKey(String username) {
+        String key = User.getValue(username,"key");
+        if (key.equals("")) {
+            
+                return sendrecv.createKey(username);
+            }  
+         else {
+            return key;
         
-            key = sendrecv.createKey(User);
         }
-
-        return key;
-        // FileWriter keyWriter = new FileWriter("..\\keys"+login.name+".json");
-        // keyWriter.write(""
-
-        // );
-        // keyWriter.close();
-
-        // if (key.equals("0")) {
-        //
-
-        // }
 
     }
 
