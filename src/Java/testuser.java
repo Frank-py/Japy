@@ -6,7 +6,7 @@ import java.nio.file.Path;
 
 import org.json.*;
 
-import com.google.gson.JsonParser;
+//import com.google.gson.JsonParser;
 
 public class testuser {
     public String username;
@@ -17,7 +17,6 @@ public class testuser {
     File userjson;
     FileWriter writer;
     FileReader reader;
-    JsonParser parser;
 
     Path path;
 
@@ -34,18 +33,19 @@ public class testuser {
             this.keys = new File("src/", this.username + ".json");
             this.path = this.keys.toPath();
             if (this.keys.exists()) {
-                initialize = Files.readString(this.path);
-
+        
             } else {
                 initialize = "{}";
                 this.keys.createNewFile();
+                writer = new FileWriter(keys);
+                writer.write("{}");
+                writer.flush();
 
             }
 
             reader = new FileReader(keys);
-            writer = new FileWriter(keys, false);
-            writer.write(initialize);
-            writer.flush();
+            
+           
 
             // Map<String, String> jsonObject = new HashMap<String, String>();
 
@@ -71,6 +71,7 @@ public class testuser {
                 JSONObject json;
                 try {
                     json = new JSONObject(reader.read());
+                    writer = new FileWriter(keys);
                     writer.write((json.put(username, userjson)).toString());
                     System.out.println((json.put(username, userjson)).toString());
                     writer.flush();
@@ -106,6 +107,8 @@ public class testuser {
         try {
             JSONObject json = new JSONObject(Files.readString(path));
             json.put(username, ((JSONObject) json.get(username)).put(key, value));
+            writer = new FileWriter(keys);
+
             writer.write(json.toString());
             writer.flush();
         } catch (Exception e) {
