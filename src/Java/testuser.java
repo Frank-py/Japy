@@ -28,15 +28,10 @@ public class testuser {
         try {
 
             // this.filePath = Path.of("src/" + this.username + ".json");
-            this.secure = new encry(this);
-            String initialize;
+           // this.secure = new encry(this);
             this.keys = new File("src/", this.username + ".json");
             this.path = this.keys.toPath();
-            if (this.keys.exists()) {
-        
-            } else {
-                initialize = "{}";
-                this.keys.createNewFile();
+            if (!this.keys.exists()) {
                 writer = new FileWriter(keys);
                 writer.write("{}");
                 writer.flush();
