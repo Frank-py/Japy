@@ -46,11 +46,11 @@ public class testuser {
     public boolean newchat(String username) {
 
         if (sendrecv.proofuser(username)) {
-            System.out.println(username);
+            
 
             // only executes if user is not in json
             if (getValue(username, "Messages") == null) {
-                System.out.println(username);
+                
                 // writes the user + attributes to json
                 JSONObject userjson = new JSONObject()
                         .put("atemp", encry.a())
@@ -61,7 +61,6 @@ public class testuser {
                     json = new JSONObject(reader.read());
                     writer = new FileWriter(keys);
                     writer.write((json.put(username, userjson)).toString());
-                    System.out.println((json.put(username, userjson)).toString());
                     writer.flush();
                 } catch (JSONException | IOException e1) {
                     e1.printStackTrace();
@@ -119,9 +118,8 @@ public class testuser {
         try {
             writer.close();
             reader.close();
-        } catch (IOException e) {
-            System.out.println("Couldn't close Reader or Writer!");
-            e.printStackTrace();
+        } catch (Exception e) {
+            
         }
     }
 

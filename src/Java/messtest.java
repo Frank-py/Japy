@@ -123,6 +123,7 @@ public class messtest {
         listener = new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
                 me.close();
+                
             }
         };
 
@@ -224,6 +225,7 @@ public class messtest {
 
     // load messages to chat
     void showMes(String[] mes, Boolean[] alignments) {
+        
         // todo show on screen
         JPanel messagePanel = new JPanel();
         messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
