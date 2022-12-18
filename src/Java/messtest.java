@@ -1,8 +1,11 @@
 package Java;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.nio.channels.ScatteringByteChannel;
 
 public class messtest {
     testuser me;
@@ -43,8 +46,7 @@ public class messtest {
         fontColor = Color.white;
 
         // initializing the frame
-            
-        
+
         frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.setSize(1366, 768);
@@ -56,7 +58,6 @@ public class messtest {
         frame.setIconImage(logo.getImage());
         frame.getContentPane().setBackground(colortheme);
         frame.addWindowListener(listener);
-
 
         addUsers = new JButton("Add User");
         addUsers.setIcon(plus);
@@ -103,8 +104,8 @@ public class messtest {
 
         // creating the chatpanel
         back = new JLayeredPane();
-        back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));//needed?
-        
+        back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));// needed?
+
         // creating the chatpanel
         chat = new JPanel();
         chat.setSize(back.getWidth(), back.getHeight());
@@ -112,10 +113,7 @@ public class messtest {
 
         back.add(chat, Integer.valueOf(1));
         frame.add(back, BorderLayout.EAST);
-        //frame.setvisible(true);
-
-        
-
+        // frame.setvisible(true);
 
     }
 
@@ -134,7 +132,7 @@ public class messtest {
                 String textuser = ((JButton) e.getSource()).getText();
                 if (me.openchat(textuser)) {
                     // creates the chat interface visually
-                    //newchat();fdsgsdghds
+                    // newchat();
                     // loads the messages to the chat if necessary
                 } else {
                     // displaying the error message when key is not ready
@@ -190,8 +188,10 @@ public class messtest {
                         }
                         // user is not in database
                         else {
-                            JOptionPane.showMessageDialog(null,"Check spelling or send your partner a link to join this messenger.", "User not found!",
-                                    
+                            JOptionPane.showMessageDialog(null,
+                                    "Check spelling or send your partner a link to join this messenger.",
+                                    "User not found!",
+
                                     JOptionPane.ERROR_MESSAGE);
                             newUser.setText("");
                         }
@@ -223,115 +223,153 @@ public class messtest {
     }
 
     // load messages to chat
-    void loadMes(String[] mes) {
-
+    void showMes(String[] mes, Boolean[] alignments) {
         // todo show on screen
+        JPanel messagePanel = new JPanel();
+        messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
+
+        // Create the scroll pane to hold the message panel
+        JScrollPane scrollPane = new JScrollPane(messagePanel);
+
+        // Add the scroll pane to the frame
+        chat.add(scrollPane, BorderLayout.CENTER);
+
+        // Create the message clouds
+        String[] messages = { "Hello!", "Hi there!", "How are you?", "I'm doing well, thank you!" };
+        for (int i = 0; i < messages.length; i++) {
+            // Create the message label
+            JLabel messageLabel = new JLabel(messages[i]);
+            messageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+
+            // Create the message panel to hold the label
+            JPanel message = new JPanel();
+            message.setLayout(new BorderLayout(10, 10));
+            if (alignments[i]) {
+                message.add(messageLabel, BorderLayout.EAST);
+                message.setBackground(Color.CYAN);
+            } else {
+                message.add(messageLabel, BorderLayout.WEST);
+                message.setBackground(Color.LIGHT_GRAY);
+            }
+
+            Border border = BorderFactory.createLineBorder(message.getBackground(), 1);
+            message.setBorder(
+                    BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+            // Add the message panel to the message panel
+            messagePanel.add(Box.createVerticalBox().add(message));
+        }
+
+        // Show the frame
+        frame.setVisible(true);
 
     }
 
     void newchat(String User) {
-
-        loadMes(me.getMes(User, 0, 5));
+        showMes(me.getMes(User, 0, 5), new Boolean[] { true, false, true, false, true });
 
     }
 }
-//     {
-        
-    
-//         // Users.setSize(frame.getWidth()-100, frame.getHeight());
-//         // tUsers.setSize(frame.getWidth()/10*2, frame.getHeight());
-//         frame.setVisible(true);
-        
-//         chat.setBackground(Color.black);
+// {
 
-//         back.setBackground(Color.red);
-//         chat.setOpaque(true);
-//         background = new JLabel(ba);
-//         back.add(background, Integer.valueOf(0));
-//         back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
-//         frame.add(back, BorderLayout.EAST); // ??????
-//         frame.setVisible(true);
-        
-//         frame.setVisible(true);
-//         // System.out.println(back.getWidth()+"rrr");
-//         // System.out.println(frame.getWidth());
+// // Users.setSize(frame.getWidth()-100, frame.getHeight());
+// // tUsers.setSize(frame.getWidth()/10*2, frame.getHeight());
+// frame.setVisible(true);
 
-//     public void reloadframe() {
+// chat.setBackground(Color.black);
 
-//         // Users.add(addUsers);
-//         // Users.setSize(addUsers.getWidth(), frame.getHeight());
-//         back.setSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
+// back.setBackground(Color.red);
+// chat.setOpaque(true);
+// background = new JLabel(ba);
+// back.add(background, Integer.valueOf(0));
+// back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(),
+// frame.getHeight()));
+// frame.add(back, BorderLayout.EAST); // ??????
+// frame.setVisible(true);
 
-//         back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
-//         chat.setSize(back.getWidth(), back.getHeight());
-//         background.setSize(frame.getWidth() - Users.getWidth(), frame.getHeight());
-//         Users.setPreferredSize(new Dimension(frame.getWidth() / 10 * 2, frame.getHeight()));
+// frame.setVisible(true);
+// // System.out.println(back.getWidth()+"rrr");
+// // System.out.println(frame.getWidth());
 
-//     }}
+// public void reloadframe() {
 
-//     /*
-//      * JLabel background = new JLabel();
-//      * Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(),
-//      * Image.SCALE_SMOOTH);
-//      * ImageIcon bascale = new ImageIcon(imgscale);
-//      * background.setIcon(bascale);
-//      * background.setSize(back.getWidth(), back.getHeight());
-//      * back.add(background, Integer.valueOf(0));
-//      * back.remove(background);
-//      * frame.setVisible(true);
-//      */
+// // Users.add(addUsers);
+// // Users.setSize(addUsers.getWidth(), frame.getHeight());
+// back.setSize(new Dimension(frame.getWidth() - Users.getWidth(),
+// frame.getHeight()));
 
-//     // public void newchat() {
-//     // chat d = new chat("ee");
-//     // System.out.println(d.name);
-//     String key = "";for(
-//     chat ch:chats)
-//     {
-//         if (ch.name.equals(currentUser)) {
-//             ch.getMessages();
-//             key = ch.key();
+// back.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(),
+// frame.getHeight()));
+// chat.setSize(back.getWidth(), back.getHeight());
+// background.setSize(frame.getWidth() - Users.getWidth(), frame.getHeight());
+// Users.setPreferredSize(new Dimension(frame.getWidth() / 10 * 2,
+// frame.getHeight()));
 
-//             break;
-//         }
+// }}
 
-//     }
+// /*
+// * JLabel background = new JLabel();
+// * Image imgscale = img.getScaledInstance(back.getWidth(), back.getHeight(),
+// * Image.SCALE_SMOOTH);
+// * ImageIcon bascale = new ImageIcon(imgscale);
+// * background.setIcon(bascale);
+// * background.setSize(back.getWidth(), back.getHeight());
+// * back.add(background, Integer.valueOf(0));
+// * back.remove(background);
+// * frame.setVisible(true);
+// */
 
-//     // if (key.equals("0")) {
-//     // joptionpane.showmessagedialog(null,
-//     // "invitation sent to user(or it crashed(50/50 chance))", "good luck",
-//     // joptionpane.information_message);
-//     // } else if (key.equals("1")) {
-//     // joptionpane.showmessagedialog(null,
-//     // "user has not accepted your invitation yet", "ignored",
-//     // joptionpane.warning_message);
+// // public void newchat() {
+// // chat d = new chat("ee");
+// // System.out.println(d.name);
+// String key = "";for(
+// chat ch:chats)
+// {
+// if (ch.name.equals(currentUser)) {
+// ch.getMessages();
+// key = ch.key();
 
-//     if(!key.equals(""))
-//     {
+// break;
+// }
 
-//         JOptionPane.showMessageDialog(null,
-//                 "generating key ...", "working ...",
-//                 JOptionPane.INFORMATION_MESSAGE);
-//         String mes = sendrecv.getMes(currentUser);
-//         System.out.println(mes);
-//         if (mes.length() >= 8) {
-//             JLabel messages;
-//             messages = new JLabel();
-//             chat.remove(messages);
-//             String[] decMessages = encry.decMes(mes, key);
+// }
 
-//             for (int x = 0; x < decMessages.length - oldMessages.length; x++) {
-//                 messages = new JLabel(decMessages[decMessages.length - 1 - x]);
-//                 messages.setBackground(new Color(0, 255, 0));
-//                 messages.setForeground(Color.white);
-//                 messages.setSize(chat.getWidth(), 100);
-//                 chat.add(messages);
-//                 oldMessages = decMessages;
-//             }
+// // if (key.equals("0")) {
+// // joptionpane.showmessagedialog(null,
+// // "invitation sent to user(or it crashed(50/50 chance))", "good luck",
+// // joptionpane.information_message);
+// // } else if (key.equals("1")) {
+// // joptionpane.showmessagedialog(null,
+// // "user has not accepted your invitation yet", "ignored",
+// // joptionpane.warning_message);
 
-//         }
-//         writeMessage.setText("");
-//         chat.add(writeMessage);
-//         frame.setVisible(true);
-//     }
+// if(!key.equals(""))
+// {
+
+// JOptionPane.showMessageDialog(null,
+// "generating key ...", "working ...",
+// JOptionPane.INFORMATION_MESSAGE);
+// String mes = sendrecv.getMes(currentUser);
+// System.out.println(mes);
+// if (mes.length() >= 8) {
+// JLabel messages;
+// messages = new JLabel();
+// chat.remove(messages);
+// String[] decMessages = encry.decMes(mes, key);
+
+// for (int x = 0; x < decMessages.length - oldMessages.length; x++) {
+// messages = new JLabel(decMessages[decMessages.length - 1 - x]);
+// messages.setBackground(new Color(0, 255, 0));
+// messages.setForeground(Color.white);
+// messages.setSize(chat.getWidth(), 100);
+// chat.add(messages);
+// oldMessages = decMessages;
+// }
+
+// }
+// writeMessage.setText("");
+// chat.add(writeMessage);
+// frame.setVisible(true);
+// }
 
 // }

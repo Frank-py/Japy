@@ -21,7 +21,7 @@ public class encry {
         getKey("wgg");
     }
 
-    public String a() {
+    public static String a() {
         return Integer.toString(a);
     }
 
