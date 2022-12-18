@@ -6,8 +6,6 @@ import java.nio.file.Path;
 
 import org.json.*;
 
-//import com.google.gson.JsonParser;
-
 public class testuser {
     public String username;
     private String pw;

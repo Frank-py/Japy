@@ -3,7 +3,6 @@ package Java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import com.google.gson.Gson;
 
 public class messtest {
     testuser me;
