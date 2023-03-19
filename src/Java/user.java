@@ -12,7 +12,7 @@ import org.json.*;
 public class user {
     public String username;
     private String pw;
-    private messtest main;
+   // private messenger_interface main;
     public File keys;
     File userjson;
     FileWriter writer;
@@ -22,8 +22,10 @@ public class user {
     // the user currently loggedin
     user(String[] UP) {
         this.username = UP[0];
-        this.pw = UP[1];
-        this.main = new messtest(this);
+        pw = UP[1];
+
+      //  main =
+        new messenger_interface(this);
         try {
 
             // this.filePath = Path.of("src/" + this.username + ".json");
@@ -83,8 +85,8 @@ public class user {
             JSONObject User = (JSONObject) json.get(username);
             return User.get(key).toString();
         } catch (Exception e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            
+            //e1.printStackTrace();
             return null;
         }
 
