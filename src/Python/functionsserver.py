@@ -16,10 +16,10 @@ class User():
         try:
             connection = mysql.connector.connect(
                  host="localhost",
-                #  user="***REMOVED***",
                   user="***REMOVED***",
-                  passwd="***REMOVED***",
+                #  user="***REMOVED***",
                 #  passwd="***REMOVED***",
+                  passwd="***REMOVED***",
                   database="***REMOVED***"
             )
         except Error as e:

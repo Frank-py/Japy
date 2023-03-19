@@ -2,7 +2,7 @@ package Java;
 
 
 public class run {
-  public static testuser user;
+  public static user user;
 
   public static void main(String[] args) {
    // new testuser(new String[]{"daniel","asdf"});
@@ -17,6 +17,6 @@ public class run {
   }
 
   public static void loggedin(String[] UP) {
-    user = new testuser(UP);
+    user = new user(UP);
   }
 }

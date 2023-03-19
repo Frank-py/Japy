@@ -1,15 +1,22 @@
 package Java.examplecodes;
-//package Japy.src.Java.examplecodes;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+
 
 public class button0 extends JFrame implements ActionListener {
 
-
         JButton button;
         JLabel label;
-        
+    
         button0(){
             
             ImageIcon icon = new ImageIcon("point.png");
@@ -29,7 +36,7 @@ public class button0 extends JFrame implements ActionListener {
             button.setIcon(icon);
             button.setHorizontalTextPosition(JButton.CENTER);
             button.setVerticalTextPosition(JButton.BOTTOM);
-            button.setFont(new Font("Comic Sans",Font.BOLD,25));
+            button.setFont(new Font("Comic Sans", Font.BOLD,25));
             button.setIconTextGap(-15);
             button.setForeground(Color.cyan);
             button.setBackground(Color.lightGray);
@@ -51,5 +58,7 @@ public class button0 extends JFrame implements ActionListener {
                 label.setVisible(true);
             }	
         }
+
+       
     }
 

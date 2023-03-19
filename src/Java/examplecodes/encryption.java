@@ -1,8 +1,9 @@
 //package Japy.src.Java.examplecodes;
 package Java.examplecodes;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigInteger;
+import java.util.Random;
+import java.util.Scanner;
 
 public class encryption {
   public static void main(String[] args) {

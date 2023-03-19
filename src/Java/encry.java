@@ -9,9 +9,9 @@ public class encry {
     public static int a;
     public static BigInteger A;
     public static String key = "";
-    testuser User;
+    user User;
 
-    encry(testuser User) {
+    encry(user User) {
         this.User = User;
             a = 12;
         

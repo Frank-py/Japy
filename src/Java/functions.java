@@ -11,7 +11,7 @@ public class functions {
 
     if (UserName.length() > 1069 || UserName.length() < 1) {
         JOptionPane.showMessageDialog(null,
-                    "Invalid! Enter a valid Ussername", "OutOfBounds",
+                    "Invalid! Enter a valid Username", "OutOfBounds",
                     JOptionPane.ERROR_MESSAGE);
     } else {
         recv = sendrecv.proofuser(UserName);
