@@ -60,7 +60,7 @@ public class testuser {
                 System.out.println(username);
                 // writes the user + attributes to json
                 JSONObject userjson = new JSONObject()
-                        .put("atemp", secure.a())
+                        .put("atemp", encry.a())
                         .put("Messages", new JSONArray())
                         .put("key", "secure.getKey(username)");
                 JSONObject json;
@@ -90,7 +90,7 @@ public class testuser {
             return User.get(key).toString();
         } catch (Exception e1) {
             // TODO Auto-generated catch block
-            e1.printStackTrace();
+           // e1.printStackTrace();
             return null;
         }
 
