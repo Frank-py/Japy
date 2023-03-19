@@ -1,6 +1,7 @@
 package Java;
-import java.math.*;
-import java.util.*;
+import java.math.BigInteger;
+import java.util.Base64;
+import java.util.Random;
 
 public class encry {
     public static int p;
