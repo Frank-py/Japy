@@ -1,24 +1,19 @@
 package Java;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
 
 import org.json.*;
-
-//import com.google.gson.JsonParser;
 
 public class testuser {
     public String username;
     private String pw;
     private messtest main;
-    private encry secure;
     public File keys;
     File userjson;
     FileWriter writer;
     FileReader reader;
-
-    Path path;
+    Path path; 
 
     // the user currently loggedin
     testuser(String[] UP) {
@@ -30,7 +25,9 @@ public class testuser {
             // this.filePath = Path.of("src/" + this.username + ".json");
            // this.secure = new encry(this);
             this.keys = new File("src/", this.username + ".json");
-            this.path = this.keys.toPath();
+            this.path = keys.toPath();
+           // Path keysPath = Path.of("C:\\Users\\HP\\Desktop\\gfg.txt");
+           // this.path = this.keys.toPath();
             if (!this.keys.exists()) {
                 writer = new FileWriter(keys);
                 writer.write("{}");
@@ -39,10 +36,6 @@ public class testuser {
             }
 
             reader = new FileReader(keys);
-            
-           
-
-            // Map<String, String> jsonObject = new HashMap<String, String>();
 
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -53,11 +46,11 @@ public class testuser {
     public boolean newchat(String username) {
 
         if (sendrecv.proofuser(username)) {
-            System.out.println(username);
+            
 
             // only executes if user is not in json
             if (getValue(username, "Messages") == null) {
-                System.out.println(username);
+                
                 // writes the user + attributes to json
                 JSONObject userjson = new JSONObject()
                         .put("atemp", encry.a())
@@ -68,7 +61,6 @@ public class testuser {
                     json = new JSONObject(reader.read());
                     writer = new FileWriter(keys);
                     writer.write((json.put(username, userjson)).toString());
-                    System.out.println((json.put(username, userjson)).toString());
                     writer.flush();
                 } catch (JSONException | IOException e1) {
                     e1.printStackTrace();
@@ -83,9 +75,7 @@ public class testuser {
     // gets the value for the given key and user
     public String getValue(String username, String key) {
         try {
-            JSONObject json = new JSONObject(reader.read());
-            // writer.write(json.toString());
-            // writer.flush();
+            JSONObject json = new JSONObject(Files.readString(path));
             JSONObject User = (JSONObject) json.get(username);
             return User.get(key).toString();
         } catch (Exception e1) {
@@ -100,7 +90,7 @@ public class testuser {
     public void setValue(String username, String key, String value) {
 
         try {
-            JSONObject json = new JSONObject(Files.readString(path));
+            JSONObject json = new JSONObject(reader.read());
             json.put(username, ((JSONObject) json.get(username)).put(key, value));
             writer = new FileWriter(keys);
 
@@ -115,7 +105,6 @@ public class testuser {
     // checks if chat is ready to open (key is fully generated)
     public boolean openchat(String user) {
         if (!getValue(user, "key").equals("")) {
-            System.out.println("22222");
             return true;
         }
 
@@ -129,9 +118,8 @@ public class testuser {
         try {
             writer.close();
             reader.close();
-        } catch (IOException e) {
-            System.out.println("Couldn't close Reader or Writer!");
-            e.printStackTrace();
+        } catch (Exception e) {
+            
         }
     }
 

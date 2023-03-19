@@ -1,4 +1,6 @@
-package Java;
+package Java.examplecodes;
+
+
 
 import javax.swing.JPanel;
 

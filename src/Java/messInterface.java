@@ -2,13 +2,12 @@ package Java;
 
 import javax.swing.*;
 
-import com.google.gson.Gson;
+
 
 import java.awt.*;
 import java.awt.event.*;
 
 public class messInterface {
-    Gson gon = new Gson();
     // String[] user;
     String currentUser;
     int n = 0;
