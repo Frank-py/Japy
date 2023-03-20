@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "gridback",
+            "request": "launch",
+            "mainClass": "Java.examplecodes.gridback",
+            "projectName": "Japy_156e1437"
+        },
+        {
+            "type": "java",
             "name": "Launch ninetytwo",
             "request": "launch",
             "mainClass": "Java.examplecodes.ninetytwo",

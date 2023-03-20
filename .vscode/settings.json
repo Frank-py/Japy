@@ -9,5 +9,6 @@
         "src/json-20220320.jar",
         "src\\json-20220924.jar",
         "src/json-20220924.jar"
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }

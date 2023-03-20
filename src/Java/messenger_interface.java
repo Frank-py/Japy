@@ -153,7 +153,7 @@ public class messenger_interface {
         chat.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
         mainpanel.add(chat,BorderLayout.EAST);
         back.add(mainpanel,JLayeredPane.DEFAULT_LAYER);
-        frame.add(back);
+        frame.getContentPane().add(back);
         // frame.setvisible(true);
 
     }
