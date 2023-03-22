@@ -16,7 +16,7 @@ public class sendrecv {
 
     public static String login(String in[]) {
         try {
-            socket =   new Socket("localhost", 6000);
+            socket =  new Socket("localhost", 6000);
             bf = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
             out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
             out.print("login");
@@ -79,9 +79,9 @@ public class sendrecv {
             out.print(in[1]);
             out.flush();
             bf.readLine();
-            return "Success";
-        } catch (IOException e) {
             return null;
+        } catch (IOException e) {
+            return e.toString();
         }
     }
 

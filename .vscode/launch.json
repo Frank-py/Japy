@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MessengerInterface",
+            "request": "launch",
+            "mainClass": "Java.examplecodes.MessengerInterface",
+            "projectName": "Japy_156e1437"
+        },
+        {
+            "type": "java",
             "name": "gridback",
             "request": "launch",
             "mainClass": "Java.examplecodes.gridback",

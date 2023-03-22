@@ -137,7 +137,8 @@ public class user {
         return decMessages;
     }
 
-    public void sendMes(String Mes) {
+    public void sendMes(String user, String Mes) {
+        sendrecv.sendMes(new String[]{user,encry.encryption(Mes, getValue(user, "key"))});
 
     }
 }

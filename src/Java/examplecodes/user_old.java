@@ -15,7 +15,7 @@ public class user_old {
     public  String name;
     user() {
         try {
-            socket =   new Socket("localhost", 6000);
+            socket =  new Socket("localhost", 6000);
             bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {

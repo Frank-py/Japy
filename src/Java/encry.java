@@ -15,7 +15,6 @@ public class encry {
         this.User = User;
             a = 12;
         
-
     }
 
     public void main(String[] args) {
@@ -69,7 +68,7 @@ public class encry {
         
         return new BigInteger(in[2]).modPow(new BigInteger(in[1]), new BigInteger(in[0])).toString(10);
     }
-
+    //decrypt array of messages
     public static String[] decMes(String in, String key) {
         Base64.Decoder dec = Base64.getDecoder();
         String[] messages = in.split(";;;");
@@ -81,7 +80,7 @@ public class encry {
         }
         return out;
     }
-
+    //can be used to encrypt single messages
     public static String encryption(String in, String key) {
         key = Integer.toBinaryString(Integer.parseInt(key));
         in = Stringtobinary(in);
@@ -101,7 +100,7 @@ public class encry {
         return res;
     }
 
-    static boolean isPrime(double n) {
+    private static boolean isPrime(double n) {
         if (n <= 1)
             return false;
         for (int i = 2; i < n; i++)
@@ -109,8 +108,8 @@ public class encry {
                 return false;
         return true;
     }
-
-    public static String crypt(String mess, String key) {
+        
+    private static String crypt(String mess, String key) {
         int messLen = mess.length();
         int keyLen = key.length();
         String temp = key;
@@ -133,7 +132,7 @@ public class encry {
         return out;
     }
 
-    public static String Stringtobinary(String in) {
+    private static String Stringtobinary(String in) {
         char[] c = in.toCharArray();
         String out = "";
         for (int x = 0; x < c.length; x++) {
@@ -148,7 +147,7 @@ public class encry {
         return out;
     }
 
-    public static String Binarytostring(String in) {
+    private static String Binarytostring(String in) {
         String out = "";
         String[] numbers = in.split("(?<=\\G.{8})");
         for (int x = 0; x <= numbers.length - 1; x++) {

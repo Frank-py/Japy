@@ -39,7 +39,7 @@ public class MessengerInterface extends JFrame {
         panelRight.add(messageField, BorderLayout.SOUTH);
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelLeft, panelRight);
-        splitPane.setResizeWeight(0.2);
+        splitPane.setResizeWeight(0.1);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Messenger");

@@ -11,6 +11,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
@@ -30,7 +31,7 @@ import java.awt.event.WindowListener;
 public class messenger_interface {
     user me;
     JFrame frame;
-    String std_font_type;
+    String std_font_type, currentuser;
     Color caretColor, colortheme, fontColor;
     JLayeredPane back;
     ImageIcon logo, ba, plus;
@@ -60,14 +61,13 @@ public class messenger_interface {
         logo = new ImageIcon("src\\pictures\\prof5.png");
         plus = new ImageIcon("src\\pictures\\plus.png");
 
-        // colors
+        // colours
         colortheme = new Color(27, 37, 43);
         caretColor = Color.white;
         fontColor = Color.white;
         std_font_type = "MV Boli";
 
         // initializing the frame
-
         frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.setSize(1366, 768);
@@ -143,7 +143,7 @@ public class messenger_interface {
         // back.setOpaque(true);
         // creating the chatpanel
         chat = new JPanel();
-        mainpanel.add(Users,BorderLayout.WEST);
+        //mainpanel.add(Users,BorderLayout.WEST);
         chat.setSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
         
         chat.setLayout(new GridLayout(10, 1));
@@ -151,9 +151,12 @@ public class messenger_interface {
         
         chat.add(writeMessage);
         chat.setPreferredSize(new Dimension(frame.getWidth() - Users.getWidth(), frame.getHeight()));
-        mainpanel.add(chat,BorderLayout.EAST);
-        back.add(mainpanel,JLayeredPane.DEFAULT_LAYER);
-        frame.getContentPane().add(back);
+       // mainpanel.add(chat,BorderLayout.EAST);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, Users, chat);
+        splitPane.setDividerSize(4);
+       // splitPane.setResizeWeight(0.1);
+       // back.add(splitPane,JLayeredPane.DEFAULT_LAYER);
+        frame.getContentPane().add(splitPane);
         // frame.setvisible(true);
 
     }
@@ -170,10 +173,10 @@ public class messenger_interface {
         // checks if an added user is clicked
         UserPressed = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String textuser = ((JButton) e.getSource()).getText();
-                if (me.openchat(textuser)) {
+                currentuser = ((JButton) e.getSource()).getText();
+                if (me.openchat(currentuser)) {
                     // creates the chat interface visually
-                    // newchat();
+                    newchat(currentuser);
                     // loads the messages to the chat if necessary
                 } else {
                     // displaying the error message when key is not ready
@@ -198,12 +201,12 @@ public class messenger_interface {
                         && e.getSource() == writeMessage) {
 
                     // String key = encry.getKey(currentUser);
-                    me.sendMes(writeMessage.getText());
+                    me.sendMes(currentuser, writeMessage.getText());
 
                     // sendrecv.sendMes(
                     // new String[] { currentUser, encry.encryption(writeMessage.getText(),
                     // encry.getKey(currentUser)) });
-                    // writeMessage.setText("");
+                     writeMessage.setText("");
                 }
 
                 // recognises user pressed enter to add new user
@@ -237,7 +240,7 @@ public class messenger_interface {
                             newUser.setText("");
                         }
                     }
-                    frame.setVisible(true);
+                    frame.setVisible(true); //needed????
                 }
             }
 
