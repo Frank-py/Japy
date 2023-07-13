@@ -15,7 +15,7 @@ class User():
         connection = None
         try:
             connection = mysql.connector.connect(
-                host="localhost",
+                 host="localhost",
                  user="***REMOVED***",
                 # user="***REMOVED***",
                 # passwd="***REMOVED***",

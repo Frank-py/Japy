@@ -1,2 +1,2 @@
 # Japy
-Never gonna give you up!
+The messenger of the next generation!
