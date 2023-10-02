@@ -1,2 +1,2 @@
 # Japy
-The messenger of the past generation!
+The messenger of the NEXT GENERATION!
