@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "run",
+            "request": "launch",
+            "mainClass": "Java.run",
+            "projectName": "Japy_578de1bc"
+        },
+        {
+            "type": "java",
             "name": "MessengerInterface",
             "request": "launch",
             "mainClass": "Java.examplecodes.MessengerInterface",

@@ -171,21 +171,19 @@ public class messenger_interface {
         };
 
         // checks if an added user is clicked
-        UserPressed = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                currentuser = ((JButton) e.getSource()).getText();
-                if (me.openchat(currentuser)) {
-                    // creates the chat interface visually
-                    newchat(currentuser);
-                    // loads the messages to the chat if necessary
-                } else {
-                    // displaying the error message when key is not ready
-                    JOptionPane.showMessageDialog(null,
-                            "User has not accepted your invitation yet", "Ignored",
-                            JOptionPane.WARNING_MESSAGE);
-                }
-
+        UserPressed = e -> {
+            currentuser = ((JButton) e.getSource()).getText();
+            if (me.openchat(currentuser)) {
+                // creates the chat interface visually
+                newchat(currentuser);
+                // loads the messages to the chat if necessary
+            } else {
+                // displaying the error message when key is not ready
+                JOptionPane.showMessageDialog(null,
+                        "User has not accepted your invitation yet", "Ignored",
+                        JOptionPane.WARNING_MESSAGE);
             }
+
         };
 
         // keylistener with a variety of functions
@@ -252,16 +250,14 @@ public class messenger_interface {
         };
 
         // checks if addUser button is pressed
-        addListener = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // checks the source of the event
-                if (e.getSource() == addUsers) {
-                    // adds the textfield to the sidebar
-                    addUsers.setEnabled(false);
-                    Users.add(newUser, 1);
-                    newUser.requestFocusInWindow();
-                    frame.setVisible(true);
-                }
+        addListener = e -> {
+            // checks the source of the event
+            if (e.getSource() == addUsers) {
+                // adds the textfield to the sidebar
+                addUsers.setEnabled(false);
+                Users.add(newUser, 1);
+                newUser.requestFocusInWindow();
+                frame.setVisible(true);
             }
         };
     }

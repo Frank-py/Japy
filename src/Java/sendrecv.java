@@ -14,10 +14,10 @@ public class sendrecv {
     public static Socket socket;
     public static String test;
 
-    public static String login(String in[]) {
+    public static String login(String[] in) {
         try {
             socket =  new Socket("localhost", 6000);
-            bf = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+            bf = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
             out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
             out.print("login");
             out.flush();
@@ -44,11 +44,7 @@ public class sendrecv {
             out.flush();
             bf.readLine();
 
-            if (bf.readLine().equals("1")) {
-                return true;
-            } else {
-                return false;
-            }
+            return bf.readLine().equals("1");
         } catch (IOException e) {
             return false;
         }

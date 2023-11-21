@@ -27,7 +27,7 @@ public class encry {
 
     public String getKey(String username) {
         String key = User.getValue(username,"key");
-        if (key.equals("")) {
+        if (key.isEmpty()) {
             
                 return sendrecv.createKey(username);
             }  
@@ -113,7 +113,7 @@ public class encry {
         int messLen = mess.length();
         int keyLen = key.length();
         String temp = key;
-        String out = "";
+        StringBuilder out = new StringBuilder();
 
         while (messLen > keyLen) {
             key = key + temp;
@@ -124,27 +124,27 @@ public class encry {
         
         for (int x = 0; x < mess.length(); x++) {
             if (keyC[x] == messC[x]) {
-                out = out + 0;
+                out.append(0);
             } else {
-                out = out + 1;
+                out.append(1);
             }
         }
-        return out;
+        return out.toString();
     }
 
     private static String Stringtobinary(String in) {
         char[] c = in.toCharArray();
-        String out = "";
-        for (int x = 0; x < c.length; x++) {
-            String bin = Integer.toBinaryString((int) c[x]);
+        StringBuilder out = new StringBuilder();
+        for (char value : c) {
+            StringBuilder bin = new StringBuilder(Integer.toBinaryString(value));
             int y = bin.length() % 8;
             while (y != 0) {
-                bin = 0 + bin;
+                bin.insert(0, 0);
                 y = bin.length() % 8;
             }
-            out = out + bin;
+            out.append(bin);
         }
-        return out;
+        return out.toString();
     }
 
     private static String Binarytostring(String in) {

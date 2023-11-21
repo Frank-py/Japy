@@ -15,12 +15,12 @@ class User():
         connection = None
         try:
             connection = mysql.connector.connect(
-                 host="localhost",
-                 user="***REMOVED***",
+                host="localhost",
+                 user="root",
                 # user="***REMOVED***",
                 # passwd="***REMOVED***",
-                 passwd="***REMOVED***",
-                 database="***REMOVED***"
+                 passwd="",
+                 database="Messenger"
             )
         except Error as e:
             print(f"The error '{e}' occurred")

@@ -39,10 +39,10 @@ public class login {
       public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
           // name = user.getText();
-          if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
+          if (String.valueOf(pass.getPassword()).isEmpty() | user.getText().isEmpty()) {
             enter("2");
 
-          } else if (EULA.isSelected() == false | robo.isSelected() == false) {
+          } else if (!EULA.isSelected() | !robo.isSelected()) {
             enter("3");
           } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50) {
             enter("4");
@@ -68,28 +68,26 @@ public class login {
       public void keyTyped(KeyEvent e) {
       }
     };
-    ActionListener act = new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loginbu) {
-          if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
-            enter("2");
+    ActionListener act = e -> {
+      if (e.getSource() == loginbu) {
+        if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
+          enter("2");
 
-          } else if (EULA.isSelected() == false | robo.isSelected() == false) {
-            enter("3");
-          } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50) {
-            enter("4");
-          } else {
-            try {
-              String[] UP = { user.getText(), String.valueOf(pass.getPassword()) };
-              // name = user.getText();
-              if (enter(sendrecv.login(UP)) == 1) {
-                run.loggedin(UP);
-              }
-              // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
-            } catch (Exception f) {
-              f.printStackTrace();
-              enter("5");
+        } else if (!EULA.isSelected() | !robo.isSelected()) {
+          enter("3");
+        } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50) {
+          enter("4");
+        } else {
+          try {
+            String[] UP = { user.getText(), String.valueOf(pass.getPassword()) };
+            // name = user.getText();
+            if (enter(sendrecv.login(UP)) == 1) {
+              run.loggedin(UP);
             }
+            // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
+          } catch (Exception f) {
+            f.printStackTrace();
+            enter("5");
           }
         }
       }

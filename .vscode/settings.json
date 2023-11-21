@@ -10,5 +10,7 @@
         "src\\json-20220924.jar",
         "src/json-20220924.jar"
     ],
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+	"cmake.sourceDirectory": "${workspaceFolder}/src",
+    "clangd.checkUpdates": true
 }

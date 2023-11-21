@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class imglabel extends JPanel {
 
-        private ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
-        private Image backgroundImage = ba.getImage();
+        private final ImageIcon ba = new ImageIcon("src\\Java\\Background.png");
+        private final Image backgroundImage = ba.getImage();
         
         
         public void paintComponent(Graphics g) {

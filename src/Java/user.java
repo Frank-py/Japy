@@ -11,8 +11,7 @@ import org.json.*;
 
 public class user {
     public String username;
-    private String pw;
-   // private messenger_interface main;
+    // private messenger_interface main;
     public File keys;
     File userjson;
     FileWriter writer;
@@ -22,7 +21,7 @@ public class user {
     // the user currently loggedin
     user(String[] UP) {
         this.username = UP[0];
-        pw = UP[1];
+        String pw = UP[1];
 
       //  main =
         new messenger_interface(this);
@@ -110,12 +109,9 @@ public class user {
 
     // checks if chat is ready to open (key is fully generated)
     public boolean openchat(String user) {
-        if (!getValue(user, "key").equals("")) {
-            return true;
-        }
+        return !getValue(user, "key").isEmpty();
 
         // add check for key
-        return false;
     }
 
     // closes everything neccessary and finishes up
