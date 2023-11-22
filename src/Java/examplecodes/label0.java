@@ -8,7 +8,7 @@ import javax.swing.border.Border;
 public class label0 extends JLabel {
 
 	label0(String lol) {
-		// JLabel = a GUI display area for a string of text, an image, or both as dimension
+		// JLabel = a GUI display area for a string of text, start image, or both as dimension
 		ImageIcon image = new ImageIcon("src\\Java\\prof.png");
 		Border border = BorderFactory.createLineBorder(Color.green, 3);
 		this.setText(lol);

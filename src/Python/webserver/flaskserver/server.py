@@ -12,11 +12,11 @@ def login():
     request_method = request.method
     if request_method == "POST":
         form = json.loads(request.data)
-        benutzer = User().checkaccount(form["content"][0], hashlib.md5(bytes(form["content"][1], encoding='utf-8')).hexdigest())
-        if benutzer.loggedin and benutzer.registriert:
+        benutzer = User().check_account(form["content"][0], hashlib.md5(bytes(form["content"][1], encoding='utf-8')).hexdigest())
+        if benutzer.logged_in and benutzer.registered:
             #redirect!
             return {"response": "202"}
-        elif benutzer.loggedin:
+        elif benutzer.logged_in:
             return {"response": "201"}
         else:
             return {"response": "401"}

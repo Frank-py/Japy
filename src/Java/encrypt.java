@@ -3,7 +3,7 @@ import java.math.BigInteger;
 import java.util.Base64;
 import java.util.Random;
 
-public class encry {
+public class encrypt {
     public static int p;
     public static int g;
     public static int a;
@@ -11,7 +11,7 @@ public class encry {
     public static String key = "";
     user User;
 
-    encry(user User) {
+    encrypt(user User) {
         this.User = User;
             a = 12;
         
@@ -148,12 +148,12 @@ public class encry {
     }
 
     private static String Binarytostring(String in) {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         String[] numbers = in.split("(?<=\\G.{8})");
         for (int x = 0; x <= numbers.length - 1; x++) {
             char c = (char) Integer.parseInt(numbers[x], 2);
-            out = out + c;
+            out.append(c);
         } 
-        return out;
+        return out.toString();
     }
 }

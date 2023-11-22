@@ -7,21 +7,19 @@ import java.awt.event.*;
 
 public class login {
   static ImageIcon logo = new ImageIcon("Java/prof5.png");
-  // ImageIcon pic = new ImageIcon("Japy\\src\\Java\\prof.png");
-  // ImageIcon pic = new ImageIcon("/home/daniel/Projekt/src/Java/prof.png");
   static JFrame frame = new JFrame();
   static Color color = new Color(27, 37, 43);
-  static JLabel laby = new JLabel("Hier Anmelden:");
+  static JLabel login_here = new JLabel("Login:");
   static JPanel title = new JPanel();
   static JPanel UserInput = new JPanel(new GridLayout(8, 1));
   static JPanel button = new JPanel();
   static JPanel space = new JPanel();
   static JTextField user = new JTextField("");
-  static JLabel UserTitle = new JLabel("Username: ");
+  static JLabel username = new JLabel("Username: ");
   static JPasswordField pass = new JPasswordField();
   static JLabel PassTitle = new JLabel("Password: ");
-  static JButton loginbu = new JButton("Login!");
-  static JCheckBox robo = new JCheckBox("I'm not a robot", true);
+  static JButton login_button = new JButton("Login!");
+  static JCheckBox reCaptcha = new JCheckBox("I'm not a robot", true);
   static JCheckBox EULA = new JCheckBox("Accept the EULA and our AGB", true);
   static JCheckBox news = new JCheckBox("Subscribe to the Newsletter", true);
 
@@ -42,7 +40,7 @@ public class login {
           if (String.valueOf(pass.getPassword()).isEmpty() | user.getText().isEmpty()) {
             enter("2");
 
-          } else if (!EULA.isSelected() | !robo.isSelected()) {
+          } else if (!EULA.isSelected() | !reCaptcha.isSelected()) {
             enter("3");
           } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50) {
             enter("4");
@@ -54,7 +52,7 @@ public class login {
                 run.loggedin(UP);
               }
 
-              // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
+              // 0 = registered, 1 = eingeloggt, 2 = falsches Passwort
             } catch (Exception f) {
               enter("5");
             }
@@ -69,11 +67,11 @@ public class login {
       }
     };
     ActionListener act = e -> {
-      if (e.getSource() == loginbu) {
-        if (String.valueOf(pass.getPassword()).equals("") | user.getText().equals("")) {
+      if (e.getSource() == login_button) {
+        if (String.valueOf(pass.getPassword()).isEmpty() | user.getText().isEmpty()) {
           enter("2");
 
-        } else if (!EULA.isSelected() | !robo.isSelected()) {
+        } else if (!EULA.isSelected() | !reCaptcha.isSelected()) {
           enter("3");
         } else if (user.getText().length() > 20 | String.valueOf(pass.getPassword()).length() > 50) {
           enter("4");
@@ -84,7 +82,7 @@ public class login {
             if (enter(sendrecv.login(UP)) == 1) {
               run.loggedin(UP);
             }
-            // 0 = registriert, 1 = eingeloggt, 2 = falsches Passwort
+            // 0 = registered, 1 = eingeloggt, 2 = falsches Passwort
           } catch (Exception f) {
             f.printStackTrace();
             enter("5");
@@ -100,25 +98,25 @@ public class login {
     frame.setResizable(false);
     frame.setIconImage(logo.getImage());
     frame.getContentPane().setBackground(color);
-    laby.setFont(new Font("MV Boli", Font.BOLD, 30));
-    laby.setForeground(Color.white);
+    login_here.setFont(new Font("MV Boli", Font.BOLD, 30));
+    login_here.setForeground(Color.white);
     title.setBackground(color);
     UserInput.setBackground(color);
     button.setBackground(color);
     space.setSize(50, 50);
     space.setVisible(false);
-    UserTitle.setFont(new Font("MV Boli", Font.BOLD, 20));
-    UserTitle.setForeground(Color.white);
+    username.setFont(new Font("MV Boli", Font.BOLD, 20));
+    username.setForeground(Color.white);
     PassTitle.setFont(new Font("MV Boli", Font.BOLD, 20));
     PassTitle.setForeground(Color.white);
-    loginbu.setFont(new Font("MV Boli", Font.BOLD, 14));
-    loginbu.setForeground(Color.white);
-    loginbu.setBackground(new Color(47, 49, 54));
-    loginbu.setFocusable(false);
-    loginbu.setSize(200, 40);
-    robo.setFocusable(false);
-    robo.setBackground(color);
-    robo.setForeground(Color.white);
+    login_button.setFont(new Font("MV Boli", Font.BOLD, 14));
+    login_button.setForeground(Color.white);
+    login_button.setBackground(new Color(47, 49, 54));
+    login_button.setFocusable(false);
+    login_button.setSize(200, 40);
+    reCaptcha.setFocusable(false);
+    reCaptcha.setBackground(color);
+    reCaptcha.setForeground(Color.white);
     EULA.setFocusable(false);
     EULA.setBackground(color);
     EULA.setForeground(Color.white);
@@ -126,16 +124,16 @@ public class login {
     news.setBackground(color);
     news.setForeground(Color.white);
 
-    loginbu.addActionListener(act);
+    login_button.addActionListener(act);
     pass.addKeyListener(g);
     user.addKeyListener(g);
-    title.add(laby);
-    button.add(loginbu);
-    UserInput.add(UserTitle);
+    title.add(login_here);
+    button.add(login_button);
+    UserInput.add(username);
     UserInput.add(user);
     UserInput.add(PassTitle);
     UserInput.add(pass);
-    UserInput.add(robo);
+    UserInput.add(reCaptcha);
     UserInput.add(EULA);
     UserInput.add(news);
     UserInput.add(button);
@@ -144,29 +142,29 @@ public class login {
     frame.setVisible(true);
 
     // public static String name;
-    // public static boolean loggedin = false;
+    // public static boolean logged_in = false;
 
   }
 
-  static int enter(String recv) {
-    if (Integer.parseInt(recv) == 0) {
+  static int enter(String receive) {
+    if (Integer.parseInt(receive) == 0) {
       frame.dispose();
       JOptionPane.showMessageDialog(null, "You have registered a new user", "NEW USER", JOptionPane.WARNING_MESSAGE);
       return 1;
 
-    } else if (Integer.parseInt(recv) == 1) {
+    } else if (Integer.parseInt(receive) == 1) {
       frame.dispose();
       return 1;
 
-    } else if (Integer.parseInt(recv) == 2) {
+    } else if (Integer.parseInt(receive) == 2) {
       EULA.setSelected(false);
       news.setSelected(true);
-      robo.setSelected(false);
+      reCaptcha.setSelected(false);
 
       JOptionPane.showMessageDialog(null, "No or Wrong Password or Username, try again!", "Invalid UserInput",
           JOptionPane.ERROR_MESSAGE);
       return 0;
-    } else if (Integer.parseInt(recv) == 3) {
+    } else if (Integer.parseInt(receive) == 3) {
       JOptionPane.showMessageDialog(null, "Proof Humanity and Accept EULA", "Accept required Terms",
           JOptionPane.ERROR_MESSAGE);
       /*
@@ -188,16 +186,16 @@ public class login {
        * loginbu.setEnabled(true);
        */
       return 0;
-    } else if (Integer.parseInt(recv) == 4) {
+    } else if (Integer.parseInt(receive) == 4) {
       EULA.setSelected(false);
       news.setSelected(true);
-      robo.setSelected(false);
+      reCaptcha.setSelected(false);
       pass.setText("");
       user.setText("");
       JOptionPane.showMessageDialog(null, "Username or Password is too long, try again!", "Invalid UserInput",
           JOptionPane.ERROR_MESSAGE);
       return 0;
-    } else if (Integer.parseInt(recv) == 5) {
+    } else if (Integer.parseInt(receive) == 5) {
       JOptionPane.showMessageDialog(null,
           "An unknown exception occured please try again! \nEnsure your internet connection", "ERROR",
           JOptionPane.ERROR_MESSAGE);

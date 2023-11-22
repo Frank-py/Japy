@@ -9,7 +9,7 @@ public class functions {
 
    static void newchat(String UserName){
 
-    if (UserName.length() > 1069 || UserName.length() < 1) {
+    if (UserName.length() > 1069 || UserName.isEmpty()) {
         JOptionPane.showMessageDialog(null,
                     "Invalid! Enter a valid Username", "OutOfBounds",
                     JOptionPane.ERROR_MESSAGE);
@@ -53,8 +53,4 @@ public class functions {
         frame.setVisible(true);
     }
 }
-}
-
-    }
-    
 }

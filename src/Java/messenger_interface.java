@@ -170,7 +170,7 @@ public class messenger_interface {
             }
         };
 
-        // checks if an added user is clicked
+        // checks if start added user is clicked
         UserPressed = e -> {
             currentuser = ((JButton) e.getSource()).getText();
             if (me.openchat(currentuser)) {

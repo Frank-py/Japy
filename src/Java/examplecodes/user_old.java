@@ -136,7 +136,7 @@ public class user_old {
         return s;
     }
 
-    // public static String[] recv() {
+    // public static String[] receive() {
     // String[] lol = {};
     // bf.readLine();
     // if (bf.readline == "recvkey") {

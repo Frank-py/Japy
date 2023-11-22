@@ -31,17 +31,17 @@ async def Client(reader,writer):
                 salt = bcrypt.gensalt()
                 hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
                 benutzer = User()
-                Exist = benutzer.checkaccount(user_and_password[0])
+                Exist = benutzer.check_account(user_and_password[0])
                 if not Exist:
                     benutzer.register(user_and_password[0], hashed_password.decode("utf-8"))
                 else:
                     benutzer.login(user_and_password[0], password) 
-                if benutzer.loggedin and benutzer.registriert:
+                if benutzer.logged_in and benutzer.registered:
                     writer.write("0\n".encode('utf-8'))
                     await writer.drain()
                     #benutzer.fetch_friends()
                     break
-                elif benutzer.loggedin:
+                elif benutzer.logged_in:
                     writer.write("1\n".encode('utf-8'))
                     await writer.drain()
                     break
@@ -87,7 +87,7 @@ async def Client(reader,writer):
                 writer.write(RESPONSE_VALUE)
                 await writer.drain()
 
-                if benutzer.searchaccount(user):
+                if benutzer.search_account(user):
                     writer.write("1\n".encode('utf-8'))
                     await writer.drain()
                 else:
@@ -110,7 +110,7 @@ async def Client(reader,writer):
                 else:
                     writer.write(RESPONSE_VALUE)
                 await writer.drain()
-                benutzer.insertmessage(userMes, messages) 
+                benutzer.insert_message(userMes, messages)
             elif command_request == "createKey":
                 
                 user = (await reader.read(512)).decode("utf-8") #user
@@ -141,13 +141,13 @@ async def Client(reader,writer):
                         return
                     writer.write(RESPONSE_VALUE)
                     await writer.drain()
-                    benutzer.insertKeys(user, P, G, A)
+                    benutzer.insert_keys(user, P, G, A)
                     
                 elif benutzer.status == 2:
                     writer.write(status)
                     await writer.drain()
                     
-                    P,G,A = benutzer.getKeys(user)
+                    P,G,A = benutzer.get_keys(user)
                     writer.write((P+"\n").encode("utf-8"))
                     await writer.drain()
                     
@@ -163,12 +163,12 @@ async def Client(reader,writer):
                     
                     writer.write(RESPONSE_VALUE)
                     await writer.drain()
-                    benutzer.insertKeys(user=user, aorb = B)
+                    benutzer.insert_keys(user=user, aorb = B)
                 elif benutzer.status == 3:
                     
                     writer.write(status)
                     await writer.drain()
-                    P, B = benutzer.getKeys(user)
+                    P, B = benutzer.get_keys(user)
                     writer.write((P+"\n").encode("utf-8"))
                     await writer.drain()
                     writer.write((B+"\n").encode("utf-8"))

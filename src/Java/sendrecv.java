@@ -12,7 +12,6 @@ public class sendrecv {
     public static BufferedReader bf;
     public static PrintWriter out;
     public static Socket socket;
-    public static String test;
 
     public static String login(String[] in) {
         try {
@@ -116,9 +115,8 @@ public class sendrecv {
             s = bf.readLine();
 
             if (s.equals("0")) { // Du bist benutzer A
-                s = "";
 
-                String[] pgA = encry.newkey(new String[] {});
+                String[] pgA = encrypt.newkey(new String[] {});
                 // s.append(in[0]);
                 out.print(pgA[0]);
                 out.flush();
@@ -137,20 +135,20 @@ public class sendrecv {
                 Bap[2] = bf.readLine();
                 String g = bf.readLine();
                 Bap[0] = bf.readLine();
-                String A = encry.newkey(new String[] { Bap[2], g })[2];
-                Bap[1] = encry.a();
+                String A = encrypt.newkey(new String[] { Bap[2], g })[2];
+                Bap[1] = encrypt.a();
 
                 out.print(A);
                 out.flush();
                 bf.readLine();
-                return encry.endnewkey(Bap);
+                return encrypt.endnewkey(Bap);
             }
             if (s.equals("3")) { // looser du bist immer noch A
                 String[] Bap = new String[3];
                 Bap[2] = bf.readLine();
                 Bap[0] = bf.readLine();
-                Bap[1] = encry.a();
-                return encry.endnewkey(Bap);
+                Bap[1] = encrypt.a();
+                return encrypt.endnewkey(Bap);
             } else { // gönn dir ne Pause return 1
                 System.out.println("gggf");
                 return "";

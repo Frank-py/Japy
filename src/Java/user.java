@@ -18,7 +18,7 @@ public class user {
     FileReader reader;
     Path path; 
 
-    // the user currently loggedin
+    // the user currently logged_in
     user(String[] UP) {
         this.username = UP[0];
         String pw = UP[1];
@@ -58,7 +58,7 @@ public class user {
                 
                 // writes the user + attributes to json
                 JSONObject userjson = new JSONObject()
-                        .put("atemp", encry.a())
+                        .put("atemp", encrypt.a())
                         .put("Messages", new JSONArray())
                         .put("key", "secure.getKey(username)");
                 JSONObject json;
@@ -129,12 +129,12 @@ public class user {
     public String[] getMes(String user, int start, int end) {
 
         // add get messages
-        String[] decMessages = encry.decMes(sendrecv.getMes(user, start, end), getValue(user, "key"));
+        String[] decMessages = encrypt.decMes(sendrecv.getMes(user, start, end), getValue(user, "key"));
         return decMessages;
     }
 
     public void sendMes(String user, String Mes) {
-        sendrecv.sendMes(new String[]{user,encry.encryption(Mes, getValue(user, "key"))});
+        sendrecv.sendMes(new String[]{user, encrypt.encryption(Mes, getValue(user, "key"))});
 
     }
 }
