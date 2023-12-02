@@ -8,9 +8,10 @@
         "src/gson-2.9.1.jar",
         "src/json-20220320.jar",
         "src\\json-20220924.jar",
-        "src/json-20220924.jar"
+        "src/json-20220924.jar",
+        "json-20231013.jar"
     ],
     "java.debug.settings.onBuildFailureProceed": true,
 	"cmake.sourceDirectory": "${workspaceFolder}/src",
-    "clangd.checkUpdates": true
+    "clangd.checkUpdates": true,
 }

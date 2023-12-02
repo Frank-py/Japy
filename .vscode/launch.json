@@ -9,6 +9,13 @@
             "name": "run",
             "request": "launch",
             "mainClass": "Java.run",
+            "projectName": "Japy_9dfb1581"
+        },
+        {
+            "type": "java",
+            "name": "run",
+            "request": "launch",
+            "mainClass": "Java.run",
             "projectName": "Japy_578de1bc"
         },
         {
